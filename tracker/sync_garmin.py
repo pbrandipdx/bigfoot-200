@@ -52,8 +52,29 @@ if not SB_URL or not SB_KEY:
 SB_HEAD = {"apikey": SB_KEY, "Authorization": f"Bearer {SB_KEY}",
            "Content-Type": "application/json", "Prefer": "resolution=merge-duplicates"}
 
+INT_FIELDS = {
+    "resting_hr","stress_avg","max_stress","steps","active_calories","intensity_minutes",
+    "body_battery_high","body_battery_low","body_battery_change","sleep_score",
+    "sleep_duration_s","deep_sleep_s","rem_sleep_s","light_sleep_s","awake_s",
+    "lowest_spo2","restless_moments","floors_ascended","training_readiness",
+    "hill_score","endurance_score","race_pred_5k_s","race_pred_10k_s",
+    "race_pred_half_s","race_pred_marathon_s","acclimation_heat","acclimation_altitude",
+}
+
+def coerce(row):
+    """Postgres integer columns reject '467.0'. Round anything numeric bound for one."""
+    out = {}
+    for k, v in row.items():
+        if k in INT_FIELDS and v is not None:
+            try:
+                v = int(round(float(v)))
+            except (TypeError, ValueError):
+                continue
+        out[k] = v
+    return out
+
 def upsert(table, rows, conflict):
-    rows = [r for r in rows if r]
+    rows = [coerce(r) for r in rows if r]
     if not rows:
         return 0
     r = requests.post(f"{SB_URL}/rest/v1/{table}?on_conflict={conflict}",
@@ -79,17 +100,23 @@ def connect():
         print(f"  token cached at {TOKENSTORE} - you can remove GARMIN_PASSWORD from .env now")
         return g
 
-def call(g, names, *args):
-    """Try several method names; return (name, value) for the first that works.
-    Method names differ between library versions, so we probe rather than assume."""
+def call(g, names, iso):
+    """Try several method names and several call signatures.
+    Library versions differ: some take (date), some (), some (start, end)."""
     for n in names:
         fn = getattr(g, n, None)
         if not fn:
             continue
-        try:
-            return n, fn(*args)
-        except Exception as e:
-            print(f"    {n}: {type(e).__name__}")
+        for args in ((iso,), (), (iso, iso)):
+            try:
+                v = fn(*args)
+                if v is not None:
+                    return n, v
+            except TypeError:
+                continue          # wrong arity - try the next signature
+            except Exception as e:
+                print(f"    {n}{args}: {type(e).__name__}")
+                break
     return None, None
 
 WELLNESS = {
@@ -177,8 +204,10 @@ def sync_day(g, day):
         "hill_score":       num(payloads.get("hill_score") or {}, "overallScore", "hillScore"),
         "endurance_score":  num(payloads.get("endurance_score") or {}, "overallScore", "enduranceScore"),
         "running_tolerance":num(payloads.get("running_tolerance") or {}, "runningTolerance", "value"),
-        "vo2max_running":   num(gen, "vo2MaxPreciseValue", "vo2MaxValue"),
+        "vo2max_running":   num(gen, "vo2MaxPreciseValue", "vo2MaxValue")
+                            or num(payloads.get("hill_score") or {}, "vo2Max"),
         "training_status":  num(ts, "trainingStatus", "trainingStatusKey"),
+        "acute_load":       num(tr, "acuteLoad"),
         "raw":              {"endpoints": [k for k in payloads if k in PERFORMANCE]},
     }
     training = {k: v for k, v in training.items() if v is not None}
