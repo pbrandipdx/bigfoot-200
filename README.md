@@ -40,7 +40,24 @@ The runner manual is **not** published there — copyrighted, private repo only.
 
 ---
 
-## Rules that keep the three devices from diverging
+## Working from any machine
+
+One command, on whichever Mac you're sitting at:
+
+    cd ~/Developer/bigfoot-200 && make sync
+
+It pulls (rebasing your local work on top), rebuilds both the tracker and the site,
+commits anything that changed, and pushes both repos. Run it when you sit down and
+when you get up. If you only ever run one command in this repo, run that one.
+
+To see where things stand without changing anything:
+
+    make status
+
+Prints how many commits behind and ahead each repo is, and whether anything is
+uncommitted.
+
+### Rules that keep the machines from diverging
 
 1. **The Mac mini owns the weekly refresh.** It is the machine with the Strava
    connection. Only it edits `tracker/weeks.json`. The MacBook reads.
