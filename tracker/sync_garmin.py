@@ -11,11 +11,11 @@ Credentials NEVER live in this repo. Put them in tracker/.env (gitignored):
     SUPABASE_URL=https://mwjprmuwdhfjlldrruhx.supabase.co
     SUPABASE_SERVICE_KEY=...       # service_role key - RLS is on, anon cannot write
 
-Install once:
-    pip3 install garminconnect requests
+Install once (a venv avoids the macOS pip3/python3 mismatch):
+    python3 -m venv .venv && .venv/bin/pip install garminconnect requests
 
-Usage:
-    python3 tracker/sync_garmin.py discover              # which methods your version has
+Usage (use .venv/bin/python, not python3):
+    .venv/bin/python tracker/sync_garmin.py discover              # which methods your version has
     python3 tracker/sync_garmin.py daily                 # yesterday + today
     python3 tracker/sync_garmin.py backfill 2024-09-01 2026-09-11
 """
@@ -24,11 +24,11 @@ import os, sys, json, time, datetime as dt
 try:
     import requests
 except ImportError:
-    sys.exit("pip3 install requests")
+    sys.exit("Missing requests. Run:  python3 -m venv .venv && .venv/bin/pip install garminconnect requests")
 try:
     from garminconnect import Garmin
 except ImportError:
-    sys.exit("pip3 install garminconnect")
+    sys.exit("Missing garminconnect. Run:  python3 -m venv .venv && .venv/bin/pip install garminconnect requests")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOKENSTORE = os.path.expanduser("~/.garminconnect")

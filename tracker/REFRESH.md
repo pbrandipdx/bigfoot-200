@@ -44,11 +44,15 @@ Do not hand-edit `bigfoot-tracker.html` — it is generated and will be overwrit
 `garmin_raw` — the monitors in `plan/block-targets.md` (HRV, resting HR, body
 battery, sleep, hill score, endurance score, running tolerance) all read from there.
 
-    pip3 install garminconnect requests
-    cp tracker/.env.example tracker/.env      # fill it in; it is gitignored
-    python3 tracker/sync_garmin.py discover   # see which methods your library version has
-    python3 tracker/sync_garmin.py backfill 2024-09-01 2026-09-11
-    python3 tracker/sync_garmin.py daily      # weekly from then on
+    python3 -m venv .venv
+    .venv/bin/pip install garminconnect requests
+    cp tracker/.env.example tracker/.env             # fill it in; it is gitignored
+    .venv/bin/python tracker/sync_garmin.py discover # what your library version can reach
+    .venv/bin/python tracker/sync_garmin.py backfill 2024-09-01 2026-09-11
+    .venv/bin/python tracker/sync_garmin.py daily    # weekly from then on
+
+Use `.venv/bin/python`, not `python3` — on macOS `pip3` and `python3` often point at
+different interpreters, so packages installed with one are invisible to the other.
 
 Notes:
 
