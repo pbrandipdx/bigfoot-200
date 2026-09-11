@@ -10,3 +10,7 @@
 # Private — not published. The Destination Trail runner manual is copyrighted;
 # this repo is public. Keep it here, out of git.
 plan/private/
+
+# Secrets - never commit
+tracker/.env
+.env

@@ -37,3 +37,29 @@ weekly-template rules — those live here, in `plan/block-targets.md`, and are g
 into the dashboard. If a number appears in both places, this repo is right.
 
 Do not hand-edit `bigfoot-tracker.html` — it is generated and will be overwritten.
+
+## Garmin sync
+
+`sync_garmin.py` fills the Supabase tables `garmin_daily`, `garmin_training` and
+`garmin_raw` — the monitors in `plan/block-targets.md` (HRV, resting HR, body
+battery, sleep, hill score, endurance score, running tolerance) all read from there.
+
+    pip3 install garminconnect requests
+    cp tracker/.env.example tracker/.env      # fill it in; it is gitignored
+    python3 tracker/sync_garmin.py discover   # see which methods your library version has
+    python3 tracker/sync_garmin.py backfill 2024-09-01 2026-09-11
+    python3 tracker/sync_garmin.py daily      # weekly from then on
+
+Notes:
+
+- Credentials live only in `tracker/.env` on the Mac mini. They are never committed
+  and never pass through Claude.
+- `discover` first. The library's method names vary by version, and hill score and
+  endurance score are not in every build — the script probes rather than assumes,
+  and skips what is missing instead of failing.
+- Every payload is stored verbatim in `garmin_raw`, so a mapping mistake loses nothing.
+- It sleeps 1s between days. This is Garmin's private API, not a supported one:
+  go gently, and expect it to need fixing whenever Garmin changes something.
+- Metrics only exist from when Garmin started computing them on a device you owned.
+  Hill score and endurance score date from ~2022 devices; running tolerance is newer
+  still. A backfill earlier than the Fenix 8 will simply return nothing for those.
