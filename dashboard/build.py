@@ -14,7 +14,7 @@ import md, nav, doc_shell
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-OUT  = os.path.join(os.path.dirname(REPO), "bigfoot200-training")
+OUT  = os.environ.get("BF_OUT") or os.path.join(os.path.dirname(REPO), "bigfoot200-training")
 
 NEVER_PUBLISH = ("runner-manual",)
 
