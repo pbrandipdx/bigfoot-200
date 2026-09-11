@@ -1,0 +1,23 @@
+{
+  "_source": "Generated view of plan/block-targets.md and plan/sub100-plan.md. Edit those, then run `make dashboard`.",
+  "race": { "name": "Bigfoot 200", "date": "2027-08-13", "goal": "sub-100hr", "schedule": "97:00" },
+  "blocks": [
+    { "id": 1, "name": "Block 1 — base + vertical intro", "start": "2026-09-07", "end": "2026-12-12", "vert": "5,000 ft", "hours": "15 hr/wk", "endsWith": "Frozen Trail Run Fest 50K" },
+    { "id": 2, "name": "Block 2 — build",                 "start": "2026-12-13", "end": "2027-02-13", "vert": "6,500 ft", "hours": "17 hr/wk", "endsWith": "Hagg Mud 50K" },
+    { "id": 3, "name": "Block 3 — night running",         "start": "2027-02-14", "end": "2027-04-16", "vert": "8,000 ft", "hours": "19 hr/wk", "endsWith": "Gorge Waterfalls 100K" },
+    { "id": 4, "name": "Block 4 — the gate",              "start": "2027-04-17", "end": "2027-06-18", "vert": "10,000 ft", "hours": "21 hr/wk", "endsWith": "Bighorn 100" },
+    { "id": 5, "name": "Block 5 — peak + taper",          "start": "2027-06-19", "end": "2027-08-13", "vert": "12,000 ft", "hours": "22–24 hr/wk", "endsWith": "BIGFOOT 200", "taper": true }
+  ],
+  "races": [
+    { "name": "Three Sisters Loop",             "start": "2026-10-02", "end": "2026-10-05", "tag": "multi-day · first sleep-stop practice" },
+    { "name": "Run the Rock 50K",               "start": "2026-11-07", "end": "2026-11-07", "tag": "Block 1 checkpoint · 3.2 mph, finish upright" },
+    { "name": "West Linn Turkey Trot",          "start": "2026-11-26", "end": "2026-11-26", "tag": "tune-up" },
+    { "name": "St. Jude Memphis Half Marathon", "start": "2026-12-05", "end": "2026-12-05", "tag": "tune-up" },
+    { "name": "Frozen Trail Run Fest 50K",      "start": "2026-12-12", "end": "2026-12-12", "tag": "Block 1 checkpoint" },
+    { "name": "BURT 100",                       "start": "2027-02-06", "end": "2027-02-06", "tag": "pencilled in · first 100-miler · 54K loop ×3, Bainbridge Island WA" },
+    { "name": "Hagg Mud 50K",                   "start": "2027-02-15", "end": "2027-02-15", "tag": "tune-up · date approximate" },
+    { "name": "Gorge Waterfalls 100K",          "start": "2027-04-16", "end": "2027-04-16", "tag": "WS qualifier · 17 hr cutoff · Block 3 checkpoint" },
+    { "name": "Bighorn 100",                    "start": "2027-06-18", "end": "2027-06-19", "tag": "WS qualifier · the gate · finish under 30 hr" },
+    { "name": "Bigfoot 200",                    "start": "2027-08-13", "end": "2027-08-13", "tag": "A race · 97:00 schedule, sub-100 goal" }
+  ]
+}

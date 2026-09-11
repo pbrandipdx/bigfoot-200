@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Today — Bigfoot 200 training</title>
+<meta name="description" content="What Patrick is training today, on the road to a sub-100 hour Bigfoot 200.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFF1EA;
+    --paper-2:#E4E7DD;
+    --ink:#131C15;
+    --ink-soft:#33402F;
+    --ink-faint:#5C6B58;
+    --forest:#20402C;
+    --forest-deep:#152B1D;
+    --amber:#B0793A;
+    --amber-deep:#7A521F;
+    --line:#C7CCBE;
+    --white:#FBFBF8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--forest)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  header.top{padding:40px 0 0}
+  .top-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 20px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .site-name{font-size:15px;font-weight:600;letter-spacing:0.01em}
+  .site-sub{font-size:13px;color:var(--ink-faint)}
+
+  .profile{margin:28px 0 6px;font-size:13px;color:var(--ink-faint)}
+  .today-date{font-size:15px;color:var(--ink-soft);margin-bottom:6px}
+
+  h1.today-title{
+    font-family:'Spectral',serif;
+    font-weight:600;
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.08;
+    color:var(--forest-deep);
+    margin:2px 0 18px;
+    max-width:14ch;
+  }
+  .today-desc{font-size:17px;color:var(--ink-soft);max-width:58ch;margin-bottom:6px}
+  .today-meta{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0 8px;font-size:13px;color:var(--ink-faint)}
+  .today-meta strong{color:var(--ink)}
+
+  .profile-note{font-size:13px;color:var(--ink-faint);margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+
+  .elev{width:100%;height:44px;margin:34px 0 6px;display:block}
+  .elev path.fill{fill:var(--paper-2)}
+  .elev path.line{fill:none;stroke:var(--amber-deep);stroke-width:1.4}
+
+  section{margin:44px 0}
+  h2.sec-title{font-size:13px;font-weight:600;color:var(--ink-faint);text-transform:none;letter-spacing:0.01em;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+
+  .race-strip{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .race-strip .name{font-size:16px;font-weight:500}
+  .race-strip .when{font-size:13px;color:var(--ink-faint);margin-top:2px}
+  .countdown{font-family:'Spectral',serif;font-size:34px;font-weight:600;color:var(--amber-deep);white-space:nowrap}
+  .countdown span{font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:var(--ink-faint);margin-left:6px}
+
+  table.week{width:100%;border-collapse:collapse;font-size:14px}
+  table.week th{text-align:left;font-weight:500;color:var(--ink-faint);font-size:12px;padding:0 12px 8px 0}
+  table.week td{padding:10px 12px 10px 0;border-top:1px solid var(--line);vertical-align:top}
+  table.week tr.is-today td{background:var(--paper-2)}
+  table.week tr.is-today td:first-child{border-left:2px solid var(--amber-deep);padding-left:10px}
+  .day-name{font-weight:500;white-space:nowrap}
+
+  ol.ladder{list-style:none;padding:0}
+  ol.ladder li{display:flex;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+  ol.ladder li:first-child{border-top:none}
+  ol.ladder .lwhen{width:110px;flex-shrink:0;font-size:13px;color:var(--ink-faint);padding-top:1px}
+  ol.ladder .lname{font-weight:500}
+  ol.ladder .ltag{font-size:12px;color:var(--amber-deep);margin-top:2px}
+  ol.ladder li.past{opacity:0.45}
+  ol.ladder li.next .lname{color:var(--forest-deep)}
+
+  footer{padding:30px 0 50px;font-size:12px;color:var(--ink-faint);border-top:1px solid var(--line);margin-top:60px}
+
+  @media (max-width:520px){
+    .countdown{font-size:26px}
+    .race-strip{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="top-row">
+      <div class="site-name">Bigfoot 200 training</div>
+      <div class="site-sub">Mount St. Helens, WA &middot; Aug 13, 2027 &middot; goal: sub-100hr</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="profile" id="block-label">Loading block&hellip;</div>
+    <div class="today-date" id="today-date"></div>
+    <h1 class="today-title" id="today-title">&nbsp;</h1>
+    <p class="today-desc" id="today-desc"></p>
+    <div class="today-meta" id="today-meta"></div>
+
+    <svg class="elev" viewBox="0 0 700 60" preserveAspectRatio="none" aria-hidden="true">
+      <path class="fill" d="M0,55 L0,40 L60,25 L110,32 L170,12 L230,20 L290,4 L350,18 L410,10 L470,26 L530,15 L590,30 L650,20 L700,35 L700,60 L0,60 Z"/>
+      <path class="line" d="M0,40 L60,25 L110,32 L170,12 L230,20 L290,4 L350,18 L410,10 L470,26 L530,15 L590,30 L650,20 L700,35"/>
+    </svg>
+
+    <div class="profile-note">This page recalculates automatically from the current date &mdash; nothing to update by hand. Weekly template through Block 1 is exact; Block 2 onward applies deterministic placeholder rules for which Saturday is a back-to-back or overnight session until the week-by-week plan for those blocks is written.</div>
+
+    <section>
+      <h2 class="sec-title">Next race</h2>
+      <div class="race-strip">
+        <div>
+          <div class="name" id="next-race-name"></div>
+          <div class="when" id="next-race-when"></div>
+        </div>
+        <div class="countdown" id="next-race-countdown"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec-title">This week</h2>
+      <table class="week" id="week-table">
+        <thead><tr><th>Day</th><th>Workout</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="sec-title">Race ladder</h2>
+      <ol class="ladder" id="ladder-list"></ol>
+    </section>
+  </main>
+
+  <footer>
+    Patrick Brandimore &middot; training log lives in Strava &middot; this page is read-only
+  </footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+const BLOCKS = DATA.blocks;
+
+const RACES = DATA.races;
+
+function toDate(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
+function daysBetween(a,b){ return Math.round((b-a)/86400000); }
+function fmtDate(d){ return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}); }
+function fmtShort(s){
+  const d = toDate(s);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+
+const today = new Date(); today.setHours(0,0,0,0);
+
+function currentBlock(){
+  for(const b of BLOCKS){
+    if(today >= toDate(b.start) && today <= toDate(b.end)) return b;
+  }
+  if(today < toDate(BLOCKS[0].start)) return BLOCKS[0];
+  return BLOCKS[BLOCKS.length-1];
+}
+
+function weekOfBlock(block){
+  return Math.floor(daysBetween(toDate(block.start), today)/7) + 1;
+}
+
+function ordinalSaturdayOfMonth(d){
+  const day = d.getDate();
+  return Math.floor((day-1)/7) + 1;
+}
+
+function saturdayWorkout(block, d){
+  if(block.id === 1){
+    const s = fmtIso(d);
+    if(s < '2026-09-13') return { title:'Wildwood — vertical build', desc:'~2,400 ft gain. Week 1 of the Saturday progression.' };
+    if(s < '2026-09-27') return { title:'Angels Rest → Devil\u2019s Rest loop', desc:'~3,159 ft gain, Columbia River Gorge. No timed-use permit required in 2026.' };
+    if(s <= '2026-10-05') return { title:'Three Sisters Loop', desc:'Multi-day. First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop.' };
+    if(s < '2026-11-01') return { title:'Elk Mountain / Kings Mountain traverse', desc:'~4,000 ft gain — the block\u2019s biggest single vertical day so far.' };
+    if(s <= '2026-11-07') return { title:'Taper into Run the Rock 50K', desc:'Short and easy — race is today or this week.' };
+    return { title:'Long day, vertical-focused', desc:'Block 1 continues building toward the Dec 12 Frozen Trail 50K checkpoint.' };
+  }
+  const nth = ordinalSaturdayOfMonth(d);
+  if(!block.taper){
+    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data.' };
+    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${block.vert} of vertical. Put the hardest climbing in the back half of the day, not the front. Followed by a genuinely long Sunday.` };
+  }
+  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. Hardest climbing goes in the back half of the day.` };
+}
+
+function fmtIso(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function sundayWorkout(block, d){
+  const sat = new Date(d); sat.setDate(sat.getDate()-1);
+  const nthSat = ordinalSaturdayOfMonth(sat);
+  if(block.id !== 4 && nthSat === 3){
+    return { title:'Back-to-back weekend — Sunday', desc:'A genuinely long second day, not easy recovery — this is where fatigue-resistant climbing actually gets built.' };
+  }
+  return { title:'Flexible recovery', desc:'Up to 6 miles, only if Saturday\u2019s long day happened.' };
+}
+
+function thursdayWorkout(block){
+  if(block.id === 1){
+    return { title:'LeBron ramp repeats', desc:'10–12 reps, run up / walk down, 150–160 bpm. Real vertical here is modest (~250–300 ft) \u2014 Monday\u2019s incline intervals are the actual vertical-volume session; this one is about real-terrain movement.' };
+  }
+  const wk = weekOfBlock(block);
+  if(wk % 2 === 0){
+    return { title:'LeBron ramp — down-focus', desc:'Walk up conservatively, run down under control at race effort. Builds the eccentric quad durability the course\u2019s 45,563 ft of descent demands \u2014 the point isn\u2019t vertical volume, it\u2019s the descent itself.' };
+  }
+  return { title:'LeBron ramp — up-focus', desc:'Run up, walk down, 150–160 bpm. Real-terrain movement, not a vertical-volume session \u2014 Monday\u2019s incline intervals cover that.' };
+}
+
+function scheduleFor(date){
+  const block = currentBlock();
+  const dow = date.getDay(); // 0 Sun .. 6 Sat
+  switch(dow){
+    case 1: return { title:'Strength A + incline intervals', desc:'4×3 min, 150–160 bpm, 15–18% grade treadmill.' };
+    case 2: return { title:'Rest + capped walk', desc:'Up to 3 miles / under 1 hour. Not training — doesn\u2019t count toward compliance.' };
+    case 3: return { title:'Easy run', desc:'25–30 min, Nike Jogging Trail.' };
+    case 4: return thursdayWorkout(block);
+    case 5: return { title:'Rest', desc:'Full rest day.' };
+    case 6: return saturdayWorkout(block, date);
+    case 0: return sundayWorkout(block, date);
+  }
+}
+
+function render(){
+  const block = currentBlock();
+  document.getElementById('block-label').textContent = block.name;
+  document.getElementById('today-date').textContent = fmtDate(today);
+
+  const todaysRace = RACES.find(r => toDate(r.start) <= today && today <= toDate(r.end));
+  const todayWork = todaysRace
+    ? { title: todaysRace.name, desc: 'Race day. ' + todaysRace.tag + '.' }
+    : scheduleFor(today);
+  document.getElementById('today-title').textContent = todayWork.title;
+  document.getElementById('today-desc').textContent = todayWork.desc;
+
+  const raceDays = daysBetween(today, toDate(RACES[RACES.length-1].start));
+  document.getElementById('today-meta').innerHTML =
+    `<div><strong>${raceDays}</strong> days to Bigfoot 200</div>` +
+    `<div>Week ${weekOfBlock(block)} of ${block.name.split('—')[0].trim()}</div>`;
+
+  const upcoming = RACES.find(r => toDate(r.end) >= today) || RACES[RACES.length-1];
+  document.getElementById('next-race-name').textContent = upcoming.name;
+  const startStr = fmtShort(upcoming.start);
+  const endStr = upcoming.start !== upcoming.end ? '–' + toDate(upcoming.end).getDate() : '';
+  document.getElementById('next-race-when').textContent = startStr + endStr + '  ·  ' + upcoming.tag;
+  const daysOut = daysBetween(today, toDate(upcoming.start));
+  document.getElementById('next-race-countdown').innerHTML =
+    (daysOut <= 0 ? 'today' : daysOut) + (daysOut > 0 ? '<span>days</span>' : '');
+
+  const tbody = document.querySelector('#week-table tbody');
+  tbody.innerHTML = '';
+  const names = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const startOfWeek = new Date(today); startOfWeek.setDate(today.getDay() - today.getDay());
+  for(let i=0;i<7;i++){
+    const d = new Date(startOfWeek); d.setDate(startOfWeek.getDate()+i);
+    const w = scheduleFor(d);
+    const tr = document.createElement('tr');
+    if(fmtIso(d) === fmtIso(today)) tr.className = 'is-today';
+    tr.innerHTML = `<td class="day-name">${names[i]}</td><td><strong>${w.title}</strong><br><span style="color:var(--ink-faint)">${w.desc}</span></td>`;
+    tbody.appendChild(tr);
+  }
+
+  const ladder = document.getElementById('ladder-list');
+  ladder.innerHTML = '';
+  RACES.forEach(r=>{
+    const isPast = toDate(r.end) < today;
+    const isNext = r === upcoming;
+    const li = document.createElement('li');
+    li.className = (isPast ? 'past ' : '') + (isNext ? 'next' : '');
+    const endStr2 = r.start !== r.end ? '–' + toDate(r.end).getDate() : '';
+    li.innerHTML = `<div class="lwhen">${fmtShort(r.start)}${endStr2}</div><div><div class="lname">${r.name}</div><div class="ltag">${r.tag}</div></div>`;
+    ladder.appendChild(li);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
