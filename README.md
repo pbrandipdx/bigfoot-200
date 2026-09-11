@@ -1,0 +1,85 @@
+# Bigfoot 200 — source of truth
+
+**Race:** Bigfoot 200, Friday August 13 2027. 200.1 mi · 44,082 ft gain · 45,563 ft loss · 107 hr cutoff.
+**Goal:** sub-100. Schedule built to 97:00.
+
+This repository is the only canonical copy. If a file exists here and also somewhere
+else on any of your machines, **this one wins.**
+
+---
+
+## Where everything lives
+
+| Path | What it is | Edit by hand? |
+|---|---|---|
+| `plan/sub100-plan.md` | The race plan — pacing chart, sleep strategy, reserves, decision points | ✅ yes |
+| `plan/block-targets.md` | Training block targets | ✅ yes |
+| `plan/runner-manual-2026.md` | Official Destination Trail runner manual | ✅ reference only |
+| `tracker/weeks.json` | **The training data.** Weekly rollups from Strava | ✅ via weekly refresh |
+| `tracker/template.html` | Source for the local tracker page | ✅ yes |
+| `tracker/racebook_*.html` | Source for the phone racebook (3 parts) | ✅ yes |
+| `tracker/REFRESH.md` | How the weekly Strava refresh works — aggregation rules | ✅ yes |
+| `build/` | **Generated.** Rebuilt by `make` | ❌ never |
+| `_archive/` | Superseded drafts, kept for reference | ❌ never |
+
+## Rebuilding
+
+    make            # rebuilds both pages from tracker/weeks.json
+
+Open `build/bigfoot-tracker.html` in a browser for the local tracker.
+
+## The phone
+
+You don't sync files to the iPhone. The racebook is published as a Claude artifact:
+
+**https://claude.ai/code/artifact/1b073ecd-aa0c-44d3-8549-f4416989a436**
+
+After a weekly refresh, republish to that same URL so it updates in place.
+See `tracker/REFRESH.md`.
+
+---
+
+## Rules that keep the three devices from diverging
+
+1. **The Mac mini owns the weekly refresh.** It is the machine with the Strava
+   connection. Only it edits `tracker/weeks.json`. The MacBook reads.
+2. **Pull before you start, push when you stop.** Every session, both machines:
+
+       git pull    # before
+       git push    # after
+
+3. **Nothing in this repo goes in iCloud Drive, ever.** That is what caused the
+   original mess — see below.
+4. **Never hand-edit anything in `build/`.** It is output, not content.
+
+## Why this repo is not on the Desktop
+
+The old folder lived in `~/Desktop/BIGFOOT`, and Desktop is synced to iCloud Drive.
+iCloud was the actual problem, not the three devices:
+
+- It created a `BIGFOOT 2/` folder holding byte-identical duplicates of two files —
+  that is iCloud "resolving" a conflict by cloning.
+- It renamed a second copy of the tracker to `bigfoot-tracker_1.html`. The `_1` is a
+  collision suffix, not a version.
+- It **evicted two files off the Mac entirely** to save disk — `racebook.html` and the
+  runner manual existed as placeholders with no local content.
+
+That last behaviour is why a git repo must never live in iCloud: iCloud will eventually
+evict objects out of `.git` and corrupt the repository. Git and iCloud both want to be
+the sync layer, and they fight. Here, git is the sync layer and iCloud is not involved.
+
+The old Desktop folder was left in place as a backup. Delete it once you've confirmed
+this repo is good on both machines.
+
+## What was reconciled on 2026-09-11
+
+- `bigfoot-sub100-plan.md` vs `bigfoot-sub100-plan copy.md` → the non-copy was newer and
+  a strict superset (97:00 schedule w/ two-reserve strategy, BURT 100 pencilled in,
+  manual sourcing notes, Chain of Lakes decision table). The copy held an older 97:00
+  draft with different sleep splits. Kept the newer; copy archived.
+- `bigfoot-tracker.html` vs `bigfoot-tracker_1.html` → `_1` was the current build.
+  Verified by rebuilding from source: the fresh build is byte-identical to `_1`.
+  The unsuffixed one was a stale build, archived.
+- `BIGFOOT 2/` → both files byte-identical to the root copies. Dropped.
+- `racebook.html` → was iCloud-evicted, but it is generated. Rebuilt from source,
+  same 76,352 bytes. Nothing lost.

@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bigfoot 200 — Block Tracker</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:#fcfcfb; --plane:#f4f4f1; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+    --series-1:#2a78d6; --series-1-soft:rgba(42,120,214,.12); --baseline:#898781;
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --warn-ink:#8a6100;
+    --shadow:0 1px 2px rgba(11,11,11,.05), 0 8px 24px rgba(11,11,11,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-1:#1a1a19; --plane:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+      --series-1:#3987e5; --series-1-soft:rgba(57,135,229,.16); --baseline:#898781;
+      --warn-ink:#fab219;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:#1a1a19; --plane:#0d0d0d; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+    --series-1:#3987e5; --series-1-soft:rgba(57,135,229,.16); --baseline:#898781;
+    --warn-ink:#fab219;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--plane); color:var(--ink);
+         font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1080px; margin:0 auto; padding:28px 20px 72px; }
+
+  header.top { display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+  header.top h1 { font-size:22px; font-weight:650; letter-spacing:-.01em; margin:0 0 4px; }
+  header.top .sub { color:var(--ink-2); font-size:13px; }
+  .spacer { flex:1 1 auto; }
+  button { font:inherit; color:var(--ink-2); background:transparent; border:1px solid var(--border);
+           border-radius:8px; padding:7px 10px; cursor:pointer; }
+  button:hover { background:var(--surface-1); }
+
+  .card { background:var(--surface-1); border:1px solid var(--border); border-radius:14px;
+          padding:18px 20px; box-shadow:var(--shadow); }
+  section + section { margin-top:18px; }
+  h2 { font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-2); margin:0 0 14px; }
+
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .tile { background:var(--surface-1); border:1px solid var(--border); border-radius:14px;
+          padding:16px 18px; box-shadow:var(--shadow); }
+  .tile .label { font-size:12px; color:var(--muted); }
+  .tile .value { font-size:30px; font-weight:600; letter-spacing:-.02em; line-height:1.15; margin-top:5px; }
+  .tile .value small { font-size:14px; font-weight:500; color:var(--ink-2); letter-spacing:0; }
+  .tile .foot { font-size:12px; color:var(--ink-2); margin-top:5px; }
+
+  .meter + .meter { margin-top:13px; }
+  .meter .m-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:13px; }
+  .meter .m-name { color:var(--ink-2); }
+  .meter .m-val { font-variant-numeric:tabular-nums; font-weight:600; }
+  .meter .m-val .t { color:var(--muted); font-weight:400; }
+  .track { height:8px; border-radius:4px; background:var(--grid); margin-top:6px; overflow:hidden; }
+  .fill { height:100%; border-radius:4px; background:var(--series-1); }
+  .fill.good{background:var(--good)} .fill.warn{background:var(--warn)}
+  .fill.serious{background:var(--serious)} .fill.critical{background:var(--critical)}
+
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:13px; }
+  th, td { text-align:right; padding:7px 9px; border-bottom:1px solid var(--grid); white-space:nowrap; }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:var(--muted); font-weight:500; font-size:12px; }
+  tbody tr:hover { background:var(--series-1-soft); }
+  tr.sectionrow td { background:var(--plane); font-weight:600; color:var(--ink-2); font-size:12px;
+                     letter-spacing:.03em; text-transform:uppercase; }
+  .scroll { overflow-x:auto; }
+  .now td { box-shadow:inset 3px 0 0 var(--series-1); }
+
+  .chart-wrap { position:relative; }
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  .tip { position:absolute; pointer-events:none; opacity:0; transition:opacity .1s;
+         background:var(--surface-1); border:1px solid var(--border); border-radius:9px;
+         padding:8px 11px; font-size:12px; box-shadow:var(--shadow); white-space:nowrap; z-index:5;
+         font-variant-numeric:tabular-nums; }
+  .legend { display:flex; gap:16px; align-items:center; flex-wrap:wrap; font-size:12px; color:var(--ink-2); margin:2px 0 10px; }
+  .swatch { display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--series-1); margin-right:6px; vertical-align:-1px; }
+  .swatch.base { background:var(--baseline); }
+  .dashline { display:inline-block; width:16px; height:0; border-top:2px dashed var(--muted); margin-right:6px; vertical-align:3px; }
+
+  details { border-top:1px solid var(--grid); padding:12px 0 2px; }
+  details summary { cursor:pointer; font-weight:550; font-size:14px; list-style:none; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::before { content:"▸ "; color:var(--muted); }
+  details[open] summary::before { content:"▾ "; }
+  details .body { padding:10px 0 6px; color:var(--ink-2); font-size:13px; }
+  details .body ul { margin:6px 0 12px; padding-left:20px; }
+  details .body li { margin:3px 0; }
+  details .body strong { color:var(--ink); }
+
+  .badge { display:inline-block; font-size:11px; font-weight:600; letter-spacing:.03em; text-transform:uppercase;
+           padding:3px 8px; border-radius:999px; background:var(--series-1-soft); color:var(--series-1); }
+  .status { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:550; }
+  .dot { width:8px; height:8px; border-radius:50%; display:inline-block; flex:none; }
+  .s-good{color:var(--good)} .s-good .dot{background:var(--good)}
+  .s-warn{color:var(--warn-ink)} .s-warn .dot{background:var(--warn)}
+  .s-serious{color:var(--serious)} .s-serious .dot{background:var(--serious)}
+  .s-critical{color:var(--critical)} .s-critical .dot{background:var(--critical)}
+  .s-none{color:var(--muted)} .s-none .dot{background:var(--muted)}
+  .note { font-size:12px; color:var(--muted); margin-top:10px; }
+  .callout { border-left:3px solid var(--serious); background:var(--plane); border-radius:0 10px 10px 0;
+             padding:12px 16px; font-size:13px; color:var(--ink-2); margin-top:14px; }
+  .callout strong { color:var(--ink); }
+  ul.needs { list-style:none; margin:0; padding:0; font-size:13px; }
+  ul.needs li { display:flex; gap:9px; align-items:flex-start; padding:7px 0; border-bottom:1px solid var(--grid); }
+  ul.needs li:last-child { border-bottom:0; }
+  ul.needs .n { color:var(--ink); font-weight:550; min-width:190px; }
+  ul.needs .d { color:var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <h1>Bigfoot 200 — Block Tracker</h1>
+    <div class="sub">Race Aug 13, 2027 · 200.1 mi · 44,082 ft gain / 45,563 ft loss · 107 hr limit · <strong>target 100:00</strong> · unsupported · 9 hr sleep, 4:12 aid, 2.31 mph moving</div>
+  </div>
+  <div class="spacer"></div>
+  <button id="themeBtn" title="Toggle light/dark">◐</button>
+</header>
+
+<section class="tiles" id="tiles"></section>
+
+<section class="card">
+  <h2>Reality check — measured, not assumed</h2>
+  <div id="reality"></div>
+</section>
+
+<section class="card">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px">
+    <h2 style="margin:0">Current week</h2><span id="curLabel" class="badge"></span>
+  </div>
+  <div id="meters" style="margin-top:14px"></div>
+  <div id="blockQuestion" class="note"></div>
+</section>
+
+<section class="card">
+  <h2>Time on feet — hours per week</h2>
+  <div class="legend"><span><span class="swatch base"></span>Before the plan</span><span><span class="swatch"></span>In the plan</span><span><span class="dashline"></span>Block target</span></div>
+  <div class="chart-wrap" id="wrapHours"><div class="tip" id="tipHours"></div></div>
+</section>
+
+<section class="card">
+  <h2>Vertical gain — feet per week</h2>
+  <div class="legend"><span><span class="swatch base"></span>Before the plan</span><span><span class="swatch"></span>In the plan</span><span><span class="dashline"></span>Block target</span></div>
+  <div class="chart-wrap" id="wrapVert"><div class="tip" id="tipVert"></div></div>
+</section>
+
+<section class="card">
+  <h2>Longest single effort — hours</h2>
+  <div class="legend"><span><span class="swatch base"></span>Before the plan</span><span><span class="swatch"></span>In the plan</span><span><span class="dashline"></span>Block peak-day target</span></div>
+  <div class="chart-wrap" id="wrapLong"><div class="tip" id="tipLong"></div></div>
+  <div class="note">The single longest continuous activity in each week. This is the number the race actually tests.</div>
+</section>
+
+<section class="card">
+  <h2>Block progress</h2>
+  <div class="scroll"><table id="blockTable"></table></div>
+  <div class="note">Each cell shows the block target, then <span style="color:var(--muted)">· your logged average</span> once weeks land. Peak day shows the target and your best week.</div>
+</section>
+
+<section class="card">
+  <h2>Week log — synced automatically</h2>
+  <div class="scroll"><table id="weekTable"></table></div>
+</section>
+
+<section class="card">
+  <h2>Not coming from Strava</h2>
+  <p style="margin:0 0 12px;color:var(--ink-2);font-size:13px">Strava carries time, distance, elevation and activity timing, so everything above updates on its own. These do not exist in Strava at all — they live in Garmin, and there is no Garmin connector available to this session yet.</p>
+  <ul class="needs" id="needs"></ul>
+  <div class="note">Two ways to close this: drop a Garmin Connect export into a folder shared with Claude and it gets parsed on each refresh, or connect a Garmin bridge if one becomes available. Until then these stay blank rather than guessed.</div>
+</section>
+
+<section class="card">
+  <h2>Reference</h2>
+  <details>
+    <summary>Monitors — thresholds, not goals</summary>
+    <div class="body">
+      <p><strong>Descent HR gap.</strong> Average HR on sustained descent vs sustained climb, on any long day. Baseline 15–20 bpm; the fatigued pattern is ~2 bpm. Under 10 bpm on a day that should feel comfortable means under-recovery. Two in a row, cut the week.</p>
+      <p><strong>Aerobic decoupling.</strong> Pace-to-HR, first half vs second half of long days. Target under 5%. Above 8% consistently means the day was too hard or you're under-recovered.</p>
+      <p><strong>Zone discipline.</strong> Long days sit 125–140 bpm. More than 15% of a long day above 150 and it was a workout, not a long day.</p>
+      <p><strong>VO2 max — monitor, do not chase.</strong> 42.0 at baseline; expect 43–46 by Bighorn as a byproduct. It will likely decline in Blocks 4 and 5, which is normal. For a 105-hour race it's close to irrelevant.</p>
+      <p><strong>HRV — trend only.</strong> 30-day rolling baseline. Single low day: ignore. 7-day average down &gt;10%: cut volume 30% that week. "Unbalanced" 7+ days: three full days off.</p>
+      <p><strong>Resting HR.</strong> +5 bpm sustained over 5 days: back off. +8 bpm: stop and check for illness.</p>
+      <p><strong>Sleep.</strong> Train rested, race deprived. 7+ hr/night through Blocks 1–4; sleep score 75+ the two nights before any long day.</p>
+      <p><strong>Body Battery.</strong> Morning of a long day: 70+. Under 50, downgrade the session. Overnight recharge under 30 for three straight nights means accumulated fatigue.</p>
+      <p><strong>Hill score / endurance score / running tolerance.</strong> Hill score should rise through every block — flat or falling during a climbing block means the vert isn't being absorbed. Running tolerance is the injury guardrail: weekly load stays under it.</p>
+    </div>
+  </details>
+  <details>
+    <summary>Non-negotiables</summary>
+    <div class="body"><ul>
+      <li><strong>Night hours accumulate on schedule.</strong> Zero so far.</li>
+      <li><strong>Bighorn is a gate, not a formality.</strong> Finish well and Bigfoot is on. DNF or a badly damaged finish and the correct decision is to defer — decide the rule now, while it's abstract.</li>
+      <li><strong>Descent training happens on rock</strong>, not loam, and late in the day.</li>
+      <li><strong>Feet get managed from hour five</strong>, not hour nine. Practice in training.</li>
+      <li><strong>Eat every 40 minutes</strong> on every long day, including when you don't want to.</li>
+    </ul></div>
+  </details>
+  <details>
+    <summary>Review cadence — end of each block</summary>
+    <div class="body"><ul>
+      <li>Did time on feet, vertical, and peak day hit?</li>
+      <li>Did the descent HR gap hold?</li>
+      <li>Did night hours accumulate?</li>
+      <li>What did hill score and endurance score do?</li>
+      <li>Did the checkpoint race meet its pace target?</li>
+    </ul>
+    <p>Three or more misses means the next block gets rebuilt, not stacked on top.</p></div>
+  </details>
+  <details>
+    <summary>How the numbers are built</summary>
+    <div class="body"><ul>
+      <li><strong>Time on feet</strong> — moving time from Walk, Hike, Run and Stair-Stepper activities. Weight training, swims and ball sports are excluded.</li>
+      <li><strong>Vertical</strong> — Strava elevation gain, converted to feet. Treadmill and stair-stepper work reports zero gain, so real climbing is understated whenever the vert came from a machine.</li>
+      <li><strong>Miles</strong> — Walk, Hike and Run distance only.</li>
+      <li><strong>Longest effort</strong> — the single longest activity in the week, not the daily total.</li>
+      <li><strong>Weeks</strong> run Monday to Sunday.</li>
+    </ul></div>
+  </details>
+</section>
+
+<div class="note" id="syncNote" style="text-align:center;margin-top:22px"></div>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var SYNC = {"synced":"2026-09-06","source":"Strava","weeks":{"2026-05-25":{"hours":9.86,"vert":2182,"miles":39.9,"longest":2.35,"night":0,"sessions":12,"days":7},"2026-06-01":{"hours":8.31,"vert":1919,"miles":36.4,"longest":1.03,"night":0,"sessions":14,"days":7},"2026-06-08":{"hours":8.94,"vert":1066,"miles":31.7,"longest":1.55,"night":0,"sessions":15,"days":7},"2026-06-15":{"hours":7.65,"vert":2011,"miles":30.7,"longest":2.06,"night":0,"sessions":12,"days":7},"2026-06-22":{"hours":7.4,"vert":883,"miles":29.2,"longest":2.15,"night":0,"sessions":11,"days":6},"2026-06-29":{"hours":9.29,"vert":1280,"miles":34.6,"longest":1.13,"night":0,"sessions":14,"days":7},"2026-07-06":{"hours":8.56,"vert":2103,"miles":24.3,"longest":2.08,"night":0,"sessions":8,"days":6},"2026-07-13":{"hours":8.37,"vert":1752,"miles":32.0,"longest":1.71,"night":0,"sessions":12,"days":7},"2026-07-20":{"hours":7.53,"vert":1119,"miles":26.5,"longest":1.07,"night":0,"sessions":8,"days":7},"2026-07-27":{"hours":8.94,"vert":2694,"miles":28.0,"longest":3.0,"night":0,"sessions":7,"days":6},"2026-08-03":{"hours":6.67,"vert":1742,"miles":17.5,"longest":1.76,"night":0,"sessions":7,"days":5},"2026-08-10":{"hours":9.28,"vert":1519,"miles":33.6,"longest":1.89,"night":0,"sessions":6,"days":6},"2026-08-17":{"hours":7.26,"vert":915,"miles":23.8,"longest":1.86,"night":0,"sessions":5,"days":4},"2026-08-24":{"hours":12.7,"vert":1453,"miles":33.7,"longest":1.75,"night":0,"sessions":13,"days":7},"2026-08-31":{"hours":12.1,"vert":2927,"miles":39.6,"longest":2.98,"night":0,"sessions":9,"days":6}}};
+
+/* ---------- plan model ---------- */
+var BASE = Date.UTC(2026, 8, 7);
+var NPLAN = 49;
+var RACE = Date.UTC(2027, 7, 13);
+
+var BLOCKS = [
+  { n:1, start:0,  end:13, ends:"Frozen Trail Run Fest 50K",
+    peak:[8,8], nightCum:4,
+    q:"Can you sustain a full day on feet and descend hard without wrecking your quads — and rebuild the vertical base the old plan assumed you already had?" },
+  { n:2, start:14, end:22, ends:"First 100-miler",
+    peak:[10,12], nightCum:12,
+    q:"Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable — and finish 100 miles with a full night solo?" },
+  { n:3, start:23, end:31, ends:"Gorge Waterfalls 100K — 14–15 hr",
+    peak:[14,14], nightCum:24,
+    q:"Can you move competently in the dark for six hours, alone, and still run the last 10K?" },
+  { n:4, start:32, end:40, ends:"Bighorn 100 — the gate, sub-28",
+    peak:[18,18], nightCum:40,
+    q:"Can you run through a night and keep functioning the next day, with aid stops under 90 minutes total? Sub-100 at Bigfoot is decided here." },
+  { n:5, start:41, end:48, ends:"BIGFOOT 200 — sub-100",
+    peak:[20,20], nightCum:60,
+    q:"Recover, peak once, then arrive fresh with sleep banked and heat in the legs." }
+];
+var BLOCK_DISPLAY = {
+  1:{h:"10 → 15", v:"2,000 → 4,500", m:"32 → 50"},
+  2:{h:"17", v:"6,000", m:"55"},
+  3:{h:"19", v:"7,500", m:"60"},
+  4:{h:"21", v:"9,500", m:"65"},
+  5:{h:"23 peak", v:"12,000 peak", m:"70 peak"}
+};
+var B5 = [
+  {h:5,v:1000,m:15,tag:"Recovery — walks only"},
+  {h:5,v:1000,m:15,tag:"Recovery — walks only"},
+  {h:23,v:12000,m:70,tag:"Peak"},
+  {h:23,v:12000,m:70,tag:"Peak — one 20 hr day"},
+  {h:23,v:12000,m:70,tag:"Peak"},
+  {h:14,v:7200,m:42,tag:"Reduce 40%"},
+  {h:9,v:4000,m:28,tag:"Taper"},
+  {h:5,v:1500,m:15,tag:"Taper — race week"}
+];
+function blockOf(i){ for (var k=0;k<BLOCKS.length;k++) if (i>=BLOCKS[k].start && i<=BLOCKS[k].end) return BLOCKS[k]; return BLOCKS[4]; }
+function target(i){
+  var b = blockOf(i);
+  if (b.n===1){ var t=i/13; return {h:10+5*t, v:2000+2500*t, m:32+18*t, tag:"Rebuild the base"}; }
+  if (b.n===2) return {h:17,v:6000,m:55,tag:""};
+  if (b.n===3) return {h:19,v:7500,m:60,tag:""};
+  if (b.n===4) return {h:21,v:9500,m:65,tag:""};
+  var w = B5[i-41] || B5[7]; return {h:w.h,v:w.v,m:w.m,tag:w.tag};
+}
+function nightTargetCum(i){
+  var b=blockOf(i), prev = b.n===1?0:BLOCKS[b.n-2].nightCum;
+  var span=b.end-b.start, f= span===0?1:(i-b.start)/span;
+  return prev + (b.nightCum-prev)*f;
+}
+
+/* ---------- timeline: baseline weeks + plan weeks ---------- */
+function iso(d){ return new Date(d).toISOString().slice(0,10); }
+function planStart(i){ return BASE + i*7*86400000; }
+
+var TL = [];   // {ms, key, phase, pi}
+(function build(){
+  var keys = Object.keys(SYNC.weeks).sort();
+  for (var j=0;j<keys.length;j++){
+    var ms = Date.parse(keys[j]+"T00:00:00Z");
+    if (ms < BASE) TL.push({ms:ms, key:keys[j], phase:"base", pi:null});
+  }
+  for (var i=0;i<NPLAN;i++){ var m=planStart(i); TL.push({ms:m, key:iso(m), phase:"plan", pi:i}); }
+})();
+var FIRST_PLAN = TL.findIndex(function(t){ return t.phase==="plan"; });
+
+function D(t){ return SYNC.weeks[t.key] || null; }
+function fmtDate(ms){ return new Date(ms).toLocaleDateString(undefined,{month:"short",day:"numeric",timeZone:"UTC"}); }
+function fmtRange(ms){ var b=ms+6*86400000; return fmtDate(ms)+"–"+fmtDate(b)+", "+new Date(b).getUTCFullYear(); }
+function n0(x){ return x==null?"—":Math.round(x).toLocaleString(); }
+function n1(x){ return x==null?"—":(Math.round(x*10)/10).toLocaleString(undefined,{maximumFractionDigits:1}); }
+
+/* current week = last timeline entry whose Monday <= today */
+var TODAY = Date.now();
+var CUR = 0; for (var z=0;z<TL.length;z++) if (TL[z].ms <= TODAY) CUR = z;
+
+/* ---------- theme ---------- */
+try { var th = localStorage.getItem("bf.theme"); if (th) document.documentElement.setAttribute("data-theme", th); } catch(e){}
+document.getElementById("themeBtn").addEventListener("click", function(){
+  var cur = document.documentElement.getAttribute("data-theme");
+  var next = cur==="dark" ? "light" : cur==="light" ? "dark"
+    : (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark");
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("bf.theme", next); } catch(e){}
+  renderCharts();
+});
+
+/* ---------- stats ---------- */
+function statusFor(a,t){ if(a==null) return "none"; var r=a/t;
+  return r>=1.18?"warn": r>=0.95?"good": r>=0.80?"warn":"serious"; }
+function chip(s,txt){ return '<span class="status s-'+s+'"><span class="dot"></span>'+txt+'</span>'; }
+function css(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+function baselineStats(n){
+  var pts=[]; for (var i=0;i<TL.length;i++){ if (TL[i].phase!=="base") continue; var d=D(TL[i]); if(d) pts.push(d); }
+  pts = pts.slice(-n);
+  if (!pts.length) return null;
+  var s={h:0,v:0,m:0,long:0,weeks:pts.length};
+  pts.forEach(function(p){ s.h+=p.hours; s.v+=p.vert; s.m+=p.miles; s.long=Math.max(s.long,p.longest); });
+  s.h/=pts.length; s.v/=pts.length; s.m/=pts.length;
+  return s;
+}
+
+/* ---------- tiles ---------- */
+function renderTiles(){
+  var weeksLeft = Math.max(0, Math.ceil((RACE-TODAY)/(7*86400000)));
+  var t = TL[CUR];
+  var blockTxt, blockFoot;
+  if (t.phase==="base"){ blockTxt = "Pre-plan"; blockFoot = "Block 1 starts "+fmtDate(BASE); }
+  else { var b=blockOf(t.pi); blockTxt="Block "+b.n; blockFoot="Week "+(t.pi-b.start+1)+" of "+(b.end-b.start+1)+" · ends "+b.ends; }
+
+  var night=0, vert=0;
+  for (var i=0;i<TL.length;i++){ var d=D(TL[i]); if (d && TL[i].phase==="plan"){ night+=d.night||0; vert+=d.vert||0; } }
+  var nreq = t.phase==="plan" ? nightTargetCum(t.pi) : 0;
+
+  var b12 = baselineStats(12);
+  document.getElementById("tiles").innerHTML =
+    tile("Weeks to Bigfoot", weeksLeft, "", "Aug 13, 2027") +
+    tile("Where you are", blockTxt, "", blockFoot) +
+    tile("Last 12 weeks", b12?n1(b12.h):"—", "hr/wk avg", b12 ? n0(b12.v)+" ft/wk · "+n0(b12.m)+" mi/wk" : "no data") +
+    tile("Night hours", n1(night), "hr in-plan",
+      t.phase==="plan"
+        ? (night>=nreq ? chip("good", n1(nreq)+" due by now") : chip(nreq<0.5?"none":"serious", nreq<0.5?"first sessions due in November":n1(nreq)+" due by now"))
+        : chip("none","first sessions due in November"));
+}
+function tile(l,v,u,f){ return '<div class="tile"><div class="label">'+l+'</div><div class="value">'+v+
+  (u?' <small>'+u+'</small>':'')+'</div><div class="foot">'+f+'</div></div>'; }
+
+/* ---------- reality check ---------- */
+var ASSUMED = { h:12, v:3000, m:45, long:2.98 };
+function renderReality(){
+  var b = baselineStats(12);
+  if (!b){ document.getElementById("reality").innerHTML = "<p class='note'>No synced weeks yet.</p>"; return; }
+  var rows = [
+    rrow("Time on feet", b.h, ASSUMED.h, "hr/wk", n1),
+    rrow("Vertical", b.v, ASSUMED.v, "ft/wk", n0),
+    rrow("On-foot miles", b.m, ASSUMED.m, "mi/wk", n0),
+    rrow("Longest single effort", b.long, ASSUMED.long, "hr", n1)
+  ].join("");
+  var vGap = ASSUMED.v / b.v;
+  document.getElementById("reality").innerHTML =
+    '<div class="scroll"><table><thead><tr><th>Metric</th><th>Original plan assumed</th><th>Last 12 weeks, measured</th><th>Gap</th></tr></thead><tbody>'+
+    rows + '</tbody></table></div>' +
+    '<div class="callout"><strong>The block targets below are re-based on these numbers, not the original ones.</strong> '+
+    'The original plan started from 3,000 ft/week; you are averaging '+n0(b.v)+', so its Block 1 target of 5,000 was '+
+    (Math.round(5000/b.v*10)/10)+'× your real starting point rather than the 1.7× it implied. Block 1 now ramps 2,000 → 4,500 and the '+
+    'peak lands at 12,000. Cumulative vertical works out near 303,000 ft — about 6.9× the race, built from where you are.</div>';
+}
+function rrow(name, actual, assumed, unit, f){
+  var r = actual/assumed;
+  var s = r>=0.95 ? "good" : r>=0.8 ? "warn" : "serious";
+  var pct = Math.round((r-1)*100);
+  return '<tr><td>'+name+'</td><td style="color:var(--muted)">'+f(assumed)+' '+unit+'</td><td><strong>'+f(actual)+'</strong> '+unit+
+    '</td><td>'+chip(s,(pct>0?"+":"")+pct+"%")+'</td></tr>';
+}
+
+/* ---------- current week meters ---------- */
+function renderCurrent(){
+  var t = TL[CUR], d = D(t), el = document.getElementById("meters");
+  if (t.phase==="base"){
+    document.getElementById("curLabel").textContent = "Before the plan · "+fmtRange(t.ms);
+    var b = baselineStats(12);
+    el.innerHTML =
+      meter("Time on feet", d?d.hours:null, b?b.h:12, "hr", n1, "against your 12-week average", true) +
+      meter("Vertical", d?d.vert:null, b?b.v:3000, "ft", n0, "against your 12-week average", true) +
+      meter("On-foot miles", d?d.miles:null, b?b.m:45, "mi", n0, "against your 12-week average", true) +
+      meter("Longest single effort", d?d.longest:null, 3, "hr", n1, "your longest to date is 3.0 hr", true);
+    document.getElementById("blockQuestion").innerHTML =
+      "<strong>Block 1 starts "+fmtDate(BASE)+".</strong> Targets switch to the plan's numbers that week.";
+    return;
+  }
+  var b2 = blockOf(t.pi), tg = target(t.pi);
+  document.getElementById("curLabel").textContent = "Block "+b2.n+" · Week "+(t.pi-b2.start+1)+"/"+(b2.end-b2.start+1)+(tg.tag?" · "+tg.tag:"");
+  var best=null;
+  for (var q=0;q<TL.length;q++){ if (TL[q].phase!=="plan"||TL[q].pi<b2.start||TL[q].pi>b2.end) continue;
+    var dd=D(TL[q]); if (dd) best=Math.max(best==null?0:best, dd.longest); }
+  el.innerHTML =
+    meter("Time on feet", d?d.hours:null, tg.h, "hr", n1) +
+    meter("Vertical", d?d.vert:null, tg.v, "ft", n0) +
+    meter("On-foot miles", d?d.miles:null, tg.m, "mi", n0) +
+    '<div class="meter"><div class="m-head"><span class="m-name">Longest single effort — best in block</span>'+
+    '<span class="m-val">'+(best==null?"—":n1(best))+' <span class="t">/ '+b2.peak[0]+(b2.peak[1]!==b2.peak[0]?"–"+b2.peak[1]:"")+' hr</span></span></div>'+
+    '<div class="track"><div class="fill" style="width:'+(best==null?0:Math.min(100,best/b2.peak[0]*100))+'%"></div></div>'+
+    '<div class="note" style="margin-top:5px">Block target, not a weekly one — it has until '+fmtDate(planStart(b2.end)+6*86400000)+' to land.</div></div>';
+  document.getElementById("blockQuestion").innerHTML = "<strong>Block "+b2.n+" question:</strong> "+b2.q;
+}
+function meter(name, actual, targ, unit, f, sub, neutral){
+  var s = neutral ? "" : statusFor(actual, targ), pct = actual==null?0:Math.min(100, actual/targ*100);
+  return '<div class="meter"><div class="m-head"><span class="m-name">'+name+'</span>'+
+    '<span class="m-val">'+(actual==null?"—":f(actual))+' <span class="t">/ '+f(targ)+' '+unit+'</span></span></div>'+
+    '<div class="track"><div class="fill '+(s==="none"?"":s)+'" style="width:'+pct+'%"></div></div>'+
+    (sub?'<div class="note" style="margin-top:5px">'+sub+'</div>':'')+'</div>';
+}
+
+/* ---------- charts ---------- */
+function drawChart(mountId, tipId, o){
+  var mount=document.getElementById(mountId), tip=document.getElementById(tipId);
+  var W=1000,H=270,PL=56,PR=12,PT=14,PB=46, iw=W-PL-PR, ih=H-PT-PB;
+  var N=TL.length, max=0;
+  for (var i=0;i<N;i++){ var v=o.value(i), t=o.target(i);
+    if (v!=null) max=Math.max(max,v); if (t!=null) max=Math.max(max,t); }
+  max = (max*1.12)||1;
+  var step=iw/N, bw=Math.min(13, step*0.6);
+  var x=function(i){ return PL+i*step+step/2; }, y=function(v){ return PT+ih-(v/max)*ih; };
+  var muted=css("--muted"), grid=css("--grid"), axis=css("--axis"), s1=css("--series-1"), sb=css("--baseline");
+  var p=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+o.aria+'">'];
+
+  niceTicks(max,5).forEach(function(tv){
+    var yy=y(tv);
+    p.push('<line x1="'+PL+'" y1="'+yy+'" x2="'+(W-PR)+'" y2="'+yy+'" stroke="'+grid+'" stroke-width="1"/>');
+    p.push('<text x="'+(PL-9)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="'+muted+'">'+o.fmtAxis(tv)+'</text>');
+  });
+
+  // baseline region label
+  if (FIRST_PLAN > 0){
+    var xs=PL+FIRST_PLAN*step;
+    p.push('<rect x="'+PL+'" y="'+PT+'" width="'+(xs-PL)+'" height="'+ih+'" fill="'+grid+'" opacity=".35"/>');
+    p.push('<text x="'+(PL+(xs-PL)/2)+'" y="'+(H-28)+'" text-anchor="middle" font-size="11" fill="'+muted+'">Before the plan</text>');
+    p.push('<line x1="'+xs+'" y1="'+PT+'" x2="'+xs+'" y2="'+(PT+ih)+'" stroke="'+axis+'" stroke-width="1.5"/>');
+    p.push('<text x="'+(xs+5)+'" y="'+(PT+11)+'" font-size="10" fill="'+muted+'">plan starts</text>');
+  }
+  // block dividers
+  BLOCKS.forEach(function(b,k){
+    var xs=PL+(FIRST_PLAN+b.start)*step, wpx=(b.end-b.start+1)*step;
+    if (k>0) p.push('<line x1="'+xs+'" y1="'+PT+'" x2="'+xs+'" y2="'+(PT+ih)+'" stroke="'+axis+'" stroke-width="1" stroke-dasharray="2 3"/>');
+    p.push('<text x="'+(xs+wpx/2)+'" y="'+(H-28)+'" text-anchor="middle" font-size="11" fill="'+muted+'">Block '+b.n+'</text>');
+    p.push('<text x="'+(xs+wpx/2)+'" y="'+(H-14)+'" text-anchor="middle" font-size="10" fill="'+muted+'">'+fmtDate(planStart(b.start))+'</text>');
+  });
+  p.push('<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(W-PR)+'" y2="'+(PT+ih)+'" stroke="'+axis+'" stroke-width="1"/>');
+
+  // target step line (plan region only)
+  var d=[], started=false;
+  for (var j=0;j<N;j++){
+    var tv2=o.target(j); if (tv2==null){ started=false; continue; }
+    var x0=PL+j*step, x1=PL+(j+1)*step, yv=y(tv2);
+    d.push((started?"L":"M")+x0+" "+yv); d.push("L"+x1+" "+yv); started=true;
+  }
+  if (d.length) p.push('<path d="'+d.join(" ")+'" fill="none" stroke="'+muted+'" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"/>');
+
+  // bars
+  for (var k2=0;k2<N;k2++){
+    var v2=o.value(k2); if (v2==null) continue;
+    var h=(PT+ih)-y(v2); if (h<2) h=2;
+    p.push('<rect x="'+(x(k2)-bw/2)+'" y="'+y(v2)+'" width="'+bw+'" height="'+h+'" rx="4" fill="'+(TL[k2].phase==="base"?sb:s1)+'"/>');
+  }
+  p.push('<line x1="'+x(CUR)+'" y1="'+PT+'" x2="'+x(CUR)+'" y2="'+(PT+ih)+'" stroke="'+s1+'" stroke-width="1" opacity=".35"/>');
+  for (var k3=0;k3<N;k3++) p.push('<rect class="hit" data-i="'+k3+'" x="'+(PL+k3*step)+'" y="'+PT+'" width="'+step+'" height="'+ih+'" fill="transparent"/>');
+  p.push('</svg>');
+
+  mount.innerHTML = p.join(""); mount.appendChild(tip);
+  var svg=mount.querySelector("svg");
+  svg.addEventListener("mousemove", function(e){
+    var el=e.target.closest?e.target.closest(".hit"):null;
+    if(!el){ tip.style.opacity=0; return; }
+    tip.innerHTML=o.tip(+el.getAttribute("data-i")); tip.style.opacity=1;
+    var r=mount.getBoundingClientRect(), tx=e.clientX-r.left+14, ty=e.clientY-r.top-10;
+    if (tx+tip.offsetWidth>r.width) tx=e.clientX-r.left-tip.offsetWidth-14;
+    tip.style.left=tx+"px"; tip.style.top=Math.max(0,ty)+"px";
+  });
+  svg.addEventListener("mouseleave", function(){ tip.style.opacity=0; });
+}
+function niceTicks(max,n){
+  var raw=max/n, mag=Math.pow(10,Math.floor(Math.log(raw)/Math.LN10)), norm=raw/mag;
+  var s=(norm>=5?5:norm>=2?2:norm>=1?1:0.5)*mag, out=[];
+  for (var v=0; v<=max; v+=s) out.push(v);
+  return out;
+}
+function tipFor(i, label, val, tgt, f, unit){
+  var t=TL[i];
+  var head = t.phase==="base" ? "<b>Before the plan</b>" : "<b>Week "+(t.pi+1)+" · Block "+blockOf(t.pi).n+"</b>";
+  return head+" · "+fmtRange(t.ms)+"<br>"+label+": <b>"+(val==null?"—":f(val)+" "+unit)+"</b>"+
+    (tgt==null?"":"<br>Target: "+f(tgt)+" "+unit);
+}
+function renderCharts(){
+  drawChart("wrapHours","tipHours",{ aria:"Weekly time on feet",
+    value:function(i){ var d=D(TL[i]); return d?d.hours:null; },
+    target:function(i){ return TL[i].phase==="plan" ? target(TL[i].pi).h : null; },
+    fmtAxis:n0,
+    tip:function(i){ var d=D(TL[i]); return tipFor(i,"Time on feet", d?d.hours:null,
+      TL[i].phase==="plan"?target(TL[i].pi).h:null, n1, "hr"); }});
+  drawChart("wrapVert","tipVert",{ aria:"Weekly vertical gain",
+    value:function(i){ var d=D(TL[i]); return d?d.vert:null; },
+    target:function(i){ return TL[i].phase==="plan" ? target(TL[i].pi).v : null; },
+    fmtAxis:function(v){ return v>=1000?(v/1000)+"k":n0(v); },
+    tip:function(i){ var d=D(TL[i]); return tipFor(i,"Vertical", d?d.vert:null,
+      TL[i].phase==="plan"?target(TL[i].pi).v:null, n0, "ft"); }});
+  drawChart("wrapLong","tipLong",{ aria:"Longest single effort each week",
+    value:function(i){ var d=D(TL[i]); return d?d.longest:null; },
+    target:function(i){ return TL[i].phase==="plan" ? blockOf(TL[i].pi).peak[0] : null; },
+    fmtAxis:n0,
+    tip:function(i){ var d=D(TL[i]); return tipFor(i,"Longest effort", d?d.longest:null,
+      TL[i].phase==="plan"?blockOf(TL[i].pi).peak[0]:null, n1, "hr"); }});
+}
+
+/* ---------- tables ---------- */
+function renderBlockTable(){
+  var h='<thead><tr><th>Block</th><th>Weeks</th><th>Hr/wk</th><th>Vert/wk</th><th>Mi/wk</th><th>Peak day</th><th>Night (cum)</th><th style="text-align:left">Ends with</th></tr></thead><tbody>';
+  var b12=baselineStats(12);
+  h += '<tr><td>Before the plan</td><td style="color:var(--ink-2)">last 12 weeks</td>'+
+       '<td>'+(b12?n1(b12.h):"—")+'</td><td>'+(b12?n0(b12.v):"—")+'</td><td>'+(b12?n0(b12.m):"—")+'</td>'+
+       '<td>'+(b12?n1(b12.long)+" hr":"—")+'</td><td>0</td><td style="text-align:left;color:var(--muted)">measured, not planned</td></tr>';
+  BLOCKS.forEach(function(b){
+    var D_=BLOCK_DISPLAY[b.n], hs=0,hn=0,vs=0,vn=0,ms=0,mn=0,best=null,ncum=0;
+    for (var i=0;i<TL.length;i++){
+      var t=TL[i]; if (t.phase!=="plan") continue;
+      var d=D(t); if(!d) continue;
+      if (t.pi<=b.end) ncum += d.night||0;
+      if (t.pi<b.start||t.pi>b.end) continue;
+      hs+=d.hours; hn++; vs+=d.vert; vn++; ms+=d.miles; mn++;
+      best=Math.max(best==null?0:best, d.longest);
+    }
+    function lg(x){ return ' <span style="color:var(--muted)">· '+x+'</span>'; }
+    var isNow = TL[CUR].phase==="plan" && TL[CUR].pi>=b.start && TL[CUR].pi<=b.end;
+    h += '<tr'+(isNow?' class="now"':'')+'><td>Block '+b.n+'</td>'+
+      '<td style="color:var(--ink-2)">'+fmtDate(planStart(b.start))+' – '+fmtDate(planStart(b.end)+6*86400000)+'</td>'+
+      '<td>'+D_.h+(hn?lg(n1(hs/hn)):'')+'</td>'+
+      '<td>'+D_.v+(vn?lg(n0(vs/vn)):'')+'</td>'+
+      '<td>'+D_.m+(mn?lg(n0(ms/mn)):'')+'</td>'+
+      '<td>'+b.peak[0]+(b.peak[1]!==b.peak[0]?'–'+b.peak[1]:'')+' hr'+(best!=null?lg(n1(best)):'')+'</td>'+
+      '<td>'+(ncum?n1(ncum)+' / ':'')+b.nightCum+'</td>'+
+      '<td style="text-align:left">'+b.ends+'</td></tr>';
+  });
+  document.getElementById("blockTable").innerHTML = h+'</tbody>';
+}
+
+function renderWeekTable(){
+  var h='<thead><tr><th>Week</th><th>Dates</th><th>Hours</th><th>Vert</th><th>Miles</th><th>Longest</th><th>Sessions</th><th>Days on feet</th></tr></thead><tbody>';
+  if (FIRST_PLAN>0) h+='<tr class="sectionrow"><td colspan="8">Before the plan — measured from Strava</td></tr>';
+  for (var i=0;i<TL.length;i++){
+    var t=TL[i];
+    if (t.phase==="plan"){
+      var b=blockOf(t.pi);
+      if (t.pi===b.start) h+='<tr class="sectionrow"><td colspan="8">Block '+b.n+' — ends '+b.ends+'</td></tr>';
+    }
+    var d=D(t), tg = t.phase==="plan"?target(t.pi):null;
+    var cls = i===CUR?' class="now"':'';
+    h += '<tr'+cls+'><td>'+(t.phase==="plan"?(t.pi+1):"—")+'</td><td>'+fmtRange(t.ms)+'</td>'+
+      cell(d?d.hours:null, tg?tg.h:null, n1)+
+      cell(d?d.vert:null,  tg?tg.v:null, n0)+
+      cell(d?d.miles:null, tg?tg.m:null, n0)+
+      '<td>'+(d?n1(d.longest):'—')+'</td>'+
+      '<td style="color:var(--ink-2)">'+(d?d.sessions:'—')+'</td>'+
+      '<td style="color:var(--ink-2)">'+(d?d.days+'/7':'—')+'</td></tr>';
+  }
+  document.getElementById("weekTable").innerHTML = h+'</tbody>';
+}
+function cell(a,t,f){
+  if (a==null) return '<td style="color:var(--muted)">—'+(t!=null?' <span style="font-size:11px">/'+f(t)+'</span>':'')+'</td>';
+  if (t==null) return '<td>'+f(a)+'</td>';
+  var s=statusFor(a,t), col=s==="good"?"var(--good)":s==="warn"?"var(--warn)":"var(--serious)";
+  return '<td><span style="color:'+col+'">●</span> '+f(a)+' <span style="color:var(--muted);font-size:11px">/'+f(t)+'</span></td>';
+}
+
+/* ---------- needs-Garmin list ---------- */
+var NEEDS = [
+  ["Descent HR gap","Needs heart rate split by climb vs descent within a single activity."],
+  ["Aerobic decoupling","Needs the pace and HR streams, first half vs second half."],
+  ["HRV and resting HR","Overnight physiology. Garmin only."],
+  ["Sleep and Body Battery","Garmin only."],
+  ["Hill score, endurance score, running tolerance","Garmin-computed. Still the three baselines the plan flags as missing."],
+  ["VO2 max","Garmin estimate. 42.0 at baseline; a monitor, not a target."],
+  ["Night hours","Derivable from activity timing against local sunset and sunrise — wired up, currently zero. Target is now 60 cumulative, not 30: four nights, alone."]
+];
+function renderNeeds(){
+  document.getElementById("needs").innerHTML = NEEDS.map(function(n){
+    return '<li><span class="dot" style="background:var(--muted);margin-top:6px"></span><span><span class="n">'+n[0]+'</span><br><span class="d">'+n[1]+'</span></span></li>';
+  }).join("");
+}
+
+function renderSync(){
+  var n=0; for (var k in SYNC.weeks) if (Object.prototype.hasOwnProperty.call(SYNC.weeks,k)) n++;
+  document.getElementById("syncNote").textContent =
+    n+" weeks synced from "+SYNC.source+" · last refreshed "+new Date(SYNC.synced+"T12:00:00Z")
+      .toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric",timeZone:"UTC"});
+}
+
+renderTiles(); renderReality(); renderCurrent(); renderCharts();
+renderBlockTable(); renderWeekTable(); renderNeeds(); renderSync();
+window.addEventListener("resize", function(){ clearTimeout(window.__rz); window.__rz=setTimeout(renderCharts,150); });
+})();
+</script>
+</body>
+</html>

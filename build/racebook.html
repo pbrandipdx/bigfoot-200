@@ -1,0 +1,928 @@
+<title>Bigfoot 200 Racebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --ground:#eeeeec; --surface:#fbfbfa; --surface-2:#f4f4f2;
+  --ink:#16181a; --ink-2:#4b5057; --muted:#858a90;
+  --line:#dcdcd8; --line-2:#c9c9c4;
+  --moss:#3d6b4a; --moss-soft:rgba(61,107,74,.10); --moss-line:rgba(61,107,74,.28);
+  --ember:#a94d1c; --ember-soft:rgba(169,77,28,.10);
+  --good:#3d6b4a; --warn:#a97a1c; --bad:#a3402c;
+  --shadow:0 1px 1px rgba(22,24,26,.04), 0 10px 30px rgba(22,24,26,.05);
+  --f-display:"Zilla Slab", Georgia, serif;
+  --f-body:"Archivo", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --ground:#0f1011; --surface:#191b1c; --surface-2:#212325;
+    --ink:#f3f3f1; --ink-2:#b6babe; --muted:#80858b;
+    --line:#2a2d2f; --line-2:#3a3e41;
+    --moss:#7fc094; --moss-soft:rgba(127,192,148,.12); --moss-line:rgba(127,192,148,.30);
+    --ember:#e08a52; --ember-soft:rgba(224,138,82,.12);
+    --good:#7fc094; --warn:#d9a441; --bad:#e0765c;
+    --shadow:0 1px 1px rgba(0,0,0,.5), 0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#0f1011; --surface:#191b1c; --surface-2:#212325;
+  --ink:#f3f3f1; --ink-2:#b6babe; --muted:#80858b;
+  --line:#2a2d2f; --line-2:#3a3e41;
+  --moss:#7fc094; --moss-soft:rgba(127,192,148,.12); --moss-line:rgba(127,192,148,.30);
+  --ember:#e08a52; --ember-soft:rgba(224,138,82,.12);
+  --good:#7fc094; --warn:#d9a441; --bad:#e0765c;
+  --shadow:0 1px 1px rgba(0,0,0,.5), 0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+a{color:var(--moss)}
+:focus-visible{outline:2px solid var(--moss);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+/* masthead */
+.masthead{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.mast-inner{max-width:940px;margin:0 auto;padding:16px 20px 12px;display:flex;align-items:flex-end;gap:18px}
+.eyebrow{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mast-inner h1{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.1;margin-top:3px}
+.mast-inner h1 em{font-style:normal;color:var(--moss)}
+.grow{flex:1}
+.countdown{text-align:right;font-family:var(--f-mono);line-height:1.05;flex:none}
+.countdown .big{display:block;font-size:26px;font-weight:500;letter-spacing:-.02em}
+.countdown .unit{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.themebtn{flex:none;background:none;border:1px solid var(--line-2);color:var(--ink-2);border-radius:7px;
+  width:32px;height:32px;cursor:pointer;font-size:14px;line-height:1}
+.themebtn:hover{background:var(--surface-2)}
+
+.tabs{max-width:940px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);
+  font:inherit;font-size:13px;font-weight:600;letter-spacing:.02em;padding:8px 12px 9px;cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--ink-2)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--moss)}
+
+main{max-width:940px;margin:0 auto;padding:26px 20px 80px}
+.panel{display:flex;flex-direction:column;gap:22px}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow)}
+.block > h2{font-size:12px;font-family:var(--f-body);font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px}
+.block.plain{background:none;border:0;box-shadow:none;padding:0}
+h3.sec{font-family:var(--f-display);font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 0 10px}
+p{margin:0 0 12px;max-width:66ch;color:var(--ink-2)}
+p:last-child{margin-bottom:0}
+p strong,li strong{color:var(--ink);font-weight:600}
+.lede{font-size:17px;color:var(--ink)}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tile{background:var(--surface);padding:15px 17px 16px}
+.tile .lab{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.tile .val{font-family:var(--f-mono);font-size:27px;font-weight:500;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.tile .val small{font-family:var(--f-body);font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:0}
+.tile .sub{font-size:12px;color:var(--ink-2);margin-top:5px;line-height:1.35}
+
+/* meters */
+.meter + .meter{margin-top:14px}
+.mrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:14px}
+.mrow .nm{color:var(--ink-2)}
+.mrow .vl{font-family:var(--f-mono);font-weight:500}
+.mrow .vl .t{color:var(--muted);font-weight:400}
+.bar{height:7px;border-radius:2px;background:var(--line);margin-top:7px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--moss);border-radius:2px}
+.bar i.warn{background:var(--warn)} .bar i.bad{background:var(--bad)}
+.hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;font-family:var(--f-mono);font-weight:400}
+th,td{text-align:right;padding:8px 11px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;font-family:var(--f-body)}
+thead th{font-family:var(--f-body);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;background:var(--surface-2);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--moss-soft)}
+tr.grp td{background:var(--surface-2);font-family:var(--f-body);font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+tr.here td{box-shadow:inset 3px 0 0 var(--moss)}
+tr.tot td{font-weight:500;border-top:1px solid var(--line-2);background:var(--surface-2)}
+td.dim{color:var(--muted)}
+.sleepcell{color:var(--ember);font-weight:500}
+
+/* chart */
+.chartbox{overflow-x:auto;position:relative}
+.chartbox svg{display:block;min-width:660px;width:100%;height:auto}
+.key{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin:0 0 12px}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--moss);margin-right:6px;vertical-align:-1px}
+.key i.pre{background:var(--muted)}
+.key u{display:inline-block;width:15px;border-top:2px dashed var(--muted);margin-right:6px;vertical-align:4px;text-decoration:none}
+.tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--surface);
+  border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;font-size:12px;font-family:var(--f-mono);
+  box-shadow:var(--shadow);white-space:nowrap;z-index:5}
+
+/* callout */
+.callout{border-left:3px solid var(--ember);background:var(--ember-soft);border-radius:0 9px 9px 0;
+  padding:13px 16px;font-size:14px;color:var(--ink-2);margin-top:16px}
+.callout strong{color:var(--ink)}
+.rule{border-left:3px solid var(--moss);background:var(--moss-soft);border-radius:0 9px 9px 0;
+  padding:13px 16px;font-size:14px;color:var(--ink-2);margin-top:16px}
+.rule strong{color:var(--ink)}
+
+ul.tight{margin:0;padding-left:20px;color:var(--ink-2);font-size:14.5px}
+ul.tight li{margin:6px 0;max-width:64ch}
+ul.plainlist{list-style:none;margin:0;padding:0}
+ul.plainlist li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+ul.plainlist li:last-child{border-bottom:0}
+ul.plainlist b{display:block;color:var(--ink);font-weight:600;font-size:14.5px;margin-bottom:2px}
+
+details{border-top:1px solid var(--line);padding:11px 0 3px}
+details summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;color:var(--ink)}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ ";color:var(--moss);font-family:var(--f-mono)}
+details[open] summary::before{content:"– "}
+details .body{padding:10px 0 4px;font-size:14px;color:var(--ink-2)}
+details .body p{font-size:14px}
+
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.02em;
+  padding:3px 9px;border-radius:99px;background:var(--moss-soft);color:var(--moss);font-family:var(--f-body)}
+.pill.ember{background:var(--ember-soft);color:var(--ember)}
+.stat{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+.stat s{width:7px;height:7px;border-radius:50%;display:inline-block;text-decoration:none}
+.stat.g{color:var(--good)} .stat.g s{background:var(--good)}
+.stat.w{color:var(--warn)} .stat.w s{background:var(--warn)}
+.stat.b{color:var(--bad)}  .stat.b s{background:var(--bad)}
+.stat.n{color:var(--muted)} .stat.n s{background:var(--muted)}
+footer{max-width:940px;margin:0 auto;padding:0 20px 50px;font-size:12.5px;color:var(--muted);text-align:center}
+
+@media (max-width:640px){
+  .mast-inner{padding:13px 16px 10px;gap:12px}
+  .mast-inner h1{font-size:21px}
+  .countdown .big{font-size:21px}
+  main{padding:20px 16px 60px}
+  .block{padding:16px 15px;border-radius:10px}
+  h3.sec{font-size:19px}
+  .tabs{padding:0 16px}
+  footer{padding:0 16px 40px}
+}
+</style>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <div>
+      <span class="eyebrow">Marble Mountain → Randle, WA · Aug 13, 2027</span>
+      <h1>Bigfoot 200 <em>Racebook</em></h1>
+    </div>
+    <div class="grow"></div>
+    <div class="countdown"><span class="big" id="cd">—</span><span class="unit">weeks out</span></div>
+    <button class="themebtn" id="themebtn" title="Light / dark" aria-label="Toggle light or dark theme">◐</button>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true"  data-tab="now">Now</button>
+    <button role="tab" aria-selected="false" data-tab="training">Training</button>
+    <button role="tab" aria-selected="false" data-tab="raceday">Race day</button>
+    <button role="tab" aria-selected="false" data-tab="vert">Where to get vert</button>
+    <button role="tab" aria-selected="false" data-tab="plan">The plan</button>
+    <button role="tab" aria-selected="false" data-tab="ref">Reference</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ===================== NOW ===================== -->
+<section class="panel" id="p-now">
+  <div class="tiles" id="tiles"></div>
+
+  <div class="block">
+    <h2>Current week</h2>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <span class="pill" id="curpill">—</span>
+      <span class="hint" id="curdates" style="margin:0"></span>
+    </div>
+    <div id="meters"></div>
+    <p class="hint" id="blockq" style="margin-top:16px"></p>
+  </div>
+
+  <div class="block">
+    <h2>Trajectory — forwards or backwards</h2>
+    <div id="traj"></div>
+    <p class="hint" id="trajnote"></p>
+  </div>
+
+  <div class="block">
+    <h2>Reality check — measured, not assumed</h2>
+    <div class="tw"><table id="realtab"></table></div>
+    <div class="callout" id="realnote"></div>
+  </div>
+
+  <div class="block">
+    <h2>What's next</h2>
+    <ul class="plainlist">
+      <li><b>Get the three Garmin baselines</b>Hill score, endurance score, running tolerance. Running tolerance is the guardrail on Block 1's vertical ramp, which is the steepest relative jump in the whole 49 weeks.</li>
+      <li><b>Decide the Bighorn rule now</b>Sub-28 with controlled aid → sub-100 is live. 28–30 → race Bigfoot to finish. DNF or a damaged finish → defer. Write it down in September, not in June.</li>
+      <li><b>Confirm BURT 100</b>Feb 6 2027, Bainbridge Island — pencilled in as your first 100. Registration opens through UltraSignup; it has sold out in past years. Not a Western States qualifier, so it earns nothing but the thing you actually need: a 100-mile finish and a full night alone.</li>
+      <li><b>Solve crew</b>Unsupported costs two to four hours against a competent crew — most of the sub-100 margin. Worth more than any training block on this page.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== TRAINING ===================== -->
+<section class="panel" id="p-training" hidden>
+  <div class="block">
+    <h2>Time on feet — hours per week</h2>
+    <div class="key"><span><i class="pre"></i>Before the plan</span><span><i></i>In the plan</span><span><u></u>Block target</span></div>
+    <div class="chartbox" id="c-hours"><div class="tip" id="t-hours"></div></div>
+  </div>
+  <div class="block">
+    <h2>Vertical gain — feet per week</h2>
+    <div class="key"><span><i class="pre"></i>Before the plan</span><span><i></i>In the plan</span><span><u></u>Block target</span></div>
+    <div class="chartbox" id="c-vert"><div class="tip" id="t-vert"></div></div>
+  </div>
+  <div class="block">
+    <h2>Longest single effort — hours</h2>
+    <div class="key"><span><i class="pre"></i>Before the plan</span><span><i></i>In the plan</span><span><u></u>Block peak-day target</span></div>
+    <div class="chartbox" id="c-long"><div class="tip" id="t-long"></div></div>
+    <p class="hint">The longest continuous activity in each week — not the daily total. This is the number the race actually tests.</p>
+  </div>
+  <div class="block">
+    <h2>Block progress</h2>
+    <div class="tw"><table id="blocktab"></table></div>
+    <p class="hint">Each cell shows the block target, then your logged average once weeks land. Peak day shows the target and your best week.</p>
+  </div>
+  <div class="block">
+    <h2>Week log — synced from Strava</h2>
+    <div class="tw" style="max-height:560px;overflow-y:auto"><table id="weektab"></table></div>
+  </div>
+</section>
+
+<!-- ===================== RACE DAY ===================== -->
+<section class="panel" id="p-raceday" hidden>
+  <div class="block plain">
+    <h3 class="sec">97:00 schedule, 100:00 goal</h3>
+    <p class="lede">The goal is sub-100. The schedule is built to 97:00, and the three-hour difference isn't padding you hope to keep — it's what makes sub-100 likely rather than a coin flip. You don't pace to the number you want to hit.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="lab">Moving</div><div class="val">86:48</div><div class="sub">2.31 mph across 44,082 ft</div></div>
+    <div class="tile"><div class="lab">Aid</div><div class="val">4:12</div><div class="sub">12 stops, unsupported · 21 min avg</div></div>
+    <div class="tile"><div class="lab">Sleep</div><div class="val">6:00</div><div class="sub">3 naps over 4 nights · 1.5 hr/night</div></div>
+    <div class="tile"><div class="lab">Overall</div><div class="val">2.06 <small>mph</small></div><div class="sub">including every stop and nap</div></div>
+  </div>
+
+  <div class="block">
+    <h2>Aid station schedule</h2>
+    <div class="tw"><table id="splittab"></table></div>
+    <p class="hint">Cutoff column is elapsed hours from the noon Friday start. Arriving <em>at</em> a cutoff is a DNF — you must leave before it.</p>
+  </div>
+
+  <div class="block">
+    <h2>Sleep — six hours, and where they go</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Night</th><th>Where</th><th>Mile</th><th>Arrive</th><th>Sleep</th></tr></thead>
+      <tbody>
+        <tr><td>Fri — night 1</td><td class="dim">run through</td><td>—</td><td>blast zone</td><td class="sleepcell">0:00</td></tr>
+        <tr><td>Sat — night 2</td><td>RD 9327</td><td>82.2</td><td>Sat 9:03 PM</td><td class="sleepcell">1:45</td></tr>
+        <tr><td>Sun — night 3</td><td>Chain of Lakes</td><td>134.4</td><td>Mon 12:32 AM</td><td class="sleepcell">1:45</td></tr>
+        <tr><td>Mon — night 4</td><td>Twin Sisters</td><td>171.1</td><td>Mon 10:47 PM</td><td class="sleepcell">2:30</td></tr>
+        <tr class="tot"><td>Total</td><td class="dim">4 nights, 200 miles</td><td>—</td><td>—</td><td class="sleepcell">6:00</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:14px">Six hours across four nights averages <strong>an hour and a half a night</strong> — against your normal seven-plus, that's roughly <strong>24 hours of sleep debt</strong> by the finish, accumulated while moving. The race allows up to six hours at any one sleep station; you're using two and a half at most. The constraint is the clock, not the rules.</p>
+    <div class="rule"><strong>The sleep is your second reserve.</strong> Three hours of schedule slack absorbs the ordinary — a bad stomach hour, a wrong turn, weather. Twin Sisters is the deliberate one: cut it to 45 minutes and you claw back 1:45. Together that's about five and a half hours against the 100:00 goal, spent in that order, and you never touch the second one before mile 171.</div>
+    <p style="margin-top:14px"><strong>Why the big nap is last.</strong> Twin Sisters sits at mile 171 with 29 miles left, after both of the sections this race is known for, and the last 13 of those miles are road that has to be <em>run</em> at 3.8 mph. Most people arrive at mile 171 having spent their sleep early, then walk a finish they could have run.</p>
+  </div>
+
+  <div class="block">
+    <h2>Decision point — Chain of Lakes, mile 134, target 60:33</h2>
+    <ul class="plainlist">
+      <li><b>On plan or ahead</b>Run the schedule. Full 2:30 at Twin Sisters, run the finish.</li>
+      <li><b>Up to 2 hours down</b>Fine. That's the schedule slack doing its job. Change nothing.</li>
+      <li><b>3 to 4 hours down</b>Cut Twin Sisters to 1:15 and keep moving.</li>
+      <li><b>More than 5 hours down</b>Sub-100 is gone. Switch to finishing inside 107 — you'll have ten hours of margin — and enjoy the rest of it.</li>
+    </ul>
+    <div class="callout"><strong>Never buy sleep before mile 151.</strong> Extra sleep at RD 9327 or Chain of Lakes feels like the same hours, but it pushes Klickitat → Twin Sisters later, and that section has to happen in daylight. That's the one thing the schedule is shaped to protect.</div>
+  </div>
+
+  <div class="block">
+    <h2>The same race in 50K legs</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Leg</th><th>Miles</th><th>Gain</th><th>Leg time</th><th>Moving</th><th>Stopped</th><th>Moving mph</th><th>Elapsed</th><th>Arrive</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>0 – 31.1</td><td>6,277</td><td>12:21</td><td>12:12</td><td>0:09</td><td>2.55</td><td>12:21</td><td>Sat 12:20 AM</td></tr>
+        <tr><td>2</td><td>31.1 – 62.1</td><td>7,218</td><td>13:17</td><td>12:32</td><td>0:45</td><td>2.48</td><td>25:37</td><td>Sat 1:37 PM</td></tr>
+        <tr><td>3</td><td>62.1 – 93.2</td><td>6,240</td><td>14:12</td><td>11:42</td><td>2:30</td><td>2.66</td><td>39:49</td><td>Sun 3:49 AM</td></tr>
+        <tr><td>4</td><td>93.2 – 124.3</td><td>10,120</td><td>16:28</td><td>15:22</td><td>1:05</td><td>2.02</td><td>56:17</td><td>Sun 8:17 PM</td></tr>
+        <tr><td>5</td><td>124.3 – 155.3</td><td>7,255</td><td>17:08</td><td>14:33</td><td>2:35</td><td>2.14</td><td>73:25</td><td>Mon 1:25 PM</td></tr>
+        <tr><td>6</td><td>155.3 – 186.4</td><td>6,476</td><td>19:37</td><td>16:42</td><td>2:55</td><td>1.86</td><td>93:02</td><td>Tue 9:02 AM</td></tr>
+        <tr><td>7</td><td>186.4 – 200.1</td><td>497</td><td>3:58</td><td>3:43</td><td>0:15</td><td>3.68</td><td>97:00</td><td>Tue 1:00 PM</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:14px">Your slowest 50K takes <strong>59% longer</strong> than your first — 12:21 to 19:37. That's the plan, not pessimism. If you're holding leg-1 pace at leg 5, you went out too hard. <strong>Leg 4 is the hardest one nobody warns you about</strong>: 10,120 ft of gain, a third more than any other leg, because Lewis River → Quartz Ridge alone is 7,347 ft in 17 miles and the manual says the topo doesn't show it. <strong>Leg 7 is the only leg you run.</strong></p>
+  </div>
+
+  <div class="block">
+    <h2>What the clock puts where</h2>
+    <ul class="plainlist">
+      <li><b>The ropes and the river arrive at dusk</b>Fixed ropes and a knee-deep crossing about 7.4 miles into the Blue Lake → Coldwater segment, roughly mile 19.6, around hour 7. Friday evening, light going, and you're alone. Have lights out before you need them.</li>
+      <li><b>The blast zone is a night crossing</b>25.2 miles, no aid, last non-silty water at segment mile 6.2, Friday evening through 2:49 AM. The cutoff pace here is the most generous on the course — 1.53 mph — because the race knows it's slow. Carry for ten hours.</li>
+      <li><b>Mt Margaret lands in daylight</b>Saturday morning, which is what the manual recommends and the best thing about this pacing.</li>
+      <li><b>Klickitat → Twin Sisters is almost entirely daylight — protect this above everything</b>Depart 11:15 AM Monday, arrive 10:47 PM. The notorious 19.4-mile blowdown section — faint trail, downed logs, bushwhacking, the one every race report names — gets eleven and a half of its twelve hours in the light, and you're unsupported and alone in it.</li>
+      <li><b>Blue Lake is the tightest cutoff you'll be near all race</b>42 minutes in hand at mile 12.2, off a 3,280 ft climb in afternoon heat. The only place the plan runs close to a cutoff. Don't let a hot first climb become a race-ending one.</li>
+      <li><b>The last 13 miles are road and must be run</b>3:23 for 13 miles is 3.8 mph at hour 94. The most trainable segment on the course, the place most people stop being able to run, and the reason Twin Sisters gets the biggest nap.</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ===================== VERT ===================== -->
+<section class="panel" id="p-vert" hidden>
+  <div class="block plain">
+    <h3 class="sec">Where the vertical comes from</h3>
+    <p class="lede">You need to go from 1,700 ft a week to 4,500 by mid-December, then 6,000 → 7,500 → 9,500 → 12,000 by next summer. Lake Oswego itself is vertically poor — Tryon Creek, Iron Mountain and Mount Sylvania all sit around 110–170 ft per mile, so you'd need ten miles to bank fifteen hundred feet. The usable vert starts 15 minutes north.</p>
+    <div class="rule"><strong>The seasons work in your favor.</strong> Your winter volume — December through April, 6,000 to 7,500 ft a week — has to come from Forest Park, the low Gorge and the Coast Range, all of which stay open. The 9,500–12,000 ft weeks land in late spring and summer, which is exactly when Mount Defiance, Table Mountain, the Loowit and Monitor Ridge come back. Nothing in the plan asks for a venue that's closed when you need it.</p></div>
+  </div>
+
+  <div class="block">
+    <h2>Weekly recipes</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Target</th><th>When</th><th>Three outings that get you there</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>2,000 ft</td><td>now</td><td>Council Crest ×2 (1,600) + Mt Talbert loop (685)</td><td>2,285</td></tr>
+        <tr><td>4,500 ft</td><td>Dec — Block 1 exit</td><td>BPA–Newton loop (2,600) + Firelane 1 loop (1,595) + Talbert (685)</td><td>4,880</td></tr>
+        <tr><td>6,000 ft</td><td>Jan–Feb — Block 2</td><td>Kings Mountain (2,545) + BPA–Newton (2,600) + Council Crest ×2 (1,600)</td><td>6,745</td></tr>
+        <tr><td>7,500 ft</td><td>Mar–Apr — Block 3</td><td>Elk–Kings loop (3,850) + BPA–Newton (2,600) + Firelane 1 (1,595)</td><td>8,045</td></tr>
+        <tr><td>9,500 ft</td><td>May–Jun — Block 4</td><td>Mount Defiance loop (5,200) + BPA–Newton (2,600) + Council Crest ×2 (1,600)</td><td>9,400</td></tr>
+        <tr><td>12,000 ft</td><td>Jul — Block 5 peak</td><td>Loowit Trail (6,000) + Monitor Ridge (4,500) + Firelane 1 (1,595)</td><td>12,095</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint">Illustrative combinations, not prescriptions — they show the shape of a week at each level. Everything here is one big day plus one medium plus one short.</p>
+  </div>
+
+  <div class="block">
+    <h2>Weekday repeatables — under 35 minutes, lap-able</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Where</th><th>Dist</th><th>Gain</th><th>Ft/mi</th><th>Drive</th><th>Winter</th><th>Terrain</th></tr></thead>
+      <tbody>
+        <tr><td>BPA–Newton loop · Forest Park</td><td>8.1</td><td>2,600</td><td>321</td><td>~33 min</td><td>all year</td><td>powerline road, firelanes, singletrack</td></tr>
+        <tr><td>Firelane 1 loop · Forest Park</td><td>6.6</td><td>1,595</td><td>242</td><td>~28 min</td><td>all year</td><td>steps, steep switchbacks, gully singletrack</td></tr>
+        <tr><td>Council Crest via Marquam</td><td>4.0/lap</td><td>800/lap</td><td>~200</td><td>~15 min</td><td>all year</td><td>rutted, rooty singletrack</td></tr>
+        <tr><td>Mount Talbert summit loop</td><td>3.1</td><td>685</td><td>221</td><td>~15 min</td><td>all year</td><td><strong>rocky tread</strong> — closest rock underfoot</td></tr>
+        <tr><td>Rocky Butte</td><td>~2.4/lap</td><td>~500/lap</td><td>—</td><td>~30 min</td><td>all year</td><td>paved with soft shoulder</td></tr>
+        <tr><td>Lower Macleay → Pittock</td><td>5.4</td><td>850</td><td>157</td><td>~25 min</td><td>all year</td><td>paved start, then switchbacks — very runnable</td></tr>
+        <tr><td>Mount Tabor</td><td>2.0</td><td>350</td><td>175</td><td>~25 min</td><td>all year</td><td>96 stairs, stone steps, lit after dark</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint">Council Crest is the highest-frequency tool: 800 ft a lap, four miles round trip, fifteen minutes from your door, never snowed out. Two laps is a weekday session. Mount Tabor is the one that works in the dark — worth knowing when night hours start in October.</p>
+  </div>
+
+  <div class="block">
+    <h2>Half days — 2,000 to 3,500 ft</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Where</th><th>Dist</th><th>Gain</th><th>Ft/mi</th><th>Drive</th><th>Pass</th><th>Winter</th></tr></thead>
+      <tbody>
+        <tr><td>Kings Mountain · Tillamook SF</td><td>4.8</td><td>2,545</td><td><strong>530</strong></td><td>~75 min</td><td>none</td><td>usually — watch snow</td></tr>
+        <tr><td>Dog Mountain</td><td>6.9</td><td>2,800</td><td>406</td><td>~80 min</td><td>NW Forest</td><td>usually</td></tr>
+        <tr><td>Munra Point</td><td>6.6</td><td>2,270</td><td>344</td><td>~50 min</td><td>NW Forest</td><td>year round, hazardous wet</td></tr>
+        <tr><td>Hardy Ridge loop</td><td>8.1</td><td>2,175</td><td>269</td><td>~65 min</td><td>Discover</td><td>usually</td></tr>
+        <tr><td>Hamilton Mountain loop</td><td>7.5</td><td>2,100</td><td>280</td><td>~65 min</td><td>Discover</td><td>gate closed Mon–Thu off-season</td></tr>
+        <tr><td>Silver Star via Grouse Vista</td><td>6.8</td><td>2,040</td><td>300</td><td>~65 min</td><td>Discover</td><td>May–Nov only</td></tr>
+        <tr><td>Saddle Mountain</td><td>5.2</td><td>1,900</td><td>365</td><td>~95 min</td><td>none</td><td>Apr–Nov only</td></tr>
+        <tr><td>Multnomah–Wahkeena loop</td><td>4.9</td><td>1,600</td><td>327</td><td>~45 min</td><td>seasonal permit</td><td>all year</td></tr>
+        <tr><td>Beacon Rock</td><td>1.8</td><td>680</td><td><strong>378</strong></td><td>~70 min</td><td>Discover</td><td>all year</td></tr>
+        <tr><td>Wind Mountain</td><td>2.9</td><td>1,185</td><td><strong>409</strong></td><td>~75 min</td><td>none</td><td>all year</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout"><strong>Beacon Rock is the lap machine.</strong> 680 ft in 1.8 miles, snow-free except in ice storms, and you can do it five times for 3,400 ft in nine miles. It's also a hand-railed tourist catwalk with zero technical value — use it for volume, never for descent work.</div>
+  </div>
+
+  <div class="block">
+    <h2>Big days — 3,500 to 6,000 ft</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Where</th><th>Dist</th><th>Gain</th><th>Ft/mi</th><th>Drive</th><th>Season</th><th>Why it's here</th></tr></thead>
+      <tbody>
+        <tr><td>Mount Defiance–Starvation Ridge</td><td>13.9</td><td><strong>5,200</strong></td><td>374</td><td>~80 min</td><td>mid-May–Oct</td><td>biggest single-day vert in the Gorge; cairned talus descent</td></tr>
+        <tr><td>Nick Eaton Ridge loop</td><td>13.6</td><td>4,820</td><td>354</td><td>~65 min</td><td>late spring–fall</td><td><strong>indistinct tread</strong> — closest analog to Bigfoot's faint sections</td></tr>
+        <tr><td>Augspurger Mountain</td><td>12.6</td><td>4,767</td><td>378</td><td>~80 min</td><td>spring–fall</td><td>same trailhead as Dog Mountain — stack both, one drive</td></tr>
+        <tr><td>Table Mountain from Bonneville</td><td>15.5</td><td>4,320</td><td>279</td><td>~60 min</td><td>Apr–Oct</td><td>Heartbreak Ridge: 700 ft in half a mile on loose rock</td></tr>
+        <tr><td>Larch Mountain from Multnomah</td><td>14.4</td><td>4,010</td><td>279</td><td>~45 min</td><td>Apr–Nov</td><td><strong>the most runnable big day</strong> — steady grade, 4,000 ft</td></tr>
+        <tr><td>Nesmith Point</td><td>9.8</td><td>3,920</td><td><strong>400</strong></td><td>~52 min</td><td>spring–fall</td><td>steepest sustained climb in the Gorge; scree and basalt</td></tr>
+        <tr><td>Elk–Kings Mountain loop</td><td>10.8</td><td>3,850</td><td>356</td><td>~75 min</td><td>all year, road gates</td><td><strong>the best Bigfoot simulator in Oregon</strong></td></tr>
+        <tr><td>Salmon Butte</td><td>11.8</td><td>3,170</td><td>269</td><td>~70 min</td><td>late spring–fall</td><td>shaded forest grind</td></tr>
+        <tr><td>Angels Rest–Devils Rest loop</td><td>10.8</td><td>3,040</td><td>281</td><td>~45 min</td><td>all season</td><td>most reliable 3,000 ft winter day in the Gorge</td></tr>
+      </tbody>
+    </table></div>
+    <p class="hint">Trapper Creek is closed for High Lava Fire activity and Tanner Butte is still closed from the 2017 Eagle Creek Fire — don't plan around either.</p>
+  </div>
+
+  <div class="block">
+    <h2>Course-specific — Mount St Helens</h2>
+    <div class="callout"><strong>SR 504 is closed by a landslide and isn't expected to reopen until 2027.</strong> That removes the entire northwest approach — Johnston Ridge, Coldwater Peak, and vehicle access to the Coldwater Lake area. Plan every recon trip from the south on FR 83/81 out of Cougar, or the northeast on FR 25/26/99 out of Randle.</div>
+    <ul class="plainlist" style="margin-top:14px">
+      <li><b>Worm Flows from Marble Mountain Sno-Park — 12 mi, 5,700 ft</b>This is literally the Bigfoot start line. Winter route: climbing permits are free and self-issued Dec 1 – Mar 31, plus a Washington Sno-Park permit. Requires ice axe, crampons and avalanche awareness — it's a mountaineering day, not a training run. ~2h15 drive.</li>
+      <li><b>Monitor Ridge from Climbers Bivouac — 10 mi, 4,500 ft</b>The summer summit route, late June through October. 2,500 vertical feet of boulder fields under ash pumice that shreds skin in a fall, then 1,000 ft of scree — two steps forward, one back. Gloves, gaiters, poles. <strong>This is the exact surface Bigfoot punishes you on.</strong></li>
+      <li><b>Loowit Trail #216 — 32 mi, 6,000 ft</b>The full circumnavigation and the best single course simulator available: pumice fields gouged with deep gullies, lava beds, boulder fields, ash slopes, three major washouts with loose canyon walls. Sparse water, no shade. A 6,000 ft day and course reconnaissance in one outing — the highest-value weekend of the whole build.</li>
+      <li><b>Ape Canyon — 11 mi, 1,400–2,500 ft</b>The runnable ash trail. Steady grade on cinders and pumice, ends at the Loowit so you can extend it. <strong>Sources disagree on the gain by over 1,000 ft</strong> — measure it yourself the first time.</li>
+      <li><b>Norway Pass — 4.2 mi, 855 ft</b>Actually on the course. Low gain and a three-hour drive via Randle, so go for course knowledge, not vertical.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Rocky descent — ranked</h2>
+    <p>Descent durability on rock is a named priority: the race has 45,563 ft of loss, more than its gain. These are ranked by how much rock is actually under you on the way down.</p>
+    <ol class="tight" style="margin-top:10px">
+      <li><strong>Elk–Kings loop</strong> — rock steps, a fixed rope, precipitous ridge. The best trainer, period.</li>
+      <li><strong>Table Mountain / Heartbreak Ridge</strong> — 700 ft in half a mile on loose rock and marked talus.</li>
+      <li><strong>Mount Defiance–Starvation Ridge</strong> — multiple cairned talus fields and a narrow ridge crest.</li>
+      <li><strong>Monitor Ridge</strong> — ash-covered boulders then scree. Course-identical surface.</li>
+      <li><strong>Loowit Trail</strong> — boulder fields, pumice gullies, washouts with loose rock.</li>
+      <li><strong>Munra Point</strong> — chutes, fixed ropes, real exposure. A skills day, not a volume day. People have been seriously injured falling from the summit ridges.</li>
+      <li><strong>Nesmith Point</strong> — scree slopes and basalt faces up high.</li>
+      <li><strong>Mount Talbert</strong> — only 685 ft, but genuinely rocky, and fifteen minutes away. Use it as a weekday footing drill.</li>
+    </ol>
+  </div>
+
+  <div class="block">
+    <h2>Passes to buy up front</h2>
+    <ul class="plainlist">
+      <li><b>America the Beautiful — $80/yr</b>Covers every Northwest Forest Pass site: Dog Mountain, Augspurger, Nick Eaton, Table Mountain, Munra, Ape Canyon, Loowit, Monitor Ridge. Better value than the $30 NW Forest Pass once Mount St Helens is in the mix.</li>
+      <li><b>Washington Discover Pass — $45/yr</b>Beacon Rock, Hamilton Mountain, Hardy Ridge, Silver Star.</li>
+      <li><b>Oregon State Parks annual — $60 resident</b>Tryon Creek, Angels Rest, Starvation Creek, John B Yeon.</li>
+      <li><b>Washington Sno-Park — seasonal</b>Only if you do Worm Flows or winter FR 83. Buy from the state; third-party sources disagree on the price.</li>
+      <li><b>Bridge of the Gods — $3 each way</b>Budget it for every Washington-side Gorge trip.</li>
+    </ul>
+    <p class="hint">Dog Mountain also needs a free trailhead permit on spring weekends, 90 vehicles a day, booked through recreation.gov. Multnomah and Wahkeena need an ODOT timed-use permit Memorial Day through Labor Day.</p>
+  </div>
+
+  <div class="block">
+    <h2>What's closed December through April</h2>
+    <p><strong>Open and reliable:</strong> all of Forest Park, Council Crest, Rocky Butte, Mount Tabor, Mount Talbert, Beacon Rock, Wind Mountain, Multnomah–Wahkeena, Angels Rest (avoid ice), Munra Point (hazardous wet), Dog Mountain except in heavy snow years, Kings Mountain and Elk–Kings if the road gate is open.</p>
+    <p><strong>Gated, closed or snowbound:</strong> Mount Defiance, Nick Eaton Ridge, Larch Mountain summit and the Larch Mountain Road snow gate at milepost 10, Salmon Butte, Saddle Mountain, Silver Star, Table Mountain, Norway Pass, Climbers Bivouac and Monitor Ridge, Ape Canyon. Hamilton Mountain's trailhead gate is closed Monday through Thursday off-season.</p>
+  </div>
+</section>
+
+<!-- ===================== PLAN ===================== -->
+<section class="panel" id="p-plan" hidden>
+  <div class="block plain">
+    <h3 class="sec">Three things that changed when the goal got a number</h3>
+  </div>
+
+  <div class="block">
+    <h2>1 · Sub-100 is a stopped-time target, not a fitness one</h2>
+    <p>The gap between 107 and 100 hours is 6.5%. You won't find seven hours by running harder — at mile 150 there is no harder. You find it by not being stationary. The budget allows <strong>six hours of sleep and 4:12 of aid across twelve stations</strong>, unsupported, doing your own resupply. A single two-hour sit-down at Chain of Lakes — which is exactly what happened to the runner who finished second in 2022 — costs a third of your margin.</p>
+    <p>That discipline is rehearsed in training or it doesn't exist on race day.</p>
+  </div>
+
+  <div class="block">
+    <h2>2 · Unsupported costs roughly what you're trying to save</h2>
+    <p>A crew hands you a prepared bottle and pushes you out. Unsupported, you filter, sort a drop bag, refill, eat and repack, alone, in the dark, at hour 84. Realistically that's <strong>two to four hours</strong> across the race — most of your margin. You also lose pacers, permitted from Coldwater Lake at mile 37.4, through the two sections this race is known for losing people in.</p>
+    <div class="callout"><strong>Finding a crew is worth more than any training block on this page.</strong> That's not a reason to abandon sub-100 — it's a reason to be honest about where the hours are. If unsupported is fixed, the plan still works; it just spends its margin on self-sufficiency instead of speed.</div>
+  </div>
+
+  <div class="block">
+    <h2>3 · Bighorn would be your first 100, eight weeks before a 200</h2>
+    <p>Your longest to date is Gorge Waterfalls 100K. The original plan goes 100K → nothing → first 100 at Bighorn in June → sub-100 at a 200 in August. Two debuts stacked eight weeks apart, the second one unsupported and four nights long. Bighorn stops being a gate and becomes an experiment, and an experiment is a bad thing to hang an A-race on.</p>
+    <p><strong>The fix, now pencilled in: BURT 100, Bainbridge Island, Saturday Feb 6 2027.</strong> It sits in week 21 of Block 2, close to home, in PNW winter — the condition you'll be training in anyway — and it leaves the following week as recovery before Block 3 opens.</p>
+    <p>It's a <strong>54K loop run three times</strong>, which sounds monotonous and is exactly right for what you need out of it. A loop course means you pass a drop bag roughly every five hours, so it's the only race on the calendar where you can rehearse the aid-station discipline sub-100 actually depends on — twelve timed transitions, unsupported, one of them at 3 AM.</p>
+    <div class="callout"><strong>BURT is not a Western States qualifier.</strong> It earns nothing but the thing you actually need — a 100-mile finish and a full night alone. Your qualifiers are Gorge Waterfalls 100K (17-hour cutoff) and Bighorn 100 (35-hour cutoff), both already in the plan. Worth noting the old Gorge target of "16–18 hours" straddled that 17-hour cutoff; the sub-100 target of 14–15 clears it with room.</div>
+  </div>
+
+  <div class="block">
+    <h2>Blocks — re-based on measured data</h2>
+    <p>Your Strava history says <strong>8.8 hr/week and 1,700 ft/week</strong> over the last twelve weeks, not the 12 hr and 3,000 ft the original plan assumed. Vertical is the gap: the old Block 1 target of 5,000 ft/week was 2.9× your real starting point, not 1.7×. Ramping that fast is how you arrive at Block 2 injured.</p>
+    <div class="tw" style="margin-top:14px"><table>
+      <thead><tr><th>Block</th><th>Dates</th><th>Hr/wk</th><th>Vert/wk</th><th>Mi/wk</th><th>Peak day</th><th>Night (cum)</th><th>Ends with</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline</td><td class="dim">measured</td><td>8.8</td><td>1,700</td><td>29</td><td>3:00</td><td>0</td><td class="dim">where you are</td></tr>
+        <tr><td>1</td><td>Sep 7 – Dec 13</td><td>10 → 15</td><td>2,000 → 4,500</td><td>32 → 50</td><td>8 hr</td><td>4</td><td>Frozen Trail 50K</td></tr>
+        <tr><td>2</td><td>Dec 14 – Feb 14</td><td>17</td><td>6,000</td><td>55</td><td>10–12 hr</td><td>12</td><td>BURT 100 <span class="pill ember">tentative</span></td></tr>
+        <tr><td>3</td><td>Feb 15 – Apr 18</td><td>19</td><td>7,500</td><td>60</td><td>14 hr</td><td>24</td><td>Gorge Waterfalls 100K</td></tr>
+        <tr><td>4</td><td>Apr 19 – Jun 20</td><td>21</td><td>9,500</td><td>65</td><td>18 hr</td><td>40</td><td>Bighorn 100 — the gate</td></tr>
+        <tr><td>5</td><td>Jun 21 – Aug 15</td><td>23 peak</td><td>12,000 peak</td><td>70</td><td>20 hr</td><td>60</td><td>BIGFOOT 200</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:14px">Cumulative vertical lands near <strong>303,000 ft</strong> — about 6.9× the race. Lower than the 8.5× the original plan wanted, because it's built from where you are rather than where the document assumed you were.</p>
+  </div>
+
+  <div class="block">
+    <h2>Five things sub-100 adds</h2>
+    <ul class="plainlist">
+      <li><b>Night hours double, and stop being a checkbox</b>Thirty cumulative hours was enough to not be frightened of the dark. You'll move through four nights alone, roughly 40 hours of it. Target is 60 cumulative — and the shape matters more than the total: two efforts crossing a full night into the next day, and one in Block 4 crossing <em>two</em>. Start in October, not November.</li>
+      <li><b>Sleep restriction becomes a recurring session</b>Two sessions on under four hours doesn't prepare you for six hours across four days. From Block 2, one long day a month starts on deliberately short sleep. In Blocks 4 and 5, rehearse the protocol: two hours down, alarm, up and moving inside fifteen minutes. The skill is the waking up.</li>
+      <li><b>Aid discipline becomes a measured thing</b>21 minutes average, unsupported, is trained behavior. On every long day: drop a bag at the car and time the stop. Under 10 minutes for a resupply, under 25 with a full change. Practice with cold hands, and at night. The failure mode isn't one long stop — it's twelve average stops that each ran ten minutes over.</li>
+      <li><b>Descent gets its own prescription</b>45,563 ft of loss, more than the gain. One descent-focused session a week from Block 2 — on rock, late in the day, on tired legs. Not loam, not fresh.</li>
+      <li><b>Late-race running speed becomes a target</b>Everyone can hike 2.3 mph on day one. Almost nobody can still <em>run</em> on day four, which is exactly where the seven hours live. Every long day from Block 2 ends with 30–60 minutes at race pace on runnable ground. It will feel pointless at the end of an eight-hour day. That's the point.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Because unsupported</h2>
+    <ul class="tight">
+      <li><strong>Carry weight is a training variable.</strong> The 25.2-mile blast zone crossing with silty water means filtering plus a real carry. Long days with race pack weight from Block 2, not Block 5.</li>
+      <li><strong>Filtering is a rehearsed skill.</strong> Silty water, at night, tired, with the actual filter.</li>
+      <li><strong>Heat acclimation starts in Block 4.</strong> Noon start, blast zone, no shade, reports of 90°F, and nobody handing you ice. Six sessions was the plan when someone else carried your cooling. Make it twelve, starting in May.</li>
+      <li><strong>Navigation is on you.</strong> Two sections have "the trail becomes faint and disappears" in the <em>official manual</em>. Practice night navigation off-trail, solo.</li>
+      <li><strong>Gear checks are random and mid-race.</strong> You carry the full mandatory list the whole way with no crew to hold anything. Build the actual race pack early.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Checkpoint standards</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Race</th><th>When</th><th>Old standard</th><th>Sub-100 standard</th></tr></thead>
+      <tbody>
+        <tr><td>Run the Rock 50K</td><td>Nov 7</td><td class="dim">3.2 mph, finish upright</td><td>unchanged — a checkpoint, not a test</td></tr>
+        <tr><td>Frozen Trail 50K</td><td>Dec</td><td class="dim">finish</td><td>negative split; last hour running</td></tr>
+        <tr><td>BURT 100 <span class="pill ember">tentative</span></td><td>Feb 6</td><td class="dim">—</td><td>finish, full night solo, aid under 45 min total</td></tr>
+        <tr><td>Gorge Waterfalls 100K</td><td>Apr</td><td class="dim">16–18 hr</td><td>14–15 hr, run the last 10K</td></tr>
+        <tr class="here"><td>Bighorn 100</td><td>Jun</td><td class="dim">under 30 hr</td><td>under 28 hr, second half no worse than 15% slower, aid under 90 min</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:14px">Bighorn is the real gate. Sub-28 with a controlled second half and disciplined aid says the sub-100 machinery works. Sub-30 with a four-hour death march says you'll finish Bigfoot in 104 hours — a fine day out, and not what you asked for.</p>
+    <div class="rule"><strong>Three outcomes at Bighorn, decided in advance.</strong> Under 28 controlled, aid under 90 minutes → sub-100 is live, run the plan. 28–30 hours, or a finish that cost you two weeks → Bigfoot is on, sub-100 is not; race it inside 107 and qualify another way. DNF or an injury finish → defer Bigfoot. There's another one next year and there's only one of you. Write that down now, in September, while it's abstract and costs nothing.</div>
+  </div>
+</section>
+
+<!-- ===================== REFERENCE ===================== -->
+<section class="panel" id="p-ref" hidden>
+  <div class="block">
+    <h2>Not coming from Strava</h2>
+    <p>Strava carries time, distance, elevation and activity timing, so everything in Training updates on its own. These don't exist in Strava at all — they live in Garmin, and they stay blank here rather than guessed.</p>
+    <ul class="plainlist" style="margin-top:12px">
+      <li><b>Hill score, endurance score, running tolerance</b>Garmin-computed, and the three the plan flags as missing. Running tolerance is the guardrail on Block 1's vertical ramp.</li>
+      <li><b>Descent HR gap</b>Heart rate split by climb versus descent inside a single activity. The best durability predictor available — baseline 15–20 bpm, and the fatigued pattern is ~2.</li>
+      <li><b>Aerobic decoupling</b>Pace and HR streams, first half versus second half. Target under 5%.</li>
+      <li><b>HRV, resting HR, sleep, Body Battery</b>Overnight physiology. Garmin only.</li>
+      <li><b>Night hours</b>Derivable from activity timing against local sunset and sunrise — wired up, currently zero.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Monitors — thresholds, not goals</h2>
+    <details><summary>Descent HR gap</summary><div class="body"><p>Average HR on sustained descent versus sustained climb, on any long day. Baseline 15–20 bpm; the fatigued pattern is about 2. Under 10 bpm on a day that should feel comfortable means under-recovery. Two in a row, cut the week.</p></div></details>
+    <details><summary>Aerobic decoupling and zone discipline</summary><div class="body"><p>Pace-to-HR, first half versus second half of long days. Target under 5%; above 8% consistently means the day was too hard or you're under-recovered. Long days sit 125–140 bpm — more than 15% of a long day above 150 and it was a workout, not a long day.</p></div></details>
+    <details><summary>Heart rate zones — use the Garmin ones</summary><div class="body"><p>Measured max <strong>205</strong>. Z1 under 121 · Z2 121–140 · Z3 141–163 · Z4 164–184 · Z5 185+. Strava's age-formula zones run about 20 beats low and should be ignored.</p></div></details>
+    <details><summary>VO2 max — monitor, do not chase</summary><div class="body"><p>42.0 at baseline; expect 43–46 by Bighorn as a byproduct, and expect it to decline in Blocks 4 and 5 under peak volume. That's normal. For a hundred-hour race it's close to irrelevant — if you find yourself training to move that number, you're training for the wrong race.</p></div></details>
+    <details><summary>HRV, resting HR, sleep, Body Battery</summary><div class="body"><p><strong>HRV</strong> — trend only, 30-day rolling baseline. Single low day: ignore. Seven-day average down more than 10%: cut volume 30% that week. "Unbalanced" for seven days: three full days off.</p><p><strong>Resting HR</strong> — up 5 bpm sustained over five days: back off. Up 8: stop and check for illness.</p><p><strong>Sleep</strong> — train rested, race deprived. Seven-plus hours a night through Blocks 1–4; sleep score 75+ the two nights before any long day.</p><p><strong>Body Battery</strong> — 70+ on the morning of a long day. Under 50, downgrade the session. Overnight recharge under 30 for three straight nights means accumulated fatigue.</p></div></details>
+  </div>
+
+  <div class="block">
+    <h2>Non-negotiables</h2>
+    <ul class="tight">
+      <li><strong>Night hours accumulate on schedule.</strong> Zero so far, and it's the cheapest gap to close.</li>
+      <li><strong>Bighorn is a gate, not a formality.</strong> Decide the rule now.</li>
+      <li><strong>Descent training happens on rock</strong>, not loam, and late in the day.</li>
+      <li><strong>Feet get managed from hour five</strong>, not hour nine. Practice in training.</li>
+      <li><strong>Eat every 40 minutes</strong> on every long day, including when you don't want to.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>Course facts, and how these numbers are built</h2>
+    <p><strong>200.1 miles · 44,082 ft gain · 45,563 ft loss · 107-hour limit · noon Friday start.</strong> Twelve full aid stations, drop bags at every one, five sleep stations, six-hour maximum at any one of them. Net 1,481 ft downhill — you start high on Mount St Helens and finish in the Cispus valley.</p>
+    <p>Every figure comes from the official Destination Trail Runner Manual. Segment miles sum to exactly 200.1, gains to 44,082, losses to 45,563, hour allowances to 107.0. Most of the internet still describes a ~208-mile version with aid stations at Windy Ridge and Johnston Ridge — that course is retired. CalTopo measures the course short at 184.5 miles; the manual's mileages are the accurate ones.</p>
+    <details><summary>Two errors in the manual, corrected here</summary><div class="body"><p>The Quartz Ridge → Chain of Lakes row prints 2.6 mph where 16.2 mi ÷ 7.5 h = 2.16. And the prose for Start → Blue Lake says 2,980/2,490 ft where the chart says 3,280/2,743 — the chart figure is the one that sums correctly to the totals.</p></div></details>
+    <details><summary>How the training numbers are computed</summary><div class="body"><ul class="tight">
+      <li><strong>Time on feet</strong> — moving time from Walk, Hike, Run and Stair-Stepper. Weights, swims and ball sports excluded.</li>
+      <li><strong>Vertical</strong> — Strava elevation gain in feet. Treadmill and stair-stepper report zero gain, so real climbing is understated whenever the vert came from a machine.</li>
+      <li><strong>Miles</strong> — Walk, Hike and Run distance only.</li>
+      <li><strong>Longest effort</strong> — the single longest activity in the week, not the daily total.</li>
+      <li><strong>Weeks</strong> run Monday to Sunday.</li>
+    </ul></div></details>
+  </div>
+</section>
+
+</main>
+<footer id="foot"></footer>
+
+<script>
+(function(){
+"use strict";
+var SYNC = {"synced":"2026-09-06","source":"Strava","weeks":{"2026-05-25":{"hours":9.86,"vert":2182,"miles":39.9,"longest":2.35,"night":0,"sessions":12,"days":7},"2026-06-01":{"hours":8.31,"vert":1919,"miles":36.4,"longest":1.03,"night":0,"sessions":14,"days":7},"2026-06-08":{"hours":8.94,"vert":1066,"miles":31.7,"longest":1.55,"night":0,"sessions":15,"days":7},"2026-06-15":{"hours":7.65,"vert":2011,"miles":30.7,"longest":2.06,"night":0,"sessions":12,"days":7},"2026-06-22":{"hours":7.4,"vert":883,"miles":29.2,"longest":2.15,"night":0,"sessions":11,"days":6},"2026-06-29":{"hours":9.29,"vert":1280,"miles":34.6,"longest":1.13,"night":0,"sessions":14,"days":7},"2026-07-06":{"hours":8.56,"vert":2103,"miles":24.3,"longest":2.08,"night":0,"sessions":8,"days":6},"2026-07-13":{"hours":8.37,"vert":1752,"miles":32.0,"longest":1.71,"night":0,"sessions":12,"days":7},"2026-07-20":{"hours":7.53,"vert":1119,"miles":26.5,"longest":1.07,"night":0,"sessions":8,"days":7},"2026-07-27":{"hours":8.94,"vert":2694,"miles":28.0,"longest":3.0,"night":0,"sessions":7,"days":6},"2026-08-03":{"hours":6.67,"vert":1742,"miles":17.5,"longest":1.76,"night":0,"sessions":7,"days":5},"2026-08-10":{"hours":9.28,"vert":1519,"miles":33.6,"longest":1.89,"night":0,"sessions":6,"days":6},"2026-08-17":{"hours":7.26,"vert":915,"miles":23.8,"longest":1.86,"night":0,"sessions":5,"days":4},"2026-08-24":{"hours":12.7,"vert":1453,"miles":33.7,"longest":1.75,"night":0,"sessions":13,"days":7},"2026-08-31":{"hours":12.1,"vert":2927,"miles":39.6,"longest":2.98,"night":0,"sessions":9,"days":6}}};
+
+var BASE=Date.UTC(2026,8,7), NPLAN=49, RACE=Date.UTC(2027,7,13);
+var BLOCKS=[
+ {n:1,start:0,end:13,ends:"Frozen Trail Run Fest 50K",peak:[8,8],nightCum:4,
+  q:"Can you sustain a full day on feet, descend hard without wrecking your quads, and rebuild the vertical base the old plan assumed you already had?"},
+ {n:2,start:14,end:22,ends:"BURT 100 — first 100-miler (tentative)",peak:[10,12],nightCum:12,
+  q:"Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable — and finish 100 miles with a full night solo?"},
+ {n:3,start:23,end:31,ends:"Gorge Waterfalls 100K — 14–15 hr",peak:[14,14],nightCum:24,
+  q:"Can you move competently in the dark for six hours, alone, and still run the last 10K?"},
+ {n:4,start:32,end:40,ends:"Bighorn 100 — the gate, sub-28",peak:[18,18],nightCum:40,
+  q:"Can you run through a night and keep functioning the next day, with aid stops under 90 minutes total? Sub-100 at Bigfoot is decided here."},
+ {n:5,start:41,end:48,ends:"BIGFOOT 200 — sub-100",peak:[20,20],nightCum:60,
+  q:"Recover, peak once, then arrive fresh with sleep banked and heat in the legs."}
+];
+var DISP={1:{h:"10 → 15",v:"2,000 → 4,500",m:"32 → 50"},2:{h:"17",v:"6,000",m:"55"},
+          3:{h:"19",v:"7,500",m:"60"},4:{h:"21",v:"9,500",m:"65"},5:{h:"23 peak",v:"12,000 peak",m:"70 peak"}};
+var B5=[{h:5,v:1000,m:15,tag:"Recovery — walks only"},{h:5,v:1000,m:15,tag:"Recovery — walks only"},
+        {h:23,v:12000,m:70,tag:"Peak"},{h:23,v:12000,m:70,tag:"Peak — one 20 hr day"},{h:23,v:12000,m:70,tag:"Peak"},
+        {h:14,v:7200,m:42,tag:"Reduce 40%"},{h:9,v:4000,m:28,tag:"Taper"},{h:5,v:1500,m:15,tag:"Taper — race week"}];
+function blockOf(i){for(var k=0;k<5;k++)if(i>=BLOCKS[k].start&&i<=BLOCKS[k].end)return BLOCKS[k];return BLOCKS[4];}
+function target(i){var b=blockOf(i);
+ if(b.n===1){var t=i/13;return{h:10+5*t,v:2000+2500*t,m:32+18*t,tag:"Rebuild the base"};}
+ if(b.n===2)return{h:17,v:6000,m:55,tag:""};
+ if(b.n===3)return{h:19,v:7500,m:60,tag:""};
+ if(b.n===4)return{h:21,v:9500,m:65,tag:""};
+ var w=B5[i-41]||B5[7];return{h:w.h,v:w.v,m:w.m,tag:w.tag};}
+function nightCumTarget(i){var b=blockOf(i),prev=b.n===1?0:BLOCKS[b.n-2].nightCum,
+ span=b.end-b.start,f=span===0?1:(i-b.start)/span;return prev+(b.nightCum-prev)*f;}
+
+function iso(ms){return new Date(ms).toISOString().slice(0,10);}
+function planStart(i){return BASE+i*7*86400000;}
+var TL=[];
+(function(){var ks=Object.keys(SYNC.weeks).sort();
+ for(var j=0;j<ks.length;j++){var ms=Date.parse(ks[j]+"T00:00:00Z");if(ms<BASE)TL.push({ms:ms,key:ks[j],phase:"base",pi:null});}
+ for(var i=0;i<NPLAN;i++){var m=planStart(i);TL.push({ms:m,key:iso(m),phase:"plan",pi:i});}})();
+var FIRST=0;for(var z=0;z<TL.length;z++){if(TL[z].phase==="plan"){FIRST=z;break;}}
+function D(t){return SYNC.weeks[t.key]||null;}
+var NOW=Date.now(),CUR=0;for(var y=0;y<TL.length;y++)if(TL[y].ms<=NOW)CUR=y;
+// if the current week has no data yet, show the last week that does
+var SHOW=CUR,STALE=false;
+if(!SYNC.weeks[TL[CUR].key]){for(var w=CUR;w>=0;w--){if(SYNC.weeks[TL[w].key]){SHOW=w;STALE=true;break;}}}
+
+function fd(ms){return new Date(ms).toLocaleDateString(undefined,{month:"short",day:"numeric",timeZone:"UTC"});}
+function fr(ms){var b=ms+6*86400000;return fd(ms)+"–"+fd(b)+", "+new Date(b).getUTCFullYear();}
+function n0(x){return x==null?"—":Math.round(x).toLocaleString();}
+function n1(x){return x==null?"—":(Math.round(x*10)/10).toLocaleString(undefined,{maximumFractionDigits:1});}
+function cls(a,t){if(a==null)return"n";var r=a/t;return r>=1.18?"w":r>=.95?"g":r>=.8?"w":"b";}
+function stat(c,txt){return'<span class="stat '+c+'"><s></s>'+txt+'</span>';}
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+
+function base12(){var p=[];for(var i=0;i<TL.length;i++){if(TL[i].phase!=="base")continue;var d=D(TL[i]);if(d)p.push(d);}
+ p=p.slice(-12);if(!p.length)return null;
+ var s={h:0,v:0,m:0,long:0,n:p.length};p.forEach(function(q){s.h+=q.hours;s.v+=q.vert;s.m+=q.miles;s.long=Math.max(s.long,q.longest);});
+ s.h/=p.length;s.v/=p.length;s.m/=p.length;return s;}
+
+/* ---- theme ---- */
+try{var th=localStorage.getItem("bf.theme");if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
+document.getElementById("themebtn").addEventListener("click",function(){
+ var c=document.documentElement.getAttribute("data-theme");
+ var n=c==="dark"?"light":c==="light"?"dark":(matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark");
+ document.documentElement.setAttribute("data-theme",n);
+ try{localStorage.setItem("bf.theme",n);}catch(e){}
+ charts();});
+
+/* ---- tabs ---- */
+var TABS=["now","training","raceday","vert","plan","ref"];
+document.querySelectorAll(".tabs button").forEach(function(b){
+ b.addEventListener("click",function(){
+  document.querySelectorAll(".tabs button").forEach(function(o){o.setAttribute("aria-selected",String(o===b));});
+  TABS.forEach(function(t){document.getElementById("p-"+t).hidden=(t!==b.dataset.tab);});
+  window.scrollTo({top:0,behavior:"instant"});
+  if(b.dataset.tab==="training")charts();
+ });});
+
+/* ---- tiles ---- */
+(function(){
+ var wl=Math.max(0,Math.ceil((RACE-NOW)/(7*86400000)));
+ document.getElementById("cd").textContent=wl;
+ var t=TL[CUR],where,sub;
+ if(t.phase==="base"){where="Pre-plan";sub="Block 1 starts "+fd(BASE);}
+ else{var b=blockOf(t.pi);where="Block "+b.n;sub="Week "+(t.pi-b.start+1)+" of "+(b.end-b.start+1)+" · ends "+b.ends;}
+ var night=0;for(var i=0;i<TL.length;i++){var d=D(TL[i]);if(d&&TL[i].phase==="plan")night+=d.night||0;}
+ var req=t.phase==="plan"?nightCumTarget(t.pi):0;
+ var b12=base12();
+ document.getElementById("tiles").innerHTML=
+  tile("Weeks to Bigfoot",wl,"","Friday, Aug 13 2027 · noon")+
+  tile("Where you are",where,"",sub)+
+  tile("Last 12 weeks",b12?n1(b12.h):"—","hr/wk",b12?n0(b12.v)+" ft/wk · "+n0(b12.m)+" mi/wk":"no data")+
+  tile("Night hours",n1(night),"banked",req<0.5?stat("n","first sessions due in November")
+    :(night>=req?stat("g",n1(req)+" hr due by now"):stat("b",n1(req)+" hr due by now")));
+})();
+function tile(l,v,u,s){return'<div class="tile"><div class="lab">'+l+'</div><div class="val">'+v+(u?' <small>'+u+'</small>':'')+'</div><div class="sub">'+s+'</div></div>';}
+
+/* ---- current week ---- */
+(function(){
+ var t=TL[SHOW],d=D(t),el=document.getElementById("meters");
+ document.getElementById("curdates").textContent=(STALE?"last completed week · ":"")+fr(t.ms);
+ if(t.phase==="base"){
+  var b=base12();
+  document.getElementById("curpill").textContent="Before the plan";
+  el.innerHTML=[met("Time on feet",d?d.hours:null,b?b.h:12,"hr",n1,"against your 12-week average",true),
+   met("Vertical",d?d.vert:null,b?b.v:1700,"ft",n0,"against your 12-week average",true),
+   met("On-foot miles",d?d.miles:null,b?b.m:29,"mi",n0,"against your 12-week average",true),
+   met("Longest single effort",d?d.longest:null,3,"hr",n1,"your longest to date is 3.0 hr",true)].join("");
+  document.getElementById("blockq").innerHTML="<strong>Block 1 starts "+fd(BASE)+".</strong> Targets switch to the plan's numbers that week.";
+  return;}
+ var b2=blockOf(t.pi),tg=target(t.pi),best=null;
+ for(var q=0;q<TL.length;q++){if(TL[q].phase!=="plan"||TL[q].pi<b2.start||TL[q].pi>b2.end)continue;var dd=D(TL[q]);if(dd)best=Math.max(best==null?0:best,dd.longest);}
+ document.getElementById("curpill").textContent="Block "+b2.n+" · Week "+(t.pi-b2.start+1)+" of "+(b2.end-b2.start+1)+(tg.tag?" · "+tg.tag:"");
+ el.innerHTML=met("Time on feet",d?d.hours:null,tg.h,"hr",n1)+met("Vertical",d?d.vert:null,tg.v,"ft",n0)+
+  met("On-foot miles",d?d.miles:null,tg.m,"mi",n0)+
+  '<div class="meter"><div class="mrow"><span class="nm">Longest single effort — best in block</span><span class="vl">'+
+  (best==null?"—":n1(best))+' <span class="t">/ '+b2.peak[0]+(b2.peak[1]!==b2.peak[0]?"–"+b2.peak[1]:"")+' hr</span></span></div>'+
+  '<div class="bar"><i style="width:'+(best==null?0:Math.min(100,best/b2.peak[0]*100))+'%"></i></div>'+
+  '<div class="hint">Block target, not a weekly one — it has until '+fd(planStart(b2.end)+6*86400000)+' to land.</div></div>';
+ document.getElementById("blockq").innerHTML="<strong>Block "+b2.n+" question:</strong> "+b2.q;
+})();
+function met(name,a,t,u,f,sub,neutral){
+ var c=neutral?"":cls(a,t),pct=a==null?0:Math.min(100,a/t*100);
+ return'<div class="meter"><div class="mrow"><span class="nm">'+name+'</span><span class="vl">'+(a==null?"—":f(a))+
+  ' <span class="t">/ '+f(t)+' '+u+'</span></span></div><div class="bar"><i class="'+(c==="g"?"":c==="w"?"warn":c==="b"?"bad":"")+
+  '" style="width:'+pct+'%"></i></div>'+(sub?'<div class="hint">'+sub+'</div>':'')+'</div>';}
+
+/* ---- trajectory ---- */
+(function(){
+ // ordered list of weeks that actually have data
+ var pts=[];
+ for(var i=0;i<TL.length;i++){var d=D(TL[i]);if(d)pts.push({i:i,d:d});}
+ var el=document.getElementById("traj");
+ if(pts.length<4){el.innerHTML='<p class="hint">Not enough synced weeks yet to read a trend.</p>';return;}
+
+ function slope(vals){ // least squares per week over the window
+  var n=vals.length,sx=0,sy=0,sxy=0,sxx=0;
+  for(var k=0;k<n;k++){sx+=k;sy+=vals[k];sxy+=k*vals[k];sxx+=k*k;}
+  var den=n*sxx-sx*sx; return den===0?0:(n*sxy-sx*sy)/den;}
+ function avg(a){return a.reduce(function(x,y){return x+y;},0)/a.length;}
+
+ var win=pts.slice(-8), recent=pts.slice(-4), prior=pts.slice(-8,-4);
+ var t=TL[SHOW];
+ var b=t.phase==="plan"?blockOf(t.pi):BLOCKS[0];
+ var exit=target(b.end), exitDate=fd(planStart(b.end)+6*86400000);
+ // weeks from the last synced week to the block's final week
+ var horizon=Math.max(1,(FIRST+b.end)-pts[pts.length-1].i);
+
+ function row(name,key,exitTarget,fmt,unit){
+  var vals=win.map(function(p){return p.d[key];});
+  var m=slope(vals), cur=avg(recent.map(function(p){return p.d[key];}));
+  var prev=prior.length?avg(prior.map(function(p){return p.d[key];})):null;
+  var proj=cur+m*horizon;
+  var delta=prev==null?null:(cur-prev)/prev*100;
+  var hit=proj>=exitTarget*0.97;
+  var dir=m>0.0001?"up":(m<-0.0001?"down":"flat");
+  var arrow=dir==="up"?"▲":dir==="down"?"▼":"▬";
+  var cl=hit?"g":(dir==="up"?"w":"b");
+  return '<div class="meter"><div class="mrow"><span class="nm">'+name+
+   '</span><span class="vl">'+fmt(cur)+' <span class="t">'+unit+'/wk now</span></span></div>'+
+   '<div class="bar"><i class="'+(cl==="g"?"":cl==="w"?"warn":"bad")+
+     '" style="width:'+Math.max(2,Math.min(100,cur/exitTarget*100))+'%"></i></div>'+
+   '<div class="hint">'+arrow+' '+(dir==="flat"?"flat":(m>0?"+":"")+fmt(m)+" "+unit+"/wk")+
+   (delta==null?"":" · "+(delta>0?"+":"")+Math.round(delta)+"% vs the 4 weeks before")+
+   ' — at this rate you reach <strong>'+fmt(proj)+' '+unit+'</strong> by '+exitDate+
+   ', against a Block '+b.n+' exit target of '+fmt(exitTarget)+'. '+
+   (hit?'<span style="color:var(--good)">On pace.</span>':
+        '<span style="color:var(--bad)">Short by '+fmt(Math.max(0,exitTarget-proj))+' '+unit+'.</span>')+'</div></div>';}
+
+ el.innerHTML = row("Time on feet","hours",exit.h,n1,"hr")+
+                row("Vertical","vert",exit.v,n0,"ft")+
+                row("On-foot miles","miles",exit.m,n0,"mi");
+ var nightSum=0;for(var q=0;q<TL.length;q++){var dd=D(TL[q]);if(dd&&TL[q].phase==="plan")nightSum+=dd.night||0;}
+ var nreq=t.phase==="plan"?nightCumTarget(t.pi):0;
+ document.getElementById("trajnote").innerHTML =
+  "Trend is a least-squares fit over your last "+win.length+" synced weeks, projected to the end of Block "+b.n+
+  " ("+exitDate+"). Night hours: <strong>"+n1(nightSum)+" banked</strong> against "+n1(nreq)+
+  " due by now and "+b.nightCum+" by the end of the block.";
+})();
+
+/* ---- reality ---- */
+(function(){
+ var b=base12();if(!b)return;
+ var A={h:12,v:3000,m:45,long:2.98};
+ function row(n,a,as,u,f){var r=a/as,c=r>=.95?"g":r>=.8?"w":"b",p=Math.round((r-1)*100);
+  return'<tr><td>'+n+'</td><td class="dim">'+f(as)+' '+u+'</td><td><strong>'+f(a)+'</strong> '+u+'</td><td>'+stat(c,(p>0?"+":"")+p+"%")+'</td></tr>';}
+ document.getElementById("realtab").innerHTML=
+  '<thead><tr><th>Metric</th><th>Original plan assumed</th><th>Last 12 weeks, measured</th><th>Gap</th></tr></thead><tbody>'+
+  row("Time on feet",b.h,A.h,"hr/wk",n1)+row("Vertical",b.v,A.v,"ft/wk",n0)+
+  row("On-foot miles",b.m,A.m,"mi/wk",n0)+row("Longest single effort",b.long,A.long,"hr",n1)+'</tbody>';
+ document.getElementById("realnote").innerHTML=
+  '<strong>The block targets are re-based on these numbers.</strong> The original plan started from 3,000 ft/week; you average '+
+  n0(b.v)+', so its Block 1 target of 5,000 was '+(Math.round(5000/b.v*10)/10)+
+  '× your real starting point rather than the 1.7× it implied. Block 1 now ramps 2,000 → 4,500 and the peak lands at 12,000.';
+})();
+
+/* ---- charts ---- */
+function chart(mountId,tipId,o){
+ var mount=document.getElementById(mountId),tip=document.getElementById(tipId);
+ var W=1000,H=250,PL=54,PR=10,PT=12,PB=44,iw=W-PL-PR,ih=H-PT-PB,N=TL.length,max=0;
+ for(var i=0;i<N;i++){var v=o.value(i),t=o.target(i);if(v!=null)max=Math.max(max,v);if(t!=null)max=Math.max(max,t);}
+ max=(max*1.14)||1;
+ var step=iw/N,bw=Math.min(12,step*.58);
+ function x(i){return PL+i*step+step/2;} function yy(v){return PT+ih-(v/max)*ih;}
+ var mut=css("--muted"),ln=css("--line"),l2=css("--line-2"),ac=css("--moss");
+ var p=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+o.aria+'">'];
+ ticks(max,5).forEach(function(tv){var Y=yy(tv);
+  p.push('<line x1="'+PL+'" y1="'+Y+'" x2="'+(W-PR)+'" y2="'+Y+'" stroke="'+ln+'" stroke-width="1"/>');
+  p.push('<text x="'+(PL-8)+'" y="'+(Y+4)+'" text-anchor="end" font-size="11" font-family="IBM Plex Mono, monospace" fill="'+mut+'">'+o.ax(tv)+'</text>');});
+ if(FIRST>0){var xs=PL+FIRST*step;
+  p.push('<rect x="'+PL+'" y="'+PT+'" width="'+(xs-PL)+'" height="'+ih+'" fill="'+ln+'" opacity=".5"/>');
+  p.push('<text x="'+(PL+(xs-PL)/2)+'" y="'+(H-26)+'" text-anchor="middle" font-size="11" fill="'+mut+'">Before the plan</text>');
+  p.push('<line x1="'+xs+'" y1="'+PT+'" x2="'+xs+'" y2="'+(PT+ih)+'" stroke="'+l2+'" stroke-width="1.5"/>');}
+ BLOCKS.forEach(function(b,k){var xs=PL+(FIRST+b.start)*step,w=(b.end-b.start+1)*step;
+  if(k>0)p.push('<line x1="'+xs+'" y1="'+PT+'" x2="'+xs+'" y2="'+(PT+ih)+'" stroke="'+l2+'" stroke-width="1" stroke-dasharray="2 3"/>');
+  p.push('<text x="'+(xs+w/2)+'" y="'+(H-26)+'" text-anchor="middle" font-size="11" fill="'+mut+'">Block '+b.n+'</text>');
+  p.push('<text x="'+(xs+w/2)+'" y="'+(H-12)+'" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="'+mut+'">'+fd(planStart(b.start))+'</text>');});
+ p.push('<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(W-PR)+'" y2="'+(PT+ih)+'" stroke="'+l2+'" stroke-width="1"/>');
+ var d=[],on=false;
+ for(var j=0;j<N;j++){var tv2=o.target(j);if(tv2==null){on=false;continue;}
+  var x0=PL+j*step,x1=PL+(j+1)*step,Y=yy(tv2);d.push((on?"L":"M")+x0+" "+Y);d.push("L"+x1+" "+Y);on=true;}
+ if(d.length)p.push('<path d="'+d.join(" ")+'" fill="none" stroke="'+mut+'" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"/>');
+ for(var k2=0;k2<N;k2++){var v2=o.value(k2);if(v2==null)continue;var h=(PT+ih)-yy(v2);if(h<2)h=2;
+  p.push('<rect x="'+(x(k2)-bw/2)+'" y="'+yy(v2)+'" width="'+bw+'" height="'+h+'" rx="3" fill="'+(TL[k2].phase==="base"?mut:ac)+'"/>');}
+ p.push('<line x1="'+x(CUR)+'" y1="'+PT+'" x2="'+x(CUR)+'" y2="'+(PT+ih)+'" stroke="'+ac+'" stroke-width="1" opacity=".4"/>');
+ for(var k3=0;k3<N;k3++)p.push('<rect class="hit" data-i="'+k3+'" x="'+(PL+k3*step)+'" y="'+PT+'" width="'+step+'" height="'+ih+'" fill="transparent"/>');
+ p.push('</svg>');
+ mount.innerHTML=p.join("");mount.appendChild(tip);
+ var svg=mount.querySelector("svg");
+ svg.addEventListener("mousemove",function(e){
+  var el=e.target.closest?e.target.closest(".hit"):null;
+  if(!el){tip.style.opacity=0;return;}
+  tip.innerHTML=o.tip(+el.getAttribute("data-i"));tip.style.opacity=1;
+  var r=mount.getBoundingClientRect(),tx=e.clientX-r.left+14,ty=e.clientY-r.top-10;
+  if(tx+tip.offsetWidth>mount.scrollLeft+r.width)tx=e.clientX-r.left-tip.offsetWidth-14;
+  tip.style.left=tx+"px";tip.style.top=Math.max(0,ty)+"px";});
+ svg.addEventListener("mouseleave",function(){tip.style.opacity=0;});
+}
+function ticks(max,n){var raw=max/n,mag=Math.pow(10,Math.floor(Math.log(raw)/Math.LN10)),nm=raw/mag;
+ var s=(nm>=5?5:nm>=2?2:nm>=1?1:.5)*mag,o=[];for(var v=0;v<=max;v+=s)o.push(v);return o;}
+function tipFor(i,label,val,tgt,f,u){var t=TL[i];
+ var head=t.phase==="base"?"Before the plan":"Week "+(t.pi+1)+" · Block "+blockOf(t.pi).n;
+ return"<b>"+head+"</b><br>"+fr(t.ms)+"<br>"+label+": <b>"+(val==null?"—":f(val)+" "+u)+"</b>"+(tgt==null?"":"<br>Target: "+f(tgt)+" "+u);}
+function charts(){
+ chart("c-hours","t-hours",{aria:"Weekly time on feet against block targets",
+  value:function(i){var d=D(TL[i]);return d?d.hours:null;},
+  target:function(i){return TL[i].phase==="plan"?target(TL[i].pi).h:null;},ax:n0,
+  tip:function(i){var d=D(TL[i]);return tipFor(i,"Time on feet",d?d.hours:null,TL[i].phase==="plan"?target(TL[i].pi).h:null,n1,"hr");}});
+ chart("c-vert","t-vert",{aria:"Weekly vertical gain against block targets",
+  value:function(i){var d=D(TL[i]);return d?d.vert:null;},
+  target:function(i){return TL[i].phase==="plan"?target(TL[i].pi).v:null;},
+  ax:function(v){return v>=1000?(v/1000)+"k":n0(v);},
+  tip:function(i){var d=D(TL[i]);return tipFor(i,"Vertical",d?d.vert:null,TL[i].phase==="plan"?target(TL[i].pi).v:null,n0,"ft");}});
+ chart("c-long","t-long",{aria:"Longest single effort each week",
+  value:function(i){var d=D(TL[i]);return d?d.longest:null;},
+  target:function(i){return TL[i].phase==="plan"?blockOf(TL[i].pi).peak[0]:null;},ax:n0,
+  tip:function(i){var d=D(TL[i]);return tipFor(i,"Longest effort",d?d.longest:null,TL[i].phase==="plan"?blockOf(TL[i].pi).peak[0]:null,n1,"hr");}});
+}
+
+/* ---- block + week tables ---- */
+(function(){
+ var b12=base12(),h='<thead><tr><th>Block</th><th>Weeks</th><th>Hr/wk</th><th>Vert/wk</th><th>Mi/wk</th><th>Peak day</th><th>Night</th><th>Ends with</th></tr></thead><tbody>';
+ h+='<tr><td>Before the plan</td><td class="dim">last 12 weeks</td><td>'+(b12?n1(b12.h):"—")+'</td><td>'+(b12?n0(b12.v):"—")+
+    '</td><td>'+(b12?n0(b12.m):"—")+'</td><td>'+(b12?n1(b12.long)+" hr":"—")+'</td><td>0</td><td class="dim">measured</td></tr>';
+ BLOCKS.forEach(function(b){
+  var Dp=DISP[b.n],hs=0,hn=0,vs=0,vn=0,ms=0,mn=0,best=null,nc=0;
+  for(var i=0;i<TL.length;i++){var t=TL[i];if(t.phase!=="plan")continue;var d=D(t);if(!d)continue;
+   if(t.pi<=b.end)nc+=d.night||0;
+   if(t.pi<b.start||t.pi>b.end)continue;
+   hs+=d.hours;hn++;vs+=d.vert;vn++;ms+=d.miles;mn++;best=Math.max(best==null?0:best,d.longest);}
+  function lg(x){return' <span style="color:var(--muted)">· '+x+'</span>';}
+  var here=TL[CUR].phase==="plan"&&TL[CUR].pi>=b.start&&TL[CUR].pi<=b.end;
+  h+='<tr'+(here?' class="here"':'')+'><td>Block '+b.n+'</td><td class="dim">'+fd(planStart(b.start))+' – '+fd(planStart(b.end)+6*86400000)+'</td>'+
+    '<td>'+Dp.h+(hn?lg(n1(hs/hn)):'')+'</td><td>'+Dp.v+(vn?lg(n0(vs/vn)):'')+'</td><td>'+Dp.m+(mn?lg(n0(ms/mn)):'')+'</td>'+
+    '<td>'+b.peak[0]+(b.peak[1]!==b.peak[0]?'–'+b.peak[1]:'')+' hr'+(best!=null?lg(n1(best)):'')+'</td>'+
+    '<td>'+(nc?n1(nc)+' / ':'')+b.nightCum+'</td><td>'+b.ends+'</td></tr>';});
+ document.getElementById("blocktab").innerHTML=h+'</tbody>';
+})();
+(function(){
+ var h='<thead><tr><th>Wk</th><th>Dates</th><th>Hours</th><th>Vert</th><th>Miles</th><th>Longest</th><th>Sessions</th><th>Days on feet</th></tr></thead><tbody>';
+ if(FIRST>0)h+='<tr class="grp"><td colspan="8">Before the plan — measured from Strava</td></tr>';
+ for(var i=0;i<TL.length;i++){var t=TL[i];
+  if(t.phase==="plan"){var b=blockOf(t.pi);if(t.pi===b.start)h+='<tr class="grp"><td colspan="8">Block '+b.n+' — ends '+b.ends+'</td></tr>';}
+  var d=D(t),tg=t.phase==="plan"?target(t.pi):null;
+  h+='<tr'+(i===CUR?' class="here"':'')+'><td>'+(t.phase==="plan"?(t.pi+1):"—")+'</td><td>'+fr(t.ms)+'</td>'+
+    cell(d?d.hours:null,tg?tg.h:null,n1)+cell(d?d.vert:null,tg?tg.v:null,n0)+cell(d?d.miles:null,tg?tg.m:null,n0)+
+    '<td>'+(d?n1(d.longest):'—')+'</td><td class="dim">'+(d?d.sessions:'—')+'</td><td class="dim">'+(d?d.days+'/7':'—')+'</td></tr>';}
+ document.getElementById("weektab").innerHTML=h+'</tbody>';
+})();
+function cell(a,t,f){
+ if(a==null)return'<td class="dim">—'+(t!=null?' <span style="font-size:11px">/'+f(t)+'</span>':'')+'</td>';
+ if(t==null)return'<td>'+f(a)+'</td>';
+ var c=cls(a,t),col=c==="g"?"var(--good)":c==="w"?"var(--warn)":"var(--bad)";
+ return'<td><span style="color:'+col+'">●</span> '+f(a)+' <span class="dim" style="font-size:11px">/'+f(t)+'</span></td>';}
+
+/* ---- split table ---- */
+(function(){
+ var R=[["Blue Lake",12.2,12.2,"3,280","4:49","0:09","4:49","4:58","Fri 4:49 PM",5.5,"0:42",0],
+  ["Coldwater Lake",37.4,25.2,"4,002","9:51","0:25","14:49","15:15","Sat 2:49 AM",22.0,"7:11",0],
+  ["Norway Pass",56.1,18.7,"5,105","7:53","0:20","23:08","23:27","Sat 11:07 AM",32.0,"8:55",0],
+  ["Elk Pass",67.2,11.1,"2,037","3:59","0:20","27:26","27:46","Sat 3:26 PM",37.5,"10:04",0],
+  ["RD 9327",82.2,15.0,"2,543","5:18","2:10","33:04","35:14","Sat 9:03 PM",45.5,"12:27",1],
+  ["Spencer Butte",93.4,11.2,"2,817","4:40","0:15","39:54","40:09","Sun 3:54 AM",52.0,"12:05",0],
+  ["Lewis River",101.0,7.6,"1,282","2:36","0:25","42:45","43:11","Sun 6:45 AM",56.0,"13:15",0],
+  ["Quartz Ridge",118.2,17.2,"7,347","10:08","0:25","53:19","53:44","Sun 5:18 PM",65.5,"12:11",0],
+  ["Chain of Lakes",134.4,16.2,"3,846","6:48","2:10","60:33","62:43","Mon 12:32 AM",73.0,"12:27",1],
+  ["Klickitat",151.7,17.3,"3,927","8:07","0:25","70:50","71:15","Mon 10:49 AM",82.5,"11:40",0],
+  ["Twin Sisters",171.1,19.4,"4,919","11:33","2:55","82:48","85:43","Mon 10:47 PM",93.5,"10:42",1],
+  ["Owens Creek",187.1,16.0,"2,592","7:39","0:15","93:22","93:37","Tue 9:21 AM",101.5,"8:08",0],
+  ["FINISH · Randle",200.1,13.0,"385","3:23","—","97:00","—","Tue 1:00 PM",107.0,"10:00",0]];
+ var h='<thead><tr><th>Aid station</th><th>Mile</th><th>Seg</th><th>Gain</th><th>Moving</th><th>Stop</th><th>Arrive</th><th>Depart</th><th>Clock</th><th>Cutoff</th><th>In hand</th></tr></thead><tbody>';
+ R.forEach(function(r,i){
+  h+='<tr'+(i===R.length-1?' class="tot"':'')+'><td>'+r[0]+(r[11]?' <span class="pill ember">sleep</span>':'')+'</td>'+
+   '<td>'+r[1].toFixed(1)+'</td><td>'+r[2].toFixed(1)+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td>'+
+   '<td'+(r[11]?' class="sleepcell"':'')+'>'+r[5]+'</td><td>'+r[6]+'</td><td>'+r[7]+'</td><td>'+r[8]+'</td>'+
+   '<td class="dim">'+r[9].toFixed(1)+'</td><td>'+r[10]+'</td></tr>';});
+ document.getElementById("splittab").innerHTML=h+'</tbody>';
+})();
+
+document.getElementById("foot").textContent =
+ Object.keys(SYNC.weeks).length+" weeks synced from "+SYNC.source+" · last refreshed "+
+ new Date(SYNC.synced+"T12:00:00Z").toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric",timeZone:"UTC"})+
+ " · course figures from the official Destination Trail Runner Manual";
+charts();
+window.addEventListener("resize",function(){clearTimeout(window.__r);window.__r=setTimeout(charts,150);});
+})();
+</script>

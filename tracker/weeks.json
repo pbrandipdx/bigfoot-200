@@ -1,0 +1,141 @@
+{
+ "synced": "2026-09-06",
+ "source": "Strava",
+ "weeks": {
+  "2026-05-25": {
+   "hours": 9.86,
+   "vert": 2182,
+   "miles": 39.9,
+   "longest": 2.35,
+   "night": 0,
+   "sessions": 12,
+   "days": 7
+  },
+  "2026-06-01": {
+   "hours": 8.31,
+   "vert": 1919,
+   "miles": 36.4,
+   "longest": 1.03,
+   "night": 0,
+   "sessions": 14,
+   "days": 7
+  },
+  "2026-06-08": {
+   "hours": 8.94,
+   "vert": 1066,
+   "miles": 31.7,
+   "longest": 1.55,
+   "night": 0,
+   "sessions": 15,
+   "days": 7
+  },
+  "2026-06-15": {
+   "hours": 7.65,
+   "vert": 2011,
+   "miles": 30.7,
+   "longest": 2.06,
+   "night": 0,
+   "sessions": 12,
+   "days": 7
+  },
+  "2026-06-22": {
+   "hours": 7.4,
+   "vert": 883,
+   "miles": 29.2,
+   "longest": 2.15,
+   "night": 0,
+   "sessions": 11,
+   "days": 6
+  },
+  "2026-06-29": {
+   "hours": 9.29,
+   "vert": 1280,
+   "miles": 34.6,
+   "longest": 1.13,
+   "night": 0,
+   "sessions": 14,
+   "days": 7
+  },
+  "2026-07-06": {
+   "hours": 8.56,
+   "vert": 2103,
+   "miles": 24.3,
+   "longest": 2.08,
+   "night": 0,
+   "sessions": 8,
+   "days": 6
+  },
+  "2026-07-13": {
+   "hours": 8.37,
+   "vert": 1752,
+   "miles": 32.0,
+   "longest": 1.71,
+   "night": 0,
+   "sessions": 12,
+   "days": 7
+  },
+  "2026-07-20": {
+   "hours": 7.53,
+   "vert": 1119,
+   "miles": 26.5,
+   "longest": 1.07,
+   "night": 0,
+   "sessions": 8,
+   "days": 7
+  },
+  "2026-07-27": {
+   "hours": 8.94,
+   "vert": 2694,
+   "miles": 28.0,
+   "longest": 3.0,
+   "night": 0,
+   "sessions": 7,
+   "days": 6
+  },
+  "2026-08-03": {
+   "hours": 6.67,
+   "vert": 1742,
+   "miles": 17.5,
+   "longest": 1.76,
+   "night": 0,
+   "sessions": 7,
+   "days": 5
+  },
+  "2026-08-10": {
+   "hours": 9.28,
+   "vert": 1519,
+   "miles": 33.6,
+   "longest": 1.89,
+   "night": 0,
+   "sessions": 6,
+   "days": 6
+  },
+  "2026-08-17": {
+   "hours": 7.26,
+   "vert": 915,
+   "miles": 23.8,
+   "longest": 1.86,
+   "night": 0,
+   "sessions": 5,
+   "days": 4
+  },
+  "2026-08-24": {
+   "hours": 12.7,
+   "vert": 1453,
+   "miles": 33.7,
+   "longest": 1.75,
+   "night": 0,
+   "sessions": 13,
+   "days": 7
+  },
+  "2026-08-31": {
+   "hours": 12.1,
+   "vert": 2927,
+   "miles": 39.6,
+   "longest": 2.98,
+   "night": 0,
+   "sessions": 9,
+   "days": 6
+  }
+ }
+}

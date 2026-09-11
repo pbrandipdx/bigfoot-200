@@ -1,0 +1,8 @@
+.DS_Store
+*.icloud
+# iCloud / Finder collision artifacts — if these ever appear again, sync is misconfigured
+* [0-9].md
+* [0-9].html
+*_[0-9].html
+* copy.md
+* copy.html
