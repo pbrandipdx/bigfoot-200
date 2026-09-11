@@ -10,8 +10,7 @@ DELIBERATELY NOT PUBLISHED: anything under plan/private/ — Destination Trail's
 copyrighted runner manual lives there. It is gitignored and never rendered.
 """
 import json, os, re, sys
-import markdown
-import nav, doc_shell
+import md, nav, doc_shell
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -37,10 +36,8 @@ def inject_data(tpl, data, where):
                                                   separators=(",", ":")))
 
 def md_body(src):
-    """Render a plan markdown file to an HTML fragment."""
-    text = read("plan", src)
-    body = markdown.markdown(text, extensions=["tables", "sane_lists", "attr_list"])
-    return body.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
+    """Render a plan markdown file to an HTML fragment (stdlib only — see md.py)."""
+    return md.render(read("plan", src))
 
 def md_page(src, title):
     return doc_shell.render(title, md_body(src), "plan/" + src)
