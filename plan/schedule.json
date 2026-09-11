@@ -151,13 +151,15 @@
       "date": "2026-10-17",
       "title": "COURSE RECON — Norway Pass → Mount Margaret",
       "vert": "~2,820 ft",
-      "desc": "11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. Do it while FR 99 is open; it closes with snow. Mid-October is late for this — FR 99 and the Norway Pass trailhead close with snow. Check msh institute conditions the week before; if the road is shut, fall back to Table Mountain and take the recon as lost until 2027."
+      "desc": "11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. WEATHER PLAN: FR 99 and the Norway Pass trailhead close with snow and mid-October is late. Check mshinstitute.org/current-conditions the week before. If the road is shut, SWAP with Oct 24 — do Elk/Kings today and try the recon again next Saturday.",
+      "fallback": "Swap with Oct 24 (Elk / Kings) if FR 99 is closed."
     },
     {
       "date": "2026-10-24",
       "title": "Elk Mountain / Kings Mountain traverse",
       "vert": "~3,850 ft",
-      "desc": "10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi."
+      "desc": "10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi. Coast Range, high point 3,226 ft — no snow risk in October, which is why it's the recon's backstop. IF YOU SWAPPED: this is the second and last recon attempt. If FR 99 is still shut, do Nesmith Point (~3,800 ft, similar day) and let the recon wait for summer 2027 — Klickitat → Twin Sisters matters more anyway and wants 2027 conditions.",
+      "fallback": "If used as the second recon attempt and FR 99 is still closed: Nesmith Point, ~3,800 ft."
     },
     {
       "date": "2026-10-31",
