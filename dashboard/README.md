@@ -1,17 +1,32 @@
-# The phone dashboard
+# The public site
 
-`template.html` + `../plan/schedule.json` → `../../bigfoot200-training/index.html`
+Builds `../../bigfoot200-training/` from this repo:
+
+| Output | Built from |
+|---|---|
+| `index.html` | `template.html` + `../plan/schedule.json` |
+| `log.html` | `../tracker/template.html` + `../tracker/weeks.json` |
+| `blocks.html` | `../plan/block-targets.md` |
+| `plan.html` | `../plan/sub100-plan.md` |
 
     make dashboard
 
-`bigfoot200-training` is a **view**. Never edit its `index.html` — it is overwritten
-from here every build. Block dates, vertical targets and the race ladder are written
-in `plan/block-targets.md` and `plan/sub100-plan.md`, transcribed into
-`plan/schedule.json`, and generated out. One place to change a number.
-
-After building, push the view repo:
+`bigfoot200-training` is a **view**. Never edit its HTML — it is overwritten every
+build. Then:
 
     cd ../bigfoot200-training && git add -A && git commit -m "Regenerate" && git push
 
+## Not published
+
+`plan/runner-manual-2026.md` — Destination Trail's copyrighted manual. `build.py`
+hard-refuses to finish if a file matching `runner-manual` appears in the public repo.
+
+## Files here
+
+- `template.html` — the Today page. Data-driven via `/*__DATA__*/`.
+- `doc_shell.py` — page shell for the markdown-rendered pages.
+- `nav.py` — the shared nav bar, injected after `<body>` on every page.
+- `build.py` — the build.
+
 Still hardcoded in `template.html`: a few dated Block-1 Saturday prescriptions
-(Angels Rest, Three Sisters). Those are one-off workout notes, not schedule data.
+(Angels Rest, Three Sisters). One-off workout notes, not schedule data.
