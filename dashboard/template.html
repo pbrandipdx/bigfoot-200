@@ -220,22 +220,23 @@ function ordinalSaturdayOfMonth(d){
 }
 
 function saturdayWorkout(block, d){
-  if(block.id === 1){
-    const s = fmtIso(d);
-    if(s < '2026-09-13') return { title:'Wildwood — vertical build', desc:'~2,400 ft gain. Week 1 of the Saturday progression.' };
-    if(s < '2026-09-27') return { title:'Angels Rest → Devil\u2019s Rest loop', desc:'~3,159 ft gain, Columbia River Gorge. No timed-use permit required in 2026.' };
-    if(s <= '2026-10-05') return { title:'Three Sisters Loop', desc:'Multi-day. First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop.' };
-    if(s < '2026-11-01') return { title:'Elk Mountain / Kings Mountain traverse', desc:'~4,000 ft gain — the block\u2019s biggest single vertical day so far.' };
-    if(s <= '2026-11-07') return { title:'Taper into Run the Rock 50K', desc:'Short and easy — race is today or this week.' };
-    return { title:'Long day, vertical-focused', desc:'Block 1 continues building toward the Dec 12 Frozen Trail 50K checkpoint.' };
+  // Explicit, dated plan wins — see plan/schedule.json "saturdays".
+  const iso = fmtIso(d);
+  const planned = (DATA.saturdays||[]).find(s => s.date === iso);
+  if(planned){
+    const showVert = planned.vert && !/^(race|—)$/.test(planned.vert);
+    return { title: planned.title + (showVert ? '  ·  ' + planned.vert : ''),
+             desc: planned.desc, vert: planned.vert };
   }
+  // Fallback for Saturdays with no explicit entry yet.
   const nth = ordinalSaturdayOfMonth(d);
   if(!block.taper){
-    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data.' };
-    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${block.vert} of vertical. Put the hardest climbing in the back half of the day, not the front. Followed by a genuinely long Sunday.` };
+    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data. (No dated plan for this Saturday yet.)' };
+    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${block.vert} of vertical, followed by a genuinely long Sunday. (No dated plan for this Saturday yet.)` };
   }
-  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. Hardest climbing goes in the back half of the day.` };
+  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. (No dated plan for this Saturday yet.)` };
 }
+
 
 function fmtIso(d){
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');

@@ -1,23 +1,205 @@
 {
   "_source": "Generated view of plan/block-targets.md and plan/sub100-plan.md. Edit those, then run `make dashboard`.",
-  "race": { "name": "Bigfoot 200", "date": "2027-08-13", "goal": "sub-100hr", "schedule": "97:00" },
+  "race": {
+    "name": "Bigfoot 200",
+    "date": "2027-08-13",
+    "goal": "sub-100hr",
+    "schedule": "97:00"
+  },
   "blocks": [
-    { "id": 1, "name": "Block 1 — base + vertical intro", "start": "2026-09-07", "end": "2026-12-12", "vert": "5,000 ft", "hours": "15 hr/wk", "endsWith": "Frozen Trail Run Fest 50K" },
-    { "id": 2, "name": "Block 2 — build",                 "start": "2026-12-13", "end": "2027-02-13", "vert": "6,500 ft", "hours": "17 hr/wk", "endsWith": "Hagg Mud 50K" },
-    { "id": 3, "name": "Block 3 — night running",         "start": "2027-02-14", "end": "2027-04-16", "vert": "8,000 ft", "hours": "19 hr/wk", "endsWith": "Gorge Waterfalls 100K" },
-    { "id": 4, "name": "Block 4 — the gate",              "start": "2027-04-17", "end": "2027-06-18", "vert": "10,000 ft", "hours": "21 hr/wk", "endsWith": "Bighorn 100" },
-    { "id": 5, "name": "Block 5 — peak + taper",          "start": "2027-06-19", "end": "2027-08-13", "vert": "12,000 ft", "hours": "22–24 hr/wk", "endsWith": "BIGFOOT 200", "taper": true }
+    {
+      "id": 1,
+      "name": "Block 1 — base + vertical intro",
+      "start": "2026-09-07",
+      "end": "2026-12-12",
+      "vert": "5,000 ft",
+      "hours": "15 hr/wk",
+      "endsWith": "Frozen Trail Run Fest 50K"
+    },
+    {
+      "id": 2,
+      "name": "Block 2 — build",
+      "start": "2026-12-13",
+      "end": "2027-02-13",
+      "vert": "6,500 ft",
+      "hours": "17 hr/wk",
+      "endsWith": "Hagg Mud 50K"
+    },
+    {
+      "id": 3,
+      "name": "Block 3 — night running",
+      "start": "2027-02-14",
+      "end": "2027-04-16",
+      "vert": "8,000 ft",
+      "hours": "19 hr/wk",
+      "endsWith": "Gorge Waterfalls 100K"
+    },
+    {
+      "id": 4,
+      "name": "Block 4 — the gate",
+      "start": "2027-04-17",
+      "end": "2027-06-18",
+      "vert": "10,000 ft",
+      "hours": "21 hr/wk",
+      "endsWith": "Bighorn 100"
+    },
+    {
+      "id": 5,
+      "name": "Block 5 — peak + taper",
+      "start": "2027-06-19",
+      "end": "2027-08-13",
+      "vert": "12,000 ft",
+      "hours": "22–24 hr/wk",
+      "endsWith": "BIGFOOT 200",
+      "taper": true
+    }
   ],
   "races": [
-    { "name": "Three Sisters Loop",             "start": "2026-10-02", "end": "2026-10-05", "tag": "multi-day · first sleep-stop practice" },
-    { "name": "Run the Rock 50K",               "start": "2026-11-07", "end": "2026-11-07", "tag": "Block 1 checkpoint · 3.2 mph, finish upright" },
-    { "name": "West Linn Turkey Trot",          "start": "2026-11-26", "end": "2026-11-26", "tag": "tune-up" },
-    { "name": "St. Jude Memphis Half Marathon", "start": "2026-12-05", "end": "2026-12-05", "tag": "tune-up" },
-    { "name": "Frozen Trail Run Fest 50K",      "start": "2026-12-12", "end": "2026-12-12", "tag": "Block 1 checkpoint" },
-    { "name": "BURT 100",                       "start": "2027-02-06", "end": "2027-02-06", "tag": "pencilled in · first 100-miler · 54K loop ×3, Bainbridge Island WA" },
-    { "name": "Hagg Mud 50K",                   "start": "2027-02-15", "end": "2027-02-15", "tag": "tune-up · date approximate" },
-    { "name": "Gorge Waterfalls 100K",          "start": "2027-04-16", "end": "2027-04-16", "tag": "WS qualifier · 17 hr cutoff · Block 3 checkpoint" },
-    { "name": "Bighorn 100",                    "start": "2027-06-18", "end": "2027-06-19", "tag": "WS qualifier · the gate · finish under 30 hr" },
-    { "name": "Bigfoot 200",                    "start": "2027-08-13", "end": "2027-08-13", "tag": "A race · 97:00 schedule, sub-100 goal" }
+    {
+      "name": "Three Sisters Loop",
+      "start": "2026-10-02",
+      "end": "2026-10-05",
+      "tag": "multi-day · first sleep-stop practice"
+    },
+    {
+      "name": "Run the Rock 50K",
+      "start": "2026-11-07",
+      "end": "2026-11-07",
+      "tag": "Block 1 checkpoint · 3.2 mph, finish upright"
+    },
+    {
+      "name": "West Linn Turkey Trot",
+      "start": "2026-11-26",
+      "end": "2026-11-26",
+      "tag": "tune-up"
+    },
+    {
+      "name": "St. Jude Memphis Half Marathon",
+      "start": "2026-12-05",
+      "end": "2026-12-05",
+      "tag": "tune-up"
+    },
+    {
+      "name": "Frozen Trail Run Fest 50K",
+      "start": "2026-12-12",
+      "end": "2026-12-12",
+      "tag": "Block 1 checkpoint"
+    },
+    {
+      "name": "BURT 100",
+      "start": "2027-02-06",
+      "end": "2027-02-06",
+      "tag": "pencilled in · first 100-miler · 54K loop ×3, Bainbridge Island WA"
+    },
+    {
+      "name": "Hagg Mud 50K",
+      "start": "2027-02-15",
+      "end": "2027-02-15",
+      "tag": "tune-up · date approximate"
+    },
+    {
+      "name": "Gorge Waterfalls 100K",
+      "start": "2027-04-16",
+      "end": "2027-04-16",
+      "tag": "WS qualifier · 17 hr cutoff · Block 3 checkpoint"
+    },
+    {
+      "name": "Bighorn 100",
+      "start": "2027-06-18",
+      "end": "2027-06-19",
+      "tag": "WS qualifier · the gate · finish under 30 hr"
+    },
+    {
+      "name": "Bigfoot 200",
+      "start": "2027-08-13",
+      "end": "2027-08-13",
+      "tag": "A race · 97:00 schedule, sub-100 goal"
+    }
+  ],
+  "saturdays": [
+    {
+      "date": "2026-09-12",
+      "title": "Wildwood — vertical build",
+      "vert": "~2,400 ft",
+      "desc": "Week 1 of the Saturday progression. In-town, smooth tread."
+    },
+    {
+      "date": "2026-09-19",
+      "title": "Angels Rest → Devil's Rest loop",
+      "vert": "~2,770 ft",
+      "desc": "10.7 mi, Columbia River Gorge. Talus and exposed switchbacks. No timed-use permit in 2026. Objective is the descent, not the summit — watch the descent HR gap."
+    },
+    {
+      "date": "2026-09-26",
+      "title": "COURSE RECON — Norway Pass → Mount Margaret",
+      "vert": "~2,820 ft",
+      "desc": "11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. Do it while FR 99 is open; it closes with snow."
+    },
+    {
+      "date": "2026-10-03",
+      "title": "Three Sisters Loop",
+      "vert": "multi-day",
+      "desc": "First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop."
+    },
+    {
+      "date": "2026-10-10",
+      "title": "Down week — Wildwood",
+      "vert": "~2,400 ft",
+      "desc": "Recovery from Three Sisters. Deliberately easy."
+    },
+    {
+      "date": "2026-10-17",
+      "title": "Table Mountain",
+      "vert": "~3,325 ft",
+      "desc": "8.4 mi from Bonneville. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Steep meadow exposure near the summit."
+    },
+    {
+      "date": "2026-10-24",
+      "title": "Elk Mountain / Kings Mountain traverse",
+      "vert": "~3,850 ft",
+      "desc": "10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi."
+    },
+    {
+      "date": "2026-10-31",
+      "title": "Mount Defiance",
+      "vert": "~4,840 ft",
+      "desc": "11.6 mi, the hardest day hike in the region — 3,000 ft in three miles. Biggest day of the block. Late in its season at 4,959 ft: if there's snow up high, swap to Nesmith Point (~3,800 ft)."
+    },
+    {
+      "date": "2026-11-07",
+      "title": "Taper into Run the Rock 50K",
+      "vert": "—",
+      "desc": "Short and easy. Race target: 3.2 mph, finish upright."
+    },
+    {
+      "date": "2026-11-14",
+      "title": "Down week — Angels Rest",
+      "vert": "~2,770 ft",
+      "desc": "Recovery from Run the Rock."
+    },
+    {
+      "date": "2026-11-21",
+      "title": "Dog Mountain",
+      "vert": "~3,200 ft",
+      "desc": "Steep and relentless. Permit is spring weekends only — free in November. First night-hours sessions should be landing this month too."
+    },
+    {
+      "date": "2026-11-28",
+      "title": "Elk / Kings — BENCHMARK REPEAT",
+      "vert": "~3,850 ft",
+      "desc": "Same course as Oct 24, six weeks later. This is a measurement, not a workout: compare time, descent HR gap, and how the last hour felt. It tells you whether Block 1 worked."
+    },
+    {
+      "date": "2026-12-05",
+      "title": "Table Mountain",
+      "vert": "~3,325 ft",
+      "desc": "Last long day before the checkpoint. Keep it controlled."
+    },
+    {
+      "date": "2026-12-12",
+      "title": "Frozen Trail Run Fest 50K",
+      "vert": "race",
+      "desc": "Block 1 checkpoint. Block question: can you sustain a full day on feet and descend hard without wrecking your quads?"
+    }
   ]
 }
