@@ -6,8 +6,8 @@
   blocks.html  block targets and monitors        <- ../plan/block-targets.md
   plan.html    the sub-100 race plan             <- ../plan/sub100-plan.md
 
-DELIBERATELY NOT PUBLISHED: plan/runner-manual-2026.md — Destination Trail's
-copyrighted document. Keep it in the private repo only.
+DELIBERATELY NOT PUBLISHED: anything under plan/private/ — Destination Trail's
+copyrighted runner manual lives there. It is gitignored and never rendered.
 """
 import json, os, re, sys
 import markdown
