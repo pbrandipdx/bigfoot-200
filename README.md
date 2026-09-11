@@ -30,12 +30,14 @@ Open `build/bigfoot-tracker.html` in a browser for the local tracker.
 
 ## The phone
 
-You don't sync files to the iPhone. The racebook is published as a Claude artifact:
+The phone reads **https://pbrandipdx.github.io/bigfoot200-training/**, served from the
+separate public repo `pbrandipdx/bigfoot200-training`.
 
-**https://claude.ai/code/artifact/1b073ecd-aa0c-44d3-8549-f4416989a436**
+That repo is a **view, not a source.** Block targets, race dates and the weekly template
+belong here in `plan/`. The dashboard is generated from them. If a number appears in both
+places, this repo wins.
 
-After a weekly refresh, republish to that same URL so it updates in place.
-See `tracker/REFRESH.md`.
+The old racebook artifact is retired — it held a frozen copy of the data and drifted.
 
 ---
 

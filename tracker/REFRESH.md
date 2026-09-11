@@ -27,17 +27,13 @@ Files here:
 3. Set `synced` to today.
 4. `python3 build.py`, then write `bigfoot-tracker.html` to the Desktop.
 
-## The Racebook artifact (phone + laptop)
+## The phone dashboard
 
-The published page at **https://claude.ai/code/artifact/1b073ecd-aa0c-44d3-8549-f4416989a436**
-is the version Patrick reads on his phone. It is built the same way:
+The page Patrick reads on his phone is **https://pbrandipdx.github.io/bigfoot200-training/**,
+served from the separate public repo `pbrandipdx/bigfoot200-training`.
 
-- `racebook_head.html` + `racebook_body.html` + `racebook_js.html` are the three parts
-- `python3 build_racebook.py` injects `weeks.json` into the `/*__DATA__*/` token and writes `racebook.html`
-- republish with the Artifact tool, passing that URL as `url` so it updates in place rather than
-  creating a second artifact
+That repo is a VIEW. It must never hold its own copy of block targets, race dates or
+weekly-template rules — those live here, in `plan/block-targets.md`, and are generated
+into the dashboard. If a number appears in both places, this repo is right.
 
-Do the same weekly refresh for it as for the local tracker: rebuild after updating `weeks.json`,
-then republish.
-
-Do not hand-edit `bigfoot-tracker.html` or `racebook.html` — both are generated and will be overwritten.
+Do not hand-edit `bigfoot-tracker.html` — it is generated and will be overwritten.
