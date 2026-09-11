@@ -36,11 +36,14 @@ def inject_data(tpl, data, where):
     return tpl.replace("/*__DATA__*/", json.dumps(data, ensure_ascii=False,
                                                   separators=(",", ":")))
 
-def md_page(src, title):
+def md_body(src):
+    """Render a plan markdown file to an HTML fragment."""
     text = read("plan", src)
     body = markdown.markdown(text, extensions=["tables", "sane_lists", "attr_list"])
-    body = body.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
-    return doc_shell.render(title, body, "plan/" + src)
+    return body.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
+
+def md_page(src, title):
+    return doc_shell.render(title, md_body(src), "plan/" + src)
 
 def main():
     if not os.path.isdir(OUT):
@@ -53,7 +56,14 @@ def main():
     weeks = json.loads(read("tracker", "weeks.json"))
 
     print("building %s" % OUT)
-    write("index.html",  inject_data(read("dashboard", "template.html"), schedule, "dashboard/template.html"))
+
+    # the Today page carries the full training plan inline, after the race ladder
+    plan_html = md_body("block-targets.md")
+    today_tpl = read("dashboard", "template.html")
+    if "<!--__PLAN__-->" not in today_tpl:
+        sys.exit("dashboard/template.html has no <!--__PLAN__--> token")
+    today_tpl = today_tpl.replace("<!--__PLAN__-->", plan_html)
+    write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
     write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
     write("blocks.html", md_page("block-targets.md", "Block targets"))
     write("plan.html",   md_page("sub100-plan.md",  "Race plan"))
