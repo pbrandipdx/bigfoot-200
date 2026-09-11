@@ -12,8 +12,9 @@
 plan/private/
 
 # Secrets - never commit
-tracker/.env
+tracker/.env*
 .env
+.env.*
 
 # local python env
 .venv/
