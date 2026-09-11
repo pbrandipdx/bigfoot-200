@@ -61,11 +61,8 @@ uncommitted.
 
 1. **The Mac mini owns the weekly refresh.** It is the machine with the Strava
    connection. Only it edits `tracker/weeks.json`. The MacBook reads.
-2. **Pull before you start, push when you stop.** Every session, both machines:
-
-       git pull    # before
-       git push    # after
-
+2. **`make sync` when you sit down and when you get up.** Both machines. That is
+   the whole discipline — see above.
 3. **Nothing in this repo goes in iCloud Drive, ever.** That is what caused the
    original mess — see below.
 4. **Never hand-edit anything in `build/`.** It is output, not content.
