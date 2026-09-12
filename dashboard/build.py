@@ -42,6 +42,22 @@ def md_body(src):
 def md_page(src, title):
     return doc_shell.render(title, md_body(src), "plan/" + src)
 
+def odds_pill():
+    """The finish-odds chip in the header. Empty if the model hasn't run yet."""
+    path = os.path.join(REPO, "plan", "odds.json")
+    if not os.path.exists(path):
+        return ""
+    o = json.load(open(path, encoding="utf-8"))
+    t = o["trajectory"]
+    return ('<a class="odds" href="progress.html" title="Chance of finishing on '
+            'current trajectory, %d weeks out. %s. Tap for the breakdown.">'
+            '<span class="dot" style="background:%s"></span>'
+            '<span class="pct">%d\u2013%d%%</span>'
+            '<span class="word">finish odds</span></a>'
+            % (o["weeksToRace"], o["baseNote"].replace('"', "'"),
+               o["color"], t["low"], t["high"]))
+
+
 def main():
     if not os.path.isdir(OUT):
         sys.exit("sibling repo not found: %s\n  git -C %s clone "
@@ -60,6 +76,7 @@ def main():
     if "<!--__PLAN__-->" not in today_tpl:
         sys.exit("dashboard/template.html has no <!--__PLAN__--> token")
     today_tpl = today_tpl.replace("<!--__PLAN__-->", plan_html)
+    today_tpl = today_tpl.replace("<!--__ODDS__-->", odds_pill())
     write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
     write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
     if os.path.exists(os.path.join(REPO, "plan", "progress.md")):

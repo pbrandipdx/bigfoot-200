@@ -12,46 +12,81 @@
       "name": "Block 1 — base + vertical intro",
       "start": "2026-09-07",
       "end": "2026-12-12",
-      "vert": "5,000 ft",
-      "hours": "15 hr/wk",
-      "endsWith": "Frozen Trail Run Fest 50K"
+      "vert": "3,500 ft",
+      "hours": "12 hr/wk",
+      "endsWith": "Frozen Trail Run Fest 50K",
+      "targets": {
+        "hoursPerWeek": 12,
+        "vertFtPerWeek": 3500,
+        "milesPerWeek": 45,
+        "peakDayHours": 8,
+        "nightHoursCumulative": 3
+      }
     },
     {
       "id": 2,
       "name": "Block 2 — build",
       "start": "2026-12-13",
       "end": "2027-02-13",
-      "vert": "6,500 ft",
-      "hours": "17 hr/wk",
-      "endsWith": "Hagg Mud 50K"
+      "vert": "5,000 ft",
+      "hours": "14 hr/wk",
+      "endsWith": "Hagg Mud 50K",
+      "targets": {
+        "hoursPerWeek": 14,
+        "vertFtPerWeek": 5000,
+        "milesPerWeek": 50,
+        "peakDayHours": 10,
+        "nightHoursCumulative": 6
+      }
     },
     {
       "id": 3,
       "name": "Block 3 — night running",
       "start": "2027-02-14",
       "end": "2027-04-16",
-      "vert": "8,000 ft",
-      "hours": "19 hr/wk",
-      "endsWith": "Gorge Waterfalls 100K"
+      "vert": "6,500 ft",
+      "hours": "16 hr/wk",
+      "endsWith": "Gorge Waterfalls 100K",
+      "targets": {
+        "hoursPerWeek": 16,
+        "vertFtPerWeek": 6500,
+        "milesPerWeek": 55,
+        "peakDayHours": 12,
+        "nightHoursCumulative": 12
+      }
     },
     {
       "id": 4,
       "name": "Block 4 — the gate",
       "start": "2027-04-17",
       "end": "2027-06-18",
-      "vert": "10,000 ft",
-      "hours": "21 hr/wk",
-      "endsWith": "Bighorn 100"
+      "vert": "8,000 ft",
+      "hours": "18 hr/wk",
+      "endsWith": "Bighorn 100",
+      "targets": {
+        "hoursPerWeek": 18,
+        "vertFtPerWeek": 8000,
+        "milesPerWeek": 60,
+        "peakDayHours": 16,
+        "nightHoursCumulative": 20
+      }
     },
     {
       "id": 5,
       "name": "Block 5 — peak + taper",
       "start": "2027-06-19",
       "end": "2027-08-13",
-      "vert": "12,000 ft",
-      "hours": "22–24 hr/wk",
+      "vert": "10,000 ft",
+      "hours": "20–22 hr/wk",
       "endsWith": "BIGFOOT 200",
-      "taper": true
+      "taper": true,
+      "targets": {
+        "hoursPerWeek": 21,
+        "vertFtPerWeek": 10000,
+        "milesPerWeek": 65,
+        "peakDayHours": 20,
+        "nightHoursCumulative": 30
+      }
     }
   ],
   "races": [

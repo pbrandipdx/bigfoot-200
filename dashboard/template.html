@@ -39,6 +39,23 @@
   .site-name{font-size:15px;font-weight:600;letter-spacing:0.01em}
   .site-sub{font-size:13px;color:var(--ink-faint)}
 
+  /* finish-odds pill — filled by dashboard/build.py from plan/odds.json */
+  .odds{
+    display:inline-flex;align-items:center;gap:7px;vertical-align:middle;
+    margin-left:10px;padding:4px 11px 4px 9px;border-radius:999px;
+    background:var(--white);border:1px solid var(--line);
+    font-size:12.5px;font-weight:600;line-height:1;color:var(--ink-soft);
+    text-decoration:none;white-space:nowrap;
+  }
+  .odds:hover{border-color:var(--ink-faint)}
+  .odds .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+  .odds .pct{color:var(--ink);font-variant-numeric:tabular-nums}
+  .odds .word{color:var(--ink-faint);font-weight:500}
+  @media (max-width:460px){
+    .site-name{display:block}
+    .odds{margin-left:0;margin-top:8px;display:flex;width:max-content}
+  }
+
   .profile{margin:28px 0 6px;font-size:13px;color:var(--ink-faint)}
   .today-date{font-size:15px;color:var(--ink-soft);margin-bottom:6px}
 
@@ -130,7 +147,7 @@
 
   <header class="top">
     <div class="top-row">
-      <div class="site-name">Bigfoot 200 training</div>
+      <div class="site-name">Bigfoot 200 training<!--__ODDS__--></div>
       <div class="site-sub">Mount St. Helens, WA &middot; Aug 13, 2027 &middot; goal: sub-100hr</div>
     </div>
   </header>

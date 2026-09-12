@@ -11,10 +11,12 @@ Credentials come from tracker/.env (gitignored):
   SUPABASE_URL, SUPABASE_SERVICE_KEY
 """
 import json, os, sys, urllib.request, urllib.parse, datetime
+import odds as odds_model
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 OUT  = os.path.join(REPO, "plan", "progress.md")
+ODDS = os.path.join(REPO, "plan", "odds.json")
 
 # Block 1 targets, from plan/block-targets.md. Keep these in step with that file.
 TARGET = {"hours": 12.0, "vert_ft": 3500, "miles": 45.0, "peak_day_hr": 8.0}
@@ -84,16 +86,22 @@ def pct(now, target):
 
 def main():
     weeks = int(sys.argv[1]) if len(sys.argv) > 1 else 12
-    rows = fetch(env(), weeks + 1)
-    if not rows:
+    # the odds model wants 12 complete weeks of history regardless of how many
+    # the table is asked to show
+    all_rows = fetch(env(), max(weeks + 1, 14))
+    if not all_rows:
         sys.exit("weekly_progress returned no rows")
 
-    for r in rows:
-        for k in ("hours", "miles", "vert_ft", "longest_day_hr", "run_hours",
-                  "run_miles", "run_vert_ft", "hrv_avg", "rhr_avg", "sleep_avg",
-                  "readiness_avg", "endurance", "hill", "run_tolerance"):
+    for r in all_rows:
+        for k in ("hours", "miles", "vert_ft", "longest_day_hr", "night_hours",
+                  "run_hours", "run_miles", "run_vert_ft", "hrv_avg", "rhr_avg",
+                  "sleep_avg", "readiness_avg", "endurance", "hill",
+                  "run_tolerance"):
             r[k] = num(r.get(k))
+    rows = all_rows[:weeks + 1]
 
+    schedule = json.load(open(os.path.join(REPO, "plan", "schedule.json"),
+                              encoding="utf-8"))
     today = datetime.date.today()
     this_monday = today - datetime.timedelta(days=today.weekday())
     # The current week is still being written; report on it but mark it partial.
@@ -107,6 +115,15 @@ def main():
     L.append("Read the arrows as direction, not verdict: `^` up, `v` down, `=` level, "
              "`!` means the direction is the wrong one.")
     L.append("")
+
+    # ---- finish odds ---------------------------------------------------------
+    odds_md, odds_data = odds_model.report(all_rows, schedule["blocks"], today)
+    if odds_md:
+        L.append(odds_md)
+        json.dump(odds_data, open(ODDS, "w", encoding="utf-8"), indent=2)
+        print("wrote %s (%d-%d%% on trajectory)"
+              % (ODDS, odds_data["trajectory"]["low"],
+                 odds_data["trajectory"]["high"]))
 
     # ---- headline: last complete week vs the one before it -------------------
     done = [r for r in rows if r["week_start"] != this_monday.isoformat()]
