@@ -5,6 +5,17 @@
 
 ---
 
+## The long day is Sunday
+
+Moved from Saturday on 2026-09-12. Saturday is now recovery — up to 6 miles,
+easy — or day one of a back-to-back weekend. Races and the Three Sisters
+multi-day keep their real dates, which are Saturdays; the Sunday after one of
+those is recovery or day two, not a fresh long day. `plan/schedule.json` keys
+the dated progression by DATE (`longDays`), not by weekday, so nothing has to
+be re-dated if a weekend moves again.
+
+---
+
 ## How to read this
 
 **Targets** are things you train toward and either hit or miss.
@@ -300,7 +311,7 @@ weeks. Increase impact load gradually after a lighter period like this."*
   race the running ramp has to actually reach, and there are seven months for it.
 - Raise it by frequency, not by one big day. Three easy midweek runs — which is
   what you were doing through Jul 21 — plus running the runnable parts of the
-  Saturday long day.
+  weekly long day.
 
 ### Why all three moved together
 
@@ -329,7 +340,7 @@ from Destination Trail's own coach:
 1. **Sustained downhill, 10–30 min continuous.** The most race-specific session
    available and completely absent. Bigfoot descends 45,563 ft — more than it
    climbs — and Block 1's question is whether you can descend hard without
-   wrecking your quads. Add it to a Saturday, late in the day, on rock.
+   wrecking your quads. Add it to the Sunday long day, late in the day, on rock.
 2. **Uphill tempo intervals, progressed weekly:** 3×5 min → 3×10 min → 2×15 min.
    Replaces the fixed LeBron ramp prescription with something that builds.
 3. **A carbohydrate target: up to 120 g/hr**, rehearsed on every long day. The

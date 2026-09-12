@@ -151,21 +151,21 @@
       "tag": "A race · 97:00 schedule, sub-100 goal"
     }
   ],
-  "saturdays": [
+  "longDays": [
     {
-      "date": "2026-09-12",
+      "date": "2026-09-13",
       "title": "Wildwood — vertical build",
       "vert": "~2,400 ft",
-      "desc": "Week 1 of the Saturday progression. In-town, smooth tread."
+      "desc": "Week 1 of the long-day progression. In-town, smooth tread."
     },
     {
-      "date": "2026-09-19",
+      "date": "2026-09-20",
       "title": "Angels Rest → Devil's Rest loop",
       "vert": "~2,770 ft",
       "desc": "10.7 mi, Columbia River Gorge. Talus and exposed switchbacks. No timed-use permit in 2026. Objective is the descent, not the summit — watch the descent HR gap."
     },
     {
-      "date": "2026-09-26",
+      "date": "2026-09-27",
       "title": "Table Mountain",
       "vert": "~3,325 ft",
       "desc": "8.4 mi from Bonneville. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Steep meadow exposure near the summit."
@@ -177,27 +177,27 @@
       "desc": "First real overnight and multi-day exposure — a good spot to try a short deliberate sleep stop."
     },
     {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "title": "DELOAD — Wildwood",
       "vert": "~2,400 ft",
       "desc": "Deload week: 60-70% of block targets. Recovery from the Three Sisters multi-day. Keep the frequency, cut the duration."
     },
     {
-      "date": "2026-10-17",
+      "date": "2026-10-18",
       "title": "COURSE RECON — Norway Pass → Mount Margaret",
       "vert": "~2,820 ft",
-      "desc": "11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. WEATHER PLAN: FR 99 and the Norway Pass trailhead close with snow and mid-October is late. Check mshinstitute.org/current-conditions the week before. If the road is shut, SWAP with Oct 24 — do Elk/Kings today and try the recon again next Saturday.",
+      "desc": "11 mi out-and-back, high point 5,780 ft. This is Bigfoot course miles 56 back toward 37, and Mount Margaret is the HIGH POINT OF THE RACE. Manual: 'Best views of the course, recommend running in daylight if possible.' NW Forest Pass or $5 day-use; no backcountry permit for day hiking. Water at Bear Camp (mi 4.1) is unreliable late season — carry it. No dogs. WEATHER PLAN: FR 99 and the Norway Pass trailhead close with snow and mid-October is late. Check mshinstitute.org/current-conditions the week before. If the road is shut, SWAP with Oct 24 — do Elk/Kings today and try the recon again the following weekend.",
       "fallback": "Swap with Oct 24 (Elk / Kings) if FR 99 is closed."
     },
     {
-      "date": "2026-10-24",
+      "date": "2026-10-25",
       "title": "Elk Mountain / Kings Mountain traverse",
       "vert": "~3,850 ft",
       "desc": "10.9 mi, Tillamook State Forest. Exposed narrow ridge with scrambling and a fixed rope — closest thing in Block 1 to Blue Lake → Coldwater Lake. Elk Mtn climbs 2,080 ft in 1.5 mi. Coast Range, high point 3,226 ft — no snow risk in October, which is why it's the recon's backstop. IF YOU SWAPPED: this is the second and last recon attempt. If FR 99 is still shut, do Nesmith Point (~3,800 ft, similar day) and let the recon wait for summer 2027 — Klickitat → Twin Sisters matters more anyway and wants 2027 conditions.",
       "fallback": "If used as the second recon attempt and FR 99 is still closed: Nesmith Point, ~3,800 ft."
     },
     {
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "title": "Mount Defiance",
       "vert": "~4,840 ft",
       "desc": "11.6 mi, the hardest day hike in the region — 3,000 ft in three miles. Biggest day of the block. Late in its season at 4,959 ft: if there's snow up high, swap to Nesmith Point (~3,800 ft)."
@@ -209,25 +209,25 @@
       "desc": "Block 1 checkpoint. 25K rather than the 50K: running tolerance is 12 mi/wk and even a perfect 10%/week ramp only reaches ~26 by today, against 31 running miles for the 50K. Finish strong rather than survived."
     },
     {
-      "date": "2026-11-14",
+      "date": "2026-11-15",
       "title": "DELOAD — Angels Rest",
       "vert": "~2,770 ft",
       "desc": "Deload week: 60-70% of block targets. Recovery from Run the Rock. Easy effort, half the usual long day."
     },
     {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "title": "Dog Mountain",
       "vert": "~3,200 ft",
       "desc": "Steep and relentless. Permit is spring weekends only — free in November. First night-hours sessions should be landing this month too."
     },
     {
-      "date": "2026-11-28",
+      "date": "2026-11-29",
       "title": "Elk / Kings — BENCHMARK REPEAT",
       "vert": "~3,850 ft",
       "desc": "Same course as Oct 24, six weeks later. This is a measurement, not a workout: compare time, descent HR gap, and how the last hour felt. It tells you whether Block 1 worked."
     },
     {
-      "date": "2026-12-05",
+      "date": "2026-12-06",
       "title": "DELOAD — taper into Frozen Trail",
       "vert": "~1,800 ft",
       "desc": "Deload week: 60-70%. Taper into the Dec 12 Frozen Trail 50K that closes Block 1. Short and controlled."

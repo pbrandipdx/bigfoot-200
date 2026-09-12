@@ -164,7 +164,7 @@
       <path class="line" d="M0,40 L60,25 L110,32 L170,12 L230,20 L290,4 L350,18 L410,10 L470,26 L530,15 L590,30 L650,20 L700,35"/>
     </svg>
 
-    <div class="profile-note">This page recalculates automatically from the current date &mdash; nothing to update by hand. Weekly template through Block 1 is exact; Block 2 onward applies deterministic placeholder rules for which Saturday is a back-to-back or overnight session until the week-by-week plan for those blocks is written.</div>
+    <div class="profile-note">This page recalculates automatically from the current date &mdash; nothing to update by hand. The long day is Sunday; Saturday is recovery, or day one of a back-to-back. Weekly template through Block 1 is exact; Block 2 onward applies deterministic placeholder rules for which Sunday is a back-to-back or overnight session until the week-by-week plan for those blocks is written.</div>
 
     <section>
       <h2 class="sec-title">Next race</h2>
@@ -231,41 +231,60 @@ function weekOfBlock(block){
   return Math.floor(daysBetween(toDate(block.start), today)/7) + 1;
 }
 
-function ordinalSaturdayOfMonth(d){
-  const day = d.getDate();
-  return Math.floor((day-1)/7) + 1;
+function ordinalOfMonth(d){
+  return Math.floor((d.getDate()-1)/7) + 1;
 }
-
-function saturdayWorkout(block, d){
-  // Explicit, dated plan wins — see plan/schedule.json "saturdays".
-  const iso = fmtIso(d);
-  const planned = (DATA.saturdays||[]).find(s => s.date === iso);
-  if(planned){
-    const showVert = planned.vert && !/^(race|—)$/.test(planned.vert);
-    return { title: planned.title + (showVert ? '  ·  ' + planned.vert : ''),
-             desc: planned.desc, vert: planned.vert };
-  }
-  // Fallback for Saturdays with no explicit entry yet.
-  const nth = ordinalSaturdayOfMonth(d);
-  if(!block.taper){
-    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data. (No dated plan for this Saturday yet.)' };
-    if(nth === 3) return { title:'Back-to-back weekend — Saturday', desc:`Long day, target ${block.vert} of vertical, followed by a genuinely long Sunday. (No dated plan for this Saturday yet.)` };
-  }
-  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. (No dated plan for this Saturday yet.)` };
-}
-
 
 function fmtIso(d){
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 
+// The dated plan lives in plan/schedule.json "longDays" and is keyed by DATE,
+// not by weekday: the weekly long day is Sunday, but a race keeps its real
+// date and a multi-day trip keeps its real start, both of which are Saturdays.
+function plannedFor(d){
+  return (DATA.longDays||[]).find(s => s.date === fmtIso(d)) || null;
+}
+
+function fromPlanned(p){
+  const showVert = p.vert && !/^(race|multi-day|—)$/.test(p.vert);
+  return { title: p.title + (showVert ? '  ·  ' + p.vert : ''),
+           desc: p.desc, vert: p.vert };
+}
+
+// SUNDAY is the long day.
 function sundayWorkout(block, d){
+  const p = plannedFor(d);
+  if(p) return fromPlanned(p);
+  // If Saturday carried a dated entry — a race, or a multi-day start — Sunday
+  // belongs to it. Do not hand back a fresh long day the morning after a 50K.
   const sat = new Date(d); sat.setDate(sat.getDate()-1);
-  const nthSat = ordinalSaturdayOfMonth(sat);
-  if(!block.taper && nthSat === 3){
-    return { title:'Back-to-back weekend — Sunday', desc:'A genuinely long second day, not easy recovery — this is where fatigue-resistant climbing actually gets built.' };
+  const satPlan = plannedFor(sat);
+  if(satPlan){
+    if(/multi-day/i.test(satPlan.vert || '')){
+      return { title: satPlan.title + ' — day two', desc:'The trip continues. Time on feet is the point; let the terrain set the pace.' };
+    }
+    return { title:'Recovery — the day after ' + satPlan.title,
+             desc:'Walk, or nothing. The long day already happened yesterday.' };
   }
-  return { title:'Flexible recovery', desc:'Up to 6 miles, only if Saturday\u2019s long day happened.' };
+  const nth = ordinalOfMonth(d);
+  if(!block.taper){
+    if(nth === 1) return { title:'Overnight long day', desc:'Evening/night start (~9pm–3am) — night-running exposure, targeting the overnight fade window seen in the split data. (No dated plan for this Sunday yet.)' };
+    if(nth === 3) return { title:'Back-to-back weekend — Sunday', desc:`The second and harder of the two days: target ${block.vert} of vertical on legs that are already tired. (No dated plan for this Sunday yet.)` };
+  }
+  return { title:'Long day, vertical-focused', desc:`Target ${block.vert} of vertical this block. (No dated plan for this Sunday yet.)` };
+}
+
+// SATURDAY is the recovery slot, or day one of a back-to-back — unless a race
+// or a multi-day trip is dated on it.
+function saturdayWorkout(block, d){
+  const p = plannedFor(d);
+  if(p) return fromPlanned(p);
+  const sun = new Date(d); sun.setDate(sun.getDate()+1);
+  if(!block.taper && ordinalOfMonth(sun) === 3 && !plannedFor(sun)){
+    return { title:'Back-to-back weekend — Saturday', desc:'Day one of two. Long, but held back — Sunday is the day that has to hurt. (No dated plan for this weekend yet.)' };
+  }
+  return { title:'Flexible recovery', desc:'Up to 6 miles, easy. Sunday is the long day — arrive at it fresh enough to do it properly.' };
 }
 
 function thursdayWorkout(block){
