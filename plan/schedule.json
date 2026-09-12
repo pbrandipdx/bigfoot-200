@@ -62,10 +62,10 @@
       "tag": "multi-day · first sleep-stop practice"
     },
     {
-      "name": "Run the Rock 50K",
+      "name": "Run the Rock 25K",
       "start": "2026-11-07",
       "end": "2026-11-07",
-      "tag": "Block 1 checkpoint · 3.2 mph, finish upright"
+      "tag": "Block 1 checkpoint · ~4-5 hr · 50K deferred, tolerance is 12 mi/wk"
     },
     {
       "name": "West Linn Turkey Trot",
@@ -143,9 +143,9 @@
     },
     {
       "date": "2026-10-10",
-      "title": "Down week — Wildwood",
+      "title": "DELOAD — Wildwood",
       "vert": "~2,400 ft",
-      "desc": "Recovery from Three Sisters. Deliberately easy."
+      "desc": "Deload week: 60-70% of block targets. Recovery from the Three Sisters multi-day. Keep the frequency, cut the duration."
     },
     {
       "date": "2026-10-17",
@@ -169,15 +169,15 @@
     },
     {
       "date": "2026-11-07",
-      "title": "Taper into Run the Rock 50K",
+      "title": "Run the Rock 25K",
       "vert": "—",
-      "desc": "Short and easy. Race target: 3.2 mph, finish upright."
+      "desc": "Block 1 checkpoint. 25K rather than the 50K: running tolerance is 12 mi/wk and even a perfect 10%/week ramp only reaches ~26 by today, against 31 running miles for the 50K. Finish strong rather than survived."
     },
     {
       "date": "2026-11-14",
-      "title": "Down week — Angels Rest",
+      "title": "DELOAD — Angels Rest",
       "vert": "~2,770 ft",
-      "desc": "Recovery from Run the Rock."
+      "desc": "Deload week: 60-70% of block targets. Recovery from Run the Rock. Easy effort, half the usual long day."
     },
     {
       "date": "2026-11-21",
@@ -193,9 +193,9 @@
     },
     {
       "date": "2026-12-05",
-      "title": "Table Mountain",
-      "vert": "~3,325 ft",
-      "desc": "Last long day before the checkpoint. Keep it controlled."
+      "title": "DELOAD — taper into Frozen Trail",
+      "vert": "~1,800 ft",
+      "desc": "Deload week: 60-70%. Taper into the Dec 12 Frozen Trail 50K that closes Block 1. Short and controlled."
     },
     {
       "date": "2026-12-12",

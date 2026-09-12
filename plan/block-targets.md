@@ -48,19 +48,19 @@ the least informative number here.
 ---
 
 ## Block 1 — Sep 7 to Dec 12 (14 weeks)
-*Ends: Frozen Trail Run Fest 50K · Checkpoint: Run the Rock 50K, Nov 7*
+*Ends: Frozen Trail Run Fest 50K · Checkpoint: Run the Rock **25K**, Nov 7*
 
 | Target | Value |
 |---|---|
-| Time on feet | Build 12 → **15 hr/week** |
-| Vertical | Build 3,000 → **5,000 ft/week** |
-| On-foot miles | 45 → **55/week** |
+| Time on feet | Build 8.8 → **12 hr/week** |
+| Vertical | Build 1,700 → **3,500 ft/week** |
+| On-foot miles | 29 → **45/week** |
 | Peak long day | **8–10 hr** (by late Oct) |
 | Longest continuous effort | **7 hr** |
 | Back-to-back weekends | 2 (Three Sisters counts as one) |
 | Night hours | **3 sessions**, 1 hr each, starting November |
 | Descent HR gap | **≥15 bpm** below climb HR |
-| Run the Rock | 3.2 mph, finish upright |
+| Run the Rock 25K | ~4–5 hr, finish strong rather than survived |
 
 **Block question:** can you sustain a full day on feet and descend hard without
 wrecking your quads?
@@ -72,9 +72,9 @@ wrecking your quads?
 
 | Target | Value |
 |---|---|
-| Time on feet | **17 hr/week** |
-| Vertical | **6,500 ft/week** |
-| On-foot miles | **60/week** |
+| Time on feet | **14 hr/week** |
+| Vertical | **5,000 ft/week** |
+| On-foot miles | **50/week** |
 | Peak long day | **10–12 hr** |
 | Longest continuous effort | **9 hr** |
 | Back-to-back weekends | **3** — Sat 6 hr + Sun 4 hr |
@@ -92,9 +92,9 @@ nothing about it is enjoyable? This is the motivation block, not the fitness one
 
 | Target | Value |
 |---|---|
-| Time on feet | **19 hr/week** |
-| Vertical | **8,000 ft/week** |
-| On-foot miles | **65/week** |
+| Time on feet | **16 hr/week** |
+| Vertical | **6,500 ft/week** |
+| On-foot miles | **55/week** |
 | Peak long day | **12–14 hr** |
 | Longest continuous effort | **11 hr** |
 | Back-to-back weekends | 3 — Sat 8 hr + Sun 5 hr |
@@ -112,9 +112,9 @@ Arriving at Gorge having never run at night is the avoidable failure here.
 
 | Target | Value |
 |---|---|
-| Time on feet | **21 hr/week** |
-| Vertical | **10,000 ft/week** |
-| On-foot miles | **70/week** |
+| Time on feet | **18 hr/week** |
+| Vertical | **8,000 ft/week** |
+| On-foot miles | **60/week** |
 | Peak long day | **16–18 hr** |
 | Longest continuous effort | **14 hr** |
 | Back-to-back-to-back | **1 × three-day block** (8 / 6 / 4 hr) |
@@ -135,32 +135,59 @@ and the correct decision is to defer. Set that rule now, while it's abstract.
 
 | Weeks 1–2 | Full recovery from Bighorn. Walks only. |
 |---|---|
-| Weeks 3–5 | Peak: **22–24 hr/week**, **12,000 ft/week**, one 20 hr day |
+| Weeks 3–5 | Peak: **20–22 hr/week**, **10,000 ft/week**, one 20 hr day |
 | Week 6 | Reduce 40% |
 | Weeks 7–8 | Taper. Legs fresh, sleep banked. |
 
 | Target | Value |
 |---|---|
-| Peak week vertical | **12,000 ft** — roughly a quarter of race total |
+| Peak week vertical | **10,000 ft** — roughly a quarter of race total |
 | Longest single effort | **20 hr** |
 | Night hours by race day | **30+ cumulative** |
 | Heat acclimation | 6 sessions (August Cascades can be hot and exposed) |
 
 ---
 
+## Deload weeks
+
+Every fourth week runs at **60–70% of that block's targets** — volume down,
+intensity down, the long day cut in half. This was missing entirely from Blocks
+2–4, which ran 27 consecutive build weeks. Adaptation happens during the easy
+week, not the hard one.
+
+**Block 1 deloads are anchored to races rather than a rigid count**, which puts
+them where the fatigue actually lands:
+
+| Week | Date | Why |
+|---|---|---|
+| 5 | Oct 10 | Recovery from the Three Sisters multi-day |
+| 10 | Nov 14 | Recovery from Run the Rock |
+| 13 | Dec 5 | Taper into Frozen Trail 50K, Dec 12 |
+
+**Blocks 2–5:** weeks 4 and 8 of each nine-week block, same 60–70% rule.
+
+A deload is not a rest week — keep the frequency, cut the duration. Miss the
+deload and the following block starts on a deficit.
+
 ## Progression at a glance
 
 | Block | Hr/wk | Vert/wk | Miles/wk | Peak day | Night hrs |
 |---|---|---|---|---|---|
-| Now | 12 | 3,000 | 45 | 5 hr | 0 |
-| 1 | 15 | 5,000 | 55 | 8–10 hr | 3 |
-| 2 | 17 | 6,500 | 60 | 10–12 hr | 6 |
-| 3 | 19 | 8,000 | 65 | 12–14 hr | 12 |
-| 4 | 21 | 10,000 | 70 | 16–18 hr | 20 |
-| 5 | 22–24 | 12,000 | 75 | 20 hr | 30+ |
+| Now (measured) | 8.8 | 1,700 | 29 | 3 hr | 0 |
+| 1 | 12 | 3,500 | 45 | 8–10 hr | 3 |
+| 2 | 14 | 5,000 | 50 | 10–12 hr | 6 |
+| 3 | 16 | 6,500 | 55 | 12–14 hr | 12 |
+| 4 | 18 | 8,000 | 60 | 16–18 hr | 20 |
+| 5 | 20–22 | 10,000 | 65 | 20 hr | 30+ |
 
-Cumulative vertical across all five blocks lands near **380,000 ft** — about
-8.5× the race itself. That ratio is the point.
+Cumulative vertical across all five blocks lands near **275,000 ft** — about
+6.2× the race itself. That ratio is still the point; the earlier 380,000 figure
+came from targets scaled off an overstated baseline.
+
+**Rescaled 2026-09-11.** Every row above was shifted down one rung because the
+plan's assumed starting point (12 hr/wk, 3,000 ft, 45 mi) was 27–43% above what
+is actually being trained (8.8 hr, 1,700 ft, 29 mi). The shape of the
+progression is unchanged — only its starting height.
 
 ---
 
@@ -263,9 +290,14 @@ weeks. Increase impact load gradually after a lighter period like this."*
 
 - **Threshold:** weekly running miles stay under tolerance. Exceeding it
   repeatedly is the clearest overtraining signal available.
-- **The gap that matters:** Run the Rock is 31 running miles on Nov 7, eight
-  weeks out, against a current tolerance of 12. Gorge Waterfalls is 62 miles
-  against a 17-hour cutoff in April. Neither is a hiking event.
+- **Why Run the Rock is the 25K, not the 50K.** At Holz's 10%/week ramp,
+  tolerance goes 12 → 14.5 → 17.6 → 21.3 → **~26 mi by Nov 7**. The 50K is 31
+  running miles with 5,000 ft and a 10-hour cutoff needing 3.11 mph held from
+  the gun. You arrive under the requirement even on a perfect ramp. The 25K is
+  ~4–5 hours, still a real Block 1 checkpoint, and costs days of recovery
+  instead of weeks.
+- Gorge Waterfalls in April is 62 miles against a 17-hour cutoff. That is the
+  race the running ramp has to actually reach, and there are seven months for it.
 - Raise it by frequency, not by one big day. Three easy midweek runs — which is
   what you were doing through Jul 21 — plus running the runnable parts of the
   Saturday long day.
