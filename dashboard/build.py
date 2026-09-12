@@ -18,6 +18,29 @@ OUT  = os.environ.get("BF_OUT") or os.path.join(os.path.dirname(REPO), "bigfoot2
 
 NEVER_PUBLISH = ("runner-manual",)
 
+def guard_source():
+    """Refuse to build if a NEVER_PUBLISH file is tracked in the source repo.
+
+    plan/private/ is the one place these may live: it is gitignored. Anywhere
+    else means a copy got committed, and this repo is meant to be public.
+    """
+    import subprocess
+    try:
+        tracked = subprocess.check_output(
+            ["git", "-C", REPO, "ls-files"], stderr=subprocess.DEVNULL
+        ).decode("utf-8", "replace").splitlines()
+    except Exception:
+        return                      # not a git checkout; nothing to police
+    bad = [f for f in tracked
+           if any(b in f.lower() for b in NEVER_PUBLISH)
+           and not f.startswith("plan/private/")]
+    if bad:
+        sys.exit("REFUSING: copyrighted file(s) tracked in the source repo, "
+                 "which is meant to be public: %s\n"
+                 "  git rm --cached %s   (and purge it from history before "
+                 "making the repo public)" % (bad, " ".join(bad)))
+
+
 def read(*p):
     return open(os.path.join(REPO, *p), encoding="utf-8").read()
 
@@ -59,6 +82,7 @@ def odds_pill():
 
 
 def main():
+    guard_source()
     if not os.path.isdir(OUT):
         sys.exit("sibling repo not found: %s\n  git -C %s clone "
                  "https://github.com/pbrandipdx/bigfoot200-training.git"
