@@ -1,5 +1,5 @@
 # Bigfoot 200 — rebuild generated pages from tracker/weeks.json
-.PHONY: all tracker dashboard sync status clean
+.PHONY: all tracker dashboard progress sync status clean
 
 all: tracker dashboard
 
@@ -11,9 +11,14 @@ tracker:
 dashboard:
 	@python3 dashboard/build.py
 
+progress:
+	@python3 tracker/weekly_report.py $(WEEKS)
+	@$(MAKE) --no-print-directory dashboard
+
 sync:
 	@echo "-- pulling"
 	@git pull --rebase --autostash
+	@python3 tracker/weekly_report.py $(WEEKS) || echo "-- progress skipped (no Supabase)"
 	@$(MAKE) --no-print-directory all
 	@git add -A
 	@git diff --cached --quiet || git commit -q -m "Sync $$(date +%Y-%m-%d\ %H:%M)"

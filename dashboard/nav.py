@@ -1,4 +1,4 @@
-PAGES = [("index.html","Today"),("log.html","Log"),("blocks.html","Blocks"),("plan.html","Race plan")]
+PAGES = [("index.html","Today"),("progress.html","Progress"),("log.html","Log"),("blocks.html","Blocks"),("plan.html","Race plan")]
 
 NAV_CSS = """
 <style id="bf-nav-css">

@@ -62,6 +62,10 @@ def main():
     today_tpl = today_tpl.replace("<!--__PLAN__-->", plan_html)
     write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
     write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
+    if os.path.exists(os.path.join(REPO, "plan", "progress.md")):
+        write("progress.html", md_page("progress.md", "Week over week"))
+    else:
+        print("  progress.md missing - run: python3 tracker/weekly_report.py")
     write("blocks.html", md_page("block-targets.md", "Block targets"))
     write("plan.html",   md_page("sub100-plan.md",  "Race plan"))
 

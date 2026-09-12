@@ -18,3 +18,5 @@ tracker/.env*
 
 # local python env
 .venv/
+__pycache__/
+*.pyc
