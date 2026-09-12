@@ -289,6 +289,23 @@ trigger, but a seventh consecutive day is.
 
 ---
 
+## Missing sessions — adopt from published coaching
+
+See `coaching-references.md`. Three gaps the current week does not cover, all
+from Destination Trail's own coach:
+
+1. **Sustained downhill, 10–30 min continuous.** The most race-specific session
+   available and completely absent. Bigfoot descends 45,563 ft — more than it
+   climbs — and Block 1's question is whether you can descend hard without
+   wrecking your quads. Add it to a Saturday, late in the day, on rock.
+2. **Uphill tempo intervals, progressed weekly:** 3×5 min → 3×10 min → 2×15 min.
+   Replaces the fixed LeBron ramp prescription with something that builds.
+3. **A carbohydrate target: up to 120 g/hr**, rehearsed on every long day. The
+   plan currently says "eat every 40 minutes" without a number.
+
+Also worth noting: Holz caps weekly progression at **10%**, and this plan steps
+13–20% between blocks off a baseline that was already overstated.
+
 ## Non-negotiables
 
 1. **Night hours accumulate on schedule.** Zero today. This is the cheapest gap
