@@ -166,9 +166,9 @@
     },
     {
       "date": "2026-09-27",
-      "title": "Table Mountain",
-      "vert": "~3,325 ft",
-      "desc": "8.4 mi from Bonneville. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Steep meadow exposure near the summit."
+      "title": "Dog Mountain",
+      "vert": "~3,200 ft",
+      "desc": "7.6 mi, steep and relentless, no technical ground. Swapped in from Nov 22 because Table Mountain turned out to be a 14.7 mi / 4,550 ft day, and stacking that against the Three Sisters trip the following weekend was too much. Permit is spring weekends only — free in September."
     },
     {
       "date": "2026-10-03",
@@ -216,9 +216,10 @@
     },
     {
       "date": "2026-11-22",
-      "title": "Dog Mountain",
-      "vert": "~3,200 ft",
-      "desc": "Steep and relentless. Permit is spring weekends only — free in November. First night-hours sessions should be landing this month too."
+      "title": "Table Mountain",
+      "vert": "~4,550 ft",
+      "desc": "14.7 mi out-and-back from the Bonneville trailhead in North Bonneville — NOT the 8.4 mi figure this entry used to carry. That was the Aldrich Butte approach, which AllTrails now marks PRIVATE PROPERTY; Bonneville is the only legal access. Heartbreak Ridge drops 700 ft in half a mile on loose talus — the quad-wrecker rehearsal. Late November at a 3,417 ft summit: if Heartbreak is iced, go up and back on the PCT route and skip the ridge. Poles, 2–3 L of water.",
+      "fallback": "If Heartbreak Ridge is iced or snowed: PCT route out-and-back, skip the ridge."
     },
     {
       "date": "2026-11-29",
