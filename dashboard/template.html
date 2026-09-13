@@ -92,6 +92,28 @@
   table.week td{padding:10px 12px 10px 0;border-top:1px solid var(--line);vertical-align:top}
   table.week tr.is-today td{background:var(--paper-2)}
   table.week tr.is-today td:first-child{border-left:2px solid var(--amber-deep);padding-left:10px}
+
+  /* Next week / the week after - collapsed by default, native <details> so it
+     works without JS once rendered and stays keyboard accessible. */
+  details.week-fold{border-top:1px solid var(--line)}
+  details.week-fold > summary{
+    list-style:none;cursor:pointer;padding:13px 0 13px 22px;position:relative;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+  }
+  details.week-fold > summary::-webkit-details-marker{display:none}
+  details.week-fold > summary::before{
+    content:'';position:absolute;left:4px;top:50%;width:6px;height:6px;
+    border-right:1.5px solid var(--ink-faint);border-bottom:1.5px solid var(--ink-faint);
+    transform:translateY(-70%) rotate(-45deg);transition:transform .15s ease;
+  }
+  details.week-fold[open] > summary::before{transform:translateY(-30%) rotate(45deg)}
+  details.week-fold > summary:hover::before{border-color:var(--ink)}
+  .wf-label{font-size:14px;font-weight:600;color:var(--ink)}
+  .wf-range{font-size:13px;color:var(--ink-faint)}
+  .wf-meta{font-size:12.5px;color:var(--amber-deep);flex-basis:100%}
+  @media (min-width:560px){.wf-meta{flex-basis:auto;margin-left:auto;text-align:right}}
+  details.week-fold table.week{margin:0 0 18px 22px;width:calc(100% - 22px)}
+  details.week-fold table.week thead{display:none}
   .day-name{font-weight:500;white-space:nowrap}
 
   ol.ladder{list-style:none;padding:0}
@@ -183,6 +205,7 @@
         <thead><tr><th>Day</th><th>Workout</th></tr></thead>
         <tbody></tbody>
       </table>
+      <div id="future-weeks"></div>
     </section>
 
     <section>
@@ -219,13 +242,15 @@ function fmtShort(s){
 
 const today = new Date(); today.setHours(0,0,0,0);
 
-function currentBlock(){
+function blockFor(d){
   for(const b of BLOCKS){
-    if(today >= toDate(b.start) && today <= toDate(b.end)) return b;
+    if(d >= toDate(b.start) && d <= toDate(b.end)) return b;
   }
-  if(today < toDate(BLOCKS[0].start)) return BLOCKS[0];
+  if(d < toDate(BLOCKS[0].start)) return BLOCKS[0];
   return BLOCKS[BLOCKS.length-1];
 }
+
+function currentBlock(){ return blockFor(today); }
 
 function weekOfBlock(block){
   return Math.floor(daysBetween(toDate(block.start), today)/7) + 1;
@@ -299,7 +324,9 @@ function thursdayWorkout(block){
 }
 
 function scheduleFor(date){
-  const block = currentBlock();
+  // Use the block that CONTAINS this date. Looking two weeks ahead can cross a
+  // block boundary, and currentBlock() would hand back today's block instead.
+  const block = blockFor(date);
   const dow = date.getDay(); // 0 Sun .. 6 Sat
   switch(dow){
     case 1: return { title:'Strength A + incline intervals', desc:'4×3 min, 150–160 bpm, 15–18% grade treadmill.' };
@@ -310,6 +337,52 @@ function scheduleFor(date){
     case 6: return saturdayWorkout(block, date);
     case 0: return sundayWorkout(block, date);
   }
+}
+
+// Weeks run Monday -> Sunday, matching tracker/REFRESH.md and the block boundaries.
+const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+function mondayOf(d){
+  const m = new Date(d);
+  m.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  m.setHours(0,0,0,0);
+  return m;
+}
+
+function weekRowsHtml(monday){
+  let rows = '';
+  for(let i=0;i<7;i++){
+    const d = new Date(monday); d.setDate(monday.getDate()+i);
+    const w = scheduleFor(d);
+    const isToday = fmtIso(d) === fmtIso(today);
+    const label = DAY_NAMES[i] +
+      ' <span class="day-date">' +
+      d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + '</span>' +
+      (isToday ? ' <span class="day-today">today</span>' : '');
+    rows += `<tr${isToday ? ' class="is-today"' : ''}>` +
+            `<td class="day-name">${label}</td>` +
+            `<td><strong>${w.title}</strong><br>` +
+            `<span style="color:var(--ink-faint)">${w.desc}</span></td></tr>`;
+  }
+  return rows;
+}
+
+function weekRangeLabel(monday){
+  const sun = new Date(monday); sun.setDate(monday.getDate()+6);
+  const o = {month:'short', day:'numeric'};
+  return monday.toLocaleDateString(undefined,o) + ' \u2013 ' + sun.toLocaleDateString(undefined,o);
+}
+
+// What that week is actually about: the Sunday long day, or a race/multi-day
+// sitting on its Saturday.
+function headlineOf(monday){
+  for(const off of [6,5]){                    // Sunday first, then Saturday
+    const d = new Date(monday); d.setDate(monday.getDate()+off);
+    const p = plannedFor(d);
+    if(p) return p.title + (p.vert && !/^(race|multi-day|\u2014)$/.test(p.vert) ? '  \u00b7  ' + p.vert : '');
+  }
+  const sun = new Date(monday); sun.setDate(monday.getDate()+6);
+  return scheduleFor(sun).title;
 }
 
 function render(){
@@ -338,24 +411,24 @@ function render(){
   document.getElementById('next-race-countdown').innerHTML =
     (daysOut <= 0 ? 'today' : daysOut) + (daysOut > 0 ? '<span>days</span>' : '');
 
-  const tbody = document.querySelector('#week-table tbody');
-  tbody.innerHTML = '';
-  // Weeks run Monday -> Sunday, matching tracker/REFRESH.md and the block boundaries.
-  const names = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  const startOfWeek = new Date(today);
-  startOfWeek.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-  for(let i=0;i<7;i++){
-    const d = new Date(startOfWeek); d.setDate(startOfWeek.getDate()+i);
-    const w = scheduleFor(d);
-    const tr = document.createElement('tr');
-    const isToday = fmtIso(d) === fmtIso(today);
-    if(isToday) tr.className = 'is-today';
-    const dayLabel = names[i] + ' <span class="day-date">' +
-      d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + '</span>' +
-      (isToday ? ' <span class="day-today">today</span>' : '');
-    tr.innerHTML = `<td class="day-name">${dayLabel}</td><td><strong>${w.title}</strong><br><span style="color:var(--ink-faint)">${w.desc}</span></td>`;
-    tbody.appendChild(tr);
-  }
+  document.querySelector('#week-table tbody').innerHTML = weekRowsHtml(mondayOf(today));
+
+  // Next week and the week after, collapsed. The long day is the thing worth
+  // seeing without opening them, so it goes in the summary.
+  const future = document.getElementById('future-weeks');
+  future.innerHTML = '';
+  const thisMonday = mondayOf(today);
+  ['Next week','The week after'].forEach((label, idx) => {
+    const m = new Date(thisMonday); m.setDate(thisMonday.getDate() + 7*(idx+1));
+    const det = document.createElement('details');
+    det.className = 'week-fold';
+    det.innerHTML =
+      `<summary><span class="wf-label">${label}</span>` +
+      `<span class="wf-range">${weekRangeLabel(m)}</span>` +
+      `<span class="wf-meta">${headlineOf(m)}</span></summary>` +
+      `<table class="week"><tbody>${weekRowsHtml(m)}</tbody></table>`;
+    future.appendChild(det);
+  });
 
   const ladder = document.getElementById('ladder-list');
   ladder.innerHTML = '';
