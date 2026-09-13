@@ -94,7 +94,7 @@ def main():
         sys.exit("weekly_progress returned no rows")
 
     for r in all_rows:
-        for k in ("hours", "miles", "vert_ft", "longest_day_hr", "night_hours",
+        for k in ("hours", "miles", "vert_ft", "longest_day_hr", "night_hours", "night_session_hours",
                   "run_hours", "run_miles", "run_vert_ft", "hrv_avg", "rhr_avg",
                   "sleep_avg", "readiness_avg", "endurance", "hill",
                   "run_tolerance"):

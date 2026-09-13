@@ -94,6 +94,7 @@ def gates(recent, tgt, night_total, endurance_series):
         1.0 if slope_per_week(es) > 2 else 0.5 if slope_per_week(es) > -2 else 0.15)
     g["run"] = clip(0.6 * clip(share / 0.30) + 0.4 * trend)
 
+    # deliberate night sessions, not incidental pre-dawn dog walking
     g["night"] = clip(night_total / tgt["nightHoursCumulative"])
 
     hit = [1 for w in last8 if (w["hours"] or 0) >= 0.8 * tgt["hoursPerWeek"]]
@@ -179,7 +180,7 @@ def report(rows, blocks, today):
     blk = current_block(blocks, today)
     tgt = blk["targets"]
     b5 = blocks[-1]["targets"]
-    night_total = sum(w["night_hours"] or 0 for w in recent[:12])
+    night_total = sum(w["night_session_hours"] or 0 for w in recent[:12])
     es = list(reversed([w["endurance"] for w in recent[:8]]))
 
     gn = gates(recent, tgt, night_total, es)
