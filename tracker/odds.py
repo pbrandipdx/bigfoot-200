@@ -163,8 +163,10 @@ def trajectory(recent, block5, night_total, today):
 
 
 def bar(v, width=10):
+    """Filled/empty block characters - readable as a bar at a glance, where
+    '#####.....' read as punctuation."""
     n = int(round(v * width))
-    return "#" * n + "." * (width - n)
+    return "\u2588" * n + "\u2591" * (width - n)
 
 
 def report(rows, blocks, today):

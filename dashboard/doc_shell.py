@@ -30,6 +30,11 @@ SHELL = """<!DOCTYPE html>
     border-left:3px solid var(--amber);border-radius:0 6px 6px 0}
   blockquote p{margin:6px 0;font-size:14.5px}
   code{background:var(--paper-2);padding:1px 5px;border-radius:4px;font-size:.88em}
+  .trend{display:inline-block;width:1.1em;text-align:center;font-weight:700;
+    line-height:1;cursor:help;font-size:1.05em}
+  .trend-good{color:#2E7D46}
+  .trend-bad{color:#A23B2C}
+  .trend-level{color:#8A9585;font-weight:500}
   pre{background:var(--paper-2);padding:12px;border-radius:8px;overflow-x:auto}
   pre code{background:none;padding:0}
   .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;

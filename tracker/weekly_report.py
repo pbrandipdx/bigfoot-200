@@ -69,15 +69,16 @@ def cell(v, fmt="%s"):
 
 
 def arrow(now, prev, higher_is_better=True, flat=0.03):
-    """Week-over-week marker. flat = fraction inside which we call it level."""
+    """Week-over-week marker as a {{trend}} token; md.py renders it as a
+    coloured arrow. flat = fraction inside which we call it level."""
     if now is None or prev in (None, 0):
         return ""
     d = (now - prev) / abs(prev)
     if abs(d) < flat:
-        return " ="
+        return " {{level}}"
     up = d > 0
     good = up == higher_is_better
-    return (" ^" if up else " v") + ("" if good else "!")
+    return " {{%s%s}}" % ("up" if up else "down", "" if good else "-bad")
 
 
 def pct(now, target):
@@ -112,8 +113,10 @@ def main():
              "(activities + garmin_daily + garmin_training, Monday-start weeks, "
              "America/Los_Angeles)." % today.isoformat())
     L.append("")
-    L.append("Read the arrows as direction, not verdict: `^` up, `v` down, `=` level, "
-             "`!` means the direction is the wrong one.")
+    L.append("Arrows compare with the previous week. "
+             "{{up}} and {{down}} are moving the way you want, "
+             "{{up-bad}} and {{down-bad}} the wrong way, "
+             "{{level}} is unchanged. Hover any arrow for what it means.")
     L.append("")
 
     # ---- finish odds ---------------------------------------------------------

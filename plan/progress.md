@@ -1,8 +1,8 @@
 # Week over week
 
-Generated 2026-09-12 from Supabase `weekly_progress` (activities + garmin_daily + garmin_training, Monday-start weeks, America/Los_Angeles).
+Generated 2026-09-13 from Supabase `weekly_progress` (activities + garmin_daily + garmin_training, Monday-start weeks, America/Los_Angeles).
 
-Read the arrows as direction, not verdict: `^` up, `v` down, `=` level, `!` means the direction is the wrong one.
+Arrows compare with the previous week. {{up}} and {{down}} are moving the way you want, {{up-bad}} and {{down-bad}} the wrong way, {{level}} is unchanged. Hover any arrow for what it means.
 
 ## Finish odds
 
@@ -12,13 +12,13 @@ That is the trajectory number: where the last eight weeks' rate of change lands 
 
 | Gate | Weight | vs Block 1 now | Projected race day |
 |---|---|---|---|
-| Vertical per week | 20% | `#####.....` 49% | `####......` 41% |
-| Longest single day | 20% | `####......` 38% | `####......` 36% |
-| Time on feet per week | 15% | `##########` 100% | `########..` 76% |
-| Run-specific capacity | 15% | `###.......` 29% | `####......` 38% |
-| Night hours | 10% | `..........` 0% | `..........` 0% |
-| Week-to-week consistency | 10% | `########..` 75% | `########..` 75% |
-| Recovery headroom | 10% | `#######...` 74% | `#######...` 74% |
+| Vertical per week | 20% | `█████░░░░░` 49% | `████░░░░░░` 41% |
+| Longest single day | 20% | `████░░░░░░` 38% | `████░░░░░░` 36% |
+| Time on feet per week | 15% | `██████████` 100% | `████████░░` 76% |
+| Run-specific capacity | 15% | `███░░░░░░░` 29% | `████░░░░░░` 38% |
+| Night hours | 10% | `░░░░░░░░░░` 0% | `░░░░░░░░░░` 0% |
+| Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
+| Recovery headroom | 10% | `███████░░░` 74% | `███████░░░` 74% |
 | **Readiness** | | **51%** | **47%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Run-specific capacity**.
@@ -29,14 +29,14 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 
 | | This week | Prior week | Block 1 target | At target |
 |---|---|---|---|---|
-| Hours | 12.1 v! | 13.8 | 12 | 101% |
-| Miles | 39.6 ^ | 33.7 | 45 | 88% |
-| Vert (ft) | 2927 ^ | 1453 | 3500 | 84% |
-| Longest day (hr) | 3 ^ | 1.7 | 8 | 38% |
-| Running miles | 2 ^ | 1.7 | — | — |
-| HRV avg | 36.5 v! | 42.3 | 41.6 baseline | 88% |
-| Resting HR | 52.7 ^! | 51.1 | — | — |
-| Endurance score | 4883 v! | 4941 | — | — |
+| Hours | 12.1 {{down-bad}} | 13.8 | 12 | 101% |
+| Miles | 39.6 {{up}} | 33.7 | 45 | 88% |
+| Vert (ft) | 2927 {{up}} | 1453 | 3500 | 84% |
+| Longest day (hr) | 3 {{up}} | 1.7 | 8 | 38% |
+| Running miles | 2 {{up}} | 1.7 | — | — |
+| HRV avg | 36.5 {{down-bad}} | 42.3 | 41.6 baseline | 88% |
+| Resting HR | 52.7 {{up-bad}} | 51.1 | — | — |
+| Endurance score | 4883 {{down-bad}} | 4941 | — | — |
 
 ### What this changes
 
