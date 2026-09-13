@@ -4,13 +4,10 @@
 **Course:** 200.1 mi · 44,082 ft gain · 45,563 ft loss · **107-hour limit**
 **Goal:** finish under **100:00** — the Western States qualifying standard
 **Support:** unsupported. Drop bags at every aid station, no crew, no pacers.
-**Today:** September 6, 2026 · 49 weeks out
 
-> **Source:** every distance, gain, loss and cutoff below is taken from the official Destination
-> Trail Runner Manual and cross-checked against the copy shared with you in Google Drive
-> ("2026 Bigfoot 200 Runner's Manual", garrett@destinationtrailrun.com). Segment miles sum to
-> exactly 200.1, gains to 44,082, losses to 45,563, and the hour allowances to 107.0 — the chart
-> is internally consistent and trustworthy.
+> **Source:** every distance, gain, loss and cutoff below comes from the official Destination Trail
+> runner manual. Segment miles sum to exactly 200.1, gains to 44,082, losses to 45,563, and the
+> hour allowances to 107.0 — the chart is internally consistent.
 >
 > Most of the internet still describes a ~208-mile version of this race with aid stations at Windy
 > Ridge and Johnston Ridge. That course is retired. Ignore any plan built on it. The manual also
@@ -53,22 +50,17 @@ Bighorn in June → sub-100 at a 200 in August. That is two debuts stacked eight
 second one unsupported and four nights long. Bighorn stops being a gate and becomes an experiment,
 and an experiment is a bad thing to hang an A-race on.
 
-**Pencilled in: BURT 100, Bainbridge Island WA, Saturday February 6 2027.** It lands in week 21 of
-Block 2, close to home, in PNW winter — the condition you'll be training in anyway — and it leaves
-the following week as recovery before Block 3 opens. Registration runs through UltraSignup; it has
-sold out in past years, so confirm early.
+**Pencilled in: BURT 100, Bainbridge Island WA, Saturday February 6 2027.** Close to home, in PNW
+winter — the condition you'll be training in anyway. It's a **54K loop run three times**, which
+sounds monotonous and is exactly right: a loop means you pass a drop bag roughly every five hours,
+so it is the only race on the calendar where you can rehearse the aid-station discipline sub-100
+depends on. Twelve timed transitions, unsupported, at least one at 3 AM. It sells out — confirm
+early.
 
-It's a **54K loop run three times**, which sounds monotonous and is exactly right for what you need
-out of it. A loop course means you pass a drop bag roughly every five hours, so it is the only race
-on the calendar where you can rehearse the aid-station discipline sub-100 depends on: twelve timed
-transitions, unsupported, at least one of them at 3 AM.
-
-**BURT is not a Western States qualifier** — it earns nothing but the thing you actually need, a
-100-mile finish and a full night alone. Your qualifiers are Gorge Waterfalls 100K (17-hour cutoff)
-and Bighorn 100 (35-hour cutoff), both already in the plan. Note the original Gorge target of
-"16–18 hours" straddled that 17-hour cutoff; the sub-100 target of 14–15 clears it with room.
-
-This turns Bighorn back into what it's supposed to be: a gate you pass, not a coin flip.
+**BURT is not a Western States qualifier**, and doesn't need to be. It earns the thing you actually
+need: a 100-mile finish and a full night alone, which turns Bighorn back into a gate you pass
+rather than a coin flip. Your qualifiers are Gorge Waterfalls 100K and Bighorn 100, both already in
+the plan.
 
 ---
 
@@ -168,8 +160,8 @@ includes every aid stop and nap that falls inside that leg.
 | 7 | 186.4 – 200.1 | 497 | 3:58 | 3:43 | 0:15 | 3.68 | 97:00 | Tue 1:00 PM |
 
 **Overall 2.06 mph** including every stop and all the sleep. Your first 50K is 12:21 and your sixth
-is 19:37 — a 59% slowdown, which is what the plan expects and budgets for. Leg 6 is the blowdown.
-Leg 7 is the road, and it's the only leg you run.
+is 19:37 — a 59% slowdown, which is what the plan expects and budgets for. Leg 6 is the blowdown;
+leg 7 is the road.
 
 ---
 
@@ -177,33 +169,17 @@ Leg 7 is the road, and it's the only leg you run.
 
 The volume spine stays. What it's pointed at changes.
 
-### Re-based, because the old baseline was wrong
-
-Your Strava history says you're averaging **8.8 hr/week and 1,700 ft/week** over the last twelve
-weeks, not the 12 hr and 3,000 ft the original plan assumed. Vertical is the gap: the original
-Block 1 target of 5,000 ft/week was 2.9× your real starting point, not 1.7×. Ramping that fast is
-how you arrive at Block 2 injured. The blocks below start where you actually are.
-
-| Block | Dates | Hr/wk | Vert/wk | Mi/wk | Peak day | Night hrs (cum) | Ends with |
-|---|---|---|---|---|---|---|---|
-| Baseline | — | 8.8 | 1,700 | 29 | 3:00 | 0 | measured |
-| **1** | Sep 7 – Dec 13 | 10 → 15 | 2,000 → 4,500 | 32 → 50 | 8 hr | **4** | Frozen Trail 50K |
-| **2** | Dec 14 – Feb 14 | 17 | 6,000 | 55 | 10–12 hr | **12** | **BURT 100** — first 100 *(tentative)* |
-| **3** | Feb 15 – Apr 18 | 19 | 7,500 | 60 | 14 hr | **24** | Gorge Waterfalls 100K |
-| **4** | Apr 19 – Jun 20 | 21 | 9,500 | 65 | 18 hr | **40** | Bighorn 100 — the gate |
-| **5** | Jun 21 – Aug 15 | 23 peak | 12,000 peak | 70 | 20 hr | **60** | BIGFOOT 200 |
-
-Cumulative vertical lands near **303,000 ft** — about 6.9× the race. Lower than the 8.5× the
-original plan wanted, because it's built from where you are rather than where the document assumed
-you were. The ratio is honest; the old one wasn't.
+> **Weekly targets live on the Blocks page, not here.** They were duplicated on both pages and the
+> two copies drifted apart — this one still carried the pre-rescale ladder. One number, one home:
+> **Blocks** owns hours, vertical, miles, peak day and night hours; this page owns race day.
 
 ### Five things sub-100 adds that "finish" didn't
 
-**1. Night hours double, and they stop being a checkbox.**
-30 cumulative night hours was enough to not be frightened of the dark. You will be moving through
-**four nights, alone, unsupported**, roughly 40 hours of it. The target is now **60 cumulative**,
-and the shape matters more than the total: at least two efforts that cross a full night and continue
-into the next day, and one in Block 4 that crosses **two** nights. Start in October, not November.
+**1. Night hours stop being a checkbox.**
+You will be moving through **four nights, alone, unsupported** — roughly 40 hours of it. Whatever
+the cumulative target on the Blocks page, **the shape matters more than the total**: at least two
+efforts that cross a full night and continue into the next day, and one in Block 4 that crosses
+**two** nights. Hours banked on a lit path in one-hour pieces do not buy that.
 
 **2. Sleep restriction is a recurring session, not a Block 4 stunt.**
 Two sessions on under four hours' sleep does not prepare you for 6 hours across 4 days. From Block 2
@@ -224,11 +200,11 @@ in the day, on tired legs.** Not loam, not fresh. The plan's original non-negoti
 under-resourced.
 
 **5. Late-race running speed becomes a training target.**
-The last 13 miles are road at 3.8 mph and there are runnable stretches all through Lewis River,
-Chain of Lakes, and Owens Creek. Everyone can hike at 2.3 mph on day one. Almost nobody can still
-*run* on day four, which is exactly where the seven hours live. **Every long day from Block 2 ends
-with 30–60 minutes at target race pace on runnable ground.** It will feel pointless and stupid at
-the end of an eight-hour day. That is the point.
+Beyond the closing road there are runnable stretches all through Lewis River, Chain of Lakes and
+Owens Creek. Everyone can hike at 2.3 mph on day one. Almost nobody can still *run* on day four,
+which is exactly where the seven hours live. **Every long day from Block 2 ends with 30–60 minutes
+at target race pace on runnable ground.** It will feel pointless and stupid at the end of an
+eight-hour day. That is the point.
 
 ### Also, because unsupported
 
@@ -245,22 +221,19 @@ the end of an eight-hour day. That is the point.
 
 | Race | When | Old standard | Sub-100 standard |
 |---|---|---|---|
-| Run the Rock 50K | Nov 7 | 3.2 mph, finish upright | unchanged — it's a checkpoint, not a test |
+| Run the Rock **25K** | Nov 7 | 3.2 mph, finish upright | a checkpoint, not a test. Dropped from the 50K: running tolerance is 12 mi/wk |
 | Frozen Trail 50K | Dec | finish | negative split; last hour running |
 | **BURT 100** *(tentative)* | **Feb 6** | — | **finish, with a full night solo and under 45 min total aid** |
 | Gorge Waterfalls 100K | Apr | 2.8 mph, 16–18 hr | **14–15 hr**, and run the last 10K |
 | Bighorn 100 | Jun | finish under 30 hr | **under 28 hr**, with the second half no worse than 15% slower than the first, and total aid under 90 minutes |
 
-That Bighorn standard is the real gate. Sub-28 with a controlled second half and disciplined aid
-says the sub-100 machinery works. Sub-30 with a four-hour death march says you'll finish Bigfoot in
-104 hours, which is a fine day out and not what you asked for.
+Sub-28 with a controlled second half and disciplined aid says the sub-100 machinery works. Sub-30
+with a four-hour death march says you'll finish Bigfoot in 104 hours — a fine day out, and not what
+you asked for.
 
 ---
 
 ## The gate, restated
-
-The original plan said: finish Bighorn well and Bigfoot is on; DNF or a badly damaged finish and
-defer. That still holds, with one addition now that the goal has a number on it.
 
 **Three outcomes at Bighorn, decided in advance:**
 
