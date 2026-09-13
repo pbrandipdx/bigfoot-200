@@ -1,0 +1,31 @@
+-- 20260913223000_weekly_progress_full_metrics
+--
+-- Everything Strava and Garmin actually populate, grouped into what it tells
+-- you. Coverage was measured first rather than assumed: chronic_load,
+-- training_balance, running_tolerance, training_status, hill_endurance_score,
+-- hill_strength_score, the race predictions and the acclimation scores are all
+-- 0% filled by the Garmin API for this account, so nothing depends on them.
+--
+-- New, and the reason for the change:
+--   ft_per_hour            vertical density. Explains how hours can be at 101%
+--                          of target while vertical sits at 84% - the hours are
+--                          flat. Block 1 asks 292 ft/hr; the race is 508.
+--   days_on_feet           frequency, not session count
+--   best_back_to_back_hr   best consecutive-day pair - the back-to-back
+--                          weekends the plan asks for and nothing tracked
+--   run_share_pct          running as a share of miles
+--   run_avg_hr             against the 121-140 Z2 band
+--   acwr                   acute:chronic ratio. Garmin leaves chronic_load and
+--                          training_balance empty, so it is derived here: this
+--                          week's acute_load over the trailing 4-week mean.
+--                          0.8-1.3 safe, above 1.5 is the ramp-too-fast zone.
+--   hrv_off_days           days not BALANCED - one bad night is noise, five is
+--                          a signal, which a 7-day mean hides
+--   sleep_hr, deep_pct, rem_pct, bb_low_avg, stress_avg, respiration, spo2
+--                          respiration in particular tends to rise before
+--                          illness shows up anywhere else
+--   vo2max, intensity_min, rel_effort
+
+-- The view body is reproduced in Supabase migration
+-- 20260913_weekly_progress_full_metrics; see `select * from weekly_progress`
+-- for the live column list.

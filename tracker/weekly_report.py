@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """Week-over-week progress report.
 
-Reads the weekly_progress view from Supabase and writes plan/progress.md.
-Stdlib only, same as dashboard/md.py, so it runs on any machine with the repo.
+Reads the weekly_progress view from Supabase and writes plan/progress.md plus
+plan/odds.json. Stdlib only, so it runs on any machine with the repo.
 
   python3 tracker/weekly_report.py            # last 12 weeks
   python3 tracker/weekly_report.py 26         # last 26 weeks
 
-Credentials come from tracker/.env (gitignored):
-  SUPABASE_URL, SUPABASE_SERVICE_KEY
+Credentials come from tracker/.env (gitignored): SUPABASE_URL, SUPABASE_SERVICE_KEY
 """
 import json, os, sys, urllib.request, urllib.parse, datetime
 import odds as odds_model
@@ -18,12 +17,17 @@ REPO = os.path.dirname(HERE)
 OUT  = os.path.join(REPO, "plan", "progress.md")
 ODDS = os.path.join(REPO, "plan", "odds.json")
 
-# Block 1 targets, from plan/block-targets.md. Keep these in step with that file.
-TARGET = {"hours": 12.0, "vert_ft": 3500, "miles": 45.0, "peak_day_hr": 8.0}
-
-# Patrick's own monitor rules, from plan/block-targets.md.
-HRV_BASELINE = 41.6      # 90-day baseline at the time the plan was written
+HRV_BASELINE = 41.6      # 90-day baseline when the plan was written
 HRV_DROP_PCT = 10.0      # ">10% below baseline: cut volume 30% that week"
+RACE_FT_PER_HR = 508     # 44,082 ft over the 86:48 moving budget
+
+NUMERIC = ("hours", "miles", "vert_ft", "ft_per_hour", "longest_day_hr", "sessions",
+           "days_on_feet", "best_back_to_back_hr", "night_hours", "night_session_hours",
+           "run_hours", "run_miles", "run_vert_ft", "run_share_pct", "run_avg_hr",
+           "rel_effort", "hrv_avg", "hrv_off_days", "rhr_avg", "sleep_avg", "sleep_hr",
+           "deep_pct", "rem_pct", "readiness_avg", "bb_low_avg", "stress_avg",
+           "respiration", "spo2", "intensity_min", "endurance", "hill",
+           "run_tolerance", "vo2max", "acute_load", "acwr")
 
 
 def env():
@@ -69,8 +73,7 @@ def cell(v, fmt="%s"):
 
 
 def arrow(now, prev, higher_is_better=True, flat=0.03):
-    """Week-over-week marker as a {{trend}} token; md.py renders it as a
-    coloured arrow. flat = fraction inside which we call it level."""
+    """{{trend}} token; md.py renders it as a coloured arrow."""
     if now is None or prev in (None, 0):
         return ""
     d = (now - prev) / abs(prev)
@@ -81,23 +84,24 @@ def arrow(now, prev, higher_is_better=True, flat=0.03):
     return " {{%s%s}}" % ("up" if up else "down", "" if good else "-bad")
 
 
-def pct(now, target):
-    return "—" if now is None else "%d%%" % round(100.0 * now / target)
+def row(label, key, a, b, target=None, better=True, fmt="%g", flat=0.03, note=""):
+    """One metric line: value + trend, prior, target, % of target."""
+    v, p = a.get(key), b.get(key)
+    at = "—"
+    if target and v is not None:
+        at = "%d%%" % round(100.0 * v / target)
+    tgt = note or (("%g" % target) if target else "—")
+    return "| %s | %s%s | %s | %s | %s |" % (
+        label, cell(v, fmt), arrow(v, p, better, flat), cell(p, fmt), tgt, at)
 
 
 def main():
     weeks = int(sys.argv[1]) if len(sys.argv) > 1 else 12
-    # the odds model wants 12 complete weeks of history regardless of how many
-    # the table is asked to show
     all_rows = fetch(env(), max(weeks + 1, 14))
     if not all_rows:
         sys.exit("weekly_progress returned no rows")
-
     for r in all_rows:
-        for k in ("hours", "miles", "vert_ft", "longest_day_hr", "night_hours", "night_session_hours",
-                  "run_hours", "run_miles", "run_vert_ft", "hrv_avg", "rhr_avg",
-                  "sleep_avg", "readiness_avg", "endurance", "hill",
-                  "run_tolerance"):
+        for k in NUMERIC:
             r[k] = num(r.get(k))
     rows = all_rows[:weeks + 1]
 
@@ -105,13 +109,15 @@ def main():
                               encoding="utf-8"))
     today = datetime.date.today()
     this_monday = today - datetime.timedelta(days=today.weekday())
-    # The current week is still being written; report on it but mark it partial.
+    blk = odds_model.current_block(schedule["blocks"], today)
+    T = blk["targets"]
+    dens = round(T["vertFtPerWeek"] / float(T["hoursPerWeek"]))   # target ft/hour
+
     L = []
     L.append("# Week over week")
     L.append("")
-    L.append("Generated %s from Supabase `weekly_progress` "
-             "(activities + garmin_daily + garmin_training, Monday-start weeks, "
-             "America/Los_Angeles)." % today.isoformat())
+    L.append("Generated %s from Supabase `weekly_progress` — Strava activities plus "
+             "Garmin daily and training metrics, Monday-start weeks." % today.isoformat())
     L.append("")
     L.append("Arrows compare with the previous week. "
              "{{up}} and {{down}} are moving the way you want, "
@@ -119,95 +125,154 @@ def main():
              "{{level}} is unchanged. Hover any arrow for what it means.")
     L.append("")
 
-    # ---- finish odds ---------------------------------------------------------
     odds_md, odds_data = odds_model.report(all_rows, schedule["blocks"], today)
     if odds_md:
         L.append(odds_md)
         json.dump(odds_data, open(ODDS, "w", encoding="utf-8"), indent=2)
         print("wrote %s (%d-%d%% on trajectory)"
-              % (ODDS, odds_data["trajectory"]["low"],
-                 odds_data["trajectory"]["high"]))
+              % (ODDS, odds_data["trajectory"]["low"], odds_data["trajectory"]["high"]))
 
-    # ---- headline: last complete week vs the one before it -------------------
     done = [r for r in rows if r["week_start"] != this_monday.isoformat()]
     if len(done) >= 2:
         a, b = done[0], done[1]
+        short = blk["name"].split("—")[0].strip()
+        head = "| | This week | Prior | Target | At target |\n|---|---|---|---|---|"
+
         L.append("## Last complete week — %s" % a["week_start"])
         L.append("")
-        L.append("| | This week | Prior week | Block 1 target | At target |")
-        L.append("|---|---|---|---|---|")
-        for label, key, tgt, better in (
-                ("Hours", "hours", TARGET["hours"], True),
-                ("Miles", "miles", TARGET["miles"], True),
-                ("Vert (ft)", "vert_ft", TARGET["vert_ft"], True),
-                ("Longest day (hr)", "longest_day_hr", TARGET["peak_day_hr"], True)):
-            L.append("| %s | %s%s | %s | %s | %s |" % (
-                label, cell(a[key], "%g"), arrow(a[key], b[key], better),
-                cell(b[key], "%g"), ("%g" % tgt), pct(a[key], tgt)))
-        L.append("| Running miles | %s%s | %s | — | — |" % (
-            cell(a["run_miles"], "%g"), arrow(a["run_miles"], b["run_miles"]),
-            cell(b["run_miles"], "%g")))
-        L.append("| HRV avg | %s%s | %s | %g baseline | %s |" % (
-            cell(a["hrv_avg"], "%g"), arrow(a["hrv_avg"], b["hrv_avg"]),
-            cell(b["hrv_avg"], "%g"), HRV_BASELINE, pct(a["hrv_avg"], HRV_BASELINE)))
-        L.append("| Resting HR | %s%s | %s | — | — |" % (
-            cell(a["rhr_avg"], "%g"), arrow(a["rhr_avg"], b["rhr_avg"], False),
-            cell(b["rhr_avg"], "%g")))
-        L.append("| Endurance score | %s%s | %s | — | — |" % (
-            cell(a["endurance"], "%d"), arrow(a["endurance"], b["endurance"], True, 0.005),
-            cell(b["endurance"], "%d")))
+        L.append("### Volume")
+        L.append("")
+        L.append(head)
+        L.append(row("Hours", "hours", a, b, T["hoursPerWeek"]))
+        L.append(row("Miles", "miles", a, b, T["milesPerWeek"]))
+        L.append(row("Vertical (ft)", "vert_ft", a, b, T["vertFtPerWeek"], fmt="%d"))
+        L.append(row("Longest day (hr)", "longest_day_hr", a, b, T["peakDayHours"]))
+        L.append(row("Best back-to-back (hr)", "best_back_to_back_hr", a, b,
+                     note="two consecutive days"))
+        L.append(row("Days on feet", "days_on_feet", a, b, note="5–6", fmt="%d"))
         L.append("")
 
-        # ---- the three rules that actually change what he does next week ----
+        L.append("### Race specificity")
+        L.append("")
+        L.append("*Volume you can fake. This is the part that has to be real.*")
+        L.append("")
+        L.append(head)
+        L.append(row("Vertical per hour", "ft_per_hour", a, b, dens, fmt="%d",
+                     note="%d (race: %d)" % (dens, RACE_FT_PER_HR)))
+        L.append(row("Running share of miles (%)", "run_share_pct", a, b, 30, fmt="%d",
+                     note="30"))
+        L.append(row("Running miles", "run_miles", a, b, note="tolerance %s"
+                     % cell(a.get("run_tolerance"), "%g")))
+        L.append(row("Night session hours", "night_session_hours", a, b,
+                     note="%d cumulative this block" % T["nightHoursCumulative"]))
+        L.append(row("Avg HR on runs", "run_avg_hr", a, b, fmt="%d", note="Z2 121–140"))
+        L.append("")
+
+        L.append("### Load and injury risk")
+        L.append("")
+        L.append(head)
+        L.append(row("Acute load (7-day)", "acute_load", a, b, fmt="%d", note="—"))
+        L.append(row("Acute:chronic ratio", "acwr", a, b, fmt="%.2f",
+                     note="0.8–1.3 safe, >1.5 risky"))
+        L.append(row("Intensity minutes", "intensity_min", a, b, fmt="%d", note="—"))
+        L.append("")
+
+        L.append("### Recovery")
+        L.append("")
+        L.append(head)
+        L.append(row("HRV avg", "hrv_avg", a, b, HRV_BASELINE,
+                     note="%g baseline" % HRV_BASELINE))
+        L.append(row("Days HRV not balanced", "hrv_off_days", a, b, better=False,
+                     fmt="%d", note="0 of 7"))
+        L.append(row("Resting HR", "rhr_avg", a, b, better=False, note="51 baseline"))
+        L.append(row("Sleep (hr)", "sleep_hr", a, b, note="7.5+"))
+        L.append(row("Deep sleep (%)", "deep_pct", a, b, fmt="%d", note="13–23 normal"))
+        L.append(row("Body battery low", "bb_low_avg", a, b, fmt="%d",
+                     note="how empty you get"))
+        L.append(row("Training readiness", "readiness_avg", a, b, fmt="%d", note="—"))
+        L.append(row("Stress avg", "stress_avg", a, b, better=False, fmt="%d",
+                     note="under 35"))
+        L.append(row("Respiration", "respiration", a, b, better=False, fmt="%.1f",
+                     note="a jump can precede illness"))
+        L.append("")
+
+        L.append("### Fitness markers")
+        L.append("")
+        L.append(head)
+        L.append(row("Endurance score", "endurance", a, b, fmt="%d", flat=0.005,
+                     note="—"))
+        L.append(row("VO2 max", "vo2max", a, b, fmt="%.1f", flat=0.005, note="—"))
+        L.append(row("Hill score", "hill", a, b, fmt="%d", flat=0.005,
+                     note="needs running on hills"))
+        L.append("")
+
+        # ---- what actually changes next week ---------------------------------
         flags = []
-        if a["hrv_avg"] is not None:
-            drop = 100.0 * (HRV_BASELINE - a["hrv_avg"]) / HRV_BASELINE
+        hrv = a.get("hrv_avg")
+        if hrv is not None:
+            drop = 100.0 * (HRV_BASELINE - hrv) / HRV_BASELINE
             if drop > HRV_DROP_PCT:
-                flags.append("**HRV rule fires.** 7-day avg %.1f is %.1f%% below the "
-                             "%g baseline, past the 10%% line. Cut next week's volume "
-                             "30%%." % (a["hrv_avg"], drop, HRV_BASELINE))
-        if a["miles"] and a["run_miles"] is not None:
-            share = 100.0 * a["run_miles"] / a["miles"]
-            if share < 25:
-                flags.append("**Running share %.0f%%** (%g of %g miles). The Saturdays "
-                             "are hikes. Run the runnable grades or the run-specific "
-                             "fitness keeps sliding." % (share, a["run_miles"], a["miles"]))
-        if len(done) >= 4 and all(r["endurance"] is not None for r in done[:4]):
-            e = [r["endurance"] for r in done[:4]]
-            if e[0] < e[3]:
-                flags.append("**Endurance score down %d over 4 weeks** (%d -> %d). "
-                             "Volume is not converting into aerobic fitness yet."
-                             % (e[3] - e[0], e[3], e[0]))
-        if a["hours"] is not None and a["hours"] < 0.8 * TARGET["hours"]:
-            flags.append("**Under 80%% of the hour target** (%g vs %g). One more "
-                         "midweek session, not a bigger Saturday."
-                         % (a["hours"], TARGET["hours"]))
+                flags.append("**HRV rule fires.** Week avg %.1f is %.1f%% below the %g "
+                             "baseline. Your rule: cut next week's volume 30%%."
+                             % (hrv, drop, HRV_BASELINE))
+        if a.get("acwr") and a["acwr"] > 1.5:
+            flags.append("**Acute:chronic %.2f — ramping too fast.** Above 1.5 is where "
+                         "injuries come from. Hold volume flat for a week."
+                         % a["acwr"])
+        elif a.get("acwr") and a["acwr"] > 1.3:
+            flags.append("**Acute:chronic %.2f, elevated.** Not dangerous, but do not add "
+                         "on top of it." % a["acwr"])
+        if a.get("ft_per_hour") is not None and a["ft_per_hour"] < 0.75 * dens:
+            flags.append("**%d ft per hour against a %d target** (race demands %d). Your "
+                         "hours are there; they are flat hours. Same time, steeper ground."
+                         % (a["ft_per_hour"], dens, RACE_FT_PER_HR))
+        if a.get("run_share_pct") is not None and a["run_share_pct"] < 25:
+            flags.append("**Running is %d%% of your miles.** The long days are hikes. Run "
+                         "the runnable grades or run-specific fitness keeps sliding."
+                         % a["run_share_pct"])
+        if a.get("night_session_hours") == 0 and T["nightHoursCumulative"] > 0:
+            flags.append("**No night session.** Zero banked against %d cumulative this "
+                         "block, and it is the cheapest gap you have — one headlamp lap "
+                         "counts." % T["nightHoursCumulative"])
+        if a.get("longest_day_hr") and a["longest_day_hr"] < 0.5 * T["peakDayHours"]:
+            flags.append("**Longest day %g hr against an %g-hour block peak.** Single-day "
+                         "duration is the gap volume does not close."
+                         % (a["longest_day_hr"], T["peakDayHours"]))
+        if a.get("hrv_off_days") and a["hrv_off_days"] >= 5:
+            flags.append("**HRV unbalanced %d of 7 days.** One bad night is noise; five is "
+                         "a signal." % a["hrv_off_days"])
+        es = [r["endurance"] for r in done[:4] if r["endurance"] is not None]
+        if len(es) == 4 and es[0] < es[3]:
+            flags.append("**Endurance score down %d over 4 weeks** (%d → %d). Volume is "
+                         "not converting into aerobic fitness yet."
+                         % (es[3] - es[0], es[3], es[0]))
+
+        L.append("### What this changes")
+        L.append("")
         if flags:
-            L.append("### What this changes")
-            L.append("")
             for f in flags:
                 L.append("- " + f)
-            L.append("")
         else:
-            L.append("No monitor rule fired this week. Carry on as planned.")
-            L.append("")
+            L.append("- Nothing fired. Carry on as planned.")
+        L.append("")
 
-    # ---- the full table -----------------------------------------------------
+    # ---- the long table ------------------------------------------------------
     L.append("## Last %d weeks" % len(rows))
     L.append("")
-    L.append("| Week | Hr | Mi | Vert | Run mi | Longest | HRV | RHR | Sleep | Endur | Hill |")
-    L.append("|---|---|---|---|---|---|---|---|---|---|---|")
+    L.append("| Week | Hr | Mi | Vert | ft/hr | Long | B2B | Run% | Night | ACWR | HRV | RHR | Sleep | Endur |")
+    L.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         tag = " *(partial)*" if r["week_start"] == this_monday.isoformat() else ""
-        L.append("| %s%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
+        L.append("| %s%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
             r["week_start"], tag,
-            cell(r["hours"], "%g"), cell(r["miles"], "%g"),
-            cell(r["vert_ft"], "%d"), cell(r["run_miles"], "%g"),
-            cell(r["longest_day_hr"], "%g"), cell(r["hrv_avg"], "%g"),
-            cell(r["rhr_avg"], "%g"), cell(r["sleep_avg"], "%d"),
-            cell(r["endurance"], "%d"), cell(r["hill"], "%d")))
+            cell(r["hours"], "%g"), cell(r["miles"], "%g"), cell(r["vert_ft"], "%d"),
+            cell(r["ft_per_hour"], "%d"), cell(r["longest_day_hr"], "%g"),
+            cell(r["best_back_to_back_hr"], "%g"), cell(r["run_share_pct"], "%d"),
+            cell(r["night_session_hours"], "%g"), cell(r["acwr"], "%.2f"),
+            cell(r["hrv_avg"], "%g"), cell(r["rhr_avg"], "%g"),
+            cell(r["sleep_hr"], "%g"), cell(r["endurance"], "%d")))
     L.append("")
-    L.append("Refresh with `make progress` after `python3 tracker/sync_garmin.py daily`.")
+    L.append("Refresh with `make progress` after `.venv/bin/python tracker/sync_garmin.py daily`.")
     L.append("")
 
     open(OUT, "w", encoding="utf-8").write("\n".join(L))
