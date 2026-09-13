@@ -172,8 +172,10 @@ def bar(v, width=10):
 
 def report(rows, blocks, today):
     """rows newest-first from weekly_progress. Returns (markdown, odds dict)."""
-    this_monday = today - datetime.timedelta(days=today.weekday())
-    recent = [r for r in rows if r["week_start"] != this_monday.isoformat()]
+    # a Monday-start week is finished at the end of its Sunday
+    recent = [r for r in rows
+              if datetime.date.fromisoformat(r["week_start"])
+                 + datetime.timedelta(days=6) <= today]
     if len(recent) < 3:
         return "", None
 

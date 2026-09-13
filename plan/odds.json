@@ -4,36 +4,36 @@
   "blockReadiness": 51,
   "blockName": "Block 1",
   "trajectory": {
-    "low": 27,
-    "high": 39,
-    "readiness": 47
+    "low": 31,
+    "high": 45,
+    "readiness": 57
   },
-  "label": "behind",
-  "color": "#B0793A",
+  "label": "on track",
+  "color": "#6B8E3D",
   "gates": {
     "vert": {
       "label": "Vertical per week",
       "weight": 20,
-      "now": 49,
-      "raceDay": 41
+      "now": 62,
+      "raceDay": 100
     },
     "long_day": {
       "label": "Longest single day",
       "weight": 20,
       "now": 38,
-      "raceDay": 36
+      "raceDay": 28
     },
     "hours": {
       "label": "Time on feet per week",
       "weight": 15,
       "now": 100,
-      "raceDay": 76
+      "raceDay": 100
     },
     "run": {
       "label": "Run-specific capacity",
       "weight": 15,
-      "now": 29,
-      "raceDay": 38
+      "now": 21,
+      "raceDay": 25
     },
     "night": {
       "label": "Night hours",
@@ -50,8 +50,8 @@
     "recovery": {
       "label": "Recovery headroom",
       "weight": 10,
-      "now": 74,
-      "raceDay": 74
+      "now": 53,
+      "raceDay": 53
     }
   },
   "baseNote": "base rate 45\u201365% assumed for a 200-mile mountain race \u2014 Destination Trail does not publish starter counts"

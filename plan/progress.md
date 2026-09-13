@@ -6,37 +6,37 @@ Arrows compare with the previous week. {{up}} and {{down}} are moving the way yo
 
 ## Finish odds
 
-**27–39%** — *behind*, 47 weeks out.
+**31–45%** — *on track*, 47 weeks out.
 
 That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at **51% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
 
 | Gate | Weight | vs Block 1 now | Projected race day |
 |---|---|---|---|
-| Vertical per week | 20% | `█████░░░░░` 49% | `████░░░░░░` 41% |
-| Longest single day | 20% | `████░░░░░░` 38% | `████░░░░░░` 36% |
-| Time on feet per week | 15% | `██████████` 100% | `████████░░` 76% |
-| Run-specific capacity | 15% | `███░░░░░░░` 29% | `████░░░░░░` 38% |
+| Vertical per week | 20% | `██████░░░░` 62% | `██████████` 100% |
+| Longest single day | 20% | `████░░░░░░` 38% | `███░░░░░░░` 28% |
+| Time on feet per week | 15% | `██████████` 100% | `██████████` 100% |
+| Run-specific capacity | 15% | `██░░░░░░░░` 21% | `███░░░░░░░` 25% |
 | Night hours | 10% | `░░░░░░░░░░` 0% | `░░░░░░░░░░` 0% |
 | Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
-| Recovery headroom | 10% | `███████░░░` 74% | `███████░░░` 74% |
-| **Readiness** | | **51%** | **47%** |
+| Recovery headroom | 10% | `█████░░░░░` 53% | `█████░░░░░` 53% |
+| **Readiness** | | **51%** | **57%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Run-specific capacity**.
 
 > **How this is built.** Seven gates, each measured from Strava and Garmin, weighted as shown, averaged into a readiness score. The *now* column compares the last four to eight weeks against the current block's targets. The *projected* column fits the slope of the last eight weeks and carries it to race day against Block 5's targets — it assumes you keep improving at exactly the rate you have been, no faster and no slower, which is why a flat eight weeks shows up as a flat projection. The readiness score is entirely measured. Turning it into a percentage needs a field-wide finish rate, and that part is an assumption: base rate 45–65% assumed for a 200-mile mountain race — Destination Trail does not publish starter counts. Read the gate breakdown and the direction as signal; read the percentage as a rough band.
 
-## Last complete week — 2026-08-31
+## Last complete week — 2026-09-07
 
 ### Volume
 
 | | This week | Prior | Target | At target |
 |---|---|---|---|---|
-| Hours | 12.1 {{down-bad}} | 13.8 | 12 | 101% |
-| Miles | 39.6 {{up}} | 33.7 | 45 | 88% |
-| Vertical (ft) | 2927 {{up}} | 1453 | 3500 | 84% |
-| Longest day (hr) | 3 {{up}} | 1.7 | 8 | 38% |
-| Best back-to-back (hr) | 6.8 {{up}} | 5.4 | two consecutive days | — |
-| Days on feet | 6 {{down-bad}} | 7 | 5–6 | — |
+| Hours | 15.1 {{up}} | 12.1 | 12 | 126% |
+| Miles | 36.6 {{down-bad}} | 39.6 | 45 | 81% |
+| Vertical (ft) | 3333 {{up}} | 2927 | 3500 | 95% |
+| Longest day (hr) | 2.1 {{down-bad}} | 3 | 8 | 26% |
+| Best back-to-back (hr) | 5.4 {{down-bad}} | 6.8 | two consecutive days | — |
+| Days on feet | 7 {{up}} | 6 | 5–6 | — |
 
 ### Race specificity
 
@@ -44,9 +44,9 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 
 | | This week | Prior | Target | At target |
 |---|---|---|---|---|
-| Vertical per hour | 242 {{up}} | 105 | 292 (race: 508) | 83% |
-| Running share of miles (%) | 5 {{level}} | 5 | 30 | 17% |
-| Running miles | 2 {{up}} | 1.7 | tolerance — | — |
+| Vertical per hour | 221 {{down-bad}} | 242 | 292 (race: 508) | 76% |
+| Running share of miles (%) | 27 {{up}} | 5 | 30 | 90% |
+| Running miles | 10 {{up}} | 2 | tolerance 12 | — |
 | Night session hours | 0 | 0 | 3 cumulative this block | — |
 | Avg HR on runs | — | — | Z2 121–140 | — |
 
@@ -54,45 +54,45 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 
 | | This week | Prior | Target | At target |
 |---|---|---|---|---|
-| Acute load (7-day) | 137 {{down-bad}} | 194 | — | — |
-| Acute:chronic ratio | 0.73 {{down-bad}} | 0.98 | 0.8–1.3 safe, >1.5 risky | — |
-| Intensity minutes | 690 {{level}} | 676 | — | — |
+| Acute load (7-day) | 263 {{up}} | 137 | — | — |
+| Acute:chronic ratio | 1.40 {{up}} | 0.73 | 0.8–1.3 safe, >1.5 risky | — |
+| Intensity minutes | 780 {{up}} | 690 | — | — |
 
 ### Recovery
 
 | | This week | Prior | Target | At target |
 |---|---|---|---|---|
-| HRV avg | 36.5 {{down-bad}} | 42.3 | 41.6 baseline | 88% |
-| Days HRV not balanced | 1 | 0 | 0 of 7 | — |
-| Resting HR | 52.7 {{up-bad}} | 51.1 | 51 baseline | — |
-| Sleep (hr) | 8.7 {{up}} | 7.8 | 7.5+ | — |
-| Deep sleep (%) | 12 {{down-bad}} | 15 | 13–23 normal | — |
-| Body battery low | 25 {{level}} | 25 | how empty you get | — |
-| Training readiness | 61 {{down-bad}} | 70 | — | — |
-| Stress avg | 33 {{up-bad}} | 31 | under 35 | — |
-| Respiration | 15.7 {{level}} | 15.7 | a jump can precede illness | — |
+| HRV avg | 38.9 {{up}} | 36.5 | 41.6 baseline | 94% |
+| Days HRV not balanced | 6 {{up-bad}} | 1 | 0 of 7 | — |
+| Resting HR | 52.1 {{level}} | 52.7 | 51 baseline | — |
+| Sleep (hr) | 8.7 {{level}} | 8.7 | 7.5+ | — |
+| Deep sleep (%) | 13 {{up}} | 12 | 13–23 normal | — |
+| Body battery low | 20 {{down-bad}} | 25 | how empty you get | — |
+| Training readiness | 45 {{down-bad}} | 61 | — | — |
+| Stress avg | 31 {{down}} | 33 | under 35 | — |
+| Respiration | 16.0 {{level}} | 15.7 | a jump can precede illness | — |
 
 ### Fitness markers
 
 | | This week | Prior | Target | At target |
 |---|---|---|---|---|
-| Endurance score | 4883 {{down-bad}} | 4941 | — | — |
-| VO2 max | 41.6 {{level}} | 41.6 | — | — |
+| Endurance score | 4775 {{down-bad}} | 4883 | — | — |
+| VO2 max | 42.1 {{up}} | 41.6 | — | — |
 | Hill score | — | — | needs running on hills | — |
 
 ### What this changes
 
-- **HRV rule fires.** Week avg 36.5 is 12.3% below the 41.6 baseline. Your rule: cut next week's volume 30%.
-- **Running is 5% of your miles.** The long days are hikes. Run the runnable grades or run-specific fitness keeps sliding.
+- **Acute:chronic 1.40, elevated.** Not dangerous, but do not add on top of it.
 - **No night session.** Zero banked against 3 cumulative this block, and it is the cheapest gap you have — one headlamp lap counts.
-- **Longest day 3 hr against an 8-hour block peak.** Single-day duration is the gap volume does not close.
-- **Endurance score down 136 over 4 weeks** (5019 → 4883). Volume is not converting into aerobic fitness yet.
+- **Longest day 2.1 hr against an 8-hour block peak.** Single-day duration is the gap volume does not close.
+- **HRV unbalanced 6 of 7 days.** One bad night is noise; five is a signal.
+- **Endurance score down 212 over 4 weeks** (4987 → 4775). Volume is not converting into aerobic fitness yet.
 
 ## Last 13 weeks
 
 | Week | Hr | Mi | Vert | ft/hr | Long | B2B | Run% | Night | ACWR | HRV | RHR | Sleep | Endur |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 2026-09-07 *(partial)* | 9.3 | 24.3 | 1434 | 154 | 1.7 | 4.4 | 15 | 0 | 1.40 | 38.9 | 52.1 | 8.7 | 4775 |
+| 2026-09-07 | 15.1 | 36.6 | 3333 | 221 | 2.1 | 5.4 | 27 | 0 | 1.40 | 38.9 | 52.1 | 8.7 | 4775 |
 | 2026-08-31 | 12.1 | 39.6 | 2927 | 242 | 3 | 6.8 | 5 | 0 | 0.73 | 36.5 | 52.7 | 8.7 | 4883 |
 | 2026-08-24 | 13.8 | 33.7 | 1453 | 105 | 1.7 | 5.4 | 5 | 0 | 0.98 | 42.3 | 51.1 | 7.8 | 4941 |
 | 2026-08-17 | 9.4 | 23.8 | 915 | 98 | 1.9 | 5.5 | 0 | 0 | 0.92 | 51 | 49.9 | 8.3 | 4987 |

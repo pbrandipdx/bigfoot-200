@@ -132,7 +132,9 @@ def main():
         print("wrote %s (%d-%d%% on trajectory)"
               % (ODDS, odds_data["trajectory"]["low"], odds_data["trajectory"]["high"]))
 
-    done = [r for r in rows if r["week_start"] != this_monday.isoformat()]
+    done = [r for r in rows
+            if datetime.date.fromisoformat(r["week_start"])
+               + datetime.timedelta(days=6) <= today]
     if len(done) >= 2:
         a, b = done[0], done[1]
         short = blk["name"].split("—")[0].strip()
@@ -262,7 +264,8 @@ def main():
     L.append("| Week | Hr | Mi | Vert | ft/hr | Long | B2B | Run% | Night | ACWR | HRV | RHR | Sleep | Endur |")
     L.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
-        tag = " *(partial)*" if r["week_start"] == this_monday.isoformat() else ""
+        tag = "" if (datetime.date.fromisoformat(r["week_start"])
+                     + datetime.timedelta(days=6) <= today) else " *(partial)*"
         L.append("| %s%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
             r["week_start"], tag,
             cell(r["hours"], "%g"), cell(r["miles"], "%g"), cell(r["vert_ft"], "%d"),
