@@ -69,6 +69,12 @@
     max-width:14ch;
   }
   .today-desc{font-size:17px;color:var(--ink-soft);max-width:58ch;margin-bottom:6px}
+  a.routelink{display:block;width:fit-content;margin-top:5px;font-size:12.5px;
+    color:var(--amber-deep);text-decoration:none;
+    border-bottom:1px solid rgba(122,82,31,.35)}
+  a.routelink::before{content:'\2197\00a0';font-size:11px}
+  a.routelink:hover{border-bottom-color:var(--amber-deep)}
+  #today-route a.routelink{font-size:13.5px;margin-top:10px}
   .today-meta{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0 8px;font-size:13px;color:var(--ink-faint)}
   .today-meta strong{color:var(--ink)}
 
@@ -179,6 +185,7 @@
     <div class="today-date" id="today-date"></div>
     <h1 class="today-title" id="today-title">&nbsp;</h1>
     <p class="today-desc" id="today-desc"></p>
+    <div id="today-route"></div>
     <div class="today-meta" id="today-meta"></div>
 
     <svg class="elev" viewBox="0 0 700 60" preserveAspectRatio="none" aria-hidden="true">
@@ -264,7 +271,8 @@ function weekRowsHtml(monday){
     rows += `<tr${isToday ? ' class="is-today"' : ''}>` +
             `<td class="day-name">${label}</td>` +
             `<td><strong>${w.title}</strong><br>` +
-            `<span style="color:var(--ink-faint)">${w.desc}</span></td></tr>`;
+            `<span style="color:var(--ink-faint)">${w.desc}</span>` +
+            routeLink(w) + `</td></tr>`;
   }
   return rows;
 }
@@ -298,6 +306,7 @@ function render(){
     : scheduleFor(today);
   document.getElementById('today-title').textContent = todayWork.title;
   document.getElementById('today-desc').textContent = todayWork.desc;
+  document.getElementById('today-route').innerHTML = routeLink(todayWork);
 
   const raceDays = daysBetween(today, toDate(RACES[RACES.length-1].start));
   document.getElementById('today-meta').innerHTML =

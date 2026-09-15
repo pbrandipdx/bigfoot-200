@@ -37,7 +37,25 @@ function plannedFor(d){
 function fromPlanned(p){
   const showVert = p.vert && !/^(race|multi-day|—)$/.test(p.vert);
   return { title: p.title + (showVert ? '  ·  ' + p.vert : ''),
-           desc: p.desc, vert: p.vert };
+           desc: p.desc, vert: p.vert,
+           link: p.link || null, linkLabel: p.linkLabel || null };
+}
+
+// One escaped anchor, or ''. Every page that prints a session uses this, so a
+// dated route can never render as a link on one page and bare text on another.
+function routeLink(w){
+  if(!w || !w.link) return '';
+  const esc = t => String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  // "AllTrails · Dog Mountain Trail" -> the source is wrapped so a phone can
+  // drop it and keep the part that identifies the route.
+  const label = String(w.linkLabel || 'Route map');
+  const i = label.indexOf(' \u00b7 ');
+  const inner = i > 0
+    ? `<span class="lsrc">${esc(label.slice(0, i + 3))}</span>${esc(label.slice(i + 3))}`
+    : esc(label);
+  return `<a class="routelink" href="${esc(w.link)}" target="_blank" ` +
+         `rel="noopener noreferrer">${inner}</a>`;
 }
 
 // SUNDAY is the long day.
@@ -50,7 +68,10 @@ function sundayWorkout(block, d){
   const satPlan = plannedFor(sat);
   if(satPlan){
     if(/multi-day/i.test(satPlan.vert || '')){
-      return { title: satPlan.title + ' — day two', desc:'The trip continues. Time on feet is the point; let the terrain set the pace.' };
+      // Same trip, so it keeps the same route map.
+      return { title: satPlan.title + ' — day two',
+               desc:'The trip continues. Time on feet is the point; let the terrain set the pace.',
+               link: satPlan.link || null, linkLabel: satPlan.linkLabel || null };
     }
     return { title:'Recovery — the day after ' + satPlan.title,
              desc:'Walk, or nothing. The long day already happened yesterday.' };

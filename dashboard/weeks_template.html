@@ -71,12 +71,15 @@
     col.c-week{width:auto} col.c-long{width:0} col.c-m{width:64px}
     th.long-col{font-size:0;padding:0}
     td.long-col{padding:0;overflow:hidden}
-    td.long-col>*{display:none}
+    /* !important because a.routelink is declared later at equal specificity,
+       and would otherwise re-show itself inside this collapsed cell. */
+    td.long-col>*{display:none!important}
     .longmob{display:block;font-weight:500;color:var(--ink-soft);
       font-size:12.5px;line-height:1.35;margin-top:3px;white-space:normal}
     .longmob .vert{font-size:11.5px}
     .mp{display:block;margin-top:0}
     .thlg{display:none}
+    .routelink .lsrc{display:none}
   }
   @media(max-width:360px){ col.c-m{width:58px} td.m,th.m{font-size:11.8px} }
   td.m,th.m{padding-right:0}
@@ -127,6 +130,11 @@
   .ddate{color:var(--ink-faint);font-weight:400;font-size:11.5px;display:block;
     margin-top:1px}
   .ddate .tag{margin-left:0}
+  a.routelink{display:block;width:fit-content;margin-top:4px;font-size:12px;
+    color:var(--amber-deep);text-decoration:none;
+    border-bottom:1px solid rgba(122,82,31,.35)}
+  a.routelink::before{content:'\2197\00a0';font-size:10px}
+  a.routelink:hover{border-bottom-color:var(--amber-deep)}
   .dtitle{font-weight:600}
   .ddesc{display:block;color:var(--ink-faint);font-size:12.3px;line-height:1.5;margin-top:1px}
   .wk{font-weight:600;white-space:normal;line-height:1.35}
@@ -201,7 +209,8 @@ function headline(monday){
   for(const off of [6,5,4,3,2,1,0]){
     const d = new Date(monday); d.setDate(monday.getDate()+off);
     const p = plannedFor(d);
-    if(p) return {title: p.title, vert: p.vert, dated: true};
+    if(p) return {title: p.title, vert: p.vert, dated: true,
+                  link: p.link || null, linkLabel: p.linkLabel || null};
   }
   const sun = new Date(monday); sun.setDate(monday.getDate()+6);
   return {title: scheduleFor(sun).title, vert:null, dated:false};
@@ -289,13 +298,16 @@ function render(){
               ? ` <span class="vert">· ${h.vert}</span>` : ''}${
             rs.filter(r => !h.title.includes(r.name)).length
               ? ` <span class="vert">· ${rs.filter(r => !h.title.includes(r.name))
-                   .map(r=>r.name).join(' · ')}</span>` : ''}</span></td>
+                   .map(r=>r.name).join(' · ')}</span>` : ''}${routeLink(h)}</span></td>
         <td class="long-col"><span class="long">${h.title}</span>${
             h.vert && !/^(race|multi-day|—)$/.test(h.vert)
               ? ` <span class="vert">· ${h.vert}</span>` : ''}${
             rs.filter(r => !h.title.includes(r.name)).length
               ? `<span class="dates">${rs.filter(r => !h.title.includes(r.name))
-                   .map(r=>r.name).join(' · ')}</span>` : ''}</td>
+                   .map(r=>r.name).join(' · ')}</span>` : ''}${
+            /* The route map rides on the week row, not the Sunday day row:
+               the day row only appears directly under it, so printing it in
+               both places is the same link twice. */ routeLink(h)}</td>
         <td class="num m">${metric(a && a.hours, t.hoursPerWeek, x => (Math.round(x*10)/10))}</td>
         <td class="num m">${metric(a && a.miles, t.milesPerWeek, x => Math.round(x))}</td>
         <td class="num m">${metric(a && a.vert_ft, t.vertFtPerWeek, x => Math.round(x).toLocaleString())}</td>
@@ -371,6 +383,8 @@ function toggleWeek(tr){
           .forEach(r => r.classList.toggle('show', open));
 }
 document.addEventListener('click', e => {
+  // A route link inside a week row is a link, not a toggle.
+  if(e.target.closest('a')) return;
   const tr = e.target.closest('tr.wkrow'); if(tr) toggleWeek(tr);
 });
 document.addEventListener('keydown', e => {
