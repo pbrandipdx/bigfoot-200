@@ -117,15 +117,134 @@ function saturdayWorkout(block, d){
   return { title:'Flexible recovery', desc:'Up to 6 miles, easy. Sunday is the long day — arrive at it fresh enough to do it properly.' };
 }
 
+// ---------------------------------------------------------------------------
+// The midweek week. Rewritten 2026-09-15.
+//
+// Five running days now: Tue, Wed, Thu, Fri and the Sunday long day. Run-
+// specific capacity is the weakest gate in the model (21%), and Bigfoot is only
+// a hiking race if you are willing to walk the runnable two thirds of it.
+//
+// Frequency, not one big day, is how Garmin's running tolerance rises, so these
+// sessions start SHORT and lengthen by block rather than starting long. The
+// guardrail is stated on every running day instead of being buried in a
+// monitor: if the week's running miles are over tolerance, Friday becomes a
+// walk. That is the release valve, and it is deliberately the smallest session.
+//
+// Monday is now a full rest day. The vertical-volume work it carried moved to
+// Tuesday's uphill tempo, which progresses instead of sitting at a fixed
+// prescription, and the strength moved to Wednesday and became eccentric.
+
+// Per-block session minutes. Block 1 is deliberately small: running tolerance
+// was 12 mi/week when this was written, and five short days already spends it.
+const RUN_MINUTES = {
+  1: { tue: 45, wed: 45, thu: 45, fri: 25 },
+  2: { tue: 55, wed: 55, thu: 60, fri: 30 },
+  3: { tue: 60, wed: 60, thu: 75, fri: 30 },
+  4: { tue: 65, wed: 70, thu: 90, fri: 35 },
+  5: { tue: 60, wed: 70, thu: 90, fri: 35 }
+};
+function runMin(block){ return RUN_MINUTES[block.id] || RUN_MINUTES[1]; }
+
+// A week is a deload when its Sunday long day says so. Block 1's deloads are
+// anchored to races (weeks 5, 10 and 13), not to a rigid count, so a modulo
+// would put the easy week in the wrong place. Blocks with no dated long days
+// fall back to weeks 4 and 8, which is what block-targets.md specifies.
+function mondayOfWeek(d){
+  const m = new Date(d); m.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+  m.setHours(0,0,0,0); return m;
+}
+function blockIsDated(block){
+  return (DATA.longDays || []).some(s =>
+    s.date >= block.start && s.date <= block.end);
+}
+function isDeloadWeek(block, d){
+  const mon = mondayOfWeek(d);
+  for(let i = 0; i < 7; i++){
+    const day = new Date(mon); day.setDate(mon.getDate() + i);
+    const p = plannedFor(day);
+    if(p) return /deload|taper/i.test(p.title || '');
+  }
+  // A dated block has already answered: no marker anywhere in the week means a
+  // build week. Only fall back to the every-fourth-week rule for blocks that
+  // carry no dated long days at all - otherwise week 4 of Block 1, which is the
+  // Three Sisters trip, was being called a deload.
+  if(blockIsDated(block)) return false;
+  return weekOfBlockOn(block, mon) % 4 === 0;
+}
+
+// Position in the three-week build ladder, counting only weeks that are not
+// deloads - so a deload pauses the ladder rather than consuming a rung.
+function buildWeekOf(block, d){
+  const target = mondayOfWeek(d).getTime();
+  let n = 0;
+  for(let m = mondayOfWeek(toDate(block.start)); m.getTime() <= target; m.setDate(m.getDate() + 7)){
+    if(!isDeloadWeek(block, m)) n++;
+  }
+  return n;
+}
+
+const TOLERANCE_NOTE = 'If the week’s running miles are at or over Garmin’s running ' +
+  'tolerance, drop Friday to a walk before cutting anything else.';
+
+// TUESDAY — uphill tempo on a four-week cycle: 3x5, 3x10, 2x15, easy. Holz's
+// structure. Replaces the fixed LeBron prescription, which never got harder.
+const UPHILL_LADDER = ['3 × 5 min', '3 × 10 min', '2 × 15 min'];
+
+function tuesdayWorkout(block, d){
+  const m = runMin(block);
+  const slot = Math.max(0, buildWeekOf(block, d) - 1) % 3;
+  if(isDeloadWeek(block, d)){
+    return { title: 'Uphill tempo — easy week',
+      desc: '2 × 5 min at tempo, no strides, ' + Math.round(m.tue * 0.7) + ' min total. Deload '
+          + 'week: keep the frequency, cut the intensity. The ladder pauses here rather than '
+          + 'advancing \u2014 next week picks up where it left off. ' + TOLERANCE_NOTE };
+  }
+  return { title: 'Uphill tempo intervals + power strides',
+    desc: UPHILL_LADDER[slot] + ' uphill at Z3 (137–157 bpm), then 5 × 20 sec power strides '
+        + 'at about 85% effort on a moderate grade. Easy 20 min either side, ' + m.tue
+        + ' min total. Week ' + (slot + 1) + ' of 3 on the ladder — it is meant to '
+        + 'progress, so do not leave it at 3 × 5. ' + TOLERANCE_NOTE };
+}
+
+// WEDNESDAY — easy aerobic plus the eccentric strength that used to sit on
+// Monday. Step-downs and single-leg RDLs are the quad armour; the loaded
+// carries are the unsupported-specific part.
+function wednesdayWorkout(block){
+  const m = runMin(block);
+  return { title: 'Easy run + eccentric strength',
+    desc: m.wed + ' min easy Z2 (118–137 bpm), on trail if you can get to it, then 30 min of '
+        + 'strength: single-leg box step-downs 3 × 10, weighted step-ups with the pack '
+        + '3 × 12, single-leg RDLs 3 × 10, loaded carries. The step-downs are the session '
+        + '— lower slowly; that slow lowering is the load the descent asks for. '
+        + TOLERANCE_NOTE };
+}
+
+// THURSDAY — the session the plan was missing. Bigfoot loses 45,563 ft, more
+// than it climbs, and nothing in the old week descended on purpose.
 function thursdayWorkout(block, d){
-  if(block.id === 1){
-    return { title:'LeBron ramp repeats', desc:'10–12 reps, run up / walk down, 150–160 bpm. Real vertical here is modest (~250–300 ft) \u2014 Monday\u2019s incline intervals are the actual vertical-volume session; this one is about real-terrain movement.' };
-  }
-  const wk = weekOfBlockOn(block, d);
-  if(wk % 2 === 0){
-    return { title:'LeBron ramp — down-focus', desc:'Walk up conservatively, run down under control at race effort. Builds the eccentric quad durability the course\u2019s 45,563 ft of descent demands \u2014 the point isn\u2019t vertical volume, it\u2019s the descent itself.' };
-  }
-  return { title:'LeBron ramp — up-focus', desc:'Run up, walk down, 150–160 bpm. Real-terrain movement, not a vertical-volume session \u2014 Monday\u2019s incline intervals cover that.' };
+  const m = runMin(block);
+  const deload = isDeloadWeek(block, d);
+  // 15 / 20 / 25 across the build ladder, back to 10 on a deload.
+  const cont = deload ? 10 : 15 + 5 * (Math.max(0, buildWeekOf(block, d) - 1) % 3);
+  const mins = deload ? Math.round(m.thu * 0.7) : m.thu;
+  return { title: 'Sustained downhill — quad armour',
+    desc: mins + ' min built around ' + cont + ' min of CONTINUOUS descent. Light feet, high '
+        + 'cadence, no braking — let the legs absorb it rather than the joints. On rock '
+        + 'rather than loam, and late in the day on legs that are already tired. This is the '
+        + 'most race-specific session of the week: the course descends more than it climbs, '
+        + 'and Block 1’s question is whether you can descend hard without wrecking your '
+        + 'quads. Watch the descent HR gap — target is 15 bpm below climb HR; it was 8 on '
+        + 'Sep 13. ' + TOLERANCE_NOTE };
+}
+
+// FRIDAY — short, easy, and the first thing to become a walk when the running
+// ramp is running hot.
+function fridayWorkout(block){
+  const m = runMin(block);
+  return { title: 'Recovery jog',
+    desc: m.fri + ' min at Z1 (98–118 bpm), easy enough to hold a conversation the whole way. '
+        + 'This is the release valve: if running miles are at or over tolerance this week, '
+        + 'walk it instead. Saturday is recovery and Sunday is the long day.' };
 }
 
 function scheduleFor(date){
@@ -158,11 +277,11 @@ function scheduleFor(date){
   const block = blockFor(date);
   const dow = date.getDay(); // 0 Sun .. 6 Sat
   switch(dow){
-    case 1: return { title:'Strength A + incline intervals', desc:'4×3 min, 150–160 bpm, 15–18% grade treadmill.' };
-    case 2: return { title:'Rest + capped walk', desc:'Up to 3 miles / under 1 hour. Not training — doesn\u2019t count toward compliance.' };
-    case 3: return { title:'Easy run', desc:'25–30 min, Nike Jogging Trail.' };
+    case 1: return { title:'Full rest', desc:'No running, no strength, no capped walk that turns into three miles. Yesterday was the long day and this is where it gets absorbed \u2014 one forced rest day a week is the single piece of published coaching every source agrees on.' };
+    case 2: return tuesdayWorkout(block, date);
+    case 3: return wednesdayWorkout(block);
     case 4: return thursdayWorkout(block, date);
-    case 5: return { title:'Rest', desc:'Full rest day.' };
+    case 5: return fridayWorkout(block);
     case 6: return saturdayWorkout(block, date);
     case 0: return sundayWorkout(block, date);
   }

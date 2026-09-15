@@ -19,8 +19,9 @@
         "hoursPerWeek": 12,
         "vertFtPerWeek": 3500,
         "milesPerWeek": 45,
-        "peakDayHours": 8,
-        "nightHoursCumulative": 3
+        "peakDayHours": 6,
+        "nightHoursCumulative": 3,
+        "volumeDayCapHours": 8
       }
     },
     {
@@ -35,8 +36,9 @@
         "hoursPerWeek": 14,
         "vertFtPerWeek": 5000,
         "milesPerWeek": 50,
-        "peakDayHours": 10,
-        "nightHoursCumulative": 6
+        "peakDayHours": 8,
+        "nightHoursCumulative": 6,
+        "volumeDayCapHours": 8
       }
     },
     {
@@ -51,8 +53,9 @@
         "hoursPerWeek": 16,
         "vertFtPerWeek": 6500,
         "milesPerWeek": 55,
-        "peakDayHours": 12,
-        "nightHoursCumulative": 12
+        "peakDayHours": 10,
+        "nightHoursCumulative": 12,
+        "volumeDayCapHours": 8
       }
     },
     {
@@ -67,8 +70,9 @@
         "hoursPerWeek": 18,
         "vertFtPerWeek": 8000,
         "milesPerWeek": 60,
-        "peakDayHours": 16,
-        "nightHoursCumulative": 20
+        "peakDayHours": 14,
+        "nightHoursCumulative": 20,
+        "volumeDayCapHours": 8
       }
     },
     {
@@ -84,8 +88,9 @@
         "hoursPerWeek": 21,
         "vertFtPerWeek": 10000,
         "milesPerWeek": 65,
-        "peakDayHours": 20,
-        "nightHoursCumulative": 30
+        "peakDayHours": 16,
+        "nightHoursCumulative": 30,
+        "volumeDayCapHours": 8
       }
     }
   ],
