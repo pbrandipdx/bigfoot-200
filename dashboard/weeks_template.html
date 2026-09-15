@@ -40,30 +40,51 @@
   .bk-tgt{font-size:12.5px;color:var(--amber-deep);flex-basis:100%}
   @media(min-width:620px){.bk-tgt{flex-basis:auto;margin-left:auto}}
 
-  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px}
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 24px}
   /* block recap - visible whether the block is open or closed */
   .recap{flex-basis:100%;display:flex;flex-wrap:wrap;gap:0;margin:10px 0 2px;
     border:1px solid var(--line);border-radius:5px;background:var(--white);
     overflow:hidden}
-  .st{flex:1 1 33.333%;min-width:104px;padding:9px 11px;
+  .st{flex:1 1 33.333%;min-width:100px;padding:8px 11px 9px;
     border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
   .st:nth-child(3n){border-right:0}
   .st-k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;
     color:var(--ink-faint);font-weight:600}
-  .st-v{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;
-    line-height:1.25;margin-top:2px}
+  .st-v{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;
+    line-height:1.2;margin-top:3px;letter-spacing:-.01em}
   .st-s{font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
   .st-v .hit{color:var(--good)} .st-v .miss{color:var(--bad)}
   @media(min-width:620px){ .st{flex:1 1 0} .st:nth-child(3n){border-right:1px solid var(--line)}
     .st:last-child{border-right:0} .recap{flex-wrap:nowrap} }
   @media(max-width:619px){ .st{border-bottom:1px solid var(--line)} }
 
-  table{border-collapse:collapse;width:100%;font-size:13.5px}
-  td.m{line-height:1.3;white-space:nowrap}
-  .mv{display:block;font-weight:600;font-variant-numeric:tabular-nums}
-  .mp{font-weight:400;color:var(--ink-faint);font-size:12px}
-  .mpct{display:block;font-size:11.5px;font-variant-numeric:tabular-nums;
-    color:var(--ink-faint)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;table-layout:fixed}
+  col.c-week{width:174px} col.c-m{width:104px}
+  .longmob{display:none}
+  /* Phones: there is no room for a separate Long day column - at 390px it was
+     squeezed to zero and every session title spilled into the numbers. Fold the
+     title into the week cell and let the numbers stack instead. */
+  @media(max-width:600px){
+    /* The cell stays in the row - removing it would shift every later cell
+       into the wrong column - but the column is zero-wide and its content
+       hidden, so it paints nothing. */
+    col.c-week{width:auto} col.c-long{width:0} col.c-m{width:64px}
+    th.long-col{font-size:0;padding:0}
+    td.long-col{padding:0;overflow:hidden}
+    td.long-col>*{display:none}
+    .longmob{display:block;font-weight:500;color:var(--ink-soft);
+      font-size:12.5px;line-height:1.35;margin-top:3px;white-space:normal}
+    .longmob .vert{font-size:11.5px}
+    .mp{display:block;margin-top:0}
+    .thlg{display:none}
+  }
+  @media(max-width:360px){ col.c-m{width:58px} td.m,th.m{font-size:11.8px} }
+  td.m,th.m{padding-right:0}
+  td.m{line-height:1.28;white-space:nowrap}
+  .mv{display:block;font-weight:600;font-variant-numeric:tabular-nums;font-size:13.5px}
+  .mp{font-weight:400;color:var(--ink-faint);font-size:11.5px}
+  .mpct{display:block;font-size:11px;font-variant-numeric:tabular-nums;
+    color:var(--ink-faint);margin-top:1px}
   .mpct.hit{color:var(--good);font-weight:600}
   .mpct.miss{color:var(--bad);font-weight:600}
   @media(max-width:600px){
@@ -71,19 +92,23 @@
     body{font-size:14px}
     td.m,th.m{font-size:12.5px}
   }
-  th{text-align:left;font-weight:500;color:var(--ink-faint);font-size:11.5px;
-    text-transform:uppercase;letter-spacing:.04em;padding:0 8px 7px 0;
+  th{text-align:left;font-weight:600;color:var(--ink-faint);font-size:10.5px;
+    text-transform:uppercase;letter-spacing:.06em;padding:0 10px 8px 0;
     border-bottom:1px solid var(--line);white-space:nowrap}
-  td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:nth-child(2){white-space:normal;overflow-wrap:anywhere}
+  tbody tr:last-child td{border-bottom:0}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   tr.now td{background:var(--paper-2)}
   tr.now td:first-child{box-shadow:inset 2px 0 0 var(--amber-deep)}
   tr.done td{color:var(--ink-soft)}
   tr.race td{background:rgba(176,121,58,.10)}
   tr.wkrow{cursor:pointer}
-  tr.wkrow:hover td{background:var(--paper-2)}
-  tr.wkrow td:first-child{padding-left:20px;position:relative}
-  tr.wkrow td:first-child::before{content:'';position:absolute;left:4px;top:15px;
+  tr.wkrow:hover td{background:rgba(32,64,44,.045)}
+  tr.wkrow.open td{background:rgba(32,64,44,.05)}
+  tr.wkrow:focus-visible td{outline:2px solid var(--forest);outline-offset:-2px}
+  tr.wkrow td:first-child{padding-left:19px;position:relative}
+  tr.wkrow td:first-child::before{content:'';position:absolute;left:3px;top:17px;
     width:5px;height:5px;border-right:1.5px solid var(--ink-faint);
     border-bottom:1.5px solid var(--ink-faint);
     transform:rotate(-45deg);transition:transform .15s}
@@ -91,19 +116,25 @@
   tr.now td:first-child{box-shadow:inset 2px 0 0 var(--amber-deep)}
   tr.day{display:none}
   tr.day.show{display:table-row}
-  tr.day td{background:var(--paper-2);border-bottom:1px solid var(--line);
-    padding-top:7px;padding-bottom:7px;font-size:13px}
-  tr.day td:first-child{padding-left:20px}
-  tr.day.dnow td{background:rgba(176,121,58,.12)}
-  .dname{font-weight:600;white-space:nowrap}
-  .ddate{color:var(--ink-faint);font-weight:400;font-size:12px}
-  .dtitle{font-weight:500}
-  .ddesc{display:block;color:var(--ink-faint);font-size:12.5px;line-height:1.5}
-  .wk{font-weight:600;white-space:nowrap}
+  tr.day.show{background:var(--paper-2)}
+  tr.day td{background:transparent;padding:8px 10px 8px 0;font-size:12.8px;
+    border-bottom:1px solid rgba(199,204,190,.55)}
+  tr.day td:first-child{padding-left:16px;border-left:3px solid rgba(199,204,190,.9)}
+  tr.day.dlast td{border-bottom:1px solid var(--line)}
+  tr.day.dnow.show{background:rgba(176,121,58,.13)}
+  tr.day.dnow td:first-child{border-left-color:var(--amber)}
+  td.dname{font-weight:600;white-space:normal}
+  .ddate{color:var(--ink-faint);font-weight:400;font-size:11.5px;display:block;
+    margin-top:1px}
+  .ddate .tag{margin-left:0}
+  .dtitle{font-weight:600}
+  .ddesc{display:block;color:var(--ink-faint);font-size:12.3px;line-height:1.5;margin-top:1px}
+  .wk{font-weight:600;white-space:normal;line-height:1.35}
+  .wk .wknum{white-space:nowrap}
   .dates{color:var(--ink-faint);font-size:12px;display:block;font-weight:400}
-  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
-    text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-left:6px;
-    vertical-align:1px}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;padding:2px 5px;border-radius:3px;margin:0 0 0 5px;
+    vertical-align:1px;white-space:nowrap}
   .t-race{background:var(--amber-deep);color:var(--white)}
   .t-deload{background:var(--paper-2);color:var(--ink-faint);border:1px solid var(--line)}
   .t-now{background:var(--forest);color:var(--white)}
@@ -185,10 +216,10 @@ function dayRowsHtml(monday){
     const d = new Date(monday); d.setDate(monday.getDate()+i);
     const w = scheduleFor(d);
     const isToday = iso(d) === iso(today);
-    out += `<tr class="day${isToday ? ' dnow' : ''}">
-      <td class="dname">${DAYS[i]} <span class="ddate">${fmt(d)}</span>${
-        isToday ? ' <span class="tag t-now">today</span>' : ''}</td>
-      <td colspan="3"><span class="dtitle">${w.title}</span>
+    out += `<tr class="day${isToday ? ' dnow' : ''}${i === 6 ? ' dlast' : ''}">
+      <td class="dname">${DAYS[i]}<span class="ddate">${fmt(d)}${
+        isToday ? ' <span class="tag t-now">today</span>' : ''}</span></td>
+      <td colspan="4"><span class="dtitle">${w.title}</span>
         <span class="ddesc">${w.desc || ''}</span></td></tr>`;
   }
   return out;
@@ -199,7 +230,9 @@ function dayRowsHtml(monday){
 function metric(actual, target, fmtf){
   const t = target ? fmtf(target) : '—';
   if(actual === undefined || actual === null)
-    return `<span class="pend">— / ${t}</span>`;
+    // Same two-part shape as a logged week, so it stacks the same way when
+    // .mp goes display:block on phones.
+    return `<span class="mv pend">— <span class="mp">/ ${t}</span></span>`;
   const p = target ? Math.round(100*actual/target) : null;
   const cl = p === null ? '' : (p >= 90 ? 'hit' : (p >= 70 ? '' : 'miss'));
   return `<span class="mv">${fmtf(actual)} <span class="mp">/ ${t}</span></span>` +
@@ -249,9 +282,15 @@ function render(){
       const wid = `${blk.id}-${i}`;
       rows += `<tr class="wkrow ${cls}" data-w="${wid}" tabindex="0" role="button"
                    aria-expanded="false" aria-controls="d-${wid}">
-        <td class="wk">Wk ${i+1}${tags.join('')}
-          <span class="dates">${fmt(m)} – ${fmt(sun)}</span></td>
-        <td><span class="long">${h.title}</span>${
+        <td class="wk"><span class="wknum">Wk ${i+1}</span>${tags.join('')}
+          <span class="dates">${fmt(m)} – ${fmt(sun)}</span>
+          <span class="longmob">${h.title}${
+            h.vert && !/^(race|multi-day|—)$/.test(h.vert)
+              ? ` <span class="vert">· ${h.vert}</span>` : ''}${
+            rs.filter(r => !h.title.includes(r.name)).length
+              ? ` <span class="vert">· ${rs.filter(r => !h.title.includes(r.name))
+                   .map(r=>r.name).join(' · ')}</span>` : ''}</span></td>
+        <td class="long-col"><span class="long">${h.title}</span>${
             h.vert && !/^(race|multi-day|—)$/.test(h.vert)
               ? ` <span class="vert">· ${h.vert}</span>` : ''}${
             rs.filter(r => !h.title.includes(r.name)).length
@@ -310,9 +349,11 @@ function render(){
         ${recap}
       </summary>
       <div class="tscroll"><table>
+        <colgroup><col class="c-week"><col class="c-long"><col class="c-m"><col class="c-m"><col class="c-m"></colgroup>
         <thead><tr>
-          <th>Week</th><th>Long day</th>
-          <th class="num m">Time on feet</th><th class="num m">Miles</th><th class="num m">Vert</th>
+          <th>Week</th><th class="long-col">Long day</th>
+          <th class="num m">Time<span class="thlg"> on feet</span></th>
+          <th class="num m">Miles</th><th class="num m">Vert</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table></div>`;
