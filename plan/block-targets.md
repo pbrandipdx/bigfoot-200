@@ -30,6 +30,7 @@ be re-dated if a weekend moves again.
 
 ## The week, rebuilt 2026-09-15
 
+> Blocks 5, 7 and 8 have no race chosen yet and are marked *draft* on the Review page.
 > The full argument behind this rebuild — what an outside review got right, what
 > it got wrong, and what was rejected — is in `plan/plan-revisions.md`. The
 > review itself is archived at `plan/reviews/`.
@@ -50,7 +51,7 @@ can still run on day four.
 | **Sunday** | **The long day.** |
 
 Session length ramps by block — 45 min midweek in Block 1, up to 90 on
-Thursdays by Block 4 — because **frequency, not one big day, is how running
+Thursdays in Block 8 — because **frequency, not one big day, is how running
 tolerance rises.** Five short days already spends a 12 mi/week tolerance.
 
 **The release valve, stated on every running day:** if the week's running miles
@@ -79,7 +80,7 @@ precisely because they cost less than one enormous effort.
 
 A long day run for **night movement, a real sleep stop, and aid rehearsal** is a
 different session with a different purpose, and back-to-backs cannot substitute
-for it. Blocks 4 and 5 each keep one, at 14 and 16 hours. Neither is an aerobic
+for it. Blocks 5 and 8 each keep one, at 14 and 16 hours. Neither is an aerobic
 workout — they exist so that hour 18, in the dark, alone, is not new information
 on race day.
 
@@ -126,10 +127,10 @@ the least informative number here.
 `bigfoot-200-training` Supabase project (`garmin_daily`, `garmin_training`,
 `activities`) with full provenance in each row's `raw`.*
 
-> **The plan was written off an overstated baseline.** Time on feet, vertical and
-> miles are all 27–43% below what the block targets were scaled from. Every
-> target below inherits that error and should be read as aspirational rather
-> than calibrated until rescaled.
+> **Rescaled 2026-09-11, then rebuilt 2026-09-15.** The original targets were scaled
+> from a baseline 27–43% above what was actually being trained. They were shifted down
+> once, then rebuilt entirely when the race moved to 2028 and the plan went from five
+> blocks to nine. The block numbers below are the current ones.
 
 ---
 
@@ -408,9 +409,9 @@ load it is the steepest thing in the plan. *(Added 2026-09-15.)*
 
 ## VO2 max — monitor, do not chase
 
-Current **42.0**. Expect 43–46 by Bighorn as a byproduct.
+Current **42.0**. Expect it to drift up as a byproduct of two years of volume. Not a target.
 
-It will likely **decline during Blocks 4 and 5.** That is normal under high
+It will likely **decline during Blocks 8 and 9.** That is normal under high
 volume and is not a warning sign. For a 105-hour race, VO2 max is close to
 irrelevant. If you find yourself training to move this number, you are training
 for the wrong race.
@@ -440,9 +441,9 @@ new downgrade trigger, one day short of the stop trigger.
 
 Train **rested**, race deprived.
 
-- **7+ hr/night** through Blocks 1–4
+- **7+ hr/night** through Blocks 1–8
 - Sleep score 75+ on the two nights before any long day
-- The deliberate sleep-deprived sessions in Block 4 are the *only* exception
+- The deliberate sleep-deprived sessions in Blocks 7–8 are the *only* exception
 - Chronic under-sleeping during a build is how this goes wrong
 
 ## Body Battery
@@ -539,8 +540,8 @@ the week rather than in a list of things to do:
 | When | Target | Why |
 |---|---|---|
 | Block 1 | **60–70 g/hr** | Start where your gut already is |
-| Block 2–3 | **70–90 g/hr** | Build tolerance on every long day |
-| Block 4–5 | **90–100 g/hr** | Race rehearsal, with race food, from the pack |
+| Blocks 2–4, 6–7 | **70–90 g/hr** | Build tolerance on every long day |
+| Blocks 5, 8–9 | **90–100 g/hr** | Race rehearsal, with race food, from the pack |
 | Ceiling | 120 g/hr (Holz) | Only if the gut gets there — it is trained, not chosen |
 
 Rehearse on **every** long day with the food you will actually carry. "Eat every
@@ -555,7 +556,8 @@ tolerance* above.
 
 1. **Night hours accumulate on schedule.** Zero today. This is the cheapest gap
    to close and the one most likely to be skipped.
-2. **Bighorn is a gate, not a formality.** Decide the rule now.
+2. **The 2028 gate race is a gate, not a formality.** A controlled finish means sub-100 is
+   live; a finish that costs two weeks means race Bigfoot to finish; a DNF means defer.
 3. **Descent training happens on rock**, not loam, and late in the day.
 4. **Feet get managed from hour five**, not hour nine. Practice in training.
 5. **Eat every 40 minutes** on every long day, including when you don't want to —

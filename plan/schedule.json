@@ -41,8 +41,7 @@
         "peakDayHours": 8,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 6
-      },
-      "provisional": true
+      }
     },
     {
       "id": 3,
@@ -59,8 +58,7 @@
         "peakDayHours": 10,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 10
-      },
-      "provisional": true
+      }
     },
     {
       "id": 4,
@@ -77,8 +75,7 @@
         "peakDayHours": 8,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 12
-      },
-      "provisional": true
+      }
     },
     {
       "id": 5,
@@ -113,8 +110,7 @@
         "peakDayHours": 10,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 20
-      },
-      "provisional": true
+      }
     },
     {
       "id": 7,
@@ -168,8 +164,7 @@
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 40
       },
-      "taper": true,
-      "provisional": true
+      "taper": true
     }
   ],
   "races": [
