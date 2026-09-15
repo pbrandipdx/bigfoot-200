@@ -99,63 +99,136 @@
       "name": "Three Sisters Loop",
       "start": "2026-10-02",
       "end": "2026-10-05",
-      "tag": "multi-day · first sleep-stop practice"
+      "tag": "multi-day · first sleep-stop practice",
+      "signup": "https://www.recreation.gov/permits/4675311",
+      "signupLabel": "Recreation.gov · Central Cascades overnight permit",
+      "signupStatus": "open",
+      "signupNote": "Permit, not a race. Quota season; book the moment your date is bookable.",
+      "taperDays": 1,
+      "recoveryDays": 2
     },
     {
       "name": "Run the Rock 25K",
       "start": "2026-11-07",
       "end": "2026-11-07",
-      "tag": "first trail race · ~4-5 hr"
+      "tag": "first trail race · ~4-5 hr",
+      "signup": "https://ultrasignup.com/register.aspx?did=132453",
+      "signupLabel": "UltraSignup · Run the Rock",
+      "signupStatus": "open",
+      "taperDays": 2,
+      "recoveryDays": 2
     },
     {
       "name": "West Linn Turkey Trot",
       "start": "2026-11-26",
       "end": "2026-11-26",
-      "tag": "tune-up"
+      "tag": "tune-up",
+      "signup": "https://runsignup.com/Race/OR/WestLinn/WestLinnTurkeyTrot",
+      "signupLabel": "RunSignup · West Linn Turkey Trot",
+      "signupStatus": "open",
+      "taperDays": 1,
+      "recoveryDays": 1
     },
     {
       "name": "St. Jude Memphis Half Marathon",
       "start": "2026-12-05",
       "end": "2026-12-05",
-      "tag": "tune-up"
+      "tag": "tune-up",
+      "signup": "https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon/register.html",
+      "signupLabel": "stjude.org · Memphis Marathon Weekend",
+      "signupStatus": "open",
+      "taperDays": 2,
+      "recoveryDays": 2
     },
     {
       "name": "Frozen Trail Run Fest 50K",
       "start": "2026-12-12",
       "end": "2026-12-12",
-      "tag": "FIRST ULTRA · Block 1 checkpoint"
+      "tag": "FIRST ULTRA · Block 1 checkpoint",
+      "signup": "https://runsignup.com/Race/OR/Eugene/FrozenTrailRunFest",
+      "signupLabel": "RunSignup · Frozen Trail Run Fest",
+      "signupStatus": "open",
+      "signupNote": "First ultra. Register early — this one anchors Block 1.",
+      "taperDays": 3,
+      "recoveryDays": 4
     },
     {
       "name": "BURT 55K",
       "start": "2027-02-06",
       "end": "2027-02-06",
-      "tag": "one 33-mi loop, 4,000 ft · aid-station rehearsal · the 100-mile and 110K options are also open — see plan-revisions.md"
+      "tag": "one 33-mi loop, 4,000 ft · aid-station rehearsal · the 100-mile and 110K options are also open — see plan-revisions.md",
+      "signup": "https://ultrasignup.com/register.aspx?did=130776",
+      "signupLabel": "UltraSignup · BURT 100 (2026 listing)",
+      "signupStatus": "not-yet-open",
+      "signupNote": "2027 listing not posted as of Sep 2026. This is the Feb 2026 page — watch it for the 2027 rollover.",
+      "taperDays": 3,
+      "recoveryDays": 5
     },
     {
       "name": "Hagg Mud 50K",
       "start": "2027-02-15",
       "end": "2027-02-15",
-      "tag": "tune-up · date approximate · only 9 days after BURT, check both"
+      "tag": "tune-up · date approximate · only 9 days after BURT, check both",
+      "signup": "https://ultrasignup.com/register.aspx?did=125080",
+      "signupLabel": "UltraSignup · Hagg Mud (2026 listing)",
+      "signupStatus": "not-yet-open",
+      "signupNote": "2027 listing not posted as of Sep 2026. Date here is an estimate.",
+      "taperDays": 3,
+      "recoveryDays": 4
     },
     {
       "name": "Gorge Waterfalls 100K",
       "start": "2027-04-16",
       "end": "2027-04-16",
-      "tag": "FIRST 100K · **WS QUALIFIER** · 17 hr cutoff · this is the one that banks the qualifier"
+      "tag": "FIRST 100K · WS QUALIFIER · 17 hr cutoff · this is the one that banks the qualifier",
+      "signup": "https://ultrasignup.com/register.aspx?did=138921",
+      "signupLabel": "UltraSignup · Gorge Waterfalls 2027",
+      "signupStatus": "opens-later",
+      "signupNote": "REGISTRATION OPENS MON OCT 5, 2026 @ 6:00 AM PT. Sells out fast. This is the WS qualifier — set an alarm.",
+      "taperDays": 5,
+      "recoveryDays": 10
     },
     {
       "name": "Strawberry Fields Forever 100",
       "start": "2027-06-19",
       "end": "2027-06-19",
-      "tag": "FIRST 100-MILER · THE GATE · 10K loop × 16 at North Bonneville, ~3,200 ft, 30 hr limit, can drop to 100K/50K and still finish · DATE ESTIMATED, 2027 not yet published · NOT a WS qualifier — Gorge Waterfalls in April is",
+      "tag": "FIRST 100-MILER · THE GATE · daytime start · 10K loop × 16 at North Bonneville (~45 min away), ~3,200 ft, 30 hr limit · can drop to 100K/50K and still finish, which is why this is the gate and not SISU · DATE ESTIMATED, 2027 not yet published · NOT a WS qualifier — Gorge Waterfalls in April is",
       "link": "https://columbiagorgerunningclub.com/strawberry-fields-forever/",
-      "linkLabel": "Columbia Gorge Running Club · Strawberry Fields Forever"
+      "linkLabel": "Columbia Gorge Running Club · Strawberry Fields Forever",
+      "signup": "https://ultrasignup.com/register.aspx?did=132001",
+      "signupLabel": "UltraSignup · Strawberry Fields (2026 listing)",
+      "signupStatus": "not-yet-open",
+      "signupNote": "2027 listing not posted as of Sep 2026. Date here is an estimate.",
+      "badge": "THE GATE",
+      "taperDays": 5,
+      "recoveryDays": 14
+    },
+    {
+      "name": "SISU 100",
+      "start": "2027-06-25",
+      "end": "2027-06-27",
+      "tag": "SECOND 100-MILE ATTEMPT · 6 days after Strawberry Fields · Camp Sheppard, Enumclaw WA · 9:00 PM Friday night start — the only race on the ladder that makes you run through the first night from the gun, which is the exact Bigfoot skill · six marked mountain trails (3–19 mi), run each once (~57.5 mi) then repeat to 100, never the same trail 3× in a row · DECISION RULE: start this ONLY if Strawberry Fields did not happen, was cancelled, or you stopped before ~50 mi and recovered clean. If you finished 100 at Strawberry Fields, DO NOT START — take the finish and recover into Block 5.",
+      "link": "https://ultrasignup.com/register.aspx?did=141307",
+      "linkLabel": "UltraSignup · SISU 100 PNW",
+      "signup": "https://ultrasignup.com/register.aspx?did=141307",
+      "signupLabel": "UltraSignup · SISU 100 2027",
+      "signupStatus": "open",
+      "signupNote": "OPEN NOW — $160 through Sep 30, 2026, then $210. Closes Jun 4, 2027. Entering both is the point: cheap insurance, and you decide on Jun 20.",
+      "badge": "SECOND CHANCE",
+      "taperDays": 3,
+      "recoveryDays": 14
     },
     {
       "name": "Bigfoot 200",
       "start": "2027-08-13",
       "end": "2027-08-13",
-      "tag": "A race · 97:00 schedule, sub-100 goal"
+      "tag": "A race · 97:00 schedule, sub-100 goal",
+      "signup": "https://ultrasignup.com/register.aspx?did=142345",
+      "signupLabel": "UltraSignup · Bigfoot 200 2027",
+      "signupStatus": "closed",
+      "signupNote": "2027 lottery ran Aug 28, 2026 and the race is SOLD OUT. Waitlist is free to join. Confirm your entry status.",
+      "taperDays": 7,
+      "recoveryDays": 0
     }
   ],
   "longDays": [

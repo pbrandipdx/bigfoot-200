@@ -27,9 +27,104 @@ function weekOfBlockOn(block, d){
 }
 
 // The race covering this date, if any. Multi-day races cover every day in range.
+// A race flagged `backup:true` would be excluded here so it could not blank out
+// a training week for a start that may never happen. Nothing carries that flag
+// right now - SISU 100 is entered as a real second attempt - but the guard
+// stays so adding one later does not silently erase a week.
 function raceOn(d){
   return (typeof RACES === 'undefined' ? [] : RACES)
-    .find(r => d >= toDate(r.start) && d <= toDate(r.end)) || null;
+    .find(r => !r.backup && d >= toDate(r.start) && d <= toDate(r.end)) || null;
+}
+
+// Race shoulders. A race is not just its own day: the days before it have to
+// be a taper and the days after it have to be recovery, and until this existed
+// the calendar cheerfully printed 90-minute downhill quad sessions into the
+// six-day gap between Strawberry Fields and SISU. Each race carries its own
+// taperDays/recoveryDays in schedule.json - no distance guessing here.
+// Recovery outranks taper: you cannot taper into a race you have not recovered
+// from, and when the two overlap the honest answer is "you are still recovering".
+function shoulderOn(d){
+  const list = (typeof RACES === 'undefined' ? [] : RACES);
+  // Recovery windows overlap: SISU ends six days after Strawberry Fields, so a
+  // day in early July sits inside both. The MOST RECENT race is the one the legs
+  // are actually recovering from, so take the smallest n, not the first match.
+  let taper = null, recov = null;
+  for(const r of list){
+    if(r.backup) continue;
+    const rec = r.recoveryDays || 0, tap = r.taperDays || 0;
+    if(rec){
+      const n = daysBetween(toDate(r.end), d);
+      if(n >= 1 && n <= rec && (!recov || n < recov.n))
+        recov = { kind: 'recovery', race: r, n: n, of: rec };
+    }
+    if(tap){
+      const n = daysBetween(d, toDate(r.start));
+      if(n >= 1 && n <= tap && (!taper || n < taper.n))
+        taper = { kind: 'taper', race: r, n: n, of: tap };
+    }
+  }
+  return recov || taper;
+}
+
+function shoulderSession(sh, date){
+  const dow = date.getDay();
+  if(sh.kind === 'recovery'){
+    const easy = sh.n <= 2
+      ? 'Nothing, or a flat walk under 30 min. No running.'
+      : (sh.n <= 5
+        ? 'Walk, or 20-30 min shuffle on flat ground if it feels genuinely good. Stop early.'
+        : 'Easy Z2 only, flat, under an hour. No vertical, no intervals, no downhill.');
+    return sess('Recovery - day ' + sh.n + ' after ' + sh.race.name, [
+      { k: 'DO', v: easy },
+      { k: 'DO NOT', v: 'No uphill intervals, no eccentric strength, no sustained downhill. '
+        + 'The damage from ' + sh.race.name + ' is still being repaired and loading it now '
+        + 'is how a finish turns into an injury.' },
+      { k: 'WHY', v: 'Day ' + sh.n + ' of a ' + sh.of + '-day recovery window written into the plan '
+        + 'for this race, not a rule of thumb.' }
+    ]);
+  }
+  const body = (dow === 1)
+    ? 'Full rest.'
+    : (sh.n <= 2 ? 'Nothing, or 20-30 min very easy with 4 x 20 s strides to stay sharp.'
+                 : 'Easy Z2, 30-45 min, flat. Legs stay fresh.');
+  return sess('Taper - ' + sh.n + ' day' + (sh.n === 1 ? '' : 's') + ' to ' + sh.race.name, [
+    { k: 'DO', v: body },
+    { k: 'DO NOT', v: 'No vertical, no intervals, no downhill, no strength. '
+      + 'Nothing you do this week makes you fitter for ' + sh.race.name + '; '
+      + 'it can only make you more tired.' },
+    { k: 'WHY', v: 'Day ' + sh.n + ' of a ' + sh.of + '-day taper set for this race.' }
+  ]);
+}
+
+// The A race is the last NON-backup race on the ladder.
+function aRaceOf(list){
+  const real = (list || []).filter(r => !r.backup);
+  return real.length ? real[real.length - 1] : null;
+}
+
+// Signup links. Status drives the badge; a note explains anything non-obvious
+// (a date that has not been published, a registration window that has not
+// opened, a race that has already sold out).
+var SIGNUP_BADGE = {
+  'open':         { t: 'Register',       c: 'sg-open'  },
+  'opens-later':  { t: 'Opens later',    c: 'sg-soon'  },
+  'not-yet-open': { t: '2027 TBA',       c: 'sg-tba'   },
+  'closed':       { t: 'Sold out',       c: 'sg-shut'  }
+};
+function signupHtml(r){
+  if(!r || !r.signup) return '';
+  const b = SIGNUP_BADGE[r.signupStatus] || SIGNUP_BADGE['open'];
+  const lbl = String(r.signupLabel || 'Registration')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  let h = '<a class="signup ' + b.c + '" href="' + r.signup +
+          '" target="_blank" rel="noopener noreferrer" title="' + lbl + '">' +
+          b.t + '</a>';
+  if(r.signupNote){
+    h += '<div class="sg-note">' +
+         String(r.signupNote).replace(/&/g,'&amp;').replace(/</g,'&lt;') +
+         '</div>';
+  }
+  return h;
 }
 
 function ordinalOfMonth(d){
@@ -228,25 +323,65 @@ function buildWeekOf(block, d){
 const TOLERANCE_NOTE = 'If the week’s running miles are at or over Garmin’s running ' +
   'tolerance, drop Friday to a walk before cutting anything else.';
 
-// Indoor versions of the two terrain sessions. Portland in January, a dark
-// weeknight, or no time to reach a trail should cost the session's shape, not
-// the session. The treadmill numbers line up with the outdoor ones rather than
-// being a vague "do something on a machine".
-function treadmillUp(minutes, work){
-  return ' TREADMILL VERSION: 10 min flat warm-up, then ' + work + ' at 12\u201315% grade '
-       + 'holding Z3 (137\u2013157 bpm) \u2014 walk it fast rather than jogging badly, the grade '
-       + 'is what matters \u2014 with 2\u20133 min flat easy between. Strides become 5 \u00d7 20 sec '
-       + 'at 8\u201310% grade, stepping off the belt to recover. 10 min cool-down, '
-       + minutes + ' min total.';
+// ---------------------------------------------------------------------------
+// Sessions are structured, not prose. Each one can carry PARTS - a run
+// portion, a workout portion with its own movement list, an indoor
+// alternative - so the page can lay them out instead of printing a paragraph
+// and hoping. desc stays as a flattened string for anything that still wants
+// one.
+
+// Demo videos, checked 2026-09-15. If one rots, replace the URL here and every
+// page picks it up.
+const DEMO = {
+  stepDown:  'https://www.youtube.com/watch?v=Or4C-UQ63Xc',
+  stepUp:    'https://www.youtube.com/watch?v=tqECKZxlCKE',
+  slRdl:     'https://www.youtube.com/watch?v=Zfr6wizR8rs',
+  carry:     'https://www.youtube.com/watch?v=lLAw6fUccKA',
+  downhill:  'https://www.youtube.com/watch?v=md0vWMb8QrM',
+  hillReps:  'https://www.youtube.com/watch?v=JZJk7lld69E',
+  hillSprint:'https://www.youtube.com/watch?v=fZ85Ht6y8Vc'
+};
+
+function escHtml(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-const TREADMILL_DOWN =
-  ' TREADMILL VERSION: only if yours declines. Set \u22124 to \u22126% and run the continuous '
-  + 'block at easy effort, cadence 175\u2013180, short quick steps, no heel braking \u2014 the '
-  + 'point is the eccentric load, not the pace. If it does NOT decline, a treadmill cannot do '
-  + 'this session at all: use the LeBron ramp instead (walk up easy, run down under control, '
-  + 'repeat until the descent minutes add up), or a parking garage ramp, or stadium steps. '
-  + 'Note which you did \u2014 ramp repeats are not the same stimulus as one unbroken descent, '
-  + 'and the descent HR gap will show the difference.';
+
+// Flatten parts to a single sentence-ish string, for the places that still
+// take plain text.
+function partsToText(parts){
+  return (parts || []).map(p => {
+    const items = (p.items || []).map(it =>
+      it.n + (it.s ? ' ' + it.s : '')).join('; ');
+    return p.k + ': ' + [p.v, items].filter(Boolean).join(' ');
+  }).join('  ');
+}
+
+// One session, laid out. Used by the Today page and the Review tab, so they
+// cannot drift.
+function partsHtml(w){
+  if(!w || !w.parts || !w.parts.length) return '';
+  return '<div class="sparts">' + w.parts.map(p => {
+    const items = (p.items || []).map(it =>
+      '<li><span class="mv-n">' + escHtml(it.n) + '</span>'
+      + (it.s ? '<span class="mv-s">' + escHtml(it.s) + '</span>' : '')
+      + (it.u ? ' <a class="mv-d" href="' + escHtml(it.u) + '" target="_blank" '
+              + 'rel="noopener noreferrer">demo</a>' : '')
+      + '</li>').join('');
+    return '<div class="spart spart-' + p.k.toLowerCase().replace(/[^a-z]/g,'') + '">'
+         + '<div class="spart-k">' + escHtml(p.k) + '</div>'
+         + '<div class="spart-v">' + (p.v ? escHtml(p.v) : '')
+         + (items ? '<ul class="mvs">' + items + '</ul>' : '')
+         + '</div></div>';
+  }).join('') + '</div>';
+}
+
+// Build a session from parts, keeping desc in sync automatically.
+function sess(title, parts){
+  return { title: title, parts: parts, desc: partsToText(parts) };
+}
+
+
 
 // TUESDAY — uphill tempo on a four-week cycle: 3x5, 3x10, 2x15, easy. Holz's
 // structure. Replaces the fixed LeBron prescription, which never got harder.
@@ -264,74 +399,102 @@ const STRIDES_MIN = 6;   // 5 x 20 sec plus the walk back
 function tuesdayWorkout(block, d){
   const m = runMin(block);
   const slot = Math.max(0, buildWeekOf(block, d) - 1) % 3;
-  // Warm-up and cool-down come out of the block's easy-running budget; the
-  // session is then however long the work on top of it actually takes.
   const ends = Math.max(16, Math.round(m.tue * 0.45));
   const half = Math.round(ends / 2);
 
   if(isDeloadWeek(block, d)){
-    const total = ends + 13;
-    return { title: 'Uphill tempo \u2014 easy week',
-      desc: '2 \u00d7 5 min at tempo, 3 min easy between, no strides. ' + half
-          + ' min easy either side, about ' + total + ' min total. Deload week: keep the '
-          + 'frequency, cut the intensity. The ladder pauses here rather than advancing '
-          + '\u2014 next week picks up where it left off.'
-          + treadmillUp(total, '2 \u00d7 5 min') + ' ' + TOLERANCE_NOTE };
+    return sess('Uphill tempo \u2014 easy week', [
+      { k: 'Run', v: half + ' min easy either side, about ' + (ends + 13) + ' min total.' },
+      { k: 'Workout', v: '2 \u00d7 5 min at tempo, 3 min easy between. No strides. Deload '
+          + 'week: keep the frequency, cut the intensity \u2014 the ladder pauses here rather '
+          + 'than advancing, and next week picks up where it left off.' },
+      { k: 'Indoors', v: 'Treadmill: 10 min flat warm-up, 2 \u00d7 5 min at 12\u201315% grade '
+          + 'holding Z3, 10 min cool-down.' },
+      { k: 'If over tolerance', v: TOLERANCE_NOTE }
+    ]);
   }
 
   const rung = UPHILL_LADDER[slot];
   const total = ends + rung.work + rung.rec + STRIDES_MIN;
-  return { title: 'Uphill tempo intervals + power strides',
-    desc: rung.label + ' uphill at Z3 (137\u2013157 bpm), 3 min easy between, then 5 \u00d7 20 '
-        + 'sec power strides at about 85% effort on a moderate grade. ' + half + ' min easy '
-        + 'either side, about ' + total + ' min total'
-        + (slot > 0 ? ' \u2014 the session grows with the ladder, so this is a longer day than '
-                    + 'week 1' : '')
-        + '. Week ' + (slot + 1) + ' of 3: it is meant to progress, so do not leave it at '
-        + '3 \u00d7 5.'
-        + treadmillUp(total, rung.label) + ' ' + TOLERANCE_NOTE };
+  return sess('Uphill tempo intervals + power strides', [
+    { k: 'Run', v: half + ' min easy either side, about ' + total + ' min total.'
+        + (slot > 0 ? ' The session grows with the ladder \u2014 longer than week 1.' : '') },
+    { k: 'Workout', v: 'Week ' + (slot + 1) + ' of 3 on the ladder. It is meant to progress, '
+        + 'so do not leave it at 3 \u00d7 5.',
+      items: [
+        { n: rung.label + ' uphill', s: 'Z3, 137\u2013157 bpm \u00b7 3 min easy between',
+          u: DEMO.hillReps },
+        { n: 'Power hill strides', s: '5 \u00d7 20 sec at ~85% on a moderate grade',
+          u: DEMO.hillSprint }
+      ] },
+    { k: 'Indoors', v: 'Treadmill: 10 min flat warm-up, then ' + rung.label + ' at 12\u201315% '
+        + 'grade holding Z3 \u2014 walk it fast rather than jogging badly, the grade is what '
+        + 'matters \u2014 with 2\u20133 min flat easy between. Strides become 5 \u00d7 20 sec at '
+        + '8\u201310% grade, stepping off the belt to recover. 10 min cool-down.' },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // WEDNESDAY — easy aerobic plus the eccentric strength that used to sit on
 // Monday. Step-downs and single-leg RDLs are the quad armour; the loaded
 // carries are the unsupported-specific part.
 function wednesdayWorkout(block){
   const m = runMin(block);
-  return { title: 'Easy run + eccentric strength',
-    desc: m.wed + ' min easy Z2 (118–137 bpm), on trail if you can get to it, then 30 min of '
-        + 'strength: single-leg box step-downs 3 × 10, weighted step-ups with the pack '
-        + '3 × 12, single-leg RDLs 3 × 10, loaded carries. The step-downs are the session '
-        + '— lower slowly; that slow lowering is the load the descent asks for. '
-        + TOLERANCE_NOTE };
+  return sess('Easy run + eccentric strength', [
+    { k: 'Run', v: m.wed + ' min easy Z2 (118\u2013137 bpm), on trail if you can get to it.' },
+    { k: 'Workout', v: '30 min. The step-downs are the session \u2014 lower slowly; that slow '
+        + 'lowering is the load the descent asks for.',
+      items: [
+        { n: 'Single-leg box step-downs', s: '3 \u00d7 10', u: DEMO.stepDown },
+        { n: 'Weighted step-ups, with the pack', s: '3 \u00d7 12', u: DEMO.stepUp },
+        { n: 'Single-leg RDLs', s: '3 \u00d7 10', u: DEMO.slRdl },
+        { n: 'Loaded carries', s: '3 \u00d7 40 m', u: DEMO.carry }
+      ] },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // THURSDAY — the session the plan was missing. Bigfoot loses 45,563 ft, more
 // than it climbs, and nothing in the old week descended on purpose.
 function thursdayWorkout(block, d){
   const m = runMin(block);
   const deload = isDeloadWeek(block, d);
-  // 15 / 20 / 25 across the build ladder, back to 10 on a deload.
   const cont = deload ? 10 : 15 + 5 * (Math.max(0, buildWeekOf(block, d) - 1) % 3);
   const mins = deload ? Math.round(m.thu * 0.7) : m.thu;
-  return { title: 'Sustained downhill — quad armour',
-    desc: mins + ' min built around ' + cont + ' min of CONTINUOUS descent. Light feet, high '
-        + 'cadence, no braking — let the legs absorb it rather than the joints. On rock '
-        + 'rather than loam, and late in the day on legs that are already tired. This is the '
-        + 'most race-specific session of the week: the course descends more than it climbs, '
-        + 'and Block 1’s question is whether you can descend hard without wrecking your '
-        + 'quads. Watch the descent HR gap — target is 15 bpm below climb HR; it was 8 on '
-        + 'Sep 13.' + TREADMILL_DOWN + ' ' + TOLERANCE_NOTE };
+  return sess('Sustained downhill \u2014 quad armour', [
+    { k: 'Run', v: mins + ' min, on rock rather than loam, and late in the day on legs that '
+        + 'are already tired.' },
+    { k: 'Workout', v: 'The most race-specific session of the week: the course descends more '
+        + 'than it climbs, and Block 1\u2019s question is whether you can descend hard without '
+        + 'wrecking your quads.',
+      items: [
+        { n: cont + ' min of CONTINUOUS descent', s: 'light feet, high cadence, no braking',
+          u: DEMO.downhill }
+      ] },
+    { k: 'Watch', v: 'Descent HR gap \u2014 target is 15 bpm below climb HR. It was 8 on Sep 13.' },
+    { k: 'Indoors', v: 'Treadmill only if yours declines: \u22124 to \u22126% at easy effort, '
+        + 'cadence 175\u2013180. If it does not decline a treadmill cannot do this session at '
+        + 'all \u2014 use the LeBron ramp, a parking garage ramp, or stadium steps, and note '
+        + 'which, because repeats are not the same stimulus as one unbroken descent.' },
+    { k: 'If over tolerance', v: TOLERANCE_NOTE }
+  ]);
 }
+
 
 // FRIDAY — short, easy, and the first thing to become a walk when the running
 // ramp is running hot.
 function fridayWorkout(block){
   const m = runMin(block);
-  return { title: 'Recovery jog',
-    desc: m.fri + ' min at Z1 (98–118 bpm), easy enough to hold a conversation the whole way. '
-        + 'This is the release valve: if running miles are at or over tolerance this week, '
-        + 'walk it instead. Saturday is recovery and Sunday is the long day.' };
+  return sess('Recovery jog', [
+    { k: 'Run', v: m.fri + ' min at Z1 (98\u2013118 bpm), easy enough to hold a conversation '
+        + 'the whole way.' },
+    { k: 'If over tolerance', v: 'This is the release valve. If running miles are at or over '
+        + 'tolerance this week, walk it instead. Saturday is recovery and Sunday is the long day.' }
+  ]);
 }
+
 
 function scheduleFor(date){
   // A race outranks the weekly template. Most races here fall on a Saturday and
@@ -353,10 +516,15 @@ function scheduleFor(date){
 
   // Nothing is planned past the A race. Without this the final week printed a
   // recovery Saturday and a long-day Sunday after Bigfoot had already finished.
-  const aRace = (typeof RACES === 'undefined' || !RACES.length)
-    ? null : RACES[RACES.length - 1];
+  const aRace = (typeof RACES === 'undefined') ? null : aRaceOf(RACES);
   if(aRace && date > toDate(aRace.end))
     return { title: '—', desc: 'After ' + aRace.name + '. Nothing scheduled.' };
+
+  // A dated long day still wins inside a shoulder - those are deliberate, and a
+  // race weekend trip is dated. Otherwise the taper/recovery window outranks the
+  // weekly template, which knows nothing about what race is six days away.
+  const sh = shoulderOn(date);
+  if(sh && !plannedFor(date)) return shoulderSession(sh, date);
 
   // Use the block that CONTAINS this date. Looking two weeks ahead can cross a
   // block boundary, and currentBlock() would hand back today's block instead.

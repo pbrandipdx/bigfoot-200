@@ -69,12 +69,41 @@
     max-width:14ch;
   }
   .today-desc{font-size:17px;color:var(--ink-soft);max-width:58ch;margin-bottom:6px}
+  .today-desc.has-parts{font-size:15px;max-width:72ch}
+  .today-desc.has-parts .spart-k{flex-basis:88px;font-size:10px}
+  .today-desc.has-parts .spart-v{font-size:14.5px}
+  .today-desc.has-parts .mv-n{font-size:14.5px}
   a.routelink{display:block;width:fit-content;margin-top:5px;font-size:12.5px;
     color:var(--amber-deep);text-decoration:none;
     border-bottom:1px solid rgba(122,82,31,.35)}
   a.routelink::before{content:'\2197\00a0';font-size:11px}
   a.routelink:hover{border-bottom-color:var(--amber-deep)}
   #today-route a.routelink{font-size:13.5px;margin-top:10px}
+  /* Structured sessions. A day used to print one paragraph; it now lays out a
+     run portion, a workout portion with its own movement list, an indoor
+     alternative. Labels are the scan line - you should be able to find the run
+     without reading the prose. */
+  .sparts{display:block;margin-top:5px}
+  .spart{display:flex;gap:10px;align-items:baseline;margin-top:5px}
+  .spart-k{flex:0 0 74px;font-size:9.5px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--amber-deep);padding-top:2px;line-height:1.35}
+  .spart-v{flex:1 1 auto;color:var(--ink-soft);font-size:12.6px;line-height:1.5}
+  .spart-indoors .spart-k,.spart-ifovertolerance .spart-k{color:var(--ink-faint)}
+  .spart-indoors .spart-v,.spart-ifovertolerance .spart-v{color:var(--ink-faint);font-size:12px}
+  ul.mvs{list-style:none;margin:5px 0 0;padding:0}
+  ul.mvs li{display:flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline;
+    padding:3px 0 3px 11px;border-left:2px solid rgba(199,204,190,.85)}
+  .mv-n{font-weight:600;color:var(--ink)}
+  .mv-s{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  a.mv-d{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--amber-deep);text-decoration:none;border-bottom:1px solid rgba(122,82,31,.35)}
+  a.mv-d::before{content:'\25B7\00a0';font-size:9px}
+  a.mv-d:hover{border-bottom-color:var(--amber-deep)}
+  @media(max-width:600px){
+    .spart{display:block}
+    .spart-k{margin-bottom:1px}
+    .spart-v{font-size:12.4px}
+  }
   .today-meta{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0 8px;font-size:13px;color:var(--ink-faint)}
   .today-meta strong{color:var(--ink)}
 
@@ -128,6 +157,26 @@
   ol.ladder .lwhen{width:110px;flex-shrink:0;font-size:13px;color:var(--ink-faint);padding-top:1px}
   ol.ladder .lname{font-weight:500}
   ol.ladder .ltag{font-size:12px;color:var(--amber-deep);margin-top:2px}
+  ol.ladder .lbadge{display:inline-block;margin-left:7px;padding:1px 6px;border-radius:3px;
+    font-size:10px;font-weight:700;letter-spacing:.06em;vertical-align:1px;
+    background:#eceae4;color:#6b6659}
+  ol.ladder li.backup .lname{color:var(--ink-faint);font-weight:400}
+  ol.ladder .lsignup{margin-top:5px}
+  ol.ladder .lsignup:empty{display:none}
+  a.signup{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;
+    font-weight:600;letter-spacing:.03em;text-decoration:none;border:1px solid transparent}
+  a.signup:hover{text-decoration:underline}
+  a.signup.sg-open{background:var(--forest-deep,#2f5d3a);color:#fff}
+  a.signup.sg-soon{background:#fff3d6;color:#8a5a00;border-color:#e0c68a}
+  a.signup.sg-tba{background:#f2f1ec;color:#6b6659;border-color:#ddd9cf}
+  a.signup.sg-shut{background:#f7e9e6;color:#96392b;border-color:#e3c2bb}
+  .sg-note{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.45;max-width:52ch}
+  @media (prefers-color-scheme:dark){
+    ol.ladder .lbadge{background:#33322d;color:#a09a8c}
+    a.signup.sg-soon{background:#3a2f16;color:#e8c77a;border-color:#5a4a22}
+    a.signup.sg-tba{background:#2c2b27;color:#a09a8c;border-color:#403e38}
+    a.signup.sg-shut{background:#3a2420;color:#e0a093;border-color:#5c332b}
+  }
   ol.ladder li.past{opacity:0.45}
   ol.ladder li.next .lname{color:var(--forest-deep)}
 
@@ -271,7 +320,8 @@ function weekRowsHtml(monday){
     rows += `<tr${isToday ? ' class="is-today"' : ''}>` +
             `<td class="day-name">${label}</td>` +
             `<td><strong>${w.title}</strong><br>` +
-            `<span style="color:var(--ink-faint)">${w.desc}</span>` +
+            (w.parts ? partsHtml(w)
+                     : `<span style="color:var(--ink-faint)">${w.desc}</span>`) +
             routeLink(w) + `</td></tr>`;
   }
   return rows;
@@ -305,15 +355,18 @@ function render(){
     ? { title: todaysRace.name, desc: 'Race day. ' + todaysRace.tag + '.' }
     : scheduleFor(today);
   document.getElementById('today-title').textContent = todayWork.title;
-  document.getElementById('today-desc').textContent = todayWork.desc;
+  // The hero card gets the laid-out version too, not the flattened string.
+  const tdesc = document.getElementById('today-desc');
+  if(todayWork.parts){ tdesc.innerHTML = partsHtml(todayWork); tdesc.classList.add('has-parts'); }
+  else { tdesc.textContent = todayWork.desc; }
   document.getElementById('today-route').innerHTML = routeLink(todayWork);
 
-  const raceDays = daysBetween(today, toDate(RACES[RACES.length-1].start));
+  const raceDays = daysBetween(today, toDate(aRaceOf(RACES).start));
   document.getElementById('today-meta').innerHTML =
     `<div><strong>${raceDays}</strong> days to Bigfoot 200</div>` +
     `<div>Week ${weekOfBlock(block)} of ${block.name.split('—')[0].trim()}</div>`;
 
-  const upcoming = RACES.find(r => toDate(r.end) >= today) || RACES[RACES.length-1];
+  const upcoming = RACES.find(r => !r.backup && toDate(r.end) >= today) || aRaceOf(RACES);
   document.getElementById('next-race-name').textContent = upcoming.name;
   const startStr = fmtShort(upcoming.start);
   const endStr = upcoming.start !== upcoming.end ? '–' + toDate(upcoming.end).getDate() : '';
@@ -349,7 +402,11 @@ function render(){
     const li = document.createElement('li');
     li.className = (isPast ? 'past ' : '') + (isNext ? 'next' : '');
     const endStr2 = r.start !== r.end ? '–' + toDate(r.end).getDate() : '';
-    li.innerHTML = `<div class="lwhen">${fmtShort(r.start)}${endStr2}</div><div><div class="lname">${r.name}</div><div class="ltag">${r.tag}</div></div>`;
+    const badge = r.badge ? `<span class="lbadge">${r.badge}</span>` : '';
+    li.innerHTML = `<div class="lwhen">${fmtShort(r.start)}${endStr2}</div>` +
+      `<div><div class="lname">${r.name}${badge}</div>` +
+      `<div class="ltag">${r.tag}</div>` +
+      `<div class="lsignup">${signupHtml(r)}</div></div>`;
     ladder.appendChild(li);
   });
 }

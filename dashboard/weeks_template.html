@@ -148,6 +148,32 @@
   .sessn{color:var(--ink-faint);font-variant-numeric:tabular-nums}
   .dtitle{font-weight:600}
   .ddesc{display:block;color:var(--ink-faint);font-size:12.3px;line-height:1.5;margin-top:1px}
+  /* Structured sessions. A day used to print one paragraph; it now lays out a
+     run portion, a workout portion with its own movement list, an indoor
+     alternative. Labels are the scan line - you should be able to find the run
+     without reading the prose. */
+  .sparts{display:block;margin-top:5px}
+  .spart{display:flex;gap:10px;align-items:baseline;margin-top:5px}
+  .spart-k{flex:0 0 74px;font-size:9.5px;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--amber-deep);padding-top:2px;line-height:1.35}
+  .spart-v{flex:1 1 auto;color:var(--ink-soft);font-size:12.6px;line-height:1.5}
+  .spart-indoors .spart-k,.spart-ifovertolerance .spart-k{color:var(--ink-faint)}
+  .spart-indoors .spart-v,.spart-ifovertolerance .spart-v{color:var(--ink-faint);font-size:12px}
+  ul.mvs{list-style:none;margin:5px 0 0;padding:0}
+  ul.mvs li{display:flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline;
+    padding:3px 0 3px 11px;border-left:2px solid rgba(199,204,190,.85)}
+  .mv-n{font-weight:600;color:var(--ink)}
+  .mv-s{color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  a.mv-d{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--amber-deep);text-decoration:none;border-bottom:1px solid rgba(122,82,31,.35)}
+  a.mv-d::before{content:'\25B7\00a0';font-size:9px}
+  a.mv-d:hover{border-bottom-color:var(--amber-deep)}
+  @media(max-width:600px){
+    .spart{display:block}
+    .spart-k{margin-bottom:1px}
+    .spart-v{font-size:12.4px}
+  }
+
   .wk{font-weight:600;white-space:normal;line-height:1.35}
   .wk .wknum{white-space:nowrap}
   .dates{color:var(--ink-faint);font-size:12px;display:block;font-weight:400}
@@ -250,7 +276,8 @@ function dayRowsHtml(monday){
       <td class="dname">${DAYS[i]}<span class="ddate">${fmt(d)}${
         isToday ? ' <span class="tag t-now">today</span>' : ''}</span></td>
       <td colspan="4"><span class="dtitle">${w.title}</span>
-        <span class="ddesc">${w.desc || ''}</span>${doneHtml(d)}</td></tr>`;
+        ${w.parts ? partsHtml(w) : `<span class="ddesc">${w.desc || ''}</span>`
+        }${doneHtml(d)}</td></tr>`;
   }
   return out;
 }
