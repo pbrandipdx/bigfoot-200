@@ -202,7 +202,7 @@ Treat it as a debut to be finished, not a checkpoint to be paced.
 
 ## Block 4 — the gate
 *Apr 17 2027 to Jun 18 2027 (9 weeks)*
-*Ends: Bighorn 100 — FIRST 100-MILER, the gate*
+*Ends: Strawberry Fields Forever 100 — FIRST 100-MILER, the gate*
 
 | Target | Value |
 |---|---|
@@ -215,10 +215,39 @@ Treat it as a debut to be finished, not a checkpoint to be paced.
 
 **Block question:** can you run through a night and keep functioning the next day? Everything about Bigfoot's second and third nights is decided here.
 
-**The gate, and the first 100-miler, eight weeks before a 200.** Decide the rule now,
-in writing, while it is abstract: a controlled finish means sub-100 is live; a finish that
-costs two weeks means race Bigfoot to finish inside 107; a DNF or an injury finish means
-defer. In June it will cost something to decide. Today it costs nothing.
+**The gate, and the first 100-miler, eight weeks before a 200.**
+
+**Strawberry Fields Forever, North Bonneville WA, ~June 19 2027** — chosen 2026-09-15 over
+Bighorn. A 10K loop run 16 times, ~3,200 ft total, 30-hour limit, 45 minutes from home, and
+**you can drop to 100K or 50K and still take an official finish**. That last clause is why it
+beat Bighorn: it converts the worst case from a DNF eight weeks before the A race into a
+completed 100K. Bighorn was 18,000 ft, 9,000 ft of altitude, a flight to Wyoming, and no way
+down from a bad day.
+
+**It is not a Western States qualifier.** It does not need to be — Gorge Waterfalls in April
+is, and Bigfoot under 100 hours is itself one.
+
+**The flat course changes what the clock means.** Bighorn's "sub-28" standard was for
+18,000 ft of mountain. On 3,200 ft of gravel and dirt trail, the equivalent signal is nearer
+**sub-26**, and the time is the least interesting number anyway. Watch these instead:
+
+| Read this | Not this |
+|---|---|
+| **Total aid time under 90 min** across 16 loop passes | the finish time on its own |
+| **Second half no worse than 25% slower** than the first | how you felt at halfway |
+| **Recovered in days, not weeks** | that you finished |
+
+**Three outcomes, decided now while it is abstract:**
+
+- **A hundred, controlled, aid under 90 min** → sub-100 at Bigfoot is live. Run the plan.
+- **A hundred that cost you two weeks, or a drop to 100K** → Bigfoot is on, sub-100 is not.
+  Race it to finish inside 107, enjoy it, qualify another way.
+- **A drop to 50K, a DNF, or an injury finish** → defer Bigfoot. There is another one next
+  year and there is only one of you.
+
+Note the middle outcome. With the drop-down rule a true DNF is nearly impossible, so
+**dropping to 100K is itself the signal** — it is what a bad day looks like here, and it should
+be read as one rather than as a finish.
 
 ---
 
@@ -237,7 +266,7 @@ defer. In June it will cost something to decide. Today it costs nothing.
 
 **Block question:** nothing is asked of this block but arriving fresh.
 
-| Weeks 1–2 | Full recovery from Bighorn. Walks only. |
+| Weeks 1–2 | Full recovery from the first hundred. Walks only. |
 |---|---|
 | Weeks 3–5 | Peak: 20–22 hr/week, 10,000 ft/week, one 16 hr overnight |
 | Week 6 | Reduce 40% |
@@ -501,9 +530,10 @@ tolerance* above.
 
 1. **Night hours accumulate on schedule.** Zero today. This is the cheapest gap
    to close and the one most likely to be skipped.
-2. **Bighorn is a gate, not a formality** — and it is also the first 100-miler. Under 28 hr
-   controlled means sub-100 is live; 28–30 or a finish that costs two weeks means race Bigfoot
-   to finish inside 107; a DNF or injury finish means defer. Decide it now, not in June.
+2. **Strawberry Fields is a gate, not a formality** — and it is also the first 100-miler.
+   A controlled hundred with aid under 90 min means sub-100 is live; a costly finish or a drop
+   to 100K means race Bigfoot to finish inside 107; a drop to 50K or a DNF means defer.
+   Decide it now, not in June.
 3. **Descent training happens on rock**, not loam, and late in the day.
 4. **Feet get managed from hour five**, not hour nine. Practice in training.
 5. **Eat every 40 minutes** on every long day, including when you don't want to —

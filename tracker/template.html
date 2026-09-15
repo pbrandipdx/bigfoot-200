@@ -192,7 +192,7 @@
       <p><strong>Descent HR gap.</strong> Average HR on sustained descent vs sustained climb, on any long day. Baseline 15–20 bpm; the fatigued pattern is ~2 bpm. Under 10 bpm on a day that should feel comfortable means under-recovery. Two in a row, cut the week.</p>
       <p><strong>Aerobic decoupling.</strong> Pace-to-HR, first half vs second half of long days. Target under 5%. Above 8% consistently means the day was too hard or you're under-recovered.</p>
       <p><strong>Zone discipline.</strong> Long days sit 125–140 bpm. More than 15% of a long day above 150 and it was a workout, not a long day.</p>
-      <p><strong>VO2 max — monitor, do not chase.</strong> 42.0 at baseline; expect 43–46 by Bighorn as a byproduct. It will likely decline in Blocks 4 and 5, which is normal. For a 105-hour race it's close to irrelevant.</p>
+      <p><strong>VO2 max — monitor, do not chase.</strong> 42.0 at baseline; expect it to drift up as a byproduct. It will likely decline in Blocks 4 and 5, which is normal. For a 105-hour race it's close to irrelevant.</p>
       <p><strong>HRV — trend only.</strong> 30-day rolling baseline. Single low day: ignore. 7-day average down &gt;10%: cut volume 30% that week. "Unbalanced" 7+ days: three full days off.</p>
       <p><strong>Resting HR.</strong> +5 bpm sustained over 5 days: back off. +8 bpm: stop and check for illness.</p>
       <p><strong>Sleep.</strong> Train rested, race deprived. 7+ hr/night through Blocks 1–4; sleep score 75+ the two nights before any long day.</p>
@@ -204,7 +204,7 @@
     <summary>Non-negotiables</summary>
     <div class="body"><ul>
       <li><strong>Night hours accumulate on schedule.</strong> Zero so far.</li>
-      <li><strong>Bighorn is a gate, not a formality.</strong> Finish well and Bigfoot is on. DNF or a badly damaged finish and the correct decision is to defer — decide the rule now, while it's abstract.</li>
+      <li><strong>The June hundred is a gate, not a formality.</strong> A controlled finish with aid under 90 min and Bigfoot sub-100 is on; a costly finish or a drop to 100K and race it to finish inside 107; a drop to 50K or a DNF and defer — decide the rule now, while it's abstract.</li>
       <li><strong>Descent training happens on rock</strong>, not loam, and late in the day.</li>
       <li><strong>Feet get managed from hour five</strong>, not hour nine. Practice in training.</li>
       <li><strong>Eat every 40 minutes</strong> on every long day, including when you don't want to.</li>
@@ -249,30 +249,15 @@ var NPLAN = 49;
 var RACE = Date.UTC(/*__RACE_UTC__*/);
 var RACE_LABEL = "/*__RACE_LABEL__*/";
 
-var BLOCKS = [
-  { n:1, start:0,  end:13, ends:"Frozen Trail Run Fest 50K",
-    peak:[8,8], nightCum:4,
-    q:"Can you sustain a full day on feet and descend hard without wrecking your quads — and rebuild the vertical base the old plan assumed you already had?" },
-  { n:2, start:14, end:22, ends:"First 100-miler",
-    peak:[10,12], nightCum:12,
-    q:"Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable — and finish 100 miles with a full night solo?" },
-  { n:3, start:23, end:31, ends:"Gorge Waterfalls 100K — 14–15 hr",
-    peak:[14,14], nightCum:24,
-    q:"Can you move competently in the dark for six hours, alone, and still run the last 10K?" },
-  { n:4, start:32, end:40, ends:"Bighorn 100 — the gate, sub-28",
-    peak:[18,18], nightCum:40,
-    q:"Can you run through a night and keep functioning the next day, with aid stops under 90 minutes total? Sub-100 at Bigfoot is decided here." },
-  { n:5, start:41, end:48, ends:"BIGFOOT 200 — sub-100",
-    peak:[20,20], nightCum:60,
-    q:"Recover, peak once, then arrive fresh with sleep banked and heat in the legs." }
-];
-var BLOCK_DISPLAY = {
-  1:{h:"10 → 15", v:"2,000 → 4,500", m:"32 → 50"},
-  2:{h:"17", v:"6,000", m:"55"},
-  3:{h:"19", v:"7,500", m:"60"},
-  4:{h:"21", v:"9,500", m:"65"},
-  5:{h:"23 peak", v:"12,000 peak", m:"70 peak"}
-};
+// Blocks and their display numbers come from plan/schedule.json, substituted by
+// dashboard/build.py. This file used to carry its own hardcoded copy and it had
+// drifted badly - pre-rescale weekly hours (10 -> 15, 17, 19, 21, 23), peak days
+// from before the 2026-09-15 revision, night totals that matched nothing, and a
+// Block 2 that claimed to end with a 100-miler. The Log page was quietly showing
+// a different plan from every other page for days. One source now.
+var BLOCKS = /*__BLOCKS__*/;
+var BLOCK_DISPLAY = /*__BLOCK_DISPLAY__*/;
+
 var B5 = [
   {h:5,v:1000,m:15,tag:"Recovery — walks only"},
   {h:5,v:1000,m:15,tag:"Recovery — walks only"},

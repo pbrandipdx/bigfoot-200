@@ -5,6 +5,58 @@ survives the conversation that produced it. Newest first.
 
 ---
 
+## 2026-09-15 — Strawberry Fields Forever replaces Bighorn as the gate
+
+**Bighorn 100 → Strawberry Fields Forever 100**, North Bonneville WA, **~June 19 2027**
+(date estimated; 2026 ran June 20 and the 2027 calendar is not published).
+
+Patrick questioned whether Bighorn was the right race, which it was not — for a **first**
+hundred it is close to the worst available option.
+
+| | Bighorn | Strawberry Fields |
+|---|---|---|
+| Getting there | flight to Sheridan WY, or 16 hr | **45 min** |
+| Course | point-to-point mountain | **10K loop × 16** |
+| Climbing | ~18,000 ft | **~3,200 ft** (32 ft/mile) |
+| Altitude | to 9,000 ft | sea level |
+| Bad day | DNF | **drop to 100K or 50K and still finish** |
+
+That last row is the whole argument. It converts the worst case from a DNF eight weeks
+before the A race into a completed 100K.
+
+**It is not a Western States qualifier, and does not need to be.** Checked against the
+official WSER list: **Gorge Waterfalls 100K in April is a qualifier**, and **Bigfoot 200
+under 100 hours is itself one** — which confirms the premise the whole plan rests on.
+Strawberry Fields, Pigtails and Lumberjack are all absent from the list; Hood Hundred is on
+it but runs July 31, two weeks before Bigfoot.
+
+**The flat course changes what the clock means.** Sub-28 was a Bighorn standard for 18,000 ft
+of mountain. Here the signal is total aid time under 90 minutes across sixteen loop passes,
+and a second half no worse than 25% slower. The gate's three outcomes were rewritten
+accordingly, and the middle one now reads *"a costly finish, or a drop to 100K"* — because
+with the drop-down rule a true DNF is nearly impossible, so **dropping to 100K is what a bad
+day looks like** and should be read as one.
+
+**Considered and rejected:** Pigtails Challenge (Renton, May 22, 9,000 ft, ~3 hr away) and
+Lumberjack (Port Gamble, June 5, 12,000 ft, ~3.5 hr plus a ferry). Lumberjack is the most
+fun of the three — 75% singletrack, 8 laps rather than 16, fire pits at the finish — and is
+worth revisiting if sixteen laps of a ball-field loop turns out to be the thing that breaks
+him. It is 10 weeks out rather than 8, which absorbs more of its extra climbing.
+
+### And a third source of truth turned up
+
+Fixing the Bighorn references exposed that **`tracker/template.html` — the Log page — carried
+its own hardcoded copy of the entire block plan**, and it had drifted badly: pre-rescale
+weekly hours (10→15, 17, 19, 21, 23 against the real 12/14/16/18/21), peak days from before
+the 2026-09-15 revision, night totals matching nothing, and a Block 2 that claimed to end
+with a 100-miler. The Log page had been showing a different plan from every other page for
+days, and nobody had looked at it.
+
+It now takes `BLOCKS` and `BLOCK_DISPLAY` from `schedule.json` through `build.py`, like the
+race date and the block sections before it. That is the third hardcoded copy found today.
+
+---
+
 ## 2026-09-15 (later the same day) — the race is August 2027, and it is fixed
 
 Patrick: *"my race is 2027 make that change like i asked... everything revolves

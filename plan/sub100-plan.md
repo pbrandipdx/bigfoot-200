@@ -61,7 +61,7 @@ pacing, sleep or aid strategy on this page. It changes how hard the ladder is.
 | Dec 12 2026 | **first ultra** (50K) |
 | Feb 6 2027 | BURT — first loop race |
 | Apr 16 2027 | **first 100K**, 17-hour cutoff |
-| Jun 18 2027 | **first 100-miler**, Bighorn |
+| Jun 19 2027 | **first 100-miler**, Strawberry Fields Forever |
 | Aug 13 2027 | **first 200**, unsupported, four nights, sub-100 |
 
 Three of those land in the final five months. The race date is fixed and everything revolves
@@ -69,8 +69,8 @@ around it — this is written down so the difficulty is visible, not to argue wi
 
 **What it changes in practice:**
 
-- **Bighorn is the gate and it matters more than ever**, because it is now also the first
-  hundred. The three outcomes below are worth deciding today rather than in June.
+- **The June hundred is the gate and it matters more than ever**, because it is now also the
+  first hundred. The three outcomes below are worth deciding today rather than in June.
 - **Every checkpoint below is a debut**, so the standards are "finish it, and learn something
   measurable" rather than a pace target — except Gorge, which has a real cutoff.
 - **BURT at 55K is the conservative option.** The 110K and the 100-mile are on the table and
@@ -243,7 +243,7 @@ eight-hour day. That is the point.
 | Frozen Trail 50K | Dec | finish | negative split; last hour running |
 | **BURT 55K** *(one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **finish it, and time every aid stop.** The loop format is the point, not the distance. 110K and 100-mile options still open — see `plan-revisions.md` |
 | Gorge Waterfalls 100K | Apr 16, 2027 | 2.8 mph, 16–18 hr | **your first 100K — finish inside the 17-hr cutoff.** A debut, not a checkpoint |
-| Bighorn 100 | Jun 18, 2027 | finish under 30 hr | **your first 100-miler, and the gate.** Under 28 hr controlled says the machinery works. See below |
+| **Strawberry Fields Forever 100** | Jun 19, 2027 | *was Bighorn* | **your first 100-miler, and the gate.** Flat 10K loop × 16, 30 hr limit, can drop to 100K and still finish. Read aid time and second-half fade, not the clock |
 
 Every row in that table is a debut. Standards are "finish it and learn something measurable",
 not pace targets — except Gorge, which has a real cutoff to clear.
@@ -252,21 +252,30 @@ not pace targets — except Gorge, which has a real cutoff to clear.
 
 ## The gate, restated
 
-**Bighorn is the gate, and it is also your first 100-miler**, eight weeks before a 200. That is a
-lot to ask of one race, and it is exactly why the rule below is worth writing today rather than in
-June — in June it will cost something.
+**Strawberry Fields Forever is the gate, and it is also your first 100-miler**, eight weeks before
+a 200. That is a lot to ask of one race, and it is exactly why the rule below is worth writing
+today rather than in June — in June it will cost something.
+
+It replaced Bighorn on 2026-09-15. A 10K loop run sixteen times at North Bonneville, ~3,200 ft
+total, 30-hour limit, forty-five minutes from home, **and you can drop to 100K or 50K and still
+take an official finish.** Bighorn was 18,000 ft, altitude to 9,000, a flight to Wyoming, and no
+way down from a bad day.
 
 **Three outcomes, decided in advance:**
 
-- **Under 28 hours, controlled, aid under 90 minutes** → sub-100 is live. Run the plan.
-- **28–30 hours, or a finish that cost you two weeks** → Bigfoot is on, sub-100 is not. Race it to
-  finish inside 107, enjoy it, qualify another way.
-- **DNF, or an injury finish** → defer Bigfoot. There is another one next year and there is only
-  one of you.
+- **A hundred, controlled, total aid under 90 minutes** → sub-100 is live. Run the plan.
+- **A hundred that cost you two weeks, or a drop to 100K** → Bigfoot is on, sub-100 is not. Race
+  it to finish inside 107, enjoy it, qualify another way.
+- **A drop to 50K, a DNF, or an injury finish** → defer Bigfoot. There is another one next year
+  and there is only one of you.
 
-Sub-28 with a controlled second half and disciplined aid says the sub-100 machinery works. Sub-30
-with a four-hour death march says you'll finish Bigfoot in 104 hours — a fine day out, and not what
-you asked for.
+**The drop-down rule is why the middle outcome matters.** A true DNF is nearly impossible here, so
+dropping to 100K *is* the bad day — read it as one rather than as a finish.
+
+**And the flat course changes what the clock means.** Sub-28 was a Bighorn standard, for 18,000 ft
+of mountain. On gravel and dirt at 32 ft per mile the equivalent is nearer sub-26 — but the time is
+the least interesting number. Sixteen timed aid passes and a second half no worse than 25% slower
+tell you far more about whether the sub-100 machinery works.
 
 Write it down now, in September, while it's abstract and costs nothing.
 

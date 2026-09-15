@@ -18,6 +18,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 OUT  = os.environ.get("BF_OUT") or os.path.join(os.path.dirname(REPO), "bigfoot200-training")
 
+BLOCK_QUESTIONS = {
+    1: "Can you sustain a full day on feet and descend hard without wrecking your quads?",
+    2: "Can you go out again on tired legs, in bad weather, when nothing about it is enjoyable?",
+    3: "Can you move competently in the dark for six hours, and clear a 17-hour cutoff?",
+    4: "Can you go a hundred miles, controlled, with aid under 90 minutes? Sub-100 at Bigfoot is decided here.",
+    5: "Recover, peak once, then arrive fresh with sleep banked and heat in the legs.",
+}
+
 NEVER_PUBLISH = ("runner-manual",)
 
 def guard_source():
@@ -131,11 +139,37 @@ def main():
     RACE_SUB = "Mount St. Helens, WA &middot; %s &middot; goal: %s" % (
         RACE_LABEL, schedule["race"]["goal"])
 
+    # The Log page carried its own hardcoded copy of the block plan and it had
+    # drifted to pre-rescale numbers. Build both structures it needs from
+    # schedule.json so there is one source.
+    _base = datetime.date.fromisoformat(schedule["blocks"][0]["start"])
+    _log_blocks, _log_display = [], {}
+    for _b in schedule["blocks"]:
+        _s = datetime.date.fromisoformat(_b["start"])
+        _e = datetime.date.fromisoformat(_b["end"])
+        _t = _b["targets"]
+        _log_blocks.append({
+            "n": _b["id"],
+            "start": (_s - _base).days // 7,
+            "end": (_e - _base).days // 7,
+            "ends": _b["endsWith"],
+            "peak": [_t["peakDayHours"], _t["peakDayHours"]],
+            "nightCum": _t["nightHoursCumulative"],
+            "q": BLOCK_QUESTIONS.get(_b["id"], ""),
+        })
+        _log_display[str(_b["id"])] = {
+            "h": str(_t["hoursPerWeek"]),
+            "v": "{:,}".format(_t["vertFtPerWeek"]),
+            "m": str(_t["milesPerWeek"]),
+        }
+
     def race_tokens(html):
         return (html.replace("<!--__RACE_SUB__-->", RACE_SUB)
                     .replace("<!--__RACE_DATE__-->", RACE_LABEL)
                     .replace("/*__RACE_UTC__*/", "%d, %d, %d" % (_rd.year, _rd.month - 1, _rd.day))
-                    .replace("/*__RACE_LABEL__*/", RACE_LABEL))
+                    .replace("/*__RACE_LABEL__*/", RACE_LABEL)
+                    .replace("/*__BLOCKS__*/", json.dumps(_log_blocks, ensure_ascii=False))
+                    .replace("/*__BLOCK_DISPLAY__*/", json.dumps(_log_display, ensure_ascii=False)))
 
     print("building %s" % OUT)
 

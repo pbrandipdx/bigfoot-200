@@ -65,7 +65,7 @@
       "end": "2027-06-18",
       "vert": "8,000 ft",
       "hours": "18 hr/wk",
-      "endsWith": "Bighorn 100 — FIRST 100-MILER, the gate",
+      "endsWith": "Strawberry Fields Forever 100 — FIRST 100-MILER, the gate",
       "targets": {
         "hoursPerWeek": 18,
         "vertFtPerWeek": 8000,
@@ -141,13 +141,15 @@
       "name": "Gorge Waterfalls 100K",
       "start": "2027-04-16",
       "end": "2027-04-16",
-      "tag": "FIRST 100K · WS qualifier · 17 hr cutoff"
+      "tag": "FIRST 100K · **WS QUALIFIER** · 17 hr cutoff · this is the one that banks the qualifier"
     },
     {
-      "name": "Bighorn 100",
-      "start": "2027-06-18",
+      "name": "Strawberry Fields Forever 100",
+      "start": "2027-06-19",
       "end": "2027-06-19",
-      "tag": "FIRST 100-MILER · WS qualifier · THE GATE · 8 weeks before Bigfoot"
+      "tag": "FIRST 100-MILER · THE GATE · 10K loop × 16 at North Bonneville, ~3,200 ft, 30 hr limit, can drop to 100K/50K and still finish · DATE ESTIMATED, 2027 not yet published · NOT a WS qualifier — Gorge Waterfalls in April is",
+      "link": "https://columbiagorgerunningclub.com/strawberry-fields-forever/",
+      "linkLabel": "Columbia Gorge Running Club · Strawberry Fields Forever"
     },
     {
       "name": "Bigfoot 200",
