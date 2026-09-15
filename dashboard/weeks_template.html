@@ -59,12 +59,17 @@
   @media(max-width:619px){ .st{border-bottom:1px solid var(--line)} }
 
   table{border-collapse:collapse;width:100%;font-size:13.5px}
-  /* On a phone the hour columns are the least useful pair - vertical is what
-     decides this race - so they drop out before the table starts scrolling. */
+  td.m{line-height:1.3;white-space:nowrap}
+  .mv{display:block;font-weight:600;font-variant-numeric:tabular-nums}
+  .mp{font-weight:400;color:var(--ink-faint);font-size:12px}
+  .mpct{display:block;font-size:11.5px;font-variant-numeric:tabular-nums;
+    color:var(--ink-faint)}
+  .mpct.hit{color:var(--good);font-weight:600}
+  .mpct.miss{color:var(--bad);font-weight:600}
   @media(max-width:600px){
-    th.hr,td.hr{display:none}
-    td,th{padding-right:6px}
+    td,th{padding-right:7px}
     body{font-size:14px}
+    td.m,th.m{font-size:12.5px}
   }
   th{text-align:left;font-weight:500;color:var(--ink-faint);font-size:11.5px;
     text-transform:uppercase;letter-spacing:.04em;padding:0 8px 7px 0;
@@ -183,16 +188,22 @@ function dayRowsHtml(monday){
     out += `<tr class="day${isToday ? ' dnow' : ''}">
       <td class="dname">${DAYS[i]} <span class="ddate">${fmt(d)}</span>${
         isToday ? ' <span class="tag t-now">today</span>' : ''}</td>
-      <td colspan="5"><span class="dtitle">${w.title}</span>
+      <td colspan="3"><span class="dtitle">${w.title}</span>
         <span class="ddesc">${w.desc || ''}</span></td></tr>`;
   }
   return out;
 }
 
-function pctCell(actual, target){
-  if(actual === undefined || actual === null) return '<span class="pend">—</span>';
-  const p = Math.round(100*actual/target);
-  return `<span class="${p >= 90 ? 'hit' : (p >= 70 ? '' : 'miss')}">${p}%</span>`;
+// actual / plan on the first line, percent done underneath, same treatment
+// for every metric so they read as a set.
+function metric(actual, target, fmtf){
+  const t = target ? fmtf(target) : '—';
+  if(actual === undefined || actual === null)
+    return `<span class="pend">— / ${t}</span>`;
+  const p = target ? Math.round(100*actual/target) : null;
+  const cl = p === null ? '' : (p >= 90 ? 'hit' : (p >= 70 ? '' : 'miss'));
+  return `<span class="mv">${fmtf(actual)} <span class="mp">/ ${t}</span></span>` +
+         (p === null ? '' : `<span class="mpct ${cl}">${p}%</span>`);
 }
 
 function render(){
@@ -246,11 +257,9 @@ function render(){
             rs.filter(r => !h.title.includes(r.name)).length
               ? `<span class="dates">${rs.filter(r => !h.title.includes(r.name))
                    .map(r=>r.name).join(' · ')}</span>` : ''}</td>
-        <td class="num hr">${t.hoursPerWeek || '—'}</td>
-        <td class="num hr">${a ? a.hours : '<span class="pend">—</span>'}</td>
-        <td class="num">${t.vertFtPerWeek ? t.vertFtPerWeek.toLocaleString() : '—'}</td>
-        <td class="num">${a ? a.vert_ft.toLocaleString() : '<span class="pend">—</span>'}</td>
-        <td class="num">${t.vertFtPerWeek ? pctCell(a && a.vert_ft, t.vertFtPerWeek) : '—'}</td>
+        <td class="num m">${metric(a && a.hours, t.hoursPerWeek, x => (Math.round(x*10)/10))}</td>
+        <td class="num m">${metric(a && a.miles, t.milesPerWeek, x => Math.round(x))}</td>
+        <td class="num m">${metric(a && a.vert_ft, t.vertFtPerWeek, x => Math.round(x).toLocaleString())}</td>
       </tr>` + dayRowsHtml(m).replace(/<tr class="day/g,
               `<tr id="d-${wid}" data-d="${wid}" class="day`);
     });
@@ -283,7 +292,7 @@ function render(){
       `<div class="recap">` +
       stat('Weeks', `${logged.length} <span class="st-s">of ${mine.length}</span>`,
            logged.length ? `${mine.length - logged.length} to go` : 'not started') +
-      stat('Hours', vs(aHours, pHours, x => Math.round(x*10)/10), pcOf(aHours, pHours)) +
+      stat('Time on feet', vs(aHours, pHours, x => Math.round(x*10)/10), pcOf(aHours, pHours)) +
       stat('Vertical', vs(aVert, pVert, n0), pcOf(aVert, pVert)) +
       stat('Miles', vs(aMiles, pMiles, x => Math.round(x)), pcOf(aMiles, pMiles)) +
       stat('Ft per hour', aDens ? `<span class="${aDens >= dens*0.9 ? 'hit' : (aDens < dens*0.7 ? 'miss' : '')}">${aDens}</span>` : '<span class="pend">—</span>',
@@ -303,8 +312,7 @@ function render(){
       <div class="tscroll"><table>
         <thead><tr>
           <th>Week</th><th>Long day</th>
-          <th class="num hr">Hr plan</th><th class="num hr">Hr act</th>
-          <th class="num">Vert plan</th><th class="num">Vert act</th><th class="num">Vert %</th>
+          <th class="num m">Time on feet</th><th class="num m">Miles</th><th class="num m">Vert</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table></div>`;
