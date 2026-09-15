@@ -6,24 +6,26 @@ Arrows compare with the previous week. {{up}} and {{down}} are moving the way yo
 
 ## Finish odds
 
-**32–46%** — *on track*, 47 weeks out.
+**15–22%** — *well behind*, 99 weeks out.
 
 That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at **53% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
 
 | Gate | Weight | vs Block 1 now | Projected race day |
 |---|---|---|---|
 | Vertical per week | 20% | `██████░░░░` 62% | `██████████` 100% |
-| Longest single day | 20% | `█████░░░░░` 50% | `███░░░░░░░` 35% |
+| Longest single day | 20% | `█████░░░░░` 50% | `█████░░░░░` 53% |
 | Time on feet per week | 15% | `██████████` 100% | `██████████` 100% |
 | Run-specific capacity | 15% | `██░░░░░░░░` 21% | `███░░░░░░░` 25% |
 | Night hours | 10% | `░░░░░░░░░░` 0% | `░░░░░░░░░░` 0% |
 | Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
 | Recovery headroom | 10% | `█████░░░░░` 53% | `█████░░░░░` 53% |
-| **Readiness** | | **53%** | **59%** |
+| **Readiness** | | **53%** | **62%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Run-specific capacity**.
 
-> **How this is built.** Seven gates, each measured from Strava and Garmin, weighted as shown, averaged into a readiness score. The *now* column compares the last four to eight weeks against the current block's targets. The *projected* column fits the slope of the last eight weeks and carries it to race day against Block 5's targets — it assumes you keep improving at exactly the rate you have been, no faster and no slower, which is why a flat eight weeks shows up as a flat projection. The readiness score is entirely measured. Turning it into a percentage needs a field-wide finish rate, and that part is an assumption: base rate 45–65% assumed for a 200-mile mountain race — Destination Trail does not publish starter counts. Read the gate breakdown and the direction as signal; read the percentage as a rough band.
+> **How this is built.** Seven gates, each measured from Strava and Garmin, weighted as shown, averaged into a readiness score. The *now* column compares the last four to eight weeks against the current block's targets. The *projected* column fits the slope of the last eight weeks and carries it to race day against Block 5's targets — it assumes you keep improving at exactly the rate you have been, no faster and no slower, which is why a flat eight weeks shows up as a flat projection. The readiness score is entirely measured. Turning it into a percentage needs a field-wide finish rate, and that part is an assumption: base rate 45–65% assumed for the FIELD at a 200-mile mountain race — Destination Trail does not publish starter counts — then scaled by how much of the distance ladder has actually been raced. Read the gate breakdown and the direction as signal; read the percentage as a rough band.
+
+> **The ladder you have actually raced.** Longest finish: **a marathon in ~2006; no ultra finished yet**, so the band above is scaled to **45%** of the field's. This is the one input no API can supply and the one the model was missing until 2026-09-15 — it read the training data, saw a solid block, and applied a finish rate belonging to a field of experienced 200-mile runners. It climbs on its own as races get finished: a 50K takes it to 60%, a 100K to 80%, a 100-miler to 100%. Update `LONGEST_FINISH_MI` in `tracker/odds.py` after each one.
 
 ## Last complete week — 2026-09-07
 

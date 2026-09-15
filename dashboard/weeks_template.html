@@ -157,6 +157,10 @@
   .t-race{background:var(--amber-deep);color:var(--white)}
   .t-deload{background:var(--paper-2);color:var(--ink-faint);border:1px solid var(--line)}
   .t-now{background:var(--forest);color:var(--white)}
+  /* Blocks 2-9 were drafted on 2026-09-15 when the race moved to 2028. The races in
+     them are not chosen yet, so say so on the block rather than letting a guess read
+     like a decision. */
+  .t-prov{background:transparent;color:var(--amber-deep);border:1px dashed rgba(122,82,31,.6)}
   .long{font-weight:500}
   .vert{color:var(--ink-faint);font-size:12.5px}
   .hit{color:var(--good);font-weight:600}
@@ -461,7 +465,8 @@ function render(){
     if(isCurrent) det.open = true;
     det.innerHTML = `<summary>
         <span class="bk-name">${blk.name}</span>
-        <span class="bk-when">${fmt(toDate(blk.start))} – ${fmt(toDate(blk.end))} · ${mine.length} weeks · ends ${blk.endsWith}</span>
+        <span class="bk-when">${fmt(toDate(blk.start))} – ${fmt(toDate(blk.end))} · ${mine.length} weeks · ends ${blk.endsWith}${
+          blk.provisional ? ' <span class="tag t-prov">draft</span>' : ''}</span>
         ${recap}
       </summary>
       <div class="tscroll"><table>

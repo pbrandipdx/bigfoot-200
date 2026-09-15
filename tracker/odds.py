@@ -21,11 +21,46 @@ import datetime
 
 # Field-wide finish rate for a 200-mile mountain race. ASSUMPTION. Replace the
 # moment we have real starters-vs-finishers data for the Bigfoot 200.
+# The base rate is for the FIELD at a 200-mile mountain race - people who
+# mostly arrive with several ultras behind them. It is not the base rate for a
+# first-time ultrarunner, and until 2026-09-15 this model was quietly applying
+# the field's number to someone whose longest finish was a marathon twenty years
+# ago. Every gate here is measured from training data; none of them can see a
+# start list. That is the model's blind spot and it flattered him for four days.
+#
+# LONGEST_FINISH is the correction: the longest race actually FINISHED, in
+# miles. It is entered by hand because no API knows it, and it scales the band
+# until the ladder has been climbed. Update it after every race.
 BASE_LOW, BASE_HIGH = 0.45, 0.65
-BASE_NOTE = ("base rate 45–65% assumed for a 200-mile mountain race — "
-             "Destination Trail does not publish starter counts")
+BASE_NOTE = ("base rate 45–65% assumed for the FIELD at a 200-mile mountain race — "
+             "Destination Trail does not publish starter counts — then scaled by "
+             "how much of the distance ladder has actually been raced")
 
-RACE_DATE = datetime.date(2027, 8, 13)
+LONGEST_FINISH_MI = 26.2      # marathon, ~2006. No ultra finished yet.
+LONGEST_FINISH_NOTE = "a marathon in ~2006; no ultra finished yet"
+
+
+def experience_factor(longest_mi):
+    """How much of the band a runner has earned the right to.
+
+    Not a judgement about grit - a statement about evidence. A 200 is the far
+    end of a ladder, and finishing one is strongly predicted by having finished
+    the rungs below it. With no ultra on the board there is no evidence either
+    way, so the honest thing is a wide, low band that CLIMBS as races are
+    finished rather than a number that pretends the question is settled.
+
+        no ultra        0.45      nothing below it has been tested
+        50K             0.60
+        100K            0.80
+        100 mi          1.00      the ladder has been climbed
+    """
+    for miles, factor in ((100.0, 1.00), (62.0, 0.80), (31.0, 0.60)):
+        if longest_mi >= miles:
+            return factor
+    return 0.45
+
+
+RACE_DATE = datetime.date(2028, 8, 11)   # ESTIMATED - see plan/sub100-plan.md
 HRV_BASELINE = 41.6
 
 GATES = [
@@ -115,7 +150,8 @@ def readiness(g):
 def odds(r):
     """Readiness -> finish-probability range. See BASE_NOTE."""
     adj = clip(0.15 + 0.95 * r, 0.0, 1.10)
-    return round(100 * BASE_LOW * adj), round(100 * BASE_HIGH * adj)
+    xp = experience_factor(LONGEST_FINISH_MI)
+    return (round(100 * BASE_LOW * adj * xp), round(100 * BASE_HIGH * adj * xp))
 
 
 def band(lo, hi):
@@ -233,6 +269,15 @@ def report(rows, blocks, today):
              "field-wide finish rate, and that part is an assumption: %s. Read "
              "the gate breakdown and the direction as signal; read the "
              "percentage as a rough band." % BASE_NOTE)
+    L.append("")
+    L.append("> **The ladder you have actually raced.** Longest finish: **%s**, so the band "
+             "above is scaled to **%d%%** of the field's. This is the one input no API can "
+             "supply and the one the model was missing until 2026-09-15 — it read the training "
+             "data, saw a solid block, and applied a finish rate belonging to a field of "
+             "experienced 200-mile runners. It climbs on its own as races get finished: a 50K "
+             "takes it to 60%%, a 100K to 80%%, a 100-miler to 100%%. Update "
+             "`LONGEST_FINISH_MI` in `tracker/odds.py` after each one."
+             % (LONGEST_FINISH_NOTE, round(experience_factor(LONGEST_FINISH_MI) * 100)))
     L.append("")
 
     return "\n".join(L), {

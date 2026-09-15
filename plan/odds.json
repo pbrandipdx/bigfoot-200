@@ -1,15 +1,15 @@
 {
   "generated": "2026-09-15",
-  "weeksToRace": 47,
+  "weeksToRace": 99,
   "blockReadiness": 53,
   "blockName": "Block 1",
   "trajectory": {
-    "low": 32,
-    "high": 46,
-    "readiness": 59
+    "low": 15,
+    "high": 22,
+    "readiness": 62
   },
-  "label": "on track",
-  "color": "#6B8E3D",
+  "label": "well behind",
+  "color": "#A23B2C",
   "gates": {
     "vert": {
       "label": "Vertical per week",
@@ -21,7 +21,7 @@
       "label": "Longest single day",
       "weight": 20,
       "now": 50,
-      "raceDay": 35
+      "raceDay": 53
     },
     "hours": {
       "label": "Time on feet per week",
@@ -54,5 +54,5 @@
       "raceDay": 53
     }
   },
-  "baseNote": "base rate 45\u201365% assumed for a 200-mile mountain race \u2014 Destination Trail does not publish starter counts"
+  "baseNote": "base rate 45\u201365% assumed for the FIELD at a 200-mile mountain race \u2014 Destination Trail does not publish starter counts \u2014 then scaled by how much of the distance ladder has actually been raced"
 }

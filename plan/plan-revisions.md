@@ -5,6 +5,104 @@ survives the conversation that produced it. Newest first.
 
 ---
 
+## 2026-09-15 — the race moved to 2028, because the history was wrong
+
+**The correction.** `sub100-plan.md` said, in the passage arguing for BURT:
+*"Your longest to date is Gorge Waterfalls 100K."* That is not true. Patrick's
+actual racing history is **a marathon around 2006 and a few half marathons in
+2026**. No ultra. The longest single effort in 208 logged activities is
+**3.0 hours**.
+
+Nobody checked it because it was written as an assertion rather than a
+question, and everything downstream inherited it.
+
+**What it was propping up.** Read against the true history, the ladder was:
+
+| | |
+|---|---|
+| Nov 7 2026 | first trail race (25K) |
+| Dec 12 2026 | **first ultra** (50K) |
+| Feb 6 2027 | **99 miles**, eight weeks later |
+| Apr 16 2027 | first 100K, 17-hour cutoff |
+| Jun 18 2027 | first 100-miler |
+| Aug 13 2027 | first 200, unsupported, four nights, sub-100 |
+
+Six debuts in ten months, three of them in the final five. The plan had already
+flagged the last two as *"two debuts stacked eight weeks apart"* — while
+believing a 100K was in the bank. It was three, and nothing was.
+
+**The decision: Bigfoot moves to August 2028.** Patrick chose this from four
+options, the others being 2027-with-a-107-hour-goal, 2027-unchanged, and
+defer-the-decision. 2027 becomes the year he learns to be an ultrarunner —
+one debut at a time, each with months of consolidation behind it.
+
+### The two-year shape
+
+| Block | When | Weeks | Ends with |
+|---|---|---|---|
+| 1 — base + vertical intro | Sep 2026 – Dec 2026 | 14 | Frozen Trail 50K — **first ultra** |
+| 2 — winter build | Dec 2026 – Feb 2027 | 9 | **BURT 55K** (was the 100-mile) |
+| 3 — first 100K | Feb – Apr 2027 | 9 | Gorge Waterfalls 100K — **first 100K** |
+| 4 — recover, base, recon | Apr – Aug 2027 | 17 | **Bigfoot 2027 as a volunteer** |
+| 5 — first 100-mile build | Aug – Oct 2027 | 11 | **first 100-miler** — race TBD |
+| 6 — winter base + night | Nov 2027 – Feb 2028 | 15 | no race |
+| 7 — build + night running | Feb – Apr 2028 | 9 | tune-up — TBD |
+| 8 — the gate | Apr – Jun 2028 | 9 | 100-miler — **the gate**, TBD |
+| 9 — peak + taper | Jun – Aug 2028 | 8 | **BIGFOOT 200** |
+
+101 weeks. Blocks 2–9 are marked **provisional** in `schedule.json` and carry a
+*draft* tag on the Review page, because their races are not chosen yet.
+
+**Working Bigfoot 2028 on a Friday August 11** — the 2028 calendar is not
+published. 2026 ran Aug 14, 2027 runs Aug 13; it is the second Friday. Confirm
+when Destination Trail posts it.
+
+### The best thing on the new plan costs nothing
+
+**Volunteer or crew at Bigfoot 2027.** Work an aid station or crew someone for
+the race he will run a year later: see the course, see the aid stations, see
+what people look like at mile 130 on night three. Free, zero injury risk, and
+better education than any training block. It is the only entry in Block 4.
+
+### Also changed: the odds model was flattering him
+
+Every gate in `tracker/odds.py` is measured from training data, and none of them
+can see a start list. It read a solid training block and applied a base rate
+belonging to **the field** at a 200-mile race — people who mostly arrive with
+several ultras behind them.
+
+Added `LONGEST_FINISH_MI`, entered by hand because no API knows it, scaling the
+band by how much of the ladder has actually been raced: **no ultra 0.45 · 50K
+0.60 · 100K 0.80 · 100-miler 1.00**.
+
+The number went from **31–45% to 15–22%**. It climbs on its own as races get
+finished, which is the right incentive: the December 50K moves it, not a good
+training week.
+
+### Kept, unchanged
+
+The training is sound and none of it was built on the wrong premise. The week
+rebuilt earlier today — five running days, the downhill session, eccentric
+strength, the uphill ladder — all still applies. So does every page of race-day
+pacing, sleep and aid strategy in `sub100-plan.md`; it is the same course.
+
+**Three Sisters, Oct 2–5 2026, stays.** It is a backpacking trip, not a race —
+multi-day time on feet at hiking pace is exactly the right first big experience,
+and it carries almost none of the risk a 100-mile race does. Permit still
+unresolved: 60% release seven days out, about Sep 26, recreation.gov.
+
+### Still open, and Patrick's to decide
+
+1. **Which 100-miler in autumn 2027**, and its date. Placeholder is Oct 16 2027.
+2. **Which race is the 2028 gate**, 8–10 weeks out. Placeholder is May 20 2028.
+3. **Gorge Waterfalls as the first 100K** — a 17-hour cutoff is tight for a
+   debut, four months after a first 50K. A more forgiving first 100K may be the
+   kinder choice, with Gorge as the second.
+4. **Whether Bighorn returns at all.** It came off the 2027 ladder; it may be
+   the right 2028 gate, or the right autumn-2027 first hundred.
+
+---
+
 ## 2026-09-15 — the week rebuilt, against an outside review
 
 Patrick brought in a second opinion: *Bigfoot 200 — Optimized Sub-100 Training

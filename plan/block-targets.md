@@ -1,8 +1,14 @@
 # Bigfoot 200 — Block Targets & Monitoring
 
-**Race:** August 13, 2027 · **200.1 mi · 44,082 ft gain · 45,563 ft loss** · 107-hour
-cutoff · sub-100 hr for WS qualification
-**49 weeks · 5 blocks.** Last revised **2026-09-15**.
+**Race:** **August 2028** (est. Friday Aug 11, unconfirmed) · **200.1 mi · 44,082 ft gain ·
+45,563 ft loss** · 107-hour cutoff · sub-100 hr for WS qualification
+**101 weeks · 9 blocks.** Last revised **2026-09-15**.
+
+> **Moved from 2027 on 2026-09-15.** The plan was built on a race history that turned out to be
+> wrong — it assumed a Gorge Waterfalls 100K finish; the real record is a marathon twenty years
+> ago and a few halves this year, with no ultra at all. 2027 is now the apprenticeship year:
+> first ultra in December, first 100K in April, first 100-miler in the autumn. Blocks 2–9 are
+> drafts until their races are chosen. Full reasoning in `plan/plan-revisions.md`.
 
 > Course figures corrected 2026-09-15. This page previously said 200–208 mi /
 > 44,000–45,500 ft, which describes the **retired** version of the course with
