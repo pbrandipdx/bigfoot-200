@@ -250,24 +250,46 @@ const TREADMILL_DOWN =
 
 // TUESDAY — uphill tempo on a four-week cycle: 3x5, 3x10, 2x15, easy. Holz's
 // structure. Replaces the fixed LeBron prescription, which never got harder.
-const UPHILL_LADDER = ['3 × 5 min', '3 × 10 min', '2 × 15 min'];
+// Each rung carries its own WORK minutes, because the session length has to be
+// computed from them. It used to print a fixed per-block total - 45 min in
+// Block 1 - next to "3 x 10 min of intervals plus 20 min either side", which
+// does not fit in 45 minutes and was wrong from week 2 of the ladder onward.
+const UPHILL_LADDER = [
+  { label: '3 \u00d7 5 min',  work: 15, rec: 6 },
+  { label: '3 \u00d7 10 min', work: 30, rec: 6 },
+  { label: '2 \u00d7 15 min', work: 30, rec: 4 }
+];
+const STRIDES_MIN = 6;   // 5 x 20 sec plus the walk back
 
 function tuesdayWorkout(block, d){
   const m = runMin(block);
   const slot = Math.max(0, buildWeekOf(block, d) - 1) % 3;
+  // Warm-up and cool-down come out of the block's easy-running budget; the
+  // session is then however long the work on top of it actually takes.
+  const ends = Math.max(16, Math.round(m.tue * 0.45));
+  const half = Math.round(ends / 2);
+
   if(isDeloadWeek(block, d)){
-    return { title: 'Uphill tempo — easy week',
-      desc: '2 × 5 min at tempo, no strides, ' + Math.round(m.tue * 0.7) + ' min total. Deload '
-          + 'week: keep the frequency, cut the intensity. The ladder pauses here rather than '
-          + 'advancing \u2014 next week picks up where it left off.'
-          + treadmillUp(Math.round(m.tue * 0.7), '2 \u00d7 5 min') + ' ' + TOLERANCE_NOTE };
+    const total = ends + 13;
+    return { title: 'Uphill tempo \u2014 easy week',
+      desc: '2 \u00d7 5 min at tempo, 3 min easy between, no strides. ' + half
+          + ' min easy either side, about ' + total + ' min total. Deload week: keep the '
+          + 'frequency, cut the intensity. The ladder pauses here rather than advancing '
+          + '\u2014 next week picks up where it left off.'
+          + treadmillUp(total, '2 \u00d7 5 min') + ' ' + TOLERANCE_NOTE };
   }
+
+  const rung = UPHILL_LADDER[slot];
+  const total = ends + rung.work + rung.rec + STRIDES_MIN;
   return { title: 'Uphill tempo intervals + power strides',
-    desc: UPHILL_LADDER[slot] + ' uphill at Z3 (137–157 bpm), then 5 × 20 sec power strides '
-        + 'at about 85% effort on a moderate grade. Easy 20 min either side, ' + m.tue
-        + ' min total. Week ' + (slot + 1) + ' of 3 on the ladder — it is meant to '
-        + 'progress, so do not leave it at 3 \u00d7 5.'
-        + treadmillUp(m.tue, UPHILL_LADDER[slot]) + ' ' + TOLERANCE_NOTE };
+    desc: rung.label + ' uphill at Z3 (137\u2013157 bpm), 3 min easy between, then 5 \u00d7 20 '
+        + 'sec power strides at about 85% effort on a moderate grade. ' + half + ' min easy '
+        + 'either side, about ' + total + ' min total'
+        + (slot > 0 ? ' \u2014 the session grows with the ladder, so this is a longer day than '
+                    + 'week 1' : '')
+        + '. Week ' + (slot + 1) + ' of 3: it is meant to progress, so do not leave it at '
+        + '3 \u00d7 5.'
+        + treadmillUp(total, rung.label) + ' ' + TOLERANCE_NOTE };
 }
 
 // WEDNESDAY — easy aerobic plus the eccentric strength that used to sit on
