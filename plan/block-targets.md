@@ -1,14 +1,19 @@
 # Bigfoot 200 — Block Targets & Monitoring
 
-**Race:** **August 2028** (est. Friday Aug 11, unconfirmed) · **200.1 mi · 44,082 ft gain ·
-45,563 ft loss** · 107-hour cutoff · sub-100 hr for WS qualification
-**101 weeks · 9 blocks.** Last revised **2026-09-15**.
+**Race:** **Friday August 13, 2027** · **200.1 mi · 44,082 ft gain · 45,563 ft loss** ·
+107-hour cutoff · sub-100 hr for WS qualification
+**49 weeks · 5 blocks.** Last revised **2026-09-15**.
 
-> **Moved from 2027 on 2026-09-15.** The plan was built on a race history that turned out to be
-> wrong — it assumed a Gorge Waterfalls 100K finish; the real record is a marathon twenty years
-> ago and a few halves this year, with no ultra at all. 2027 is now the apprenticeship year:
-> first ultra in December, first 100K in April, first 100-miler in the autumn. Blocks 2–9 are
-> drafts until their races are chosen. Full reasoning in `plan/plan-revisions.md`.
+> **The race is August 2027 and that is fixed.** It was briefly moved to 2028 on 2026-09-15 and
+> Patrick moved it back the same day — everything revolves around this date.
+>
+> **What stands regardless: the race history in this plan was wrong.** It assumed a Gorge
+> Waterfalls 100K finish. The real record is **a marathon around 2006 and a few half marathons
+> this year — no ultra**, and a longest single effort of 3.0 hours. So the ladder below is six
+> firsts in eleven months: first trail race in November, first ultra in December, first 100K in
+> April, first 100-miler in June, first 200 in August. That is a very aggressive progression and
+> it is recorded as such in `plan/plan-revisions.md` — not as an argument against the date, but
+> so nobody later mistakes it for a gentle one.
 
 > Course figures corrected 2026-09-15. This page previously said 200–208 mi /
 > 44,000–45,500 ft, which describes the **retired** version of the course with
@@ -51,7 +56,7 @@ can still run on day four.
 | **Sunday** | **The long day.** |
 
 Session length ramps by block — 45 min midweek in Block 1, up to 90 on
-Thursdays in Block 8 — because **frequency, not one big day, is how running
+Thursdays by Block 4 — because **frequency, not one big day, is how running
 tolerance rises.** Five short days already spends a 12 mi/week tolerance.
 
 **The release valve, stated on every running day:** if the week's running miles
@@ -127,10 +132,10 @@ the least informative number here.
 `bigfoot-200-training` Supabase project (`garmin_daily`, `garmin_training`,
 `activities`) with full provenance in each row's `raw`.*
 
-> **Rescaled 2026-09-11, then rebuilt 2026-09-15.** The original targets were scaled
-> from a baseline 27–43% above what was actually being trained. They were shifted down
-> once, then rebuilt entirely when the race moved to 2028 and the plan went from five
-> blocks to nine. The block numbers below are the current ones.
+> **Rescaled 2026-09-11, revised 2026-09-15.** The original targets were scaled from a
+> baseline 27–43% above what was actually being trained, so they were shifted down one
+> rung. The peak single efforts were lowered again on 2026-09-15 — see the progression
+> table. The numbers below are the current ones.
 
 ---
 
@@ -151,152 +156,95 @@ the least informative number here.
 
 ---
 
-## Block 2 — winter build
+## Block 2 — build
 *Dec 13 2026 to Feb 13 2027 (9 weeks)*
-*Ends: BURT 55K — one loop, aid-station rehearsal* · **draft — race not chosen**
-
-| Target | Value |
-|---|---|
-| Time on feet | **13 hr/week** |
-| Vertical | **4,000 ft/week** (308 ft/hr) |
-| On-foot miles | **45/week** |
-| Peak single effort | **8 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **6** |
-
-**Block question:** can you go out again on tired legs, in bad weather, when nothing about it is enjoyable? This is the motivation block, not the fitness one.
-
----
-
-## Block 3 — first 100K
-*Feb 14 2027 to Apr 17 2027 (9 weeks)*
-*Ends: Gorge Waterfalls 100K — FIRST 100K* · **draft — race not chosen**
+*Ends: BURT 55K, then Hagg Mud 50K*
 
 | Target | Value |
 |---|---|
 | Time on feet | **14 hr/week** |
 | Vertical | **5,000 ft/week** (357 ft/hr) |
 | On-foot miles | **50/week** |
-| Peak single effort | **10 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **10** |
-
-**Block question:** can you cover 100 km, in one push, inside a cutoff? This is the first real gate of the apprenticeship year.
-
----
-
-## Block 4 — recover, base, recon
-*Apr 18 2027 to Aug 15 2027 (17 weeks)*
-*Ends: Bigfoot 200 2027 — as a volunteer, not a runner* · **draft — race not chosen**
-
-| Target | Value |
-|---|---|
-| Time on feet | **11 hr/week** |
-| Vertical | **3,500 ft/week** (318 ft/hr) |
-| On-foot miles | **40/week** |
 | Peak single effort | **8 hr** |
 | Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **12** |
+| Night hours, cumulative | **6** |
 
-**Block question:** can you recover properly, hold a base through summer, and learn the course with your own eyes rather than a map?
+**Block question:** can you go out again on tired legs, in bad weather, when nothing about it is enjoyable? This is the motivation block, not the fitness one.
 
-**August 2027: work Bigfoot as a volunteer, not a runner.** Crew someone, or take an
-aid-station shift. You see the course, the aid stations, and what people look like at
-mile 130 on night three — a year before you run it. It is free, it carries no injury
-risk, and it is better education than any training block in this document.
+**BURT is at 55K here — one 33-mile loop.** The 110K and 100-mile options are open and
+the decision is Patrick's; the case for each is in `plan-revisions.md`. Whatever the
+distance, the loop format is the point: a drop bag every few hours and timed transitions,
+which is the aid-station discipline sub-100 depends on.
 
----
-
-## Block 5 — first 100-mile build
-*Aug 16 2027 to Oct 31 2027 (11 weeks)*
-*Ends: First 100-miler — race TBD* · **draft — race not chosen**
-
-| Target | Value |
-|---|---|
-| Time on feet | **15 hr/week** |
-| Vertical | **6,000 ft/week** (400 ft/hr) |
-| On-foot miles | **50/week** |
-| Peak single effort | **14 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **16** |
-
-**Block question:** can you go a hundred miles? Everything in year two assumes the answer is yes.
-
-**The race is not chosen yet.** October 2027 is a placeholder. Wanted: supported,
-forgiving cutoff, reachable from Portland, and not technical. This is a first hundred —
-the goal is to finish one, not to race one.
+**Hagg Mud is nine days after BURT.** Check both dates before entering either.
 
 ---
 
-## Block 6 — winter base + night
-*Nov 1 2027 to Feb 13 2028 (15 weeks)*
-*Ends: no race — night hours and durability* · **draft — race not chosen**
-
-| Target | Value |
-|---|---|
-| Time on feet | **13 hr/week** |
-| Vertical | **5,000 ft/week** (385 ft/hr) |
-| On-foot miles | **45/week** |
-| Peak single effort | **10 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **20** |
-
-**Block question:** can you keep a base through a second PNW winter without a race to point at? This block has no finish line, which is its difficulty.
-
----
-
-## Block 7 — build + night running
-*Feb 14 2028 to Apr 16 2028 (9 weeks)*
-*Ends: a 100K or 50-miler tune-up — TBD* · **draft — race not chosen**
+## Block 3 — night running
+*Feb 14 2027 to Apr 16 2027 (9 weeks)*
+*Ends: Gorge Waterfalls 100K — FIRST 100K*
 
 | Target | Value |
 |---|---|
 | Time on feet | **16 hr/week** |
 | Vertical | **6,500 ft/week** (406 ft/hr) |
 | On-foot miles | **55/week** |
-| Peak single effort | **12 hr** |
+| Peak single effort | **10 hr** |
 | Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **26** |
+| Night hours, cumulative | **12** |
 
-**Block question:** can you move competently in the dark, for hours, repeatedly?
+**Block question:** can you move competently in the dark for six hours? Arriving at Gorge having never run at night is the avoidable failure here.
+
+**This is the first 100K, against a 17-hour cutoff**, four months after a first-ever 50K.
+Treat it as a debut to be finished, not a checkpoint to be paced.
 
 ---
 
-## Block 8 — the gate
-*Apr 17 2028 to Jun 18 2028 (9 weeks)*
-*Ends: 100-miler — THE GATE, race TBD* · **draft — race not chosen**
+## Block 4 — the gate
+*Apr 17 2027 to Jun 18 2027 (9 weeks)*
+*Ends: Bighorn 100 — FIRST 100-MILER, the gate*
 
 | Target | Value |
 |---|---|
 | Time on feet | **18 hr/week** |
 | Vertical | **8,000 ft/week** (444 ft/hr) |
 | On-foot miles | **60/week** |
-| Peak single effort | **16 hr** |
+| Peak single effort | **14 hr** |
 | Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **32** |
+| Night hours, cumulative | **20** |
 
-**Block question:** can you run a hundred miles WELL — controlled, disciplined at aid, recovered in days rather than weeks?
+**Block question:** can you run through a night and keep functioning the next day? Everything about Bigfoot's second and third nights is decided here.
 
-**The gate.** A controlled finish with disciplined aid means sub-100 at Bigfoot is live.
-A finish that costs two weeks means Bigfoot is on and sub-100 is not. A DNF or an injury
-finish means defer. Written down now, while it is abstract.
+**The gate, and the first 100-miler, eight weeks before a 200.** Decide the rule now,
+in writing, while it is abstract: a controlled finish means sub-100 is live; a finish that
+costs two weeks means race Bigfoot to finish inside 107; a DNF or an injury finish means
+defer. In June it will cost something to decide. Today it costs nothing.
 
 ---
 
-## Block 9 — peak + taper
-*Jun 19 2028 to Aug 11 2028 (8 weeks)*
-*Ends: BIGFOOT 200* · **draft — race not chosen**
+## Block 5 — peak + taper
+*Jun 19 2027 to Aug 13 2027 (8 weeks)*
+*Ends: BIGFOOT 200*
 
 | Target | Value |
 |---|---|
-| Time on feet | **20 hr/week** |
-| Vertical | **10,000 ft/week** (500 ft/hr) |
-| On-foot miles | **60/week** |
-| Peak single effort | **18 hr** |
+| Time on feet | **21 hr/week** |
+| Vertical | **10,000 ft/week** (476 ft/hr) |
+| On-foot miles | **65/week** |
+| Peak single effort | **16 hr** |
 | Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **40** |
+| Night hours, cumulative | **30** |
 
 **Block question:** nothing is asked of this block but arriving fresh.
+
+| Weeks 1–2 | Full recovery from Bighorn. Walks only. |
+|---|---|
+| Weeks 3–5 | Peak: 20–22 hr/week, 10,000 ft/week, one 16 hr overnight |
+| Week 6 | Reduce 40% |
+| Weeks 7–8 | Taper. Legs fresh, sleep banked. |
+
+Heat acclimation: 6 sessions — August in the Cascades is hot and exposed, and the
+blast zone has no shade.
 
 ---
 
@@ -327,14 +275,10 @@ the following block starts on a deficit.
 |---|---|---|---|---|---|---|
 | Now (measured) | 11.0 | 1,659 | 30 | **3.0 hr** | 221 | 0 |
 | 1 | 12 | 3,500 | 45 | 6 hr | 292 | 3 |
-| 2 | 13 | 4,000 | 45 | 8 hr | 308 | 6 |
-| 3 | 14 | 5,000 | 50 | 10 hr | 357 | 10 |
-| 4 | 11 | 3,500 | 40 | 8 hr | 318 | 12 |
-| 5 | 15 | 6,000 | 50 | 14 hr | 400 | 16 |
-| 6 | 13 | 5,000 | 45 | 10 hr | 385 | 20 |
-| 7 | 16 | 6,500 | 55 | 12 hr | 406 | 26 |
-| 8 | 18 | 8,000 | 60 | 16 hr | 444 | 32 |
-| 9 | 20 | 10,000 | 60 | 18 hr | 500 | 40 |
+| 2 | 14 | 5,000 | 50 | 8 hr | 357 | 6 |
+| 3 | 16 | 6,500 | 55 | 10 hr | 406 | 12 |
+| 4 | 18 | 8,000 | 60 | 14 hr | 444 | 20 |
+| 5 | 21 | 10,000 | 65 | 16 hr | 476 | 30 |
 | *the race* | — | 44,082 total | 200.1 | 97 hr | **508 moving** | ~40 |
 
 The **ft/hr** column is the one to watch: it climbs to just under race pace rather than
@@ -342,16 +286,17 @@ overshooting it. Cutting weekly hours without cutting vertical pushes it above 5
 asking you to train steeper, every hour of every week, than you will ever race. Your last
 complete week was **221**.
 
-Cumulative vertical if every week is hit: **~541,000 ft** across 101 weeks, or nearer
-**490,000** once deloads take their week in four. Do not read that as a multiple of the race —
-the old plan's "6.2×" was over one year and this is over two, so the ratio changed without the
-training changing. The number that matters is the **weekly** one, and week for week this is a
-gentler plan than the 2027 version, not a bigger one.
+Cumulative vertical if every week is hit: **~304,500 ft** across 49 weeks, about **6.9×** the
+race, or nearer **277,000** once deloads take their week in four.
 
-**Rebuilt 2026-09-15** when the race moved to August 2028 and the plan went from 5 blocks
-to 9. Blocks 2–9 are drafts until their races are chosen. Generated from
-`plan/schedule.json` — if a number here disagrees with the site, the JSON wins and this
-table needs regenerating.
+**Peak single efforts were lowered on 2026-09-15** from 8/10/12/16/20 to **6/8/10/14/16**,
+and the distinction that made that sensible still holds: a long day for *aerobic stimulus*
+caps at 8 hours, while a long day for *night movement and a sleep stop* is a different
+session and Blocks 4 and 5 keep one each. The lifetime longest single effort is 3.0 hours,
+so an 8-hour Block 1 target was never going to be walked toward.
+
+Generated from `plan/schedule.json` — if a number here disagrees with the site, the JSON
+wins and this table needs regenerating.
 
 # Monitors — thresholds, not goals
 
@@ -556,8 +501,9 @@ tolerance* above.
 
 1. **Night hours accumulate on schedule.** Zero today. This is the cheapest gap
    to close and the one most likely to be skipped.
-2. **The 2028 gate race is a gate, not a formality.** A controlled finish means sub-100 is
-   live; a finish that costs two weeks means race Bigfoot to finish; a DNF means defer.
+2. **Bighorn is a gate, not a formality** — and it is also the first 100-miler. Under 28 hr
+   controlled means sub-100 is live; 28–30 or a finish that costs two weeks means race Bigfoot
+   to finish inside 107; a DNF or injury finish means defer. Decide it now, not in June.
 3. **Descent training happens on rock**, not loam, and late in the day.
 4. **Feet get managed from hour five**, not hour nine. Practice in training.
 5. **Eat every 40 minutes** on every long day, including when you don't want to —

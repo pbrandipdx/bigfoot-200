@@ -5,7 +5,48 @@ survives the conversation that produced it. Newest first.
 
 ---
 
-## 2026-09-15 — the race moved to 2028, because the history was wrong
+## 2026-09-15 (later the same day) — the race is August 2027, and it is fixed
+
+Patrick: *"my race is 2027 make that change like i asked... everything revolves
+around that race day."* Reverted. **Bigfoot 200, Friday August 13 2027.** Five
+blocks, 49 weeks, Bighorn back on the ladder as the gate.
+
+**The history correction stands and is not affected by the date.** No ultra
+finished; longest single effort 3.0 hours. What that makes the 2027 ladder is
+six firsts in eleven months, three of them in the final five — first 100K in
+April, first 100-miler in June, first 200 in August. That is recorded here so
+the difficulty is visible, not as an argument against the date. The date is
+Patrick's call and it is made.
+
+**Kept from the 2028 draft, because these were corrections rather than
+strategy:**
+
+- **Peak single efforts 6/8/10/14/16**, not 8/10/12/16/20, with the
+  volume-vs-rehearsal split: 8 hours caps an aerobic long day, and Blocks 4 and
+  5 each keep one longer overnight for the night and the sleep stop.
+- **BURT at 55K** as the default, with the 110K and 100-mile explicitly still
+  open — the 100-mile is 99 miles and 12,000 ft eight weeks after a first-ever
+  50K, and the 110K gets most of the rehearsal value for two thirds of the cost.
+- **The odds model's experience input.** `LONGEST_FINISH_MI` scales the band by
+  how much of the ladder has actually been raced. It climbs when a race is
+  finished, not when a training week goes well.
+- **The projection cap.** An eight-week slope is carried at most 26 weeks and
+  then held flat. Without it the model reported "100% of race-day vertical" next
+  to a readiness score of 53%.
+- **The build guards** — the build fails if a block has no section in
+  `block-targets.md`, or if any page shows a race date other than the configured
+  one. Both were written because two files disagreed in public today.
+- **The corrected course figures and max HR 196.**
+
+**What came back:** Bighorn 100 on Jun 18 2027 as the gate and the first
+hundred, Hagg Mud 50K on Feb 15 (nine days after BURT — check both before
+entering either), and the five-block structure.
+
+**What went away:** the Bigfoot 2027 volunteer entry, because he is running it.
+
+---
+
+## 2026-09-15 — the race moved to 2028, and then moved back (superseded)
 
 **The correction.** `sub100-plan.md` said, in the passage arguing for BURT:
 *"Your longest to date is Gorge Waterfalls 100K."* That is not true. Patrick's

@@ -18,7 +18,7 @@ Sources:
 
 | | Their guidance | This plan |
 |---|---|---|
-| Build length | 12–16 weeks (Holz); ~6 months (vert.run) | **101 weeks, 9 blocks** — 2027 is an apprenticeship year, 2028 is the build |
+| Build length | 12–16 weeks (Holz); ~6 months (vert.run) | **49 weeks, 5 blocks** |
 | Weekly progression | **no more than 10%/week** (Holz) | block-to-block jumps of 13–20% |
 | Peak weekly volume | ~1.4–1.6× sustainable baseline (vert.run) | **22–24 hr/wk** vs an 8.8 hr measured baseline |
 | Minimum for a 100 | 9 hr/wk for 6 consecutive weeks (Koop) | already exceeded |
@@ -46,7 +46,7 @@ Sources:
 2. **The 20-hour peak day has no support anywhere.** Koop's worked progression
    tops out near 8 hours. Burt prefers back-to-backs specifically because they
    cut injury risk versus one enormous effort.
-3. **The peak block sits 8–10 weeks after a 100-miler**, with real recovery — this was 3–5 weeks in the 2027 plan and is one of the things the move to 2028 fixed.
+3. **Block 5 peaks 3–5 weeks after a 100-miler**, with two weeks of recovery.
 4. **No scheduled down weeks in Blocks 2–4** — 27 consecutive build weeks.
    Holz's 10%/week cap and planned deloads both point the other way.
 

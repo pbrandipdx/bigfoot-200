@@ -2,11 +2,9 @@
   "_source": "Generated view of plan/block-targets.md and plan/sub100-plan.md. Edit those, then run `make dashboard`.",
   "race": {
     "name": "Bigfoot 200",
-    "date": "2028-08-11",
+    "date": "2027-08-13",
     "goal": "sub-100hr",
-    "schedule": "97:00",
-    "dateEstimated": true,
-    "note": "2028 calendar not yet published; Aug 11 is the second Friday, matching 2026 (Aug 14) and 2027 (Aug 13)."
+    "schedule": "97:00"
   },
   "blocks": [
     {
@@ -28,16 +26,16 @@
     },
     {
       "id": 2,
-      "name": "Block 2 — winter build",
+      "name": "Block 2 — build",
       "start": "2026-12-13",
       "end": "2027-02-13",
-      "vert": "4,000 ft",
-      "hours": "13 hr/wk",
-      "endsWith": "BURT 55K — one loop, aid-station rehearsal",
+      "vert": "5,000 ft",
+      "hours": "14 hr/wk",
+      "endsWith": "BURT 55K, then Hagg Mud 50K",
       "targets": {
-        "hoursPerWeek": 13,
-        "vertFtPerWeek": 4000,
-        "milesPerWeek": 45,
+        "hoursPerWeek": 14,
+        "vertFtPerWeek": 5000,
+        "milesPerWeek": 50,
         "peakDayHours": 8,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 6
@@ -45,124 +43,53 @@
     },
     {
       "id": 3,
-      "name": "Block 3 — first 100K",
+      "name": "Block 3 — night running",
       "start": "2027-02-14",
-      "end": "2027-04-17",
-      "vert": "5,000 ft",
-      "hours": "14 hr/wk",
+      "end": "2027-04-16",
+      "vert": "6,500 ft",
+      "hours": "16 hr/wk",
       "endsWith": "Gorge Waterfalls 100K — FIRST 100K",
       "targets": {
-        "hoursPerWeek": 14,
-        "vertFtPerWeek": 5000,
-        "milesPerWeek": 50,
+        "hoursPerWeek": 16,
+        "vertFtPerWeek": 6500,
+        "milesPerWeek": 55,
         "peakDayHours": 10,
-        "volumeDayCapHours": 8,
-        "nightHoursCumulative": 10
-      }
-    },
-    {
-      "id": 4,
-      "name": "Block 4 — recover, base, recon",
-      "start": "2027-04-18",
-      "end": "2027-08-15",
-      "vert": "3,500 ft",
-      "hours": "11 hr/wk",
-      "endsWith": "Bigfoot 200 2027 — as a volunteer, not a runner",
-      "targets": {
-        "hoursPerWeek": 11,
-        "vertFtPerWeek": 3500,
-        "milesPerWeek": 40,
-        "peakDayHours": 8,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 12
       }
     },
     {
-      "id": 5,
-      "name": "Block 5 — first 100-mile build",
-      "start": "2027-08-16",
-      "end": "2027-10-31",
-      "vert": "6,000 ft",
-      "hours": "15 hr/wk",
-      "endsWith": "First 100-miler — race TBD",
+      "id": 4,
+      "name": "Block 4 — the gate",
+      "start": "2027-04-17",
+      "end": "2027-06-18",
+      "vert": "8,000 ft",
+      "hours": "18 hr/wk",
+      "endsWith": "Bighorn 100 — FIRST 100-MILER, the gate",
       "targets": {
-        "hoursPerWeek": 15,
-        "vertFtPerWeek": 6000,
-        "milesPerWeek": 50,
+        "hoursPerWeek": 18,
+        "vertFtPerWeek": 8000,
+        "milesPerWeek": 60,
         "peakDayHours": 14,
-        "volumeDayCapHours": 8,
-        "nightHoursCumulative": 16
-      },
-      "provisional": true
-    },
-    {
-      "id": 6,
-      "name": "Block 6 — winter base + night",
-      "start": "2027-11-01",
-      "end": "2028-02-13",
-      "vert": "5,000 ft",
-      "hours": "13 hr/wk",
-      "endsWith": "no race — night hours and durability",
-      "targets": {
-        "hoursPerWeek": 13,
-        "vertFtPerWeek": 5000,
-        "milesPerWeek": 45,
-        "peakDayHours": 10,
         "volumeDayCapHours": 8,
         "nightHoursCumulative": 20
       }
     },
     {
-      "id": 7,
-      "name": "Block 7 — build + night running",
-      "start": "2028-02-14",
-      "end": "2028-04-16",
-      "vert": "6,500 ft",
-      "hours": "16 hr/wk",
-      "endsWith": "a 100K or 50-miler tune-up — TBD",
-      "targets": {
-        "hoursPerWeek": 16,
-        "vertFtPerWeek": 6500,
-        "milesPerWeek": 55,
-        "peakDayHours": 12,
-        "volumeDayCapHours": 8,
-        "nightHoursCumulative": 26
-      },
-      "provisional": true
-    },
-    {
-      "id": 8,
-      "name": "Block 8 — the gate",
-      "start": "2028-04-17",
-      "end": "2028-06-18",
-      "vert": "8,000 ft",
-      "hours": "18 hr/wk",
-      "endsWith": "100-miler — THE GATE, race TBD",
-      "targets": {
-        "hoursPerWeek": 18,
-        "vertFtPerWeek": 8000,
-        "milesPerWeek": 60,
-        "peakDayHours": 16,
-        "volumeDayCapHours": 8,
-        "nightHoursCumulative": 32
-      },
-      "provisional": true
-    },
-    {
-      "id": 9,
-      "name": "Block 9 — peak + taper",
-      "start": "2028-06-19",
-      "end": "2028-08-11",
+      "id": 5,
+      "name": "Block 5 — peak + taper",
+      "start": "2027-06-19",
+      "end": "2027-08-13",
       "vert": "10,000 ft",
-      "hours": "20 hr/wk",
+      "hours": "20–22 hr/wk",
       "endsWith": "BIGFOOT 200",
       "targets": {
-        "hoursPerWeek": 20,
+        "hoursPerWeek": 21,
         "vertFtPerWeek": 10000,
-        "milesPerWeek": 60,
-        "peakDayHours": 18,
+        "milesPerWeek": 65,
+        "peakDayHours": 16,
         "volumeDayCapHours": 8,
-        "nightHoursCumulative": 40
+        "nightHoursCumulative": 30
       },
       "taper": true
     }
@@ -202,7 +129,13 @@
       "name": "BURT 55K",
       "start": "2027-02-06",
       "end": "2027-02-06",
-      "tag": "one 33-mi loop, 4,000 ft · the aid-station rehearsal · was the 100-mile"
+      "tag": "one 33-mi loop, 4,000 ft · aid-station rehearsal · the 100-mile and 110K options are also open — see plan-revisions.md"
+    },
+    {
+      "name": "Hagg Mud 50K",
+      "start": "2027-02-15",
+      "end": "2027-02-15",
+      "tag": "tune-up · date approximate · only 9 days after BURT, check both"
     },
     {
       "name": "Gorge Waterfalls 100K",
@@ -211,28 +144,16 @@
       "tag": "FIRST 100K · WS qualifier · 17 hr cutoff"
     },
     {
-      "name": "Bigfoot 200 (volunteer)",
-      "start": "2027-08-13",
-      "end": "2027-08-13",
-      "tag": "NOT racing — crew or work an aid station. Free course recon and the best education available."
-    },
-    {
-      "name": "First 100-miler",
-      "start": "2027-10-16",
-      "end": "2027-10-16",
-      "tag": "RACE TBD · autumn 2027 · date is a placeholder"
-    },
-    {
-      "name": "Gate 100-miler",
-      "start": "2028-05-20",
-      "end": "2028-05-20",
-      "tag": "RACE TBD · 8-10 weeks before Bigfoot · date is a placeholder"
+      "name": "Bighorn 100",
+      "start": "2027-06-18",
+      "end": "2027-06-19",
+      "tag": "FIRST 100-MILER · WS qualifier · THE GATE · 8 weeks before Bigfoot"
     },
     {
       "name": "Bigfoot 200",
-      "start": "2028-08-11",
-      "end": "2028-08-11",
-      "tag": "A race · 97:00 schedule, sub-100 goal · DATE ESTIMATED"
+      "start": "2027-08-13",
+      "end": "2027-08-13",
+      "tag": "A race · 97:00 schedule, sub-100 goal"
     }
   ],
   "longDays": [

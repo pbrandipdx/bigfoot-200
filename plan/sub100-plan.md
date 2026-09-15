@@ -1,11 +1,6 @@
 # Bigfoot 200 — the sub-100 plan
 
-**Race:** **August 2028** — date estimated **Friday August 11**, to be confirmed when Destination
-Trail publishes the 2028 calendar (2026 ran Aug 14, 2027 runs Aug 13; it is the second Friday).
-12:00 PM start · Marble Mountain Sno-Park → Randle, WA
-
-> **Moved from August 2027 on 2026-09-15**, after the race history this plan was built on turned
-> out to be wrong. See item 3 below. 2027 is now the apprenticeship year.
+**Race:** Friday **August 13, 2027**, 12:00 PM · Marble Mountain Sno-Park → Randle, WA
 **Course:** 200.1 mi · 44,082 ft gain · 45,563 ft loss · **107-hour limit**
 **Goal:** finish under **100:00** — the Western States qualifying standard
 **Support:** unsupported. Drop bags at every aid station, no crew, no pacers.
@@ -50,24 +45,40 @@ highest-leverage thing on this page. If unsupported is fixed, the plan below sti
 spends its margin on self-sufficiency instead of speed.
 
 **3. You have never run an ultramarathon.**
-Corrected 2026-09-15. Everything on this page previously assumed a Gorge Waterfalls 100K finish in
-your history. There isn't one. The real record is **a marathon twenty years ago and a few half
+Corrected 2026-09-15. Everything on this page previously assumed a Gorge Waterfalls 100K finish
+in your history. There isn't one. The real record is **a marathon around 2006 and a few half
 marathons this year**, and the longest single effort in 208 logged activities is **3.0 hours**.
 
-That one wrong sentence was load-bearing. It is why BURT was described as a *rehearsal* rather than
-a debut, why Bighorn was called a gate rather than an experiment, and why the ladder below stacked
-distances the way it did. The pacing, sleep and aid strategy on this page all survive the
-correction. The race ladder did not.
+That sentence was load-bearing — it is why BURT was called a rehearsal rather than a debut, and
+why Bighorn was called a gate rather than an experiment. The correction does not change the
+pacing, sleep or aid strategy on this page. It changes how hard the ladder is.
 
-**What the ladder actually was**, read against the true history: first trail race in November,
-first ultra in December, then **99 miles eight weeks later**, a first 100K in April, a first
-100-miler in June, and a first 200 — unsupported, four nights — in August. Six debuts in ten
-months, three of them in the final five.
+**Read honestly, the ladder is six firsts in eleven months:**
 
-**So the race moved to August 2028**, and 2027 became the year you learn to be an ultrarunner:
-one debut at a time, each with months of consolidation behind it. That decision is recorded in
-`plan-revisions.md`. It costs a year and buys the thing this page is actually about — arriving at
-Bigfoot with enough ultra behind you that sub-100 is a target rather than a hope.
+| | |
+|---|---|
+| Nov 7 2026 | first trail race (25K) |
+| Dec 12 2026 | **first ultra** (50K) |
+| Feb 6 2027 | BURT — first loop race |
+| Apr 16 2027 | **first 100K**, 17-hour cutoff |
+| Jun 18 2027 | **first 100-miler**, Bighorn |
+| Aug 13 2027 | **first 200**, unsupported, four nights, sub-100 |
+
+Three of those land in the final five months. The race date is fixed and everything revolves
+around it — this is written down so the difficulty is visible, not to argue with the date.
+
+**What it changes in practice:**
+
+- **Bighorn is the gate and it matters more than ever**, because it is now also the first
+  hundred. The three outcomes below are worth deciding today rather than in June.
+- **Every checkpoint below is a debut**, so the standards are "finish it, and learn something
+  measurable" rather than a pace target — except Gorge, which has a real cutoff.
+- **BURT at 55K is the conservative option.** The 110K and the 100-mile are on the table and
+  the case for each is in `plan-revisions.md`. Against a first 50K eight weeks earlier, 55K is
+  the one that costs days rather than weeks.
+- **The finish-odds model now knows.** It scales its band by how much of the distance ladder has
+  actually been raced, which is why it reads far lower than it did. It climbs as races get
+  finished — the December 50K moves it, not a good training week.
 
 ---
 
@@ -230,37 +241,34 @@ eight-hour day. That is the point.
 |---|---|---|---|
 | Run the Rock **25K** | Nov 7 | 3.2 mph, finish upright | a checkpoint, not a test. Dropped from the 50K: running tolerance is 12 mi/wk |
 | Frozen Trail 50K | Dec | finish | negative split; last hour running |
-| **BURT 55K** *(one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **finish it, and time every aid stop.** The loop format is the point, not the distance |
-| Gorge Waterfalls 100K | Apr 2027 | 2.8 mph, 16–18 hr | **your first 100K — finish inside the 17-hr cutoff.** A debut, not a checkpoint |
-| Bighorn 100 | Jun 2027 | finish under 30 hr | **moved.** A first 100-miler two months after a first 100K was the error this page was making |
+| **BURT 55K** *(one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **finish it, and time every aid stop.** The loop format is the point, not the distance. 110K and 100-mile options still open — see `plan-revisions.md` |
+| Gorge Waterfalls 100K | Apr 16, 2027 | 2.8 mph, 16–18 hr | **your first 100K — finish inside the 17-hr cutoff.** A debut, not a checkpoint |
+| Bighorn 100 | Jun 18, 2027 | finish under 30 hr | **your first 100-miler, and the gate.** Under 28 hr controlled says the machinery works. See below |
 
-The 2028 ladder — which 100-miler, and when the gate race sits — is still to be chosen. See
-`plan-revisions.md`.
+Every row in that table is a debut. Standards are "finish it and learn something measurable",
+not pace targets — except Gorge, which has a real cutoff to clear.
 
 ---
 
 ## The gate, restated
 
-The gate logic was always right. What changed is which race is the gate, and when.
+**Bighorn is the gate, and it is also your first 100-miler**, eight weeks before a 200. That is a
+lot to ask of one race, and it is exactly why the rule below is worth writing today rather than in
+June — in June it will cost something.
 
-**2027 has no gate, because 2027 has nothing to gate.** It is the year the debuts happen: first
-ultra in December, first 100K in April. Nothing in it decides whether Bigfoot 2028 is on. It only
-decides whether you enjoy the process enough to keep going, which is a real question and a
-different one.
+**Three outcomes, decided in advance:**
 
-**The gate is a 100-mile finish in 2028, roughly eight to ten weeks before Bigfoot.** Three
-outcomes, decided in advance:
-
-- **A controlled finish with disciplined aid** → sub-100 is live. Run the plan on this page.
-- **A finish that cost you two weeks** → Bigfoot is on, sub-100 is not. Race it to finish inside
-  107, enjoy it, qualify another way.
-- **DNF, or an injury finish** → defer. There is another Bigfoot the year after and there is only
+- **Under 28 hours, controlled, aid under 90 minutes** → sub-100 is live. Run the plan.
+- **28–30 hours, or a finish that cost you two weeks** → Bigfoot is on, sub-100 is not. Race it to
+  finish inside 107, enjoy it, qualify another way.
+- **DNF, or an injury finish** → defer Bigfoot. There is another one next year and there is only
   one of you.
 
-Write that down now, while it's abstract and costs nothing. In 2028 it will cost something.
+Sub-28 with a controlled second half and disciplined aid says the sub-100 machinery works. Sub-30
+with a four-hour death march says you'll finish Bigfoot in 104 hours — a fine day out, and not what
+you asked for.
 
-> **The honest version of the deferral rule:** you have already used it once, in September 2026,
-> before anything went wrong — which is the cheapest time it will ever be available.
+Write it down now, in September, while it's abstract and costs nothing.
 
 ---
 

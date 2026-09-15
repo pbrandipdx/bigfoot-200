@@ -1,12 +1,12 @@
 {
   "generated": "2026-09-15",
-  "weeksToRace": 99,
+  "weeksToRace": 47,
   "blockReadiness": 53,
   "blockName": "Block 1",
   "trajectory": {
     "low": 13,
     "high": 18,
-    "readiness": 50
+    "readiness": 51
   },
   "label": "well behind",
   "color": "#A23B2C",
@@ -21,13 +21,13 @@
       "label": "Longest single day",
       "weight": 20,
       "now": 50,
-      "raceDay": 25
+      "raceDay": 28
     },
     "hours": {
       "label": "Time on feet per week",
       "weight": 15,
       "now": 100,
-      "raceDay": 100
+      "raceDay": 99
     },
     "run": {
       "label": "Run-specific capacity",

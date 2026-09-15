@@ -6,20 +6,20 @@ Arrows compare with the previous week. {{up}} and {{down}} are moving the way yo
 
 ## Finish odds
 
-**13–18%** — *well behind*, 99 weeks out.
+**13–18%** — *well behind*, 47 weeks out.
 
 That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against the final block's targets. Separately, you are at **53% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
 
 | Gate | Weight | vs Block 1 now | Projected race day |
 |---|---|---|---|
 | Vertical per week | 20% | `██████░░░░` 62% | `███████░░░` 69% |
-| Longest single day | 20% | `█████░░░░░` 50% | `██░░░░░░░░` 25% |
-| Time on feet per week | 15% | `██████████` 100% | `██████████` 100% |
+| Longest single day | 20% | `█████░░░░░` 50% | `███░░░░░░░` 28% |
+| Time on feet per week | 15% | `██████████` 100% | `██████████` 99% |
 | Run-specific capacity | 15% | `██░░░░░░░░` 21% | `███░░░░░░░` 25% |
 | Night hours | 10% | `░░░░░░░░░░` 0% | `░░░░░░░░░░` 0% |
 | Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
 | Recovery headroom | 10% | `█████░░░░░` 53% | `█████░░░░░` 53% |
-| **Readiness** | | **53%** | **50%** |
+| **Readiness** | | **53%** | **51%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Run-specific capacity**.
 

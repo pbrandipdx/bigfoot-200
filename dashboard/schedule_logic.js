@@ -136,24 +136,21 @@ function saturdayWorkout(block, d){
 
 // Per-block session minutes. Block 1 is deliberately small: running tolerance
 // was 12 mi/week when this was written, and five short days already spends it.
-// Rewritten 2026-09-15 for nine blocks. The table had five entries and fell
-// back to Block 1's 45 minutes for anything higher, so when the plan grew to
-// nine blocks the whole of 2028 - including peak weeks - silently rendered
-// beginner-length midweek sessions. Keyed by block, with a sensible fallback
-// rather than the smallest one.
+// Per-block session minutes. Block 1 is deliberately small: running tolerance
+// was 12 mi/week when this was written, and five short days already spends it.
+// Keyed for every block the plan has - when this table had five entries and the
+// plan briefly had nine, blocks 6-9 silently fell back to Block 1's beginner
+// 45 minutes, so the fallback is no longer the smallest entry.
 const RUN_MINUTES = {
-  1: { tue: 45, wed: 45, thu: 45, fri: 25 },   // learning to run again
+  1: { tue: 45, wed: 45, thu: 45, fri: 25 },
   2: { tue: 55, wed: 55, thu: 60, fri: 30 },
-  3: { tue: 60, wed: 60, thu: 75, fri: 30 },   // into the first 100K
-  4: { tue: 50, wed: 55, thu: 60, fri: 30 },   // recovery + summer base, deliberately smaller
-  5: { tue: 65, wed: 70, thu: 90, fri: 35 },   // first 100-mile build
-  6: { tue: 60, wed: 65, thu: 75, fri: 30 },   // winter base, no race to point at
-  7: { tue: 65, wed: 70, thu: 90, fri: 35 },
-  8: { tue: 70, wed: 75, thu: 95, fri: 35 },   // the gate block, the biggest midweek
-  9: { tue: 60, wed: 65, thu: 80, fri: 30 }    // peak + taper: the long days carry it
+  3: { tue: 60, wed: 60, thu: 75, fri: 30 },
+  4: { tue: 65, wed: 70, thu: 90, fri: 35 },
+  5: { tue: 60, wed: 70, thu: 90, fri: 35 }
 };
 function runMin(block){
-  return RUN_MINUTES[block.id] || RUN_MINUTES[Math.min(block.id || 1, 9)] || RUN_MINUTES[1];
+  const keys = Object.keys(RUN_MINUTES).map(Number);
+  return RUN_MINUTES[block.id] || RUN_MINUTES[Math.max.apply(null, keys)];
 }
 
 // ---------------------------------------------------------------------------
