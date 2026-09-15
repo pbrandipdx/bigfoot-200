@@ -16,6 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 OUT  = os.path.join(REPO, "plan", "progress.md")
 ODDS = os.path.join(REPO, "plan", "odds.json")
+ACTUALS = os.path.join(REPO, "plan", "weekly-actuals.json")
 
 HRV_BASELINE = 41.6      # 90-day baseline when the plan was written
 HRV_DROP_PCT = 10.0      # ">10% below baseline: cut volume 30% that week"
@@ -277,6 +278,21 @@ def main():
     L.append("")
     L.append("Refresh with `make progress` after `.venv/bin/python tracker/sync_garmin.py daily`.")
     L.append("")
+
+    # per-week actuals for the Every week page - finished weeks only, so a
+    # week in progress never shows as a miss.
+    act = {}
+    for r in all_rows:
+        if (datetime.date.fromisoformat(r["week_start"])
+                + datetime.timedelta(days=6)) > today:
+            continue
+        act[r["week_start"]] = {
+            "hours": r["hours"], "miles": r["miles"],
+            "vert_ft": int(r["vert_ft"]) if r["vert_ft"] is not None else 0,
+            "ft_per_hour": r["ft_per_hour"], "run_share_pct": r["run_share_pct"],
+        }
+    json.dump(act, open(ACTUALS, "w", encoding="utf-8"), indent=2)
+    print("wrote %s (%d finished weeks)" % (ACTUALS, len(act)))
 
     open(OUT, "w", encoding="utf-8").write("\n".join(L))
     print("wrote %s (%d weeks)" % (OUT, len(rows)))

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every week · Bigfoot 200</title>
+<meta name="description" content="Every training week from Block 1 to Bigfoot 200, plan against actual.">
+<style>
+  :root{--paper:#EFF1EA;--paper-2:#E4E7DD;--ink:#131C15;--ink-soft:#33402F;
+    --ink-faint:#5C6B58;--forest:#20402C;--forest-deep:#152B1D;--amber:#B0793A;
+    --amber-deep:#7A521F;--line:#C7CCBE;--white:#FBFBF8;
+    --good:#2E7D46;--bad:#A23B2C;color-scheme:light}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    -webkit-text-size-adjust:100%}
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px 72px}
+  header.top{padding:34px 0 0}
+  .site-name{font-size:15px;font-weight:600}
+  .site-sub{font-size:13px;color:var(--ink-faint);margin-top:3px;
+    padding-bottom:18px;border-bottom:1px solid var(--line)}
+  h1{font-size:24px;line-height:1.2;color:var(--forest);margin:26px 0 6px;letter-spacing:-.01em}
+  .lede{color:var(--ink-faint);font-size:14px;margin-bottom:6px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;
+    color:var(--ink-faint);margin:14px 0 4px}
+  .legend b{font-weight:600;color:var(--ink-soft)}
+
+  details.blk{border-top:1px solid var(--line);margin-top:0}
+  details.blk>summary{list-style:none;cursor:pointer;padding:14px 0 14px 22px;
+    position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 12px}
+  details.blk>summary::-webkit-details-marker{display:none}
+  details.blk>summary::before{content:'';position:absolute;left:4px;top:50%;
+    width:6px;height:6px;border-right:1.5px solid var(--ink-faint);
+    border-bottom:1.5px solid var(--ink-faint);
+    transform:translateY(-70%) rotate(-45deg);transition:transform .15s}
+  details.blk[open]>summary::before{transform:translateY(-30%) rotate(45deg)}
+  .bk-name{font-size:15px;font-weight:600}
+  .bk-when{font-size:13px;color:var(--ink-faint)}
+  .bk-tgt{font-size:12.5px;color:var(--amber-deep);flex-basis:100%}
+  @media(min-width:620px){.bk-tgt{flex-basis:auto;margin-left:auto}}
+
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 20px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  /* On a phone the hour columns are the least useful pair - vertical is what
+     decides this race - so they drop out before the table starts scrolling. */
+  @media(max-width:600px){
+    th.hr,td.hr{display:none}
+    td,th{padding-right:6px}
+    body{font-size:14px}
+  }
+  th{text-align:left;font-weight:500;color:var(--ink-faint);font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.04em;padding:0 8px 7px 0;
+    border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.now td{background:var(--paper-2)}
+  tr.now td:first-child{box-shadow:inset 2px 0 0 var(--amber-deep)}
+  tr.done td{color:var(--ink-soft)}
+  tr.race td{background:rgba(176,121,58,.10)}
+  .wk{font-weight:600;white-space:nowrap}
+  .dates{color:var(--ink-faint);font-size:12px;display:block;font-weight:400}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-left:6px;
+    vertical-align:1px}
+  .t-race{background:var(--amber-deep);color:var(--white)}
+  .t-deload{background:var(--paper-2);color:var(--ink-faint);border:1px solid var(--line)}
+  .t-now{background:var(--forest);color:var(--white)}
+  .long{font-weight:500}
+  .vert{color:var(--ink-faint);font-size:12.5px}
+  .hit{color:var(--good);font-weight:600}
+  .miss{color:var(--bad);font-weight:600}
+  .pend{color:var(--ink-faint)}
+  .foot{margin-top:26px;font-size:12.5px;color:var(--ink-faint);
+    border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="site-name">Bigfoot 200 training</div>
+    <div class="site-sub">Mount St. Helens, WA &middot; Aug 13, 2027 &middot; goal: sub-100hr</div>
+  </header>
+
+  <h1>Every week</h1>
+  <p class="lede" id="lede"></p>
+  <div class="legend">
+    <span><b>Plan</b> the block's weekly target</span>
+    <span><b>Actual</b> what you logged</span>
+    <span><b>Vert</b> is the one that decides this race</span>
+  </div>
+
+  <div id="blocks"></div>
+
+  <p class="foot">Weeks run Monday to Sunday. The long day is Sunday; races and the Three
+  Sisters trip keep their real dates. Dated long days come from
+  <code>plan/schedule.json</code>; weeks without one show the block's default shape.
+  Actuals come from Strava and Garmin via the <code>weekly_progress</code> view and only
+  appear for weeks that have finished.</p>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+const BLOCKS = DATA.blocks, LONGDAYS = DATA.longDays || [],
+      RACES = DATA.races || [], ACTUAL = DATA.actuals || {};
+const RACE_DATE = DATA.race.date;
+
+const today = new Date(); today.setHours(0,0,0,0);
+const toDate = s => { const [y,m,d] = s.split('-').map(Number);
+                      return new Date(y, m-1, d); };
+const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+
+                 String(d.getDate()).padStart(2,'0');
+const mondayOf = d => { const m=new Date(d); m.setDate(d.getDate()-((d.getDay()+6)%7));
+                        m.setHours(0,0,0,0); return m; };
+const fmt = (d,o) => d.toLocaleDateString(undefined, o || {month:'short',day:'numeric'});
+
+function blockFor(d){
+  for(const b of BLOCKS) if(d >= toDate(b.start) && d <= toDate(b.end)) return b;
+  return d < toDate(BLOCKS[0].start) ? BLOCKS[0] : BLOCKS[BLOCKS.length-1];
+}
+function plannedFor(d){ return LONGDAYS.find(s => s.date === iso(d)) || null; }
+
+// races that fall inside [a,b]
+function racesIn(a, b){
+  return RACES.filter(r => { const s = toDate(r.start); return s >= a && s <= b; });
+}
+
+// the headline session for a week: the dated long day, else the Saturday entry
+// (a race or the multi-day), else the block's default shape.
+function headline(monday){
+  for(const off of [6,5,4,3,2,1,0]){
+    const d = new Date(monday); d.setDate(monday.getDate()+off);
+    const p = plannedFor(d);
+    if(p) return {title: p.title, vert: p.vert, dated: true};
+  }
+  const blk = blockFor(monday);
+  const sun = new Date(monday); sun.setDate(monday.getDate()+6);
+  const nth = Math.floor((sun.getDate()-1)/7) + 1;
+  if(!blk.taper){
+    if(nth === 1) return {title:'Overnight long day', vert:null, dated:false};
+    if(nth === 3) return {title:'Back-to-back weekend', vert:null, dated:false};
+  }
+  return {title:'Long day, vertical-focused', vert:null, dated:false};
+}
+
+function pctCell(actual, target){
+  if(actual === undefined || actual === null) return '<span class="pend">—</span>';
+  const p = Math.round(100*actual/target);
+  return `<span class="${p >= 90 ? 'hit' : (p >= 70 ? '' : 'miss')}">${p}%</span>`;
+}
+
+function render(){
+  const start = mondayOf(toDate(BLOCKS[0].start));
+  const end   = toDate(RACE_DATE);
+  const thisMonday = mondayOf(today);
+
+  // every Monday from the first to race week
+  const weeks = [];
+  for(let d = new Date(start); d <= end; d.setDate(d.getDate()+7))
+    weeks.push(new Date(d));
+
+  const doneCount = weeks.filter(w => {
+    const s = new Date(w); s.setDate(w.getDate()+6); return s < today; }).length;
+  document.getElementById('lede').textContent =
+    `${weeks.length} weeks from ${fmt(start)} ${start.getFullYear()} to race day. ` +
+    `${doneCount} done, ${weeks.length - doneCount} to go.`;
+
+  const host = document.getElementById('blocks');
+  BLOCKS.forEach(blk => {
+    const mine = weeks.filter(w => blockFor(w).id === blk.id);
+    if(!mine.length) return;
+    const t = blk.targets || {};
+    const isCurrent = mine.some(w => iso(w) === iso(thisMonday));
+
+    let rows = '';
+    mine.forEach((m, i) => {
+      const sun = new Date(m); sun.setDate(m.getDate()+6);
+      const isNow  = iso(m) === iso(thisMonday);
+      const isDone = sun < today;
+      const h = headline(m);
+      const rs = racesIn(m, sun);
+      const a = ACTUAL[iso(m)] || null;
+
+      const tags = [];
+      if(isNow) tags.push('<span class="tag t-now">this week</span>');
+      if(rs.length) tags.push('<span class="tag t-race">race</span>');
+      if(/deload|taper/i.test(h.title)) tags.push('<span class="tag t-deload">deload</span>');
+
+      const cls = [isNow ? 'now' : '', isDone ? 'done' : '', rs.length ? 'race' : '']
+                    .filter(Boolean).join(' ');
+
+      rows += `<tr class="${cls}">
+        <td class="wk">Wk ${i+1}${tags.join('')}
+          <span class="dates">${fmt(m)} – ${fmt(sun)}</span></td>
+        <td><span class="long">${h.title}</span>${
+            h.vert && !/^(race|multi-day|—)$/.test(h.vert)
+              ? ` <span class="vert">· ${h.vert}</span>` : ''}${
+            rs.filter(r => !h.title.includes(r.name)).length
+              ? `<span class="dates">${rs.filter(r => !h.title.includes(r.name))
+                   .map(r=>r.name).join(' · ')}</span>` : ''}</td>
+        <td class="num hr">${t.hoursPerWeek || '—'}</td>
+        <td class="num hr">${a ? a.hours : '<span class="pend">—</span>'}</td>
+        <td class="num">${t.vertFtPerWeek ? t.vertFtPerWeek.toLocaleString() : '—'}</td>
+        <td class="num">${a ? a.vert_ft.toLocaleString() : '<span class="pend">—</span>'}</td>
+        <td class="num">${t.vertFtPerWeek ? pctCell(a && a.vert_ft, t.vertFtPerWeek) : '—'}</td>
+      </tr>`;
+    });
+
+    const det = document.createElement('details');
+    det.className = 'blk';
+    if(isCurrent) det.open = true;
+    det.innerHTML = `<summary>
+        <span class="bk-name">${blk.name}</span>
+        <span class="bk-when">${fmt(toDate(blk.start))} – ${fmt(toDate(blk.end))} · ${mine.length} weeks</span>
+        <span class="bk-tgt">${blk.hours} · ${blk.vert}/wk · ends ${blk.endsWith}</span>
+      </summary>
+      <div class="tscroll"><table>
+        <thead><tr>
+          <th>Week</th><th>Long day</th>
+          <th class="num hr">Hr plan</th><th class="num hr">Hr act</th>
+          <th class="num">Vert plan</th><th class="num">Vert act</th><th class="num">Vert %</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+    host.appendChild(det);
+  });
+}
+render();
+</script>
+</body>
+</html>

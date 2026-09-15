@@ -1,6 +1,6 @@
 # Week over week
 
-Generated 2026-09-13 from Supabase `weekly_progress` — Strava activities plus Garmin daily and training metrics, Monday-start weeks.
+Generated 2026-09-15 from Supabase `weekly_progress` — Strava activities plus Garmin daily and training metrics, Monday-start weeks.
 
 Arrows compare with the previous week. {{up}} and {{down}} are moving the way you want, {{up-bad}} and {{down-bad}} the wrong way, {{level}} is unchanged. Hover any arrow for what it means.
 
@@ -48,7 +48,7 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 | Running share of miles (%) | 27 {{up}} | 5 | 30 | 90% |
 | Running miles | 10 {{up}} | 2 | tolerance 12 | — |
 | Night session hours | 0 | 0 | 3 cumulative this block | — |
-| Avg HR on runs | — | — | Z2 121–140 | — |
+| Avg HR on runs | 119 | — | Z2 121–140 | — |
 
 ### Load and injury risk
 
@@ -92,6 +92,7 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 
 | Week | Hr | Mi | Vert | ft/hr | Long | B2B | Run% | Night | ACWR | HRV | RHR | Sleep | Endur |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2026-09-14 *(partial)* | 2 | 4.4 | 118 | 58 | 1 | 2 | 23 | 0 | — | — | — | — | — |
 | 2026-09-07 | 15.1 | 36.6 | 3333 | 221 | 2.1 | 5.4 | 27 | 0 | 1.40 | 38.9 | 52.1 | 8.7 | 4775 |
 | 2026-08-31 | 12.1 | 39.6 | 2927 | 242 | 3 | 6.8 | 5 | 0 | 0.73 | 36.5 | 52.7 | 8.7 | 4883 |
 | 2026-08-24 | 13.8 | 33.7 | 1453 | 105 | 1.7 | 5.4 | 5 | 0 | 0.98 | 42.3 | 51.1 | 7.8 | 4941 |
@@ -104,6 +105,5 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 | 2026-07-06 | 11.4 | 24.3 | 2103 | 185 | 2.1 | 4.9 | 5 | 0 | 0.63 | 40 | 52.6 | 7.8 | 5067 |
 | 2026-06-29 | 11.8 | 34.6 | 1280 | 108 | 1.1 | 5.4 | 54 | 0 | 0.84 | 42.2 | 52 | 7.2 | 5080 |
 | 2026-06-22 | 9 | 29.5 | 883 | 98 | 2.2 | 4.1 | 72 | 0 | 0.71 | 39.3 | 50 | 7.7 | 5084 |
-| 2026-06-15 | 7.7 | 30.7 | 2011 | 263 | 2.1 | 2.9 | 67 | 0 | 0.62 | 48.4 | 48.9 | 7.7 | 5102 |
 
 Refresh with `make progress` after `.venv/bin/python tracker/sync_garmin.py daily`.

@@ -5,6 +5,7 @@
   log.html     training log + charts             <- ../tracker/template.html + weeks.json
   blocks.html  block targets and monitors        <- ../plan/block-targets.md
   plan.html    the sub-100 race plan             <- ../plan/sub100-plan.md
+  weeks.html   every week, plan vs actual        <- schedule.json + weekly-actuals.json
 
 DELIBERATELY NOT PUBLISHED: anything under plan/private/ — Destination Trail's
 copyrighted runner manual lives there. It is gitignored and never rendered.
@@ -103,6 +104,15 @@ def main():
     today_tpl = today_tpl.replace("<!--__ODDS__-->", odds_pill())
     write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
     write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
+    # Every week: the whole campaign, plan against actual, one row per week.
+    weeks_tpl = read("dashboard", "weeks_template.html")
+    ap = os.path.join(REPO, "plan", "weekly-actuals.json")
+    actuals = json.loads(open(ap, encoding="utf-8").read()) if os.path.exists(ap) else {}
+    write("weeks.html", inject_data(weeks_tpl, {
+        "blocks": schedule["blocks"], "longDays": schedule.get("longDays", []),
+        "races": schedule["races"], "race": schedule["race"], "actuals": actuals,
+    }, "dashboard/weeks_template.html"))
+
     if os.path.exists(os.path.join(REPO, "plan", "progress.md")):
         write("progress.html", md_page("progress.md", "Week over week"))
     else:
