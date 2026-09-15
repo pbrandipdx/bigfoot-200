@@ -1,93 +1,189 @@
 {
+  "2026-09-14": {
+    "hours": 2.0,
+    "miles": 4.4,
+    "vert_ft": 118,
+    "ft_per_hour": 58.0,
+    "run_share_pct": 23.0,
+    "long_day_hr": 1.0,
+    "sessions": 3.0,
+    "night_hr": 0.0,
+    "partial": true
+  },
   "2026-09-07": {
     "hours": 15.1,
     "miles": 36.6,
     "vert_ft": 3333,
     "ft_per_hour": 221.0,
-    "run_share_pct": 27.0
+    "run_share_pct": 27.0,
+    "long_day_hr": 2.1,
+    "sessions": 15.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-08-31": {
     "hours": 12.1,
     "miles": 39.6,
     "vert_ft": 2927,
     "ft_per_hour": 242.0,
-    "run_share_pct": 5.0
+    "run_share_pct": 5.0,
+    "long_day_hr": 3.0,
+    "sessions": 9.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-08-24": {
     "hours": 13.8,
     "miles": 33.7,
     "vert_ft": 1453,
     "ft_per_hour": 105.0,
-    "run_share_pct": 5.0
+    "run_share_pct": 5.0,
+    "long_day_hr": 1.7,
+    "sessions": 15.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-08-17": {
     "hours": 9.4,
     "miles": 23.8,
     "vert_ft": 915,
     "ft_per_hour": 98.0,
-    "run_share_pct": 0.0
+    "run_share_pct": 0.0,
+    "long_day_hr": 1.9,
+    "sessions": 8.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-08-10": {
     "hours": 12.7,
     "miles": 34.1,
     "vert_ft": 1519,
     "ft_per_hour": 120.0,
-    "run_share_pct": 0.0
+    "run_share_pct": 0.0,
+    "long_day_hr": 1.9,
+    "sessions": 10.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-08-03": {
     "hours": 7.3,
     "miles": 17.5,
     "vert_ft": 1742,
     "ft_per_hour": 240.0,
-    "run_share_pct": 0.0
+    "run_share_pct": 0.0,
+    "long_day_hr": 1.8,
+    "sessions": 8.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-07-27": {
     "hours": 12.7,
     "miles": 28.0,
     "vert_ft": 2694,
     "ft_per_hour": 212.0,
-    "run_share_pct": 0.0
+    "run_share_pct": 0.0,
+    "long_day_hr": 3.0,
+    "sessions": 11.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-07-20": {
     "hours": 13.2,
     "miles": 26.9,
     "vert_ft": 1119,
     "ft_per_hour": 85.0,
-    "run_share_pct": 17.0
+    "run_share_pct": 17.0,
+    "long_day_hr": 1.4,
+    "sessions": 14.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-07-13": {
     "hours": 10.9,
     "miles": 32.0,
     "vert_ft": 1752,
     "ft_per_hour": 160.0,
-    "run_share_pct": 58.0
+    "run_share_pct": 58.0,
+    "long_day_hr": 1.7,
+    "sessions": 15.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-07-06": {
     "hours": 11.4,
     "miles": 24.3,
     "vert_ft": 2103,
     "ft_per_hour": 185.0,
-    "run_share_pct": 5.0
+    "run_share_pct": 5.0,
+    "long_day_hr": 2.1,
+    "sessions": 11.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-06-29": {
     "hours": 11.8,
     "miles": 34.6,
     "vert_ft": 1280,
     "ft_per_hour": 108.0,
-    "run_share_pct": 54.0
+    "run_share_pct": 54.0,
+    "long_day_hr": 1.1,
+    "sessions": 17.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-06-22": {
     "hours": 9.0,
     "miles": 29.5,
     "vert_ft": 883,
     "ft_per_hour": 98.0,
-    "run_share_pct": 72.0
+    "run_share_pct": 72.0,
+    "long_day_hr": 2.2,
+    "sessions": 14.0,
+    "night_hr": 0.0,
+    "partial": false
   },
   "2026-06-15": {
     "hours": 7.7,
     "miles": 30.7,
     "vert_ft": 2011,
     "ft_per_hour": 263.0,
-    "run_share_pct": 67.0
+    "run_share_pct": 67.0,
+    "long_day_hr": 2.1,
+    "sessions": 12.0,
+    "night_hr": 0.0,
+    "partial": false
+  },
+  "2026-06-08": {
+    "hours": 13.5,
+    "miles": 33.5,
+    "vert_ft": 1066,
+    "ft_per_hour": 79.0,
+    "run_share_pct": 61.0,
+    "long_day_hr": 1.6,
+    "sessions": 21.0,
+    "night_hr": 0.0,
+    "partial": false
+  },
+  "2026-06-01": {
+    "hours": 9.8,
+    "miles": 36.4,
+    "vert_ft": 1919,
+    "ft_per_hour": 196.0,
+    "run_share_pct": 69.0,
+    "long_day_hr": 1.5,
+    "sessions": 15.0,
+    "night_hr": 0.0,
+    "partial": false
+  },
+  "2026-05-25": {
+    "hours": 10.2,
+    "miles": 26.1,
+    "vert_ft": 1503,
+    "ft_per_hour": 148.0,
+    "run_share_pct": 39.0,
+    "long_day_hr": 2.4,
+    "sessions": 10.0,
+    "night_hr": 0.0,
+    "partial": false
   }
 }

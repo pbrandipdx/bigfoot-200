@@ -279,20 +279,31 @@ def main():
     L.append("Refresh with `make progress` after `.venv/bin/python tracker/sync_garmin.py daily`.")
     L.append("")
 
-    # per-week actuals for the Every week page - finished weeks only, so a
-    # week in progress never shows as a miss.
+    # Per-week actuals for the Review page. EVERY week the database has, not
+    # just the ones inside the plan and not just the finished ones: the Review
+    # tab is a record of what was done, and twelve weeks of real training sat
+    # before Block 1 opened. A week still in progress is marked partial so the
+    # page can show the numbers without scoring them as a miss.
+    every = fetch(env(), 500)
+    for r in every:
+        for k in NUMERIC:
+            r[k] = num(r.get(k))
     act = {}
-    for r in all_rows:
-        if (datetime.date.fromisoformat(r["week_start"])
-                + datetime.timedelta(days=6)) > today:
-            continue
+    for r in every:
+        done = (datetime.date.fromisoformat(r["week_start"])
+                + datetime.timedelta(days=6)) <= today
         act[r["week_start"]] = {
             "hours": r["hours"], "miles": r["miles"],
             "vert_ft": int(r["vert_ft"]) if r["vert_ft"] is not None else 0,
             "ft_per_hour": r["ft_per_hour"], "run_share_pct": r["run_share_pct"],
+            "long_day_hr": r.get("longest_day_hr"),
+            "sessions": r.get("sessions"),
+            "night_hr": r.get("night_session_hours"),
+            "partial": not done,
         }
     json.dump(act, open(ACTUALS, "w", encoding="utf-8"), indent=2)
-    print("wrote %s (%d finished weeks)" % (ACTUALS, len(act)))
+    print("wrote %s (%d weeks, %d still in progress)"
+          % (ACTUALS, len(act), sum(1 for v in act.values() if v["partial"])))
 
     open(OUT, "w", encoding="utf-8").write("\n".join(L))
     print("wrote %s (%d weeks)" % (OUT, len(rows)))

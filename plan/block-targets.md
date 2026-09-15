@@ -101,9 +101,9 @@ the least informative number here.
 
 | Metric | Current |
 |---|---|
-| Time on feet | **8.8 hr/week measured** (plan assumed ~12) |
-| Vertical | **~1,700 ft/week measured** (plan assumed ~3,000) · 62,182 ft YTD 2026 |
-| On-foot miles | **~29/week measured** (plan assumed 40–45) |
+| Time on feet | **8.8 hr/week** as measured on 2026-09-11 (plan assumed ~12). **But across the full 15 weeks in the database, May 25 – Sep 6, the average is 11.0 hr** — see the Review tab. The 8.8 came from a shorter window, and the whole ladder was rescaled down from it. Worth deciding whether the rescale went one rung too far. |
+| Vertical | **~1,700 ft/week measured** (plan assumed ~3,000) · 15-week average **1,659 ft**, which the 1,700 figure matches · 62,182 ft YTD 2026 |
+| On-foot miles | **~29/week measured** (plan assumed 40–45) · 15-week average **30.0** |
 | Longest single day | 5:03, 18.26 mi, 1,985 ft |
 | Longest continuous effort | 2:59 (Wildwood hike, Sep 5) |
 | Max HR | **196** — corrected 2026-09-14. Every reading above it (233, 210, 209, 207, 205) came on a day with no logged workout: optical-sensor artifact, not effort. Highest on a genuinely hard day is 196. Strava was using an age-derived ~185. |

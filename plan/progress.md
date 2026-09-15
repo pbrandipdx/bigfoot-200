@@ -6,20 +6,20 @@ Arrows compare with the previous week. {{up}} and {{down}} are moving the way yo
 
 ## Finish odds
 
-**31–45%** — *on track*, 47 weeks out.
+**32–46%** — *on track*, 47 weeks out.
 
-That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at **51% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
+That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against Block 5's targets. Separately, you are at **53% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
 
 | Gate | Weight | vs Block 1 now | Projected race day |
 |---|---|---|---|
 | Vertical per week | 20% | `██████░░░░` 62% | `██████████` 100% |
-| Longest single day | 20% | `████░░░░░░` 38% | `███░░░░░░░` 28% |
+| Longest single day | 20% | `█████░░░░░` 50% | `███░░░░░░░` 35% |
 | Time on feet per week | 15% | `██████████` 100% | `██████████` 100% |
 | Run-specific capacity | 15% | `██░░░░░░░░` 21% | `███░░░░░░░` 25% |
 | Night hours | 10% | `░░░░░░░░░░` 0% | `░░░░░░░░░░` 0% |
 | Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
 | Recovery headroom | 10% | `█████░░░░░` 53% | `█████░░░░░` 53% |
-| **Readiness** | | **51%** | **57%** |
+| **Readiness** | | **53%** | **59%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Run-specific capacity**.
 
@@ -34,7 +34,7 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 | Hours | 15.1 {{up}} | 12.1 | 12 | 126% |
 | Miles | 36.6 {{down-bad}} | 39.6 | 45 | 81% |
 | Vertical (ft) | 3333 {{up}} | 2927 | 3500 | 95% |
-| Longest day (hr) | 2.1 {{down-bad}} | 3 | 8 | 26% |
+| Longest day (hr) | 2.1 {{down-bad}} | 3 | 6 | 35% |
 | Best back-to-back (hr) | 5.4 {{down-bad}} | 6.8 | two consecutive days | — |
 | Days on feet | 7 {{up}} | 6 | 5–6 | — |
 
@@ -48,7 +48,7 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 | Running share of miles (%) | 27 {{up}} | 5 | 30 | 90% |
 | Running miles | 10 {{up}} | 2 | tolerance 12 | — |
 | Night session hours | 0 | 0 | 3 cumulative this block | — |
-| Avg HR on runs | 119 | — | Z2 121–140 | — |
+| Avg HR on runs | 120 | — | Z2 121–140 | — |
 
 ### Load and injury risk
 
@@ -84,7 +84,7 @@ Biggest drags on the trajectory number: **Night hours** and **Run-specific capac
 
 - **Acute:chronic 1.40, elevated.** Not dangerous, but do not add on top of it.
 - **No night session.** Zero banked against 3 cumulative this block, and it is the cheapest gap you have — one headlamp lap counts.
-- **Longest day 2.1 hr against an 8-hour block peak.** Single-day duration is the gap volume does not close.
+- **Longest day 2.1 hr against an 6-hour block peak.** Single-day duration is the gap volume does not close.
 - **HRV unbalanced 6 of 7 days.** One bad night is noise; five is a signal.
 - **Endurance score down 212 over 4 weeks** (4987 → 4775). Volume is not converting into aerobic fitness yet.
 
