@@ -17,6 +17,7 @@ REPO = os.path.dirname(HERE)
 OUT  = os.path.join(REPO, "plan", "progress.md")
 ODDS = os.path.join(REPO, "plan", "odds.json")
 ACTUALS = os.path.join(REPO, "plan", "weekly-actuals.json")
+DAILY = os.path.join(REPO, "plan", "daily-actuals.json")
 
 HRV_BASELINE = 41.6      # 90-day baseline when the plan was written
 HRV_DROP_PCT = 10.0      # ">10% below baseline: cut volume 30% that week"
@@ -94,6 +95,60 @@ def row(label, key, a, b, target=None, better=True, fmt="%g", flat=0.03, note=""
     tgt = note or (("%g" % target) if target else "—")
     return "| %s | %s%s | %s | %s | %s |" % (
         label, cell(v, fmt), arrow(v, p, better, flat), cell(p, fmt), tgt, at)
+
+
+def fetch_activities(cfg, limit=5000):
+    url = cfg["SUPABASE_URL"].rstrip("/") + "/rest/v1/activities?" + urllib.parse.urlencode({
+        "select": "start_local,name,sport_type,moving_time_s,distance_m,"
+                  "elevation_gain_m,avg_heartrate",
+        "order": "start_local.asc", "limit": str(limit)})
+    req = urllib.request.Request(url, headers={
+        "apikey": cfg["SUPABASE_SERVICE_KEY"],
+        "Authorization": "Bearer " + cfg["SUPABASE_SERVICE_KEY"],
+        "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.load(r)
+
+
+def write_daily(cfg):
+    """Per-DAY actuals for the Review page.
+
+    The day rows used to show only what was prescribed. Expanding a week you had
+    already trained told you nothing about what you actually did that week,
+    which is most of what a review is for.
+
+    start_local holds LOCAL wall-clock time under a UTC label, so the first ten
+    characters ARE the local date. Do not parse and convert it - that shifts
+    every morning session into the previous day.
+    """
+    M_PER_MILE = 1609.344
+    FT_PER_M = 3.28084
+    days = {}
+    for a in fetch_activities(cfg):
+        sl = a.get("start_local") or ""
+        if len(sl) < 10:
+            continue
+        d = days.setdefault(sl[:10], {"hours": 0.0, "miles": 0.0, "vert_ft": 0.0,
+                                      "sessions": []})
+        hrs = (a.get("moving_time_s") or 0) / 3600.0
+        mi = (a.get("distance_m") or 0) / M_PER_MILE
+        ft = (a.get("elevation_gain_m") or 0) * FT_PER_M
+        d["hours"] += hrs
+        d["miles"] += mi
+        d["vert_ft"] += ft
+        d["sessions"].append({
+            "name": a.get("name") or a.get("sport_type") or "Activity",
+            "sport": a.get("sport_type"),
+            "hr": round(hrs, 2), "mi": round(mi, 1), "ft": round(ft),
+            "avg_hr": round(a["avg_heartrate"]) if a.get("avg_heartrate") else None,
+        })
+    for v in days.values():
+        v["hours"] = round(v["hours"], 2)
+        v["miles"] = round(v["miles"], 1)
+        v["vert_ft"] = round(v["vert_ft"])
+    json.dump(days, open(DAILY, "w", encoding="utf-8"), indent=2)
+    print("wrote %s (%d days, %d sessions)"
+          % (DAILY, len(days), sum(len(v["sessions"]) for v in days.values())))
 
 
 def main():
@@ -304,6 +359,8 @@ def main():
     json.dump(act, open(ACTUALS, "w", encoding="utf-8"), indent=2)
     print("wrote %s (%d weeks, %d still in progress)"
           % (ACTUALS, len(act), sum(1 for v in act.values() if v["partial"])))
+
+    write_daily(env())
 
     open(OUT, "w", encoding="utf-8").write("\n".join(L))
     print("wrote %s (%d weeks)" % (OUT, len(rows)))

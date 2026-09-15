@@ -136,6 +136,16 @@
     border-bottom:1px solid rgba(122,82,31,.35)}
   a.routelink::before{content:'\2197\00a0';font-size:10px}
   a.routelink:hover{border-bottom-color:var(--amber-deep)}
+  /* What was actually done, under the prescription. Deliberately set apart:
+     amber rule, not another grey paragraph, so plan and actual never blur. */
+  .done-line{display:block;margin-top:7px;padding:6px 0 1px 10px;
+    border-left:2px solid rgba(176,121,58,.45);font-size:12.2px;line-height:1.5}
+  .done-k{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--amber-deep);margin-right:7px;vertical-align:1px}
+  .done-tot{font-weight:600;font-variant-numeric:tabular-nums}
+  .sess{display:block;color:var(--ink-soft);margin-top:2px}
+  .sess b{font-weight:500}
+  .sessn{color:var(--ink-faint);font-variant-numeric:tabular-nums}
   .dtitle{font-weight:600}
   .ddesc{display:block;color:var(--ink-faint);font-size:12.3px;line-height:1.5;margin-top:1px}
   .wk{font-weight:600;white-space:normal;line-height:1.35}
@@ -188,7 +198,7 @@
 <script>
 const DATA = /*__DATA__*/;
 const BLOCKS = DATA.blocks, LONGDAYS = DATA.longDays || [],
-      RACES = DATA.races || [], ACTUAL = DATA.actuals || {};
+      RACES = DATA.races || [], ACTUAL = DATA.actuals || {}, DAILY = DATA.daily || {};
 const RACE_DATE = DATA.race.date;
 
 const today = new Date(); today.setHours(0,0,0,0);
@@ -234,7 +244,7 @@ function dayRowsHtml(monday){
       <td class="dname">${DAYS[i]}<span class="ddate">${fmt(d)}${
         isToday ? ' <span class="tag t-now">today</span>' : ''}</span></td>
       <td colspan="4"><span class="dtitle">${w.title}</span>
-        <span class="ddesc">${w.desc || ''}</span></td></tr>`;
+        <span class="ddesc">${w.desc || ''}</span>${doneHtml(d)}</td></tr>`;
   }
   return out;
 }
@@ -247,6 +257,33 @@ const addDays = (d, n) => { const x = new Date(d); x.setDate(d.getDate() + n); r
 // it too, and it used to be defined inside the per-block loop.
 const stat = (k, v, s) => `<div class="st"><div class="st-k">${k}</div>` +
                           `<div class="st-v">${v}</div><div class="st-s">${s}</div></div>`;
+
+// What was actually logged on a day. The day rows used to show the prescription
+// and nothing else, so opening a week you had already trained told you nothing
+// about what you did in it - which is most of what a review is for.
+function doneHtml(d){
+  const a = DAILY[iso(d)];
+  if(!a || !a.sessions || !a.sessions.length) return '';
+  const tot = [];
+  if(a.hours) tot.push((Math.round(a.hours*10)/10) + ' hr');
+  if(a.miles >= 0.1) tot.push((Math.round(a.miles*10)/10) + ' mi');
+  if(a.vert_ft >= 1) tot.push(Math.round(a.vert_ft).toLocaleString() + ' ft');
+  const list = a.sessions.map(s => {
+    const bits = [];
+    if(s.hr) bits.push((Math.round(s.hr*60)) + ' min');
+    if(s.mi >= 0.1) bits.push(s.mi + ' mi');
+    if(s.ft >= 1) bits.push(Math.round(s.ft).toLocaleString() + ' ft');
+    if(s.avg_hr) bits.push(s.avg_hr + ' bpm');
+    return `<span class="sess"><b>${esc(s.name)}</b>${
+      bits.length ? ' <span class="sessn">' + bits.join(' \u00b7 ') + '</span>' : ''}</span>`;
+  }).join('');
+  return `<span class="done-line"><span class="done-k">Logged</span>` +
+         `<span class="done-tot">${tot.join('  \u00b7  ')}</span>${list}</span>`;
+}
+
+function esc(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
 function metric(actual, target, fmtf, partial){
   const t = target ? fmtf(target) : '—';

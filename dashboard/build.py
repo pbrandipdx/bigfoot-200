@@ -116,9 +116,14 @@ def main():
     weeks_tpl = inject_schedule_js(read("dashboard", "weeks_template.html"))
     ap = os.path.join(REPO, "plan", "weekly-actuals.json")
     actuals = json.loads(open(ap, encoding="utf-8").read()) if os.path.exists(ap) else {}
+    dp = os.path.join(REPO, "plan", "daily-actuals.json")
+    daily = json.loads(open(dp, encoding="utf-8").read()) if os.path.exists(dp) else {}
+    if not daily:
+        print("  daily-actuals.json missing - day rows will show the plan only")
     write("weeks.html", inject_data(weeks_tpl, {
         "blocks": schedule["blocks"], "longDays": schedule.get("longDays", []),
         "races": schedule["races"], "race": schedule["race"], "actuals": actuals,
+        "daily": daily,
     }, "dashboard/weeks_template.html"))
 
     if os.path.exists(os.path.join(REPO, "plan", "progress.md")):
