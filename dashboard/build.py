@@ -10,6 +10,7 @@
 DELIBERATELY NOT PUBLISHED: anything under plan/private/ — Destination Trail's
 copyrighted runner manual lives there. It is gitignored and never rendered.
 """
+import datetime
 import json, os, re, sys
 import md, nav, doc_shell
 
@@ -120,6 +121,22 @@ def main():
         print("  WARNING: block-targets.md may not mention what these blocks end with: %s"
               % ", ".join(stale))
 
+    # The race date used to be typed into three page templates and a JS
+    # constant. When it moved to 2028 the pages kept saying "Aug 13, 2027" and
+    # the Log page went on counting weeks to it, so the site showed three
+    # different answers at once. One source now, substituted here.
+    _rd = datetime.date.fromisoformat(schedule["race"]["date"])
+    RACE_LABEL = _rd.strftime("%b %-d, %Y") + (
+        " (est.)" if schedule["race"].get("dateEstimated") else "")
+    RACE_SUB = "Mount St. Helens, WA &middot; %s &middot; goal: %s" % (
+        RACE_LABEL, schedule["race"]["goal"])
+
+    def race_tokens(html):
+        return (html.replace("<!--__RACE_SUB__-->", RACE_SUB)
+                    .replace("<!--__RACE_DATE__-->", RACE_LABEL)
+                    .replace("/*__RACE_UTC__*/", "%d, %d, %d" % (_rd.year, _rd.month - 1, _rd.day))
+                    .replace("/*__RACE_LABEL__*/", RACE_LABEL))
+
     print("building %s" % OUT)
 
     # the Today page carries the full training plan inline, after the race ladder
@@ -129,8 +146,8 @@ def main():
         sys.exit("dashboard/template.html has no <!--__PLAN__--> token")
     today_tpl = today_tpl.replace("<!--__PLAN__-->", plan_html)
     today_tpl = today_tpl.replace("<!--__ODDS__-->", odds_pill())
-    write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
-    write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
+    write("index.html",  race_tokens(inject_data(today_tpl, schedule, "dashboard/template.html")))
+    write("log.html",    race_tokens(inject_data(read("tracker", "template.html"), weeks, "tracker/template.html")))
     # Every week: the whole campaign, plan against actual, one row per week.
     weeks_tpl = inject_schedule_js(read("dashboard", "weeks_template.html"))
     ap = os.path.join(REPO, "plan", "weekly-actuals.json")
@@ -139,11 +156,11 @@ def main():
     daily = json.loads(open(dp, encoding="utf-8").read()) if os.path.exists(dp) else {}
     if not daily:
         print("  daily-actuals.json missing - day rows will show the plan only")
-    write("weeks.html", inject_data(weeks_tpl, {
+    write("weeks.html", race_tokens(inject_data(weeks_tpl, {
         "blocks": schedule["blocks"], "longDays": schedule.get("longDays", []),
         "races": schedule["races"], "race": schedule["race"], "actuals": actuals,
         "daily": daily,
-    }, "dashboard/weeks_template.html"))
+    }, "dashboard/weeks_template.html")))
 
     if os.path.exists(os.path.join(REPO, "plan", "progress.md")):
         write("progress.html", md_page("progress.md", "Week over week"))
@@ -151,6 +168,15 @@ def main():
         print("  progress.md missing - run: python3 tracker/weekly_report.py")
     write("blocks.html", md_page("block-targets.md", "Block targets"))
     write("plan.html",   md_page("sub100-plan.md",  "Race plan"))
+
+    # A page that prints the race date must print the current one. A stale
+    # hardcode shows up as the label being absent, which is what happened on
+    # 2026-09-15 and was live on three pages.
+    for page in ("index.html", "weeks.html", "log.html"):
+        body = open(os.path.join(OUT, page), encoding="utf-8").read()
+        if RACE_LABEL not in body:
+            sys.exit("REFUSING: %s does not show the race date %s. Something is "
+                     "still hardcoded." % (page, RACE_LABEL))
 
     leaked = [f for f in os.listdir(OUT)
               if any(b in f.lower() for b in NEVER_PUBLISH)]

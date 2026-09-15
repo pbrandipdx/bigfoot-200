@@ -6,7 +6,7 @@ Two numbers, both recomputed from measured data every time `make progress` runs:
   NOW         readiness against the CURRENT block's targets, i.e. how the last
               eight weeks stack up against what this block asks for.
   TRAJECTORY  where the current rate of change lands on race day, measured
-              against Block 5's targets.
+              against the final block's targets.
 
 Readiness is a weighted average of seven gates, each clipped to 0..1. It is then
 mapped to a finish-probability range. The mapping's base rate is an ASSUMPTION,
@@ -166,30 +166,46 @@ def band(lo, hi):
     return "well behind", "#A23B2C"
 
 
-def trajectory(recent, block5, night_total, today):
-    """Project the current 8-week slope forward to race day, against Block 5."""
-    wks = max(1, (RACE_DATE - today).days // 7)
+# How far a measured slope is allowed to be carried, in weeks.
+#
+# The projection fits the last eight weeks and extends the line to race day.
+# At 47 weeks out that was already generous. When the race moved to 2028 the
+# horizon became 99 weeks, and a linear extension over that distance turns three
+# good weeks into "100% of race-day vertical" - the model reported exactly that
+# on 2026-09-15, next to a readiness score of 53%, and Patrick did not believe
+# it, correctly.
+#
+# Eight weeks of data cannot describe two years. The slope is carried for at
+# most PROJECT_WEEKS_CAP and then held flat: beyond that the honest claim is
+# "no evidence either way", not "the trend continues".
+PROJECT_WEEKS_CAP = 26
+
+
+def trajectory(recent, final_block, night_total, today):
+    """Project the recent slope toward race day, against the FINAL block."""
+    wks = max(1, round((RACE_DATE - today).days / 7))
+    proj_wks = min(wks, PROJECT_WEEKS_CAP)
     old_first = list(reversed(recent[:8]))          # oldest -> newest
 
     def proj(key, cap):
         cur = mean([w[key] for w in recent[:4]]) or 0.0
         s = slope_per_week([w[key] for w in old_first])
-        return clip((cur + s * wks) / cap)
+        return clip((cur + s * proj_wks) / cap)
 
     g = {}
-    g["hours"] = proj("hours", block5["hoursPerWeek"])
-    g["vert"] = proj("vert_ft", block5["vertFtPerWeek"])
+    g["hours"] = proj("hours", final_block["hoursPerWeek"])
+    g["vert"] = proj("vert_ft", final_block["vertFtPerWeek"])
 
     best = max([w["longest_day_hr"] or 0 for w in recent[:8]] or [0])
     sld = slope_per_week([w["longest_day_hr"] for w in old_first])
-    g["long_day"] = clip((best + max(sld, 0) * wks) / block5["peakDayHours"])
+    g["long_day"] = clip((best + max(sld, 0) * proj_wks) / final_block["peakDayHours"])
 
     mi = sum(w["miles"] or 0 for w in recent[:8])
     rmi = sum(w["run_miles"] or 0 for w in recent[:8])
     g["run"] = clip((rmi / mi if mi else 0.0) / 0.30)
 
     per_wk = night_total / max(1, min(len(recent), 12))
-    g["night"] = clip((night_total + per_wk * wks) / block5["nightHoursCumulative"])
+    g["night"] = clip((night_total + per_wk * proj_wks) / final_block["nightHoursCumulative"])
 
     hit = [1 for w in recent[:8] if (w["hours"] or 0) >= 0.8 * 12]
     g["consistency"] = clip(len(hit) / float(len(recent[:8]) or 1))
@@ -217,14 +233,15 @@ def report(rows, blocks, today):
 
     blk = current_block(blocks, today)
     tgt = blk["targets"]
-    b5 = blocks[-1]["targets"]
+    final_block = blocks[-1]["targets"]
+    final_name = blocks[-1]["name"]
     night_total = sum(w["night_session_hours"] or 0 for w in recent[:12])
     es = list(reversed([w["endurance"] for w in recent[:8]]))
 
     gn = gates(recent, tgt, night_total, es)
     rn = readiness(gn)            # block readiness — progress against THIS block
 
-    gt, wks = trajectory(recent, b5, night_total, today)
+    gt, wks = trajectory(recent, final_block, night_total, today)
     rt = readiness(gt)            # projected race-day readiness
     t_lo, t_hi = odds(rt)
 
@@ -237,7 +254,7 @@ def report(rows, blocks, today):
     L.append("**%d–%d%%** — *%s*, %d weeks out." % (t_lo, t_hi, label, wks))
     L.append("")
     L.append("That is the trajectory number: where the last eight weeks' rate of "
-             "change lands on race day, measured against Block 5's targets. "
+             "change lands on race day, measured against the final block's targets. "
              "Separately, you are at **%d%% of what %s asks for right now** — "
              "that is a plan-adherence score, not a probability. Block 1 fitness "
              "would not finish this race; hitting Block 1 on time is what keeps "
@@ -261,7 +278,8 @@ def report(rows, blocks, today):
              "Garmin, weighted as shown, averaged into a readiness score. The "
              "*now* column compares the last four to eight weeks against the "
              "current block's targets. The *projected* column fits the slope of "
-             "the last eight weeks and carries it to race day against Block 5's "
+             "the last eight weeks and carries it AT MOST %d weeks, then holds it "
+             "flat, against the final block's " % PROJECT_WEEKS_CAP +
              "targets — it assumes you keep improving at exactly the rate you "
              "have been, no faster and no slower, which is why a flat eight "
              "weeks shows up as a flat projection. The readiness score is "

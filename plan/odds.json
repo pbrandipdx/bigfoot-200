@@ -4,9 +4,9 @@
   "blockReadiness": 53,
   "blockName": "Block 1",
   "trajectory": {
-    "low": 15,
-    "high": 22,
-    "readiness": 62
+    "low": 13,
+    "high": 18,
+    "readiness": 50
   },
   "label": "well behind",
   "color": "#A23B2C",
@@ -15,13 +15,13 @@
       "label": "Vertical per week",
       "weight": 20,
       "now": 62,
-      "raceDay": 100
+      "raceDay": 69
     },
     "long_day": {
       "label": "Longest single day",
       "weight": 20,
       "now": 50,
-      "raceDay": 53
+      "raceDay": 25
     },
     "hours": {
       "label": "Time on feet per week",

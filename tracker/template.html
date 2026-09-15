@@ -126,7 +126,7 @@
 <header class="top">
   <div>
     <h1>Bigfoot 200 — Block Tracker</h1>
-    <div class="sub">Race Aug 13, 2027 · 200.1 mi · 44,082 ft gain / 45,563 ft loss · 107 hr limit · <strong>97:00 schedule, 100:00 goal</strong> · unsupported · 2.31 mph moving, 4:12 aid, 6:00 sleep</div>
+    <div class="sub">Race <!--__RACE_DATE__--> · 200.1 mi · 44,082 ft gain / 45,563 ft loss · 107 hr limit · <strong>97:00 schedule, 100:00 goal</strong> · unsupported · 2.31 mph moving, 4:12 aid, 6:00 sleep</div>
   </div>
   <div class="spacer"></div>
   <button id="themeBtn" title="Toggle light/dark">◐</button>
@@ -246,7 +246,8 @@ var SYNC = /*__DATA__*/;
 /* ---------- plan model ---------- */
 var BASE = Date.UTC(2026, 8, 7);
 var NPLAN = 49;
-var RACE = Date.UTC(2027, 7, 13);
+var RACE = Date.UTC(/*__RACE_UTC__*/);
+var RACE_LABEL = "/*__RACE_LABEL__*/";
 
 var BLOCKS = [
   { n:1, start:0,  end:13, ends:"Frozen Trail Run Fest 50K",
@@ -351,7 +352,9 @@ function baselineStats(n){
 
 /* ---------- tiles ---------- */
 function renderTiles(){
-  var weeksLeft = Math.max(0, Math.ceil((RACE-TODAY)/(7*86400000)));
+  // Round, do not ceil: the Progress page floors the same interval and the two
+// tiles disagreed by a week. Same instant, same number.
+var weeksLeft = Math.max(0, Math.round((RACE-TODAY)/(7*86400000)));
   var t = TL[CUR];
   var blockTxt, blockFoot;
   if (t.phase==="base"){ blockTxt = "Pre-plan"; blockFoot = "Block 1 starts "+fmtDate(BASE); }
@@ -363,7 +366,7 @@ function renderTiles(){
 
   var b12 = baselineStats(12);
   document.getElementById("tiles").innerHTML =
-    tile("Weeks to Bigfoot", weeksLeft, "", "Aug 13, 2027") +
+    tile("Weeks to Bigfoot", weeksLeft, "", RACE_LABEL) +
     tile("Where you are", blockTxt, "", blockFoot) +
     tile("Last 12 weeks", b12?n1(b12.h):"—", "hr/wk avg", b12 ? n0(b12.v)+" ft/wk · "+n0(b12.m)+" mi/wk" : "no data") +
     tile("Night hours", n1(night), "hr in-plan",
