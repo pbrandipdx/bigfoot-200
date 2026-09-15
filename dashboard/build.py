@@ -101,6 +101,25 @@ def main():
     schedule.pop("_source", None)
     weeks = json.loads(read("tracker", "weeks.json"))
 
+    # block-targets.md carries a hand-written section per block, and schedule.json
+    # carries the numbers the site renders. On 2026-09-15 they disagreed for an
+    # hour - the doc's header said 9 blocks and 2028 while its body still
+    # described 5 blocks ending at Bigfoot 2027, and it was live that way. Fail
+    # the build rather than publish two answers to the same question.
+    bt = read("plan", "block-targets.md")
+    missing = [b["name"] for b in schedule["blocks"]
+               if ("## " + b["name"]) not in bt]
+    if missing:
+        sys.exit("REFUSING: plan/block-targets.md has no section for: %s\n"
+                 "  schedule.json defines %d blocks; the doc must describe all of them."
+                 % (", ".join(missing), len(schedule["blocks"])))
+    stale = [b["name"] for b in schedule["blocks"]
+             if b["endsWith"].split("—")[0].strip() and
+             b["endsWith"].split("—")[0].strip() not in bt]
+    if stale:
+        print("  WARNING: block-targets.md may not mention what these blocks end with: %s"
+              % ", ".join(stale))
+
     print("building %s" % OUT)
 
     # the Today page carries the full training plan inline, after the race ladder
