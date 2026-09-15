@@ -53,6 +53,14 @@ def write(name, html):
     open(os.path.join(OUT, name), "w", encoding="utf-8").write(html)
     print("  %-12s %6d bytes" % (name, len(html)))
 
+def inject_schedule_js(tpl):
+    """Both page templates include dashboard/schedule_logic.js verbatim, so the
+    Today page and the Every week page share one definition of what a day is."""
+    if "/*__SCHEDULE_JS__*/" not in tpl:
+        return tpl
+    return tpl.replace("/*__SCHEDULE_JS__*/", read("dashboard", "schedule_logic.js"))
+
+
 def inject_data(tpl, data, where):
     if "/*__DATA__*/" not in tpl:
         sys.exit("%s has no /*__DATA__*/ token" % where)
@@ -97,7 +105,7 @@ def main():
 
     # the Today page carries the full training plan inline, after the race ladder
     plan_html = md_body("block-targets.md")
-    today_tpl = read("dashboard", "template.html")
+    today_tpl = inject_schedule_js(read("dashboard", "template.html"))
     if "<!--__PLAN__-->" not in today_tpl:
         sys.exit("dashboard/template.html has no <!--__PLAN__--> token")
     today_tpl = today_tpl.replace("<!--__PLAN__-->", plan_html)
@@ -105,7 +113,7 @@ def main():
     write("index.html",  inject_data(today_tpl, schedule, "dashboard/template.html"))
     write("log.html",    inject_data(read("tracker", "template.html"), weeks, "tracker/template.html"))
     # Every week: the whole campaign, plan against actual, one row per week.
-    weeks_tpl = read("dashboard", "weeks_template.html")
+    weeks_tpl = inject_schedule_js(read("dashboard", "weeks_template.html"))
     ap = os.path.join(REPO, "plan", "weekly-actuals.json")
     actuals = json.loads(open(ap, encoding="utf-8").read()) if os.path.exists(ap) else {}
     write("weeks.html", inject_data(weeks_tpl, {
