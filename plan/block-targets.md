@@ -24,6 +24,10 @@ be re-dated if a weekend moves again.
 
 ## The week, rebuilt 2026-09-15
 
+> The full argument behind this rebuild — what an outside review got right, what
+> it got wrong, and what was rejected — is in `plan/plan-revisions.md`. The
+> review itself is archived at `plan/reviews/`.
+
 Five running days. Run-specific capacity is the weakest gate in the model —
 **21% now, projecting 25%** — and Bigfoot is only a hiking race if you are
 willing to walk the runnable two thirds of it. Sub-100 lives in the parts you

@@ -145,6 +145,40 @@ const RUN_MINUTES = {
 };
 function runMin(block){ return RUN_MINUTES[block.id] || RUN_MINUTES[1]; }
 
+// ---------------------------------------------------------------------------
+// The week was rebuilt on 2026-09-15. Days BEFORE that date still render the
+// week as it actually stood, because the Every week tab is a record as well as
+// a plan: week 1 was trained and logged (15.1 hr, 126% of target) under the old
+// template, and showing it as uphill tempo and sustained downhill would be
+// claiming he was told to do something he was never told to do.
+//
+// Versioned by DAY rather than by week, because the change landed mid-week:
+// Monday Sep 14 was the old week, Tuesday Sep 15 onward is the new one.
+const TEMPLATE_V2_FROM = '2026-09-15';
+function usesNewWeek(date){ return fmtIso(date) >= TEMPLATE_V2_FROM; }
+
+const WAS = ' (the week as it stood before 2026-09-15)';
+
+function legacyWeekday(block, d, dow){
+  switch(dow){
+    case 1: return { title:'Strength A + incline intervals',
+      desc:'4 \u00d7 3 min, 150\u2013160 bpm, 15\u201318% grade treadmill.' + WAS };
+    case 2: return { title:'Rest + capped walk',
+      desc:'Up to 3 miles / under 1 hour. Not training \u2014 didn\u2019t count toward compliance.' + WAS };
+    case 3: return { title:'Easy run',
+      desc:'25\u201330 min, Nike Jogging Trail.' + WAS };
+    case 4: {
+      if(block.id === 1) return { title:'LeBron ramp repeats',
+        desc:'10\u201312 reps, run up / walk down, 150\u2013160 bpm.' + WAS };
+      const wk = weekOfBlockOn(block, d);
+      return wk % 2 === 0
+        ? { title:'LeBron ramp \u2014 down-focus', desc:'Walk up conservatively, run down under control at race effort.' + WAS }
+        : { title:'LeBron ramp \u2014 up-focus',   desc:'Run up, walk down, 150\u2013160 bpm.' + WAS };
+    }
+    case 5: return { title:'Rest', desc:'Full rest day.' + WAS };
+  }
+}
+
 // A week is a deload when its Sunday long day says so. Block 1's deloads are
 // anchored to races (weeks 5, 10 and 13), not to a rigid count, so a modulo
 // would put the easy week in the wrong place. Blocks with no dated long days
@@ -186,6 +220,26 @@ function buildWeekOf(block, d){
 const TOLERANCE_NOTE = 'If the week’s running miles are at or over Garmin’s running ' +
   'tolerance, drop Friday to a walk before cutting anything else.';
 
+// Indoor versions of the two terrain sessions. Portland in January, a dark
+// weeknight, or no time to reach a trail should cost the session's shape, not
+// the session. The treadmill numbers line up with the outdoor ones rather than
+// being a vague "do something on a machine".
+function treadmillUp(minutes, work){
+  return ' TREADMILL VERSION: 10 min flat warm-up, then ' + work + ' at 12\u201315% grade '
+       + 'holding Z3 (137\u2013157 bpm) \u2014 walk it fast rather than jogging badly, the grade '
+       + 'is what matters \u2014 with 2\u20133 min flat easy between. Strides become 5 \u00d7 20 sec '
+       + 'at 8\u201310% grade, stepping off the belt to recover. 10 min cool-down, '
+       + minutes + ' min total.';
+}
+const TREADMILL_DOWN =
+  ' TREADMILL VERSION: only if yours declines. Set \u22124 to \u22126% and run the continuous '
+  + 'block at easy effort, cadence 175\u2013180, short quick steps, no heel braking \u2014 the '
+  + 'point is the eccentric load, not the pace. If it does NOT decline, a treadmill cannot do '
+  + 'this session at all: use the LeBron ramp instead (walk up easy, run down under control, '
+  + 'repeat until the descent minutes add up), or a parking garage ramp, or stadium steps. '
+  + 'Note which you did \u2014 ramp repeats are not the same stimulus as one unbroken descent, '
+  + 'and the descent HR gap will show the difference.';
+
 // TUESDAY — uphill tempo on a four-week cycle: 3x5, 3x10, 2x15, easy. Holz's
 // structure. Replaces the fixed LeBron prescription, which never got harder.
 const UPHILL_LADDER = ['3 × 5 min', '3 × 10 min', '2 × 15 min'];
@@ -197,13 +251,15 @@ function tuesdayWorkout(block, d){
     return { title: 'Uphill tempo — easy week',
       desc: '2 × 5 min at tempo, no strides, ' + Math.round(m.tue * 0.7) + ' min total. Deload '
           + 'week: keep the frequency, cut the intensity. The ladder pauses here rather than '
-          + 'advancing \u2014 next week picks up where it left off. ' + TOLERANCE_NOTE };
+          + 'advancing \u2014 next week picks up where it left off.'
+          + treadmillUp(Math.round(m.tue * 0.7), '2 \u00d7 5 min') + ' ' + TOLERANCE_NOTE };
   }
   return { title: 'Uphill tempo intervals + power strides',
     desc: UPHILL_LADDER[slot] + ' uphill at Z3 (137–157 bpm), then 5 × 20 sec power strides '
         + 'at about 85% effort on a moderate grade. Easy 20 min either side, ' + m.tue
         + ' min total. Week ' + (slot + 1) + ' of 3 on the ladder — it is meant to '
-        + 'progress, so do not leave it at 3 × 5. ' + TOLERANCE_NOTE };
+        + 'progress, so do not leave it at 3 \u00d7 5.'
+        + treadmillUp(m.tue, UPHILL_LADDER[slot]) + ' ' + TOLERANCE_NOTE };
 }
 
 // WEDNESDAY — easy aerobic plus the eccentric strength that used to sit on
@@ -234,7 +290,7 @@ function thursdayWorkout(block, d){
         + 'most race-specific session of the week: the course descends more than it climbs, '
         + 'and Block 1’s question is whether you can descend hard without wrecking your '
         + 'quads. Watch the descent HR gap — target is 15 bpm below climb HR; it was 8 on '
-        + 'Sep 13. ' + TOLERANCE_NOTE };
+        + 'Sep 13.' + TREADMILL_DOWN + ' ' + TOLERANCE_NOTE };
 }
 
 // FRIDAY — short, easy, and the first thing to become a walk when the running
@@ -276,6 +332,9 @@ function scheduleFor(date){
   // block boundary, and currentBlock() would hand back today's block instead.
   const block = blockFor(date);
   const dow = date.getDay(); // 0 Sun .. 6 Sat
+  // Weekdays before the rebuild show what was actually prescribed then.
+  if(dow >= 1 && dow <= 5 && !usesNewWeek(date)) return legacyWeekday(block, date, dow);
+
   switch(dow){
     case 1: return { title:'Full rest', desc:'No running, no strength, no capped walk that turns into three miles. Yesterday was the long day and this is where it gets absorbed \u2014 one forced rest day a week is the single piece of published coaching every source agrees on.' };
     case 2: return tuesdayWorkout(block, date);

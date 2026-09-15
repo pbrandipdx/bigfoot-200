@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Every week · Bigfoot 200</title>
-<meta name="description" content="Every training week from Block 1 to Bigfoot 200, plan against actual.">
+<title>Review · Bigfoot 200</title>
+<meta name="description" content="Every training week from Block 1 to Bigfoot 200 — what was planned, and what you actually did.">
 <style>
   :root{--paper:#EFF1EA;--paper-2:#E4E7DD;--ink:#131C15;--ink-soft:#33402F;
     --ink-faint:#5C6B58;--forest:#20402C;--forest-deep:#152B1D;--amber:#B0793A;
@@ -162,7 +162,7 @@
     <div class="site-sub">Mount St. Helens, WA &middot; Aug 13, 2027 &middot; goal: sub-100hr</div>
   </header>
 
-  <h1>Every week</h1>
+  <h1>Review</h1>
   <p class="lede" id="lede"></p>
   <div class="legend">
     <span><b>Plan</b> the block's weekly target</span>
@@ -173,7 +173,11 @@
 
   <div id="blocks"></div>
 
-  <p class="foot">Weeks run Monday to Sunday. The long day is Sunday; races and the Three
+  <p class="foot">Weeks that have finished show what you logged against what the block asked
+  for; weeks ahead show the plan. Days before 2026-09-15 show the week as it stood then \u2014
+  the template changed, and rewriting the record would be claiming you were told to do
+  something you were never told to do.
+  Weeks run Monday to Sunday. The long day is Sunday; races and the Three
   Sisters trip keep their real dates. Dated long days come from
   <code>plan/schedule.json</code>; weeks without one show the block's default shape.
   Actuals come from Strava and Garmin via the <code>weekly_progress</code> view and only
@@ -261,8 +265,8 @@ function render(){
   const doneCount = weeks.filter(w => {
     const s = new Date(w); s.setDate(w.getDate()+6); return s < today; }).length;
   document.getElementById('lede').textContent =
-    `${weeks.length} weeks from ${fmt(start)} ${start.getFullYear()} to race day. ` +
-    `${doneCount} done, ${weeks.length - doneCount} to go.`;
+    `Every week from ${fmt(start)} ${start.getFullYear()} to race day \u2014 what was ` +
+    `planned, and what you actually did. ${doneCount} done, ${weeks.length - doneCount} to go.`;
 
   const host = document.getElementById('blocks');
   BLOCKS.forEach(blk => {
