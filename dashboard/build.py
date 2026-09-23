@@ -193,6 +193,7 @@ def main():
     write("weeks.html", race_tokens(inject_data(weeks_tpl, {
         "blocks": schedule["blocks"], "longDays": schedule.get("longDays", []),
         "races": schedule["races"], "race": schedule["race"], "actuals": actuals,
+        "decisions": schedule.get("decisions", []),
         "daily": daily,
     }, "dashboard/weeks_template.html")))
 

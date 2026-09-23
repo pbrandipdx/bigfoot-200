@@ -2376,5 +2376,51 @@
         "avg_hr": null
       }
     ]
+  },
+  "2026-09-15": {
+    "hours": 1.39,
+    "miles": 2.0,
+    "vert_ft": 0,
+    "sessions": [
+      {
+        "name": "Lunch Run",
+        "sport": "Run",
+        "hr": 0.71,
+        "mi": 2.0,
+        "ft": 0,
+        "avg_hr": 117
+      },
+      {
+        "name": "Afternoon Weight Training",
+        "sport": "WeightTraining",
+        "hr": 0.68,
+        "mi": 0.0,
+        "ft": 0,
+        "avg_hr": null
+      }
+    ]
+  },
+  "2026-09-16": {
+    "hours": 2.18,
+    "miles": 8.8,
+    "vert_ft": 410,
+    "sessions": [
+      {
+        "name": "Morning Walk",
+        "sport": "Walk",
+        "hr": 1.48,
+        "mi": 5.1,
+        "ft": 253,
+        "avg_hr": null
+      },
+      {
+        "name": "Afternoon Run",
+        "sport": "Run",
+        "hr": 0.71,
+        "mi": 3.7,
+        "ft": 157,
+        "avg_hr": 133
+      }
+    ]
   }
 }

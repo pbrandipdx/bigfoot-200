@@ -146,6 +146,15 @@
   .wf-label{font-size:14px;font-weight:600;color:var(--ink)}
   .wf-range{font-size:13px;color:var(--ink-faint)}
   .wf-meta{font-size:12.5px;color:var(--amber-deep);flex-basis:100%}
+  .decision{margin-top:8px;padding:9px 11px;border-radius:5px;border-left:3px solid}
+  .decision .dec-t{font-size:12px;font-weight:700;letter-spacing:.02em;margin-bottom:3px}
+  .decision .dec-b{font-size:12px;line-height:1.5;opacity:.92}
+  .dec-hard{background:#fbeeea;border-color:#c0492f;color:#7d2f1c}
+  .dec-soft{background:#fff6e2;border-color:#d99b22;color:#7a5410}
+  @media (prefers-color-scheme:dark){
+    .dec-hard{background:#3a211c;border-color:#c0492f;color:#f0b3a2}
+    .dec-soft{background:#372d15;border-color:#d99b22;color:#e8c77a}
+  }
   @media (min-width:560px){.wf-meta{flex-basis:auto;margin-left:auto;text-align:right}}
   details.week-fold table.week{margin:0 0 18px 22px;width:calc(100% - 22px)}
   details.week-fold table.week thead{display:none}
@@ -287,6 +296,7 @@ const DATA = /*__DATA__*/;
 const BLOCKS = DATA.blocks;
 
 const RACES = DATA.races;
+const DECISIONS = DATA.decisions || [];
 
 function toDate(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
 function daysBetween(a,b){ return Math.round((b-a)/86400000); }
@@ -322,7 +332,7 @@ function weekRowsHtml(monday){
             `<td><strong>${w.title}</strong><br>` +
             (w.parts ? partsHtml(w)
                      : `<span style="color:var(--ink-faint)">${w.desc}</span>`) +
-            routeLink(w) + `</td></tr>`;
+            routeLink(w) + decisionHtml(d) + `</td></tr>`;
   }
   return rows;
 }

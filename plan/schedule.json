@@ -224,9 +224,9 @@
       "end": "2027-08-13",
       "tag": "A race · 97:00 schedule, sub-100 goal",
       "signup": "https://ultrasignup.com/register.aspx?did=142345",
-      "signupLabel": "UltraSignup · Bigfoot 200 2027",
-      "signupStatus": "closed",
-      "signupNote": "2027 lottery ran Aug 28, 2026 and the race is SOLD OUT. Waitlist is free to join. Confirm your entry status.",
+      "signupLabel": "UltraSignup · Bigfoot 200 2027 — entry confirmed",
+      "signupStatus": "entered",
+      "signupNote": "ENTERED — Patrick confirmed his 2027 entry on 2026-09-15. The race itself is sold out; the ladder below is now about whether to run it, not whether to get in. Transfer deadlines are on the calendar.",
       "taperDays": 7,
       "recoveryDays": 0
     }
@@ -346,6 +346,32 @@
       "desc": "Block 1 checkpoint. Block question: can you sustain a full day on feet and descend hard without wrecking your quads?",
       "link": "https://level32racing.com/frozen-trail-run-fest",
       "linkLabel": "Level 32 Racing · Frozen Trail Run Fest"
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2027-02-16",
+      "kind": "soft",
+      "title": "First honest read on the transfer question",
+      "body": "BURT 55K and Hagg Mud are both behind you. This is the earliest point with real evidence and it is still six weeks before the best transfer rate expires. If the 50Ks went badly, start thinking about 2028 now rather than in June."
+    },
+    {
+      "date": "2027-03-31",
+      "kind": "hard",
+      "title": "LAST DAY for the 75% transfer — email by today",
+      "body": "Before Apr 1: 50% refund, or transfer 75% of the entry fee to 2028. This is the best rate available and it expires two weeks BEFORE Gorge Waterfalls, so the decision has to be made without the 100K result. Email info@destinationtrailrun.com — removing yourself on UltraSignup does not count. The choice is binding."
+    },
+    {
+      "date": "2027-05-31",
+      "kind": "hard",
+      "title": "LAST DAY for any refund — 25% — and for the 50% transfer",
+      "body": "Apr 1 to May 31: 25% refund, or transfer 50% to 2028. After today no refund of any size exists. Still three weeks before Strawberry Fields, so this too is decided without the gate result."
+    },
+    {
+      "date": "2027-06-30",
+      "kind": "hard",
+      "title": "FINAL transfer deadline — 25% — after this the entry is spent",
+      "body": "Jun 1 to Jun 30: transfer 25% to 2028, no refund. Strawberry Fields was Jun 19 and SISU ended Jun 27, so you have days, not weeks, to read the result and act. After today the entry is worth nothing unless you start. No exceptions — Destination Trail states plainly that doctor's notes do not qualify."
     }
   ]
 }

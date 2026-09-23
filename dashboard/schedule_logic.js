@@ -36,6 +36,26 @@ function raceOn(d){
     .find(r => !r.backup && d >= toDate(r.start) && d <= toDate(r.end)) || null;
 }
 
+// Deferral decision points. Destination Trail calls it a transfer, it is a
+// sliding scale by the date the EMAIL is sent, and it is one-shot and binding.
+// The dates live in schedule.json because they are policy, not training, and
+// because the important one (Mar 31) lands two weeks before the first 100K -
+// the decision has to be made without the evidence, which is exactly the kind
+// of thing a calendar has to say out loud rather than leave in a policy doc.
+function decisionOn(d){
+  const list = (typeof DECISIONS === 'undefined' ? [] : DECISIONS) || [];
+  const iso = fmtIso(d);
+  return list.find(x => x.date === iso) || null;
+}
+function decisionHtml(d){
+  const x = decisionOn(d);
+  if(!x) return '';
+  const esc = t => String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  return '<div class="decision ' + (x.kind === 'hard' ? 'dec-hard' : 'dec-soft') + '">' +
+         '<div class="dec-t">' + esc(x.title) + '</div>' +
+         '<div class="dec-b">' + esc(x.body) + '</div></div>';
+}
+
 // Race shoulders. A race is not just its own day: the days before it have to
 // be a taper and the days after it have to be recovery, and until this existed
 // the calendar cheerfully printed 90-minute downhill quad sessions into the
@@ -106,6 +126,7 @@ function aRaceOf(list){
 // (a date that has not been published, a registration window that has not
 // opened, a race that has already sold out).
 var SIGNUP_BADGE = {
+  'entered':      { t: 'You are in',     c: 'sg-in'    },
   'open':         { t: 'Register',       c: 'sg-open'  },
   'opens-later':  { t: 'Opens later',    c: 'sg-soon'  },
   'not-yet-open': { t: '2027 TBA',       c: 'sg-tba'   },
