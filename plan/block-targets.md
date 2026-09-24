@@ -10,8 +10,8 @@
 > **What stands regardless: the race history in this plan was wrong.** It assumed a Gorge
 > Waterfalls 100K finish. The real record is **a marathon around 2006 and a few half marathons
 > this year — no ultra**, and a longest single effort of 3.0 hours. So the ladder below is six
-> firsts in eleven months: first trail race in November, first ultra in December, first 100K in
-> April, first 100-miler in June, first 200 in August. That is a very aggressive progression and
+> firsts in eleven months: first trail race in November, first ultra in December, first
+> road marathon in April, first 100-miler in June, first 200 in August. That is a very aggressive progression and
 > it is recorded as such in `plan/plan-revisions.md` — not as an argument against the date, but
 > so nobody later mistakes it for a gentle one.
 
@@ -182,7 +182,7 @@ which is the aid-station discipline sub-100 depends on.
 
 ## Block 3 — night running
 *Feb 14 2027 to Apr 16 2027 (9 weeks)*
-*Ends: Gorge Waterfalls 100K — FIRST 100K*
+*Ends: OPEN — Gorge Waterfalls 100K was dropped in Sep 2026*
 
 | Target | Value |
 |---|---|
@@ -193,10 +193,18 @@ which is the aid-station discipline sub-100 depends on.
 | Volume long day, capped | **8 hr** |
 | Night hours, cumulative | **12** |
 
-**Block question:** can you move competently in the dark for six hours? Arriving at Gorge having never run at night is the avoidable failure here.
+**Block question:** can you move competently in the dark for six hours? Arriving at a hundred-miler having never run at night is the avoidable failure here.
 
-**This is the first 100K, against a 17-hour cutoff**, four months after a first-ever 50K.
-Treat it as a debut to be finished, not a checkpoint to be paced.
+**This block no longer ends in a race.** Gorge Waterfalls 100K was dropped in September
+2026 and replaced by the Eugene Marathon on Apr 25, which sits just past this block in
+Block 4. Two consequences worth stating plainly rather than discovering in June:
+
+- **There is no 100K on the ladder any more.** The progression goes 50K in February
+  straight to 100 miles in June. That is a bigger jump than this plan was built around.
+- **There is no backup Western States qualifier.** Sub-100 at Bigfoot is now the only
+  path to the December 2027 lottery.
+
+Neither is settled. Both are tracked as open questions on the plan.
 
 ---
 
@@ -224,8 +232,8 @@ beat Bighorn: it converts the worst case from a DNF eight weeks before the A rac
 completed 100K. Bighorn was 18,000 ft, 9,000 ft of altitude, a flight to Wyoming, and no way
 down from a bad day.
 
-**It is not a Western States qualifier.** It does not need to be — Gorge Waterfalls in April
-is, and Bigfoot under 100 hours is itself one.
+**It is not a Western States qualifier**, and since Gorge was dropped nothing else on the
+ladder is either. Bigfoot under 100 hours is the only one left.
 
 **The flat course changes what the clock means.** Bighorn's "sub-28" standard was for
 18,000 ft of mountain. On 3,200 ft of gravel and dirt trail, the equivalent signal is nearer
@@ -474,8 +482,10 @@ weeks. Increase impact load gradually after a lighter period like this."*
   the gun. You arrive under the requirement even on a perfect ramp. The 25K is
   ~4–5 hours, still a real Block 1 checkpoint, and costs days of recovery
   instead of weeks.
-- Gorge Waterfalls in April is 62 miles against a 17-hour cutoff. That is the
-  race the running ramp has to actually reach, and there are seven months for it.
+- **Revised Sep 2026:** Gorge Waterfalls 100K was the race the running ramp had to
+  reach by April. With Gorge dropped for the Eugene Marathon, the ramp now has to reach
+  26.2 road miles in April and 100 trail miles in June, with nothing between 50K and
+  100 on the ladder.
 - Raise it by frequency, not by one big day. Three easy midweek runs — which is
   what you were doing through Jul 21 — plus running the runnable parts of the
   weekly long day.
