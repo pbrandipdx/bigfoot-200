@@ -178,6 +178,14 @@ which is the aid-station discipline sub-100 depends on.
 
 **Hagg Mud is nine days after BURT.** Check both dates before entering either.
 
+**Strength gets a session-level rewrite here, not yet decided.** Four accessory
+circuits are staged and paraphrased from outside sources — see
+`coaching-references.md`, added 2026-09-28 — on top of the step-ups, box
+step-downs, single-leg RDLs, and loaded carries already in the weekly table
+above. Which moves rotate into the twice-weekly Strength A/B slot, and
+whether it needs a third short session, is still open. Full detail lands
+here once decided.
+
 ---
 
 ## Block 3 — night running

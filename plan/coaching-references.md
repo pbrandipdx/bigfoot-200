@@ -71,6 +71,44 @@ These are specific and directly address gaps in the current plan.
   The current plan says "eat every 40 minutes" but sets no carb number.
 - **One forced rest day per week; 7–9 hr sleep**, more in heavy blocks.
 
+
+
+## Workouts worth stealing from Welton, Kvam, and Rehm — added 2026-09-28
+
+Three more sources, gathered the same day the odds-model reweighting happened.
+Paraphrase only, same rule as above.
+
+- [Descents Are the Secret Leg-Killer](https://www.backpacker.com/skills/backpacking-fitness/descents-are-the-secret-leg-killer-heres-how-to-train-for-them/),
+  Lee Welton (PT assistant, personal trainer, PCT/PNT thru-hiker), Backpacker,
+  2026-08-20. **Heel-elevated goblet squat** (3–4×12–15, 4-sec eccentric) and
+  **wall-lean toe raise** (3–4×15–20, tibialis anterior) are genuinely new —
+  neither is in the current week. **Lateral step-down** (3×10/leg building to
+  4) is close to the single-leg box step-downs already in Wednesday's session
+  above; worth checking whether that's the same movement with the same cue
+  (4-sec controlled lower) or needs adjusting.
+- [Knock Out Knee Pain With These 3 Exercises](https://www.backpacker.com/skills/backpacking-fitness/knock-out-knee-pain-with-these-3-exercises/),
+  Welton again, Backpacker, 2026-06-24. Same author, injury-prevention framing.
+  **Single-leg bridge** and **exercise-ball hamstring curl** (both 3×12–15,
+  3–4x/week) are new; the article's third exercise is the same lateral
+  step-down as above.
+- [No Gear Required: 11 Bodyweight Exercises to Train for Hiking](https://www.backpacker.com/skills/backpacking-fitness/bodyweight-exercises-for-hikers-in-quarantine/),
+  Isak Kvam quoting William Sturgeon, CPT, Backpacker, 2020-04-21. Leg subset:
+  squat jumps, single-leg glute bridge, split squats, single-leg deadlift, hip
+  hinge — a no-equipment fallback for a Strength day away from the gym.
+  **Single-leg deadlift** is close to the single-leg RDLs already in Wednesday's
+  session; the rest are new.
+- [These 5 Upper-Body Exercises Are Perfect for Backpackers](https://www.backpacker.com/skills/backpacking-fitness/upper-body-exercises-for-backpackers/),
+  Jake Rehm, Backpacker. Different dimension — pole control and pack balance,
+  not leg strength. Oblique crunch, deadlift, wood chop, ab wheel rollout, dips.
+  Twice weekly, paired with a short HIIT finisher (his suggestion: burpees).
+
+**None of this is scheduled yet.** Four candidate circuits (descent-accessory,
+no-gym leg, upper-body, knee-prevention) are now documented against one
+twice-weekly Strength A/B slot that currently holds step-ups, box step-downs,
+RDLs, and loaded carries. Which of the new moves replace, rotate with, or add
+to what's already there — and whether it needs a third short session — is an
+open decision, not a scheduling afterthought. Full detail lands with Block 2.
+
 Holz's framing is that training builds evidence you can point to rather than
 motivation you have to summon — which is the same logic as the benchmark repeat
 of Elk/Kings on Nov 28.
