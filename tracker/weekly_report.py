@@ -9,7 +9,7 @@ plan/odds.json. Stdlib only, so it runs on any machine with the repo.
 
 Credentials come from tracker/.env (gitignored): SUPABASE_URL, SUPABASE_SERVICE_KEY
 """
-import json, os, sys, urllib.request, urllib.parse, datetime
+import json, os, sys, urllib.request, urllib.parse, urllib.error, datetime
 import odds as odds_model
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -151,6 +151,38 @@ def write_daily(cfg):
           % (DAILY, len(days), sum(len(v["sessions"]) for v in days.values())))
 
 
+def push_odds_to_supabase(cfg, odds_data):
+    """Mirror the freshly computed trajectory into Supabase plan_settings
+    (key='odds'), which the live site's Today-page header pill reads via the
+    public /functions/v1/plan edge function (see dashboard/build.py). Added
+    2026-09-28 after the two drifted: plan/odds.json was refreshing on every
+    run, but plan_settings.odds was a one-time snapshot from 2026-09-23 that
+    the Today pill kept showing regardless. This keeps them as one number
+    instead of two.
+
+    Best-effort - a failure here does not fail the report. progress.md and
+    plan/odds.json are already written by the time this runs and are useful
+    on their own; the live pill just keeps showing its last value until the
+    next successful push.
+    """
+    url = cfg["SUPABASE_URL"].rstrip("/") + "/rest/v1/plan_settings?key=eq.odds"
+    body = json.dumps({"value": odds_data, "updated_by": "claude"}).encode("utf-8")
+    req = urllib.request.Request(url, data=body, method="PATCH", headers={
+        "apikey": cfg["SUPABASE_SERVICE_KEY"],
+        "Authorization": "Bearer " + cfg["SUPABASE_SERVICE_KEY"],
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            r.read()
+        print("pushed odds to Supabase plan_settings (key=odds) "
+              "- Today page pill now matches")
+    except (urllib.error.URLError, OSError) as e:
+        print("WARNING: could not push odds to Supabase plan_settings: %s\n"
+              "  The Today-page pill will keep showing its last value until "
+              "this succeeds." % e)
+
+
 def main():
     weeks = int(sys.argv[1]) if len(sys.argv) > 1 else 12
     all_rows = fetch(env(), max(weeks + 1, 14))
@@ -187,6 +219,7 @@ def main():
         json.dump(odds_data, open(ODDS, "w", encoding="utf-8"), indent=2)
         print("wrote %s (%d-%d%% on trajectory)"
               % (ODDS, odds_data["trajectory"]["low"], odds_data["trajectory"]["high"]))
+        push_odds_to_supabase(env(), odds_data)
 
     done = [r for r in rows
             if datetime.date.fromisoformat(r["week_start"])
