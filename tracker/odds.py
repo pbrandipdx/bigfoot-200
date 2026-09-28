@@ -68,8 +68,8 @@ GATES = [
     ("vert",      "Vertical per week",       20),
     ("long_day",  "Longest single day",      20),
     ("hours",     "Time on feet per week",   15),
-    ("run",       "Run-specific capacity",   15),
-    ("night",     "Night hours",             10),
+    ("run",       "Run-specific capacity",   20),
+    ("night",     "Night hours",             5),
     ("consistency", "Week-to-week consistency", 10),
     ("recovery",  "Recovery headroom",       10),
 ]

@@ -15,11 +15,11 @@ That is the trajectory number: where the last eight weeks' rate of change lands 
 | Vertical per week | 20% | `████████░░` 78% | `████████░░` 84% |
 | Longest single day | 20% | `█████░░░░░` 50% | `██░░░░░░░░` 23% |
 | Time on feet per week | 15% | `██████████` 100% | `██████████` 100% |
-| Run-specific capacity | 15% | `███░░░░░░░` 35% | `█████░░░░░` 48% |
-| Night hours | 10% | `███░░░░░░░` 33% | `█░░░░░░░░░` 11% |
+| Run-specific capacity | 20% | `███░░░░░░░` 35% | `█████░░░░░` 48% |
+| Night hours | 5% | `███░░░░░░░` 33% | `█░░░░░░░░░` 11% |
 | Week-to-week consistency | 10% | `████████░░` 75% | `████████░░` 75% |
 | Recovery headroom | 10% | `██████████` 100% | `██████████` 100% |
-| **Readiness** | | **67%** | **62%** |
+| **Readiness** | | **67%** | **64%** |
 
 Biggest drags on the trajectory number: **Night hours** and **Longest single day**.
 

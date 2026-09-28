@@ -6,7 +6,7 @@
   "trajectory": {
     "low": 15,
     "high": 22,
-    "readiness": 62
+    "readiness": 64
   },
   "label": "well behind",
   "color": "#A23B2C",
@@ -31,13 +31,13 @@
     },
     "run": {
       "label": "Run-specific capacity",
-      "weight": 15,
+      "weight": 20,
       "now": 35,
       "raceDay": 48
     },
     "night": {
       "label": "Night hours",
-      "weight": 10,
+      "weight": 5,
       "now": 33,
       "raceDay": 11
     },
