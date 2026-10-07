@@ -334,7 +334,7 @@ where the fatigue actually lands:
 | Week | Date | Why |
 |---|---|---|
 | 5 | Oct 11 | Recovery from the Three Sisters multi-day |
-| 10 | Nov 15 | Recovery from Run the Rock |
+| 10 | Nov 15 | Recovery from the Nov 1 Mount Defiance push |
 | 13 | Dec 6 | Taper into Frozen Trail 50K, Dec 12 |
 
 **Blocks 2–9:** weeks 4 and 8 of each block, same 60–70% rule. The site detects a deload
@@ -420,7 +420,7 @@ binding constraint rather than a curiosity.
   clearest overtraining signal available.
 - **Raise it by frequency, not by one big day** — which is exactly what the five
   short midweek sessions are for.
-- **Cap the ramp at 10%/week** (Holz). 12 → 14.5 → 17.6 → 21.3 → ~26 by Nov 7.
+- **Cap the ramp at 10%/week** (Holz). 12 → 14.5 → 17.6 → 21.3 → ~26 by early November.
 - **When running miles reach tolerance, Friday becomes a walk.** That is the
   release valve, and it is deliberately the smallest session of the week so that
   spending it costs nothing.
@@ -517,12 +517,7 @@ weeks. Increase impact load gradually after a lighter period like this."*
 
 - **Threshold:** weekly running miles stay under tolerance. Exceeding it
   repeatedly is the clearest overtraining signal available.
-- **Why Run the Rock is the 25K, not the 50K.** At Holz's 10%/week ramp,
-  tolerance goes 12 → 14.5 → 17.6 → 21.3 → **~26 mi by Nov 7**. The 50K is 31
-  running miles with 5,000 ft and a 10-hour cutoff needing 3.11 mph held from
-  the gun. You arrive under the requirement even on a perfect ramp. The 25K is
-  ~4–5 hours, still a real Block 1 checkpoint, and costs days of recovery
-  instead of weeks.
+- **Run the Rock was dropped on 2026-10-06** because running has stopped. The first race is now the Frozen Trail 50K on Dec 12, so the running ramp restarts from the recovered baseline, not from the old 12 mi/week.
 - **Revised Sep 2026:** Gorge Waterfalls 100K was the race the running ramp had to
   reach by April. With Gorge dropped for the Eugene Marathon, the ramp now has to reach
   26.2 road miles in April and 100 trail miles in June, with nothing between 50K and

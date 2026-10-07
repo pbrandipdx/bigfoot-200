@@ -1,6 +1,6 @@
 # Bigfoot 200 — the sub-100 plan
 
-**Race:** Friday **August 13, 2027**, 12:00 PM · Marble Mountain Sno-Park → Randle, WA
+**Race:** Friday **August 11, 2028** (estimated; the 2028 calendar is not yet published), 12:00 PM · Marble Mountain Sno-Park → Randle, WA
 **Course:** 200.1 mi · 44,082 ft gain · 45,563 ft loss · **107-hour limit**
 **Goal:** finish under **100:00** — the Western States qualifying standard
 **Support:** unsupported. Drop bags at every aid station, no crew, no pacers.
@@ -53,29 +53,29 @@ That sentence was load-bearing — it is why BURT was called a rehearsal rather 
 why Bighorn was called a gate rather than an experiment. The correction does not change the
 pacing, sleep or aid strategy on this page. It changes how hard the ladder is.
 
-**Read honestly, the ladder is six firsts in eleven months:**
+**Read honestly, the ladder is five firsts in twenty months. That is the point of moving to 2028:**
 
 | | |
 |---|---|
-| Nov 7 2026 | first trail race (25K) |
 | Dec 12 2026 | **first ultra** (50K) |
-| Feb 6 2027 | BURT — first loop race |
-| Apr 16 2027 | **first 100K**, 17-hour cutoff |
-| Jun 19 2027 | **first 100-miler**, Strawberry Fields Forever |
-| Aug 13 2027 | **first 200**, unsupported, four nights, sub-100 |
+| Feb 6 2027 | BURT 55K, optional, a loop-format aid-station rehearsal |
+| Apr 17 2027 | **first 100K**, 17-hour cutoff (Gorge Waterfalls) |
+| Aug 2027 | work Bigfoot 2027 as a volunteer: free course recon |
+| ~Oct 16 2027 | **first 100-miler**, race to be chosen. This is the gate |
+| ~Apr 15 2028 | optional 50-miler or 100K tune-up |
+| Aug 11 2028 | **first 200**, unsupported, four nights, sub-100 |
 
-Three of those land in the final five months. The race date is fixed and everything revolves
-around it — this is written down so the difficulty is visible, not to argue with the date.
+Race date moved to August 2028 on 2026-10-06 at Patrick's call. The 2027 entry is being
+transferred (25% fee). Everything is spaced at least five weeks apart.
 
 **What it changes in practice:**
 
-- **The June hundred is the gate and it matters more than ever**, because it is now also the
-  first hundred. The three outcomes below are worth deciding today rather than in June.
+- **The October 2027 hundred is the gate and it matters most**, because it is the first hundred.
+  The three outcomes below are worth deciding today rather than in October. A DNF is no longer
+  fatal: there is a May 2028 second-chance 100 and a fall-back to 2029.
 - **Every checkpoint below is a debut**, so the standards are "finish it, and learn something
-  measurable" rather than a pace target — except Gorge, which has a real cutoff.
-- **BURT at 55K is the conservative option.** The 110K and the 100-mile are on the table and
-  the case for each is in `plan-revisions.md`. Against a first 50K eight weeks earlier, 55K is
-  the one that costs days rather than weeks.
+  measurable" rather than a pace target, except Gorge, which has a real cutoff.
+- **BURT at 55K is optional now.** Enter it only if it lands in a normal week.
 - **The finish-odds model now knows.** It scales its band by how much of the distance ladder has
   actually been raced, which is why it reads far lower than it did. It climbs as races get
   finished — the December 50K moves it, not a good training week.
@@ -239,11 +239,12 @@ eight-hour day. That is the point.
 
 | Race | When | Old standard | Sub-100 standard |
 |---|---|---|---|
-| Run the Rock **25K** | Nov 7 | 3.2 mph, finish upright | a checkpoint, not a test. Dropped from the 50K: running tolerance is 12 mi/wk |
-| Frozen Trail 50K | Dec | finish | negative split; last hour running |
-| **BURT 55K** *(one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **finish it, and time every aid stop.** The loop format is the point, not the distance. 110K and 100-mile options still open — see `plan-revisions.md` |
-| Gorge Waterfalls 100K | Apr 16, 2027 | 2.8 mph, 16–18 hr | **your first 100K — finish inside the 17-hr cutoff.** A debut, not a checkpoint |
-| **Strawberry Fields Forever 100** | Jun 19, 2027 | *was Bighorn* | **your first 100-miler, and the gate.** Flat 10K loop × 16, 30 hr limit, can drop to 100K and still finish. Read aid time and second-half fade, not the clock |
+| Frozen Trail 50K | Dec 12, 2026 | finish | negative split; last hour running |
+| **BURT 55K** *(optional, one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **time every aid stop.** The loop format is the point. Skip it if it is not a normal week |
+| Gorge Waterfalls 100K | Apr 17, 2027 | 2.8 mph, 16–18 hr | **your first 100K: finish inside the 17-hr cutoff.** A debut, not a checkpoint |
+| **First 100-miler** *(race TBD)* | ~Oct 16, 2027 | *was Strawberry Fields* | **your first 100-miler, and the gate.** Pick a supported, forgiving-cutoff, non-technical race. Read aid time and second-half fade, not the clock |
+| Tune-up 50-miler or 100K *(optional)* | ~Apr 15, 2028 | | kit, fueling and night running. Skip it if October went well |
+| Second 100 *(only if needed)* | ~May 20, 2028 | | enter only if October was a DNF or an injury finish |
 
 Every row in that table is a debut. Standards are "finish it and learn something measurable",
 not pace targets — except Gorge, which has a real cutoff to clear.
@@ -252,32 +253,23 @@ not pace targets — except Gorge, which has a real cutoff to clear.
 
 ## The gate, restated
 
-**Strawberry Fields Forever is the gate, and it is also your first 100-miler**, eight weeks before
-a 200. That is a lot to ask of one race, and it is exactly why the rule below is worth writing
-today rather than in June — in June it will cost something.
-
-It replaced Bighorn on 2026-09-15. A 10K loop run sixteen times at North Bonneville, ~3,200 ft
-total, 30-hour limit, forty-five minutes from home, **and you can drop to 100K or 50K and still
-take an official finish.** Bighorn was 18,000 ft, altitude to 9,000, a flight to Wyoming, and no
-way down from a bad day.
+**The October 2027 hundred is the gate, and it is your first 100-miler**, ten months before a 200.
+Ten months is the point: a bad day no longer ends the attempt, because there is room to repeat it.
 
 **Three outcomes, decided in advance:**
 
-- **A hundred, controlled, total aid under 90 minutes** → sub-100 is live. Run the plan.
-- **A hundred that cost you two weeks, or a drop to 100K** → Bigfoot is on, sub-100 is not. Race
-  it to finish inside 107, enjoy it, qualify another way.
-- **A drop to 50K, a DNF, or an injury finish** → defer Bigfoot. There is another one next year
-  and there is only one of you.
+- **A hundred, controlled, total aid under 90 minutes** → sub-100 is live. Run the plan. Skip the
+  optional spring races if you are healthy.
+- **A hundred that cost you two weeks, or a drop to a shorter distance** → Bigfoot is on, sub-100
+  is not. Race it to finish inside 107, enjoy it, qualify another way.
+- **A DNF, or an injury finish** → enter a second hundred in late May 2028. If that fails too, defer
+  Bigfoot to 2029. There is another one next year and there is only one of you.
 
-**The drop-down rule is why the middle outcome matters.** A true DNF is nearly impossible here, so
-dropping to 100K *is* the bad day — read it as one rather than as a finish.
+**What to read from the hundred:** total aid time, whether the second half is no worse than 25%
+slower than the first, and whether you recovered in days rather than weeks. The finish time is the
+least interesting number.
 
-**And the flat course changes what the clock means.** Sub-28 was a Bighorn standard, for 18,000 ft
-of mountain. On gravel and dirt at 32 ft per mile the equivalent is nearer sub-26 — but the time is
-the least interesting number. Sixteen timed aid passes and a second half no worse than 25% slower
-tell you far more about whether the sub-100 machinery works.
-
-Write it down now, in September, while it's abstract and costs nothing.
+Write it down now, while it is abstract and costs nothing.
 
 ---
 

@@ -161,16 +161,15 @@ const inRange = (arr,a,b) => arr.filter(o=>o.d>=a && o.d<=b);
 // Your race ladder (from your plan notes)
 const LADDER = [
   ['2026-10-02','Three Sisters Loop (multi-day, to Oct 5)'],
-  ['2026-11-07','Run the Rock 50K'],
   ['2026-12-12','Frozen Trail Run Fest 50K'],
-  ['2027-04-16','Gorge Waterfalls 100K'],
-  ['2027-08-13','Bigfoot 200']
+  ['2027-04-17','Gorge Waterfalls 100K'],
+  ['2027-08-13','Bigfoot 200 2027 (you volunteer)']
 ];
 const ladderMap = {}; LADDER.forEach(([d,n])=>ladderMap[d]=n);
 const raceDays = new Set(A.filter(o=>o.t==='Race').map(o=>toYou(o.d)));
 
 document.getElementById('ruler').innerHTML =
-  '<span>Day 0 <b>Sep 30</b></span><span>His Bigfoot 200 <b>day 318</b> · Aug 14, 2026</span><span>Yours <b>day 317</b> · Aug 13, 2027</span>';
+  '<span>Day 0 <b>Sep 30</b></span><span>His Bigfoot 200 <b>day 318</b> · Aug 14, 2026</span><span>Your Bigfoot is <b>Aug 11, 2028</b>, a year after this window</span>';
 
 /* ---------- tabs ---------- */
 const tabs = [...document.querySelectorAll('#tabs button')];
@@ -298,7 +297,7 @@ function renderGap(){
   document.getElementById('gprose').innerHTML =
    '<p>The two builds are shaped alike but sit at different sizes. Right after Gobi he spent about twelve weeks on short runs, climbing gym, yoga and lifting at '+fmtN(eH,1)+' hours a week, which is close to your '+fmtN(uHrs,1)+' now. His year then climbed to a median non-race week of '+fmtN(mH,1)+' hours, '+fmtN(mF,0)+' foot miles and '+fmtN(mV)+' ft. Your plan holds running at 1.5 to 2 hours a week and adds time through hiking, which is the right instinct: his Bigfoot approach was mostly vert, not mileage.</p>'+
    '<p>The biggest gap is climbing volume. His biggest ordinary week was '+fmtN(peak.vert)+' ft (the week of '+md(toYou(add(peak.a,-0)))+' on your calendar, the Mont Blanc fastpack), and he logged 40,935 ft in the race itself. Your recent Strava weeks sit near '+fmtN(uVert)+' ft of recorded climbing, so the Sunday long-day progression and the Thursday descent block are doing the work that his weekly Marin and Tam loops did.</p>'+
-   '<p>He lifted about '+fmtN(strN,1)+' times a week all year and did yoga or mobility most weeks, even through peak build. That is similar to your two or three sessions. His race calendar mirrors yours well: the Tahoe 200 lands on your June 12, 2027, one week before your June gate race window, and his Bigfoot 200 falls a day after yours.</p>'+
+   '<p>He lifted about '+fmtN(strN,1)+' times a week all year and did yoga or mobility most weeks, even through peak build. That is similar to your two or three sessions. His year is a one-year mirror of your first year: the Tahoe 200 lands on your June 12, 2027, and his Bigfoot 200 falls on your Aug 13, 2027, when you are volunteering at Bigfoot rather than racing it. Your own Bigfoot is Aug 11, 2028, so read his year as the sequencing lesson for your first twelve months, not a countdown.</p>'+
    '<p>He is a professional who won both 200s in course-record time, so treat his totals as a ceiling and his sequencing as the lesson. Your target is a finish under 100 hours, not his 44.</p>';
   let h = '<thead><tr><th>Your date</th><th>Your event</th><th>His same-day calendar</th></tr></thead><tbody>';
   LADDER.forEach(([d,n])=>{

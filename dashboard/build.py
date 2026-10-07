@@ -96,6 +96,8 @@ def _to_legacy(feed):
 
     long_days = []
     for l in feed.get("long_days") or []:
+        if l.get("status") == "cancelled":
+            continue  # removed from the plan; kept in the database as a record
         row = {
             "date": l["day_date"],
             "title": l["title"],
