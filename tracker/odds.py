@@ -60,7 +60,7 @@ def experience_factor(longest_mi):
     return 0.45
 
 
-RACE_DATE = datetime.date(2027, 8, 13)
+RACE_DATE = datetime.date(2028, 8, 11)
 HRV_BASELINE = 41.6
 
 GATES = [
@@ -172,7 +172,7 @@ def band(lo, hi):
 # At 47 weeks out an unclamped slope already reported "100% of race-day
 # vertical" off three good weeks, next to a readiness score of 53%, which is
 # not believable. It got worse when the race briefly moved to 2028 and the
-# horizon became 99 weeks. The cap stays now the race is back at 2027.
+# horizon became 99 weeks. The cap stays: the race is 2028 again from 2026-10-06.
 #
 # Eight weeks of data cannot describe two years. The slope is carried for at
 # most PROJECT_WEEKS_CAP and then held flat: beyond that the honest claim is
