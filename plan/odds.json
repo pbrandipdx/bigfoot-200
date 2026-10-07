@@ -1,27 +1,27 @@
 {
-  "generated": "2026-09-28",
-  "weeksToRace": 46,
-  "blockReadiness": 67,
+  "generated": "2026-10-06",
+  "weeksToRace": 44,
+  "blockReadiness": 79,
   "blockName": "Block 1",
   "trajectory": {
-    "low": 15,
-    "high": 22,
-    "readiness": 64
+    "low": 18,
+    "high": 26,
+    "readiness": 79
   },
-  "label": "well behind",
-  "color": "#A23B2C",
+  "label": "behind",
+  "color": "#B0793A",
   "gates": {
     "vert": {
       "label": "Vertical per week",
       "weight": 20,
-      "now": 78,
-      "raceDay": 84
+      "now": 100,
+      "raceDay": 100
     },
     "long_day": {
       "label": "Longest single day",
       "weight": 20,
-      "now": 50,
-      "raceDay": 23
+      "now": 98,
+      "raceDay": 90
     },
     "hours": {
       "label": "Time on feet per week",
@@ -32,8 +32,8 @@
     "run": {
       "label": "Run-specific capacity",
       "weight": 20,
-      "now": 35,
-      "raceDay": 48
+      "now": 33,
+      "raceDay": 44
     },
     "night": {
       "label": "Night hours",
@@ -44,14 +44,14 @@
     "consistency": {
       "label": "Week-to-week consistency",
       "weight": 10,
-      "now": 75,
-      "raceDay": 75
+      "now": 88,
+      "raceDay": 88
     },
     "recovery": {
       "label": "Recovery headroom",
       "weight": 10,
-      "now": 100,
-      "raceDay": 100
+      "now": 75,
+      "raceDay": 75
     }
   },
   "baseNote": "base rate 45\u201365% assumed for the FIELD at a 200-mile mountain race \u2014 Destination Trail does not publish starter counts \u2014 then scaled by how much of the distance ladder has actually been raced"
