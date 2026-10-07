@@ -1,12 +1,12 @@
 # Week over week
 
-Generated 2026-10-06 from Supabase `weekly_progress` — Strava activities plus Garmin daily and training metrics, Monday-start weeks.
+Generated 2026-10-07 from Supabase `weekly_progress` — Strava activities plus Garmin daily and training metrics, Monday-start weeks.
 
 Arrows compare with the previous week. {{up}} and {{down}} are moving the way you want, {{up-bad}} and {{down-bad}} the wrong way, {{level}} is unchanged. Hover any arrow for what it means.
 
 ## Finish odds
 
-**18–26%** — *behind*, 44 weeks out.
+**18–26%** — *behind*, 96 weeks out.
 
 That is the trajectory number: where the last eight weeks' rate of change lands on race day, measured against the final block's targets. Separately, you are at **79% of what Block 1 asks for right now** — that is a plan-adherence score, not a probability. Block 1 fitness would not finish this race; hitting Block 1 on time is what keeps the trajectory number climbing.
 
