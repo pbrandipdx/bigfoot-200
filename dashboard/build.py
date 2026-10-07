@@ -342,6 +342,9 @@ def main():
         print("  progress.md missing - run: python3 tracker/weekly_report.py")
     write("blocks.html", md_page("block-targets.md", "Block targets"))
     write("plan.html",   md_page("sub100-plan.md",  "Race plan"))
+    # Racing Aaron: static comparison page. Source lives here so every rebuild keeps it
+    # and nav.inject() gives it the shared nav bar.
+    write("racing-aaron.html", read("dashboard", "racing_aaron.html"))
 
     # A page that prints the race date must print the current one. A stale
     # hardcode shows up as the label being absent, which is what happened on
