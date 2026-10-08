@@ -53,32 +53,36 @@ That sentence was load-bearing — it is why BURT was called a rehearsal rather 
 why Bighorn was called a gate rather than an experiment. The correction does not change the
 pacing, sleep or aid strategy on this page. It changes how hard the ladder is.
 
-**Read honestly, the ladder is five firsts in twenty months. That is the point of moving to 2028:**
+**Read honestly, the ladder is a long run of firsts across twenty-two months. That is the point of moving to 2028:**
 
 | | |
 |---|---|
-| Dec 12 2026 | **first ultra** (50K) |
-| Feb 6 2027 | BURT 55K, optional, a loop-format aid-station rehearsal |
-| Apr 17 2027 | **first 100K**, 17-hour cutoff (Gorge Waterfalls) |
+| Feb 13 2027 | **first ultra** (Hagg Mud 50K) |
+| May 29 2027 | **first 50-miler** (Smith Rock Classic) |
+| Jul 9 2027 | **first 100K**, 17-hour cutoff (Siskiyou Out Back) |
 | Aug 2027 | work Bigfoot 2027 as a volunteer: free course recon |
-| ~Oct 16 2027 | **first 100-miler**, race to be chosen. This is the gate |
-| ~Apr 15 2028 | optional 50-miler or 100K tune-up |
+| ~Sep 18 2027 | **first 100-miler** (Mountain Lakes 100, date to confirm). The first gate |
+| ~Feb 5 2028 | second 100-miler (BURT 100), a winter night alone |
+| ~Apr 15 2028 | Gorge Waterfalls 100K |
+| ~Jun 17 2028 | Strawberry Fields Forever 100. The second gate |
+| ~Jul 8 2028 | Mt. Hood Trail Runs 50M, only if the June hundred cost under a week |
 | Aug 11 2028 | **first 200**, unsupported, four nights, sub-100 |
 
 Race date moved to August 2028 on 2026-10-06 at Patrick's call. The 2027 entry is being
-transferred (25% fee). Everything is spaced at least five weeks apart.
+transferred (25% fee). Race spacing is at least five weeks everywhere except Strawberry Fields to Mt. Hood, which is three.
+2028 dates are estimates until the races publish them.
 
 **What it changes in practice:**
 
-- **The October 2027 hundred is the gate and it matters most**, because it is the first hundred.
-  The three outcomes below are worth deciding today rather than in October. A DNF is no longer
-  fatal: there is a May 2028 second-chance 100 and a fall-back to 2029.
+- **The September 2027 hundred is the first gate and it matters most**, because it is the first hundred.
+  The three outcomes below are worth deciding today rather than in September. A DNF is no longer
+  fatal: BURT 100 and Strawberry Fields in 2028 are second tries, with a fall-back to 2029.
 - **Every checkpoint below is a debut**, so the standards are "finish it, and learn something
-  measurable" rather than a pace target, except Gorge, which has a real cutoff.
-- **BURT at 55K is optional now.** Enter it only if it lands in a normal week.
+  measurable" rather than a pace target, except Siskiyou and Gorge, which have real 17-hour cutoffs.
+- **BURT is the 100-mile in February 2028.** The 55K is off the ladder.
 - **The finish-odds model now knows.** It scales its band by how much of the distance ladder has
   actually been raced, which is why it reads far lower than it did. It climbs as races get
-  finished — the December 50K moves it, not a good training week.
+  finished — the February 50K moves it, not a good training week.
 
 ---
 
@@ -239,22 +243,24 @@ eight-hour day. That is the point.
 
 | Race | When | Old standard | Sub-100 standard |
 |---|---|---|---|
-| Frozen Trail 50K | Dec 12, 2026 | finish | negative split; last hour running |
-| **BURT 55K** *(optional, one loop, 33 mi)* | **Feb 6, 2027** | *was the 100-mile* | **time every aid stop.** The loop format is the point. Skip it if it is not a normal week |
-| Gorge Waterfalls 100K | Apr 17, 2027 | 2.8 mph, 16–18 hr | **your first 100K: finish inside the 17-hr cutoff.** A debut, not a checkpoint |
-| **First 100-miler** *(race TBD)* | ~Oct 16, 2027 | *was Strawberry Fields* | **your first 100-miler, and the gate.** Pick a supported, forgiving-cutoff, non-technical race. Read aid time and second-half fade, not the clock |
-| Tune-up 50-miler or 100K *(optional)* | ~Apr 15, 2028 | | kit, fueling and night running. Skip it if October went well |
-| Second 100 *(only if needed)* | ~May 20, 2028 | | enter only if October was a DNF or an injury finish |
+| **Hagg Mud 50K** | **Feb 13, 2027** | | **first ultra: finish upright**, run/walk, no time goal |
+| Smith Rock Classic 50M | May 29, 2027 | | **first 50-miler: time every aid stop**, rocky descents on tired legs |
+| Siskiyou Out Back 100K | Jul 9, 2027 | 2.8 mph, 16–18 hr | **your first 100K: finish inside the 17-hr cutoff.** A debut, not a checkpoint |
+| **Mountain Lakes 100** *(date to confirm)* | ~Sep 18, 2027 | | **your first 100-miler, and the first gate.** Read aid time and second-half fade, not the clock |
+| BURT 100 | ~Feb 5, 2028 | | second hundred, a winter night alone. Aid under 45 min total |
+| Gorge Waterfalls 100K | ~Apr 15, 2028 | 14–15 hr | clear the 17-hr cutoff with room, run the last 10K |
+| **Strawberry Fields Forever 100** | ~Jun 17, 2028 | | **the second gate.** Aid under 90 min, second half no worse than 25% slower |
+| Mt. Hood Trail Runs 50M *(optional)* | ~Jul 8, 2028 | | last long effort, kit and fueling only. Skip it if June cost more than a week |
 
 Every row in that table is a debut. Standards are "finish it and learn something measurable",
-not pace targets — except Gorge, which has a real cutoff to clear.
+not pace targets — except Siskiyou and Gorge, which have real cutoffs to clear.
 
 ---
 
 ## The gate, restated
 
-**The October 2027 hundred is the gate, and it is your first 100-miler**, ten months before a 200.
-Ten months is the point: a bad day no longer ends the attempt, because there is room to repeat it.
+**The September 2027 hundred is the first gate, and it is your first 100-miler**, eleven months before a 200.
+Eleven months is the point: a bad day no longer ends the attempt, because there is room to repeat it.
 
 **Three outcomes, decided in advance:**
 
@@ -262,8 +268,8 @@ Ten months is the point: a bad day no longer ends the attempt, because there is 
   optional spring races if you are healthy.
 - **A hundred that cost you two weeks, or a drop to a shorter distance** → Bigfoot is on, sub-100
   is not. Race it to finish inside 107, enjoy it, qualify another way.
-- **A DNF, or an injury finish** → enter a second hundred in late May 2028. If that fails too, defer
-  Bigfoot to 2029. There is another one next year and there is only one of you.
+- **A DNF, or an injury finish** → BURT 100 in February 2028 and Strawberry Fields in June 2028 are the
+  second tries. If those fail too, defer Bigfoot to 2029. There is another one next year and there is only one of you.
 
 **What to read from the hundred:** total aid time, whether the second half is no worse than 25%
 slower than the first, and whether you recovered in days rather than weeks. The finish time is the

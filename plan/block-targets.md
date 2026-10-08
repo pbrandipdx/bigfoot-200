@@ -13,10 +13,11 @@
 > longest single effort of 3.0 hours. One year asked for six firsts in eleven months. Two years
 > gives each first its own season.
 >
-> **The race load is deliberately light** (chosen 2026-10-06): Frozen Trail 50K (Dec 2026), Gorge
-> Waterfalls 100K (Apr 2027), one 100-miler (Oct 2027), one optional tune-up (spring 2028), then Bigfoot.
-> BURT 55K is optional. Hagg Mud, Run the Rock, SISU, Eugene and the 2027 Strawberry Fields entry are off
-> the ladder. Nothing is closer than five weeks to another race.
+> **The race ladder (chosen 2026-10-07):** Hagg Mud 50K (Feb 13 2027, first ultra), Smith Rock Classic 50M
+> (May 29 2027), Siskiyou Out Back 100K (Jul 9 2027), Mountain Lakes 100 (Sep 2027, first 100-miler),
+> BURT 100 (early Feb 2028), Gorge Waterfalls 100K (Apr 2028), Strawberry Fields Forever 100
+> (late Jun 2028), Mt. Hood Trail Runs 50M (early Jul 2028), then Bigfoot. Frozen Trail, Run the Rock,
+> BURT 55K, Gorge 2027, Eugene and SISU are off the ladder. 2028 dates are estimates until published.
 
 > Course figures corrected 2026-09-15. This page previously said 200–208 mi /
 > 44,000–45,500 ft, which describes the **retired** version of the course with
@@ -144,7 +145,7 @@ the least informative number here.
 
 ## Block 1 — base + vertical intro
 *Sep 7 2026 to Dec 12 2026 (14 weeks)*
-*Ends: Frozen Trail Run Fest 50K — FIRST ULTRA*
+*Ends: no race, rebuild the running. Hagg Mud 50K (Feb 13) is the first ultra*
 
 | Target | Value |
 |---|---|
@@ -161,7 +162,7 @@ the least informative number here.
 
 ## Block 2 — winter build
 *Dec 13 2026 to Feb 13 2027 (9 weeks)*
-*Ends: optional BURT 55K (Feb 6 2027) — a supported long day, not a race*
+*Ends: Hagg Mud 50K (Feb 13 2027) — FIRST ULTRA*
 
 | Target | Value |
 |---|---|
@@ -174,9 +175,8 @@ the least informative number here.
 
 **Block question:** can you go out again on tired legs, in bad weather, when nothing about it is enjoyable? This is the motivation block, not the fitness one.
 
-**Lighter race load (2026-10-06).** BURT 55K is optional: enter it only if it lands in a normal week and
-you want a loop-format aid-station rehearsal. Hagg Mud 50K is off the ladder. The only race that
-ends this block's first half is Frozen Trail 50K, and the winter has no required race.
+**First ultra (2026-10-07).** Hagg Mud 50K on Feb 13 is the only race in this block, and it is a
+run/walk finish with no time goal. Frozen Trail 50K and BURT 55K are off the ladder.
 
 **Strength gets a session-level rewrite here, not yet decided.** Four accessory circuits are staged
 and paraphrased from outside sources (see `coaching-references.md`, added 2026-09-28) on top of the
@@ -185,9 +185,9 @@ rotate into the twice-weekly Strength A/B slot is still open.
 
 ---
 
-## Block 3 — first 100K
+## Block 3 — 50-mile build
 *Feb 14 2027 to Apr 17 2027 (9 weeks)*
-*Ends: Gorge Waterfalls 100K, Apr 16 2027 — FIRST 100K*
+*Ends: no race, 50-mile build. Gorge Waterfalls 2027 is off the ladder*
 
 | Target | Value |
 |---|---|
@@ -202,9 +202,9 @@ rotate into the twice-weekly Strength A/B slot is still open.
 
 ---
 
-## Block 4 — recover, base, recon
+## Block 4 — first 50-miler and 100K
 *Apr 18 2027 to Aug 15 2027 (17 weeks)*
-*Ends: Bigfoot 200 2027 — as a volunteer, not a runner*
+*Ends: Smith Rock Classic 50M (May 29) and Siskiyou Out Back 100K (Jul 9), then Bigfoot 2027 as a volunteer*
 
 | Target | Value |
 |---|---|
@@ -226,7 +226,7 @@ risk, and it is better education than any training block in this document.
 
 ## Block 5 — first 100-mile build
 *Aug 16 2027 to Oct 31 2027 (11 weeks)*
-*Ends: First 100-miler, mid-Oct 2027 — race TBD, the one hundred of the plan*
+*Ends: First 100-miler — Mountain Lakes 100, Sep 2027 (date to confirm)*
 
 | Target | Value |
 |---|---|
@@ -239,7 +239,7 @@ risk, and it is better education than any training block in this document.
 
 **Block question:** can you go a hundred miles? Everything in year two assumes the answer is yes.
 
-**The race is not chosen yet.** October 2027 is a placeholder. Wanted: supported,
+**Mountain Lakes 100 is the pick, date still to confirm.** September 2027 is an estimate. Wanted: supported,
 forgiving cutoff, reachable from Portland, and not technical. This is a first hundred —
 the goal is to finish one, not to race one.
 
@@ -264,7 +264,7 @@ the goal is to finish one, not to race one.
 
 ## Block 7 — build + night running
 *Feb 14 2028 to Apr 16 2028 (9 weeks)*
-*Ends: one tune-up, a 50-miler or 100K around Apr 15 2028 — race TBD, optional if Oct 2027 went well*
+*Ends: Gorge Waterfalls 100K (~Apr 15 2028)*
 
 | Target | Value |
 |---|---|
@@ -281,7 +281,7 @@ the goal is to finish one, not to race one.
 
 ## Block 8 — the gate
 *Apr 17 2028 to Jun 18 2028 (9 weeks)*
-*Ends: optional second 100 (late May 2028) — only if the Oct 2027 hundred did not clear the gate*
+*Ends: Strawberry Fields Forever 100 (~Jun 17 2028) — the gate*
 
 | Target | Value |
 |---|---|
@@ -294,21 +294,20 @@ the goal is to finish one, not to race one.
 
 **Block question:** can you run a hundred miles WELL — controlled, disciplined at aid, recovered in days rather than weeks?
 
-**The gate is the October 2027 hundred, not a second one.** Read it when Block 8 starts:
+**The first gate is the September 2027 hundred. Strawberry Fields in June 2028 is the second.** Read the first one when Block 8 starts:
 
 - **A hundred, controlled, aid under 90 min, recovered in days** → sub-100 at Bigfoot is live.
   Block 8 is a straight training block with no race; do not add one.
 - **A hundred that cost two weeks, or a drop to a shorter distance** → Bigfoot is on, sub-100 is not.
   Run it to finish inside 107 hours.
-- **A DNF, or an injury finish** → enter a second hundred in late May 2028 (Strawberry Fields Forever
-  on its June date, or any supported 100 about eleven weeks out) and defer Bigfoot to 2029 if that
-  one fails too. Written down now, while it is abstract.
+- **A DNF, or an injury finish** → Strawberry Fields Forever in June 2028 is the second try (BURT 100 in
+  February 2028 is the first retry). Defer Bigfoot to 2029 if that one fails too. Written down now, while it is abstract.
 
 ---
 
 ## Block 9 — peak + taper
 *Jun 19 2028 to Aug 11 2028 (8 weeks)*
-*Ends: BIGFOOT 200* · **draft — race not chosen**
+*Ends: Mt. Hood Trail Runs 50M (~Jul 8), then BIGFOOT 200* · **draft — race not chosen**
 
 | Target | Value |
 |---|---|
@@ -335,7 +334,7 @@ where the fatigue actually lands:
 |---|---|---|
 | 5 | Oct 11 | Recovery from the Three Sisters multi-day |
 | 10 | Nov 15 | Recovery from the Nov 1 Mount Defiance push |
-| 13 | Dec 6 | Taper into Frozen Trail 50K, Dec 12 |
+| 13 | Dec 6 | Last big week before the holiday block |
 
 **Blocks 2–9:** weeks 4 and 8 of each block, same 60–70% rule. The site detects a deload
 from the Sunday long day's own title where one is dated, and falls back to every fourth
@@ -505,7 +504,7 @@ Peak 5,088 → 4,758. Down 330 points (−6.5%) over twelve weeks, and accelerat
 — the largest single drop was this week. Level: Intermediate.
 
 - **Threshold:** stop the decline by the end of September. Back above 5,000 by
-  the Dec 12 Frozen Trail checkpoint.
+  the Feb 13 Hagg Mud 50K.
 - Three consecutive falling weeks during a build block means the block is not
   being absorbed — rebuild it rather than stacking on top.
 
@@ -517,11 +516,9 @@ weeks. Increase impact load gradually after a lighter period like this."*
 
 - **Threshold:** weekly running miles stay under tolerance. Exceeding it
   repeatedly is the clearest overtraining signal available.
-- **Run the Rock was dropped on 2026-10-06** because running has stopped. The first race is now the Frozen Trail 50K on Dec 12, so the running ramp restarts from the recovered baseline, not from the old 12 mi/week.
-- **Revised Sep 2026:** Gorge Waterfalls 100K was the race the running ramp had to
-  reach by April. With Gorge dropped for the Eugene Marathon, the ramp now has to reach
-  26.2 road miles in April and 100 trail miles in June, with nothing between 50K and
-  100 on the ladder.
+- **Run the Rock was dropped on 2026-10-06** because running has stopped. Frozen Trail was dropped on 2026-10-07. The first race is now Hagg Mud 50K on Feb 13, so the running ramp restarts from the recovered baseline, not from the old 12 mi/week.
+- **Revised 2026-10-07:** the ramp now has to reach a 50K in February, a 50-miler in May, a 100K in
+  July and a first 100 miles in September, with no race between Frozen Trail's old slot and Hagg Mud.
 - Raise it by frequency, not by one big day. Three easy midweek runs — which is
   what you were doing through Jul 21 — plus running the runnable parts of the
   weekly long day.
@@ -576,10 +573,10 @@ tolerance* above.
 
 1. **Night hours accumulate on schedule.** Zero today. This is the cheapest gap
    to close and the one most likely to be skipped.
-2. **The October 2027 hundred is the gate, not a formality.**
+2. **The September 2027 hundred is the first gate, not a formality.**
    A controlled hundred with aid under 90 min means sub-100 is live; a costly finish or a drop
-   to a shorter distance means race Bigfoot to finish inside 107; a DNF means a second hundred in
-   May 2028 or defer. Decide it now, not in October.
+   to a shorter distance means race Bigfoot to finish inside 107; a DNF means Strawberry Fields in
+   June 2028 is the second try, or defer. Decide it now, not in September.
 3. **Descent training happens on rock**, not loam, and late in the day.
 4. **Feet get managed from hour five**, not hour nine. Practice in training.
 5. **Eat every 40 minutes** on every long day, including when you don't want to —
