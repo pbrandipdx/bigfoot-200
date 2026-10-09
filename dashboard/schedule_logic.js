@@ -360,7 +360,8 @@ const DEMO = {
   carry:     'https://www.youtube.com/watch?v=lLAw6fUccKA',
   downhill:  'https://www.youtube.com/watch?v=md0vWMb8QrM',
   hillReps:  'https://www.youtube.com/watch?v=JZJk7lld69E',
-  hillSprint:'https://www.youtube.com/watch?v=fZ85Ht6y8Vc'
+  hillSprint:'https://www.youtube.com/watch?v=fZ85Ht6y8Vc',
+  reel:      'https://www.facebook.com/share/r/19bqaGvFZW/'
 };
 
 function escHtml(t){
@@ -464,12 +465,16 @@ function wednesdayWorkout(block){
   const m = runMin(block);
   return sess('Easy run + eccentric strength', [
     { k: 'Run', v: m.wed + ' min easy Z2 (118\u2013137 bpm), on trail if you can get to it.' },
-    { k: 'Workout', v: '30 min. The step-downs are the session \u2014 lower slowly; that slow '
-        + 'lowering is the load the descent asks for.',
+    { k: 'Workout', v: '40 min. The step-downs are the session \u2014 lower slowly; that slow '
+        + 'lowering is the load the descent asks for. Climb, descent and stability moves '
+        + 'from the Televiajar reel are folded in, so each is trained every week.',
       items: [
         { n: 'Single-leg box step-downs', s: '3 \u00d7 10', u: DEMO.stepDown },
-        { n: 'Weighted step-ups, with the pack', s: '3 \u00d7 12', u: DEMO.stepUp },
-        { n: 'Single-leg RDLs', s: '3 \u00d7 10', u: DEMO.slRdl },
+        { n: 'Single-leg reach-and-tap off a low plate stack', s: '2 \u00d7 8 / leg, hands on hips, '
+            + 'free leg reaches out and taps the floor under control', u: DEMO.reel },
+        { n: 'Weighted step-ups, with the pack, knee drive at the top', s: '3 \u00d7 12', u: DEMO.stepUp },
+        { n: 'Single-leg RDLs, kettlebell, back leg level with the torso', s: '3 \u00d7 10', u: DEMO.slRdl },
+        { n: 'Walking lunge, plate held at the chest', s: '3 \u00d7 8 / leg, back knee close to the floor', u: DEMO.reel },
         { n: 'Loaded carries', s: '3 \u00d7 40 m', u: DEMO.carry }
       ] },
     { k: 'If over tolerance', v: TOLERANCE_NOTE }

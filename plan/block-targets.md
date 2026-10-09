@@ -53,7 +53,7 @@ can still run on day four.
 |---|---|
 | **Monday** | **Full rest.** No running, no strength, no capped walk that becomes three miles. |
 | **Tuesday** | **Uphill tempo + power strides.** 3×5 → 3×10 → 2×15 on a three-week ladder, Z3, then 5×20 sec strides at ~85% effort on a moderate grade. |
-| **Wednesday** | **Easy Z2 run + eccentric strength.** Single-leg box step-downs 3×10, weighted step-ups with the pack 3×12, single-leg RDLs 3×10, loaded carries. |
+| **Wednesday** | **Easy Z2 run + eccentric strength (40 min).** Single-leg box step-downs 3×10, reach-and-tap off a low plate stack 2×8/leg, weighted step-ups with the pack and a knee drive 3×12, kettlebell single-leg RDLs 3×10, walking plate lunges 3×8/leg, loaded carries. Added 2026-10-08 from the Televiajar reel (climbs / descents / stability); reps are the plan's, the reel gives none. |
 | **Thursday** | **Sustained downhill.** 15 → 20 → 25 min of *continuous* descent, on rock, late in the day. |
 | **Friday** | **Recovery jog**, Z1. |
 | **Saturday** | Recovery, or day one of a back-to-back, or a race. |
