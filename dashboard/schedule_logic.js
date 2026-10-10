@@ -176,7 +176,12 @@ function descHtml(t){
   const esc = x => String(x == null ? '' : x).replace(/&/g,'&amp;').replace(/</g,'&lt;')
                                   .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   return esc(t)
-    .replace(/(https?:\/\/[^\s<]+)/g, (u) => '<a href="' + u + '" target="_blank" rel="noopener noreferrer">video</a>')
+    .replace(/(https?:\/\/[^\s<]+)/g, (u) => {
+      const m = u.match(/[?&]v=([\w-]{11})/);
+      const thumb = m ? '<br><img src="https://i.ytimg.com/vi/' + m[1] + '/mqdefault.jpg" alt="" loading="lazy" ' +
+        'style="height:64px;width:auto;border-radius:4px;margin:3px 0 6px;vertical-align:middle">' : '';
+      return '<a href="' + u + '" target="_blank" rel="noopener noreferrer">video' + thumb + '</a>';
+    })
     .replace(/\n/g, '<br>');
 }
 
