@@ -1,12 +1,12 @@
 {
   "2026-10-05": {
-    "hours": 7.4,
-    "miles": 23.2,
-    "vert_ft": 787,
-    "ft_per_hour": 106.0,
-    "run_share_pct": 26.0,
-    "long_day_hr": 1.6,
-    "sessions": 9.0,
+    "hours": 10.6,
+    "miles": 29.3,
+    "vert_ft": 1079,
+    "ft_per_hour": 102.0,
+    "run_share_pct": 21.0,
+    "long_day_hr": 1.7,
+    "sessions": 11.0,
     "night_hr": 0.0,
     "partial": true
   },
