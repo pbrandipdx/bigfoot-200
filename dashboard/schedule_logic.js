@@ -170,6 +170,16 @@ function fromPlanned(p){
            link: p.link || null, linkLabel: p.linkLabel || null };
 }
 
+// Escape a session description, turn bare URLs into links and newlines into
+// line breaks. Dated plan entries can carry a checklist with video links.
+function descHtml(t){
+  const esc = x => String(x == null ? '' : x).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                                  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return esc(t)
+    .replace(/(https?:\/\/[^\s<]+)/g, (u) => '<a href="' + u + '" target="_blank" rel="noopener noreferrer">video</a>')
+    .replace(/\n/g, '<br>');
+}
+
 // One escaped anchor, or ''. Every page that prints a session uses this, so a
 // dated route can never render as a link on one page and bare text on another.
 function routeLink(w){

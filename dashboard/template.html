@@ -331,7 +331,7 @@ function weekRowsHtml(monday){
             `<td class="day-name">${label}</td>` +
             `<td><strong>${w.title}</strong><br>` +
             (w.parts ? partsHtml(w)
-                     : `<span style="color:var(--ink-faint)">${w.desc}</span>`) +
+                     : `<span style="color:var(--ink-faint)">${descHtml(w.desc)}</span>`) +
             routeLink(w) + decisionHtml(d) + `</td></tr>`;
   }
   return rows;
@@ -368,7 +368,7 @@ function render(){
   // The hero card gets the laid-out version too, not the flattened string.
   const tdesc = document.getElementById('today-desc');
   if(todayWork.parts){ tdesc.innerHTML = partsHtml(todayWork); tdesc.classList.add('has-parts'); }
-  else { tdesc.textContent = todayWork.desc; }
+  else { tdesc.innerHTML = descHtml(todayWork.desc); }
   document.getElementById('today-route').innerHTML = routeLink(todayWork);
 
   const raceDays = daysBetween(today, toDate(aRaceOf(RACES).start));
