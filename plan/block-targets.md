@@ -160,45 +160,25 @@ the least informative number here.
 
 ---
 
-## Block 2 — winter build
+## Block 2 — marathon base + first ultra
 *Dec 13 2026 to Feb 13 2027 (9 weeks)*
-*Ends: Hagg Mud 50K (Feb 13 2027) — FIRST ULTRA*
+*Ends: Hagg Mud 50K (Feb 13 2027) — FIRST ULTRA, run/walk, finish only*
 
-| Target | Value |
-|---|---|
-| Time on feet | **13 hr/week** |
-| Vertical | **4,000 ft/week** (308 ft/hr) |
-| On-foot miles | **45/week** |
-| Peak single effort | **8 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **6** |
+Running, not hiking, is now the long-day currency. Long run builds 6 to 14 mi, weekly run miles 18 to 30 (opens near 14-15, reach 18 by about Dec 27). Vertical eases from 4,000 to 3,000 ft/wk. Jan 17 is a half-marathon time trial that sets the Eugene goal check on Jan 18.
 
 **Block question:** can you go out again on tired legs, in bad weather, when nothing about it is enjoyable? This is the motivation block, not the fitness one.
 
-**First ultra (2026-10-07).** Hagg Mud 50K on Feb 13 is the only race in this block, and it is a
-run/walk finish with no time goal. Frozen Trail 50K and BURT 55K are off the ladder.
-
-**Strength gets a session-level rewrite here, not yet decided.** Four accessory circuits are staged
-and paraphrased from outside sources (see `coaching-references.md`, added 2026-09-28) on top of the
-step-ups, box step-downs, single-leg RDLs and loaded carries already in the weekly table. Which moves
-rotate into the twice-weekly Strength A/B slot is still open.
+Strength gets a session-level rewrite here, not yet decided. Four accessory circuits are staged (see `coaching-references.md`) on top of the step-ups, box step-downs, single-leg RDLs and loaded carries already in the weekly table.
 
 ---
 
-## Block 3 — 50-mile build
-*Feb 14 2027 to Apr 17 2027 (9 weeks)*
-*Ends: no race, 50-mile build. Gorge Waterfalls 2027 is off the ladder*
+## Block 3 — Eugene Marathon build
+*Feb 14 2027 to Apr 25 2027 (10 weeks)*
+*Ends: Eugene Marathon (Apr 25 2027), goal sub-4:00 (9:09/mi; train for 8:55-9:00)*
 
-| Target | Value |
-|---|---|
-| Time on feet | **14 hr/week** |
-| Vertical | **5,000 ft/week** (357 ft/hr) |
-| On-foot miles | **50/week** |
-| Peak single effort | **10 hr** |
-| Volume long day, capped | **8 hr** |
-| Night hours, cumulative | **10** |
+Long runs to 20 mi, marathon-pace work, 2-week taper. Peak weekly run miles 35 to 38. Hiking and vertical are maintenance only in the last six weeks before Eugene.
 
-**Block question:** can you cover 100 km, in one push, inside a cutoff? This is the first real gate of the apprenticeship year.
+**Block question:** can you hold marathon pace on trained legs without giving back the vertical base?
 
 ---
 
