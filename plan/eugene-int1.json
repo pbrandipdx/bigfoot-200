@@ -1,0 +1,1050 @@
+{
+ "plan_name": "Marathon Intermediate 1 (Eugene)",
+ "title": "Eugene Marathon: Intermediate 1 schedule",
+ "snapshot": "2026-10-25",
+ "source": "Supabase training_plan_days, plan_name 'Marathon Intermediate 1 (Eugene)'",
+ "start": "2026-12-21",
+ "race": "2027-04-25",
+ "goal": "sub-4:00",
+ "goal_pace": "9:09",
+ "rows": [
+  {
+   "date": "2026-12-21",
+   "week": 1,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2026-12-22",
+   "week": 1,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2026-12-23",
+   "week": 1,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2026-12-24",
+   "week": 1,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2026-12-25",
+   "week": 1,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2026-12-26",
+   "week": 1,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 5.0
+  },
+  {
+   "date": "2026-12-27",
+   "week": 1,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2026-12-28",
+   "week": 2,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2026-12-29",
+   "week": 2,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2026-12-30",
+   "week": 2,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2026-12-31",
+   "week": 2,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-01",
+   "week": 2,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-01-02",
+   "week": 2,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-01-03",
+   "week": 2,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 9.0
+  },
+  {
+   "date": "2027-01-04",
+   "week": 3,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-01-05",
+   "week": 3,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-06",
+   "week": 3,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-01-07",
+   "week": 3,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-08",
+   "week": 3,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-01-09",
+   "week": 3,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-01-10",
+   "week": 3,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-11",
+   "week": 4,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-01-12",
+   "week": 4,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-13",
+   "week": 4,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-14",
+   "week": 4,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-15",
+   "week": 4,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-01-16",
+   "week": 4,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-17",
+   "week": 4,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 11.0,
+   "flag": "Your Jan 17 half-marathon time-trial gate falls on this day. The hybrid plan replaces this run with the TT."
+  },
+  {
+   "date": "2027-01-18",
+   "week": 5,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-01-19",
+   "week": 5,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-20",
+   "week": 5,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-21",
+   "week": 5,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-22",
+   "week": 5,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-01-23",
+   "week": 5,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-24",
+   "week": 5,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 12.0
+  },
+  {
+   "date": "2027-01-25",
+   "week": 6,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-01-26",
+   "week": 6,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-27",
+   "week": 6,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-01-28",
+   "week": 6,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-01-29",
+   "week": 6,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-01-30",
+   "week": 6,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-01-31",
+   "week": 6,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 9.0
+  },
+  {
+   "date": "2027-02-01",
+   "week": 7,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-02-02",
+   "week": 7,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-03",
+   "week": 7,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 7.0
+  },
+  {
+   "date": "2027-02-04",
+   "week": 7,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-05",
+   "week": 7,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-02-06",
+   "week": 7,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 7.0
+  },
+  {
+   "date": "2027-02-07",
+   "week": 7,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 14.0
+  },
+  {
+   "date": "2027-02-08",
+   "week": 8,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-02-09",
+   "week": 8,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-10",
+   "week": 8,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 7.0
+  },
+  {
+   "date": "2027-02-11",
+   "week": 8,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-12",
+   "week": 8,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-02-13",
+   "week": 8,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 7.0,
+   "flag": "Hagg Mud 25K is registered for this day. Treat the race as this run."
+  },
+  {
+   "date": "2027-02-14",
+   "week": 8,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 15.0
+  },
+  {
+   "date": "2027-02-15",
+   "week": 9,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-02-16",
+   "week": 9,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-17",
+   "week": 9,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-02-18",
+   "week": 9,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-19",
+   "week": 9,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-02-20",
+   "week": 9,
+   "dow": 6,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-02-21",
+   "week": 9,
+   "dow": 7,
+   "kind": "race",
+   "session": "Half marathon (chart)",
+   "miles": 13.1,
+   "flag": "The chart calls for a half marathon. No event chosen: run a hard half effort or swap for the long run."
+  },
+  {
+   "date": "2027-02-22",
+   "week": 10,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-02-23",
+   "week": 10,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-24",
+   "week": 10,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-02-25",
+   "week": 10,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-02-26",
+   "week": 10,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-02-27",
+   "week": 10,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-02-28",
+   "week": 10,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 17.0
+  },
+  {
+   "date": "2027-03-01",
+   "week": 11,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-03-02",
+   "week": 11,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-03",
+   "week": 11,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-03-04",
+   "week": 11,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-05",
+   "week": 11,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-03-06",
+   "week": 11,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-03-07",
+   "week": 11,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 18.0
+  },
+  {
+   "date": "2027-03-08",
+   "week": 12,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-03-09",
+   "week": 12,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-10",
+   "week": 12,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-11",
+   "week": 12,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-12",
+   "week": 12,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-03-13",
+   "week": 12,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-03-14",
+   "week": 12,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 13.0,
+   "flag": "Shamrock Run Half is registered for this day. Race it in place of the 13-mile run."
+  },
+  {
+   "date": "2027-03-15",
+   "week": 13,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-03-16",
+   "week": 13,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-17",
+   "week": 13,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-03-18",
+   "week": 13,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-19",
+   "week": 13,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-03-20",
+   "week": 13,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-21",
+   "week": 13,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 20.0
+  },
+  {
+   "date": "2027-03-22",
+   "week": 14,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-03-23",
+   "week": 14,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-24",
+   "week": 14,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-25",
+   "week": 14,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-26",
+   "week": 14,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-03-27",
+   "week": 14,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-03-28",
+   "week": 14,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 12.0
+  },
+  {
+   "date": "2027-03-29",
+   "week": 15,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-03-30",
+   "week": 15,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-03-31",
+   "week": 15,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-04-01",
+   "week": 15,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-04-02",
+   "week": 15,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-04-03",
+   "week": 15,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-04-04",
+   "week": 15,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 20.0
+  },
+  {
+   "date": "2027-04-05",
+   "week": 16,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-04-06",
+   "week": 16,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-04-07",
+   "week": 16,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 6.0
+  },
+  {
+   "date": "2027-04-08",
+   "week": 16,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-04-09",
+   "week": 16,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-04-10",
+   "week": 16,
+   "dow": 6,
+   "kind": "run",
+   "session": "Marathon-pace run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-04-11",
+   "week": 16,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 12.0
+  },
+  {
+   "date": "2027-04-12",
+   "week": 17,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-04-13",
+   "week": 17,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-04-14",
+   "week": 17,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 5.0
+  },
+  {
+   "date": "2027-04-15",
+   "week": 17,
+   "dow": 4,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-04-16",
+   "week": 17,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-04-17",
+   "week": 17,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-04-18",
+   "week": 17,
+   "dow": 7,
+   "kind": "run",
+   "session": "Long Run",
+   "miles": 8.0
+  },
+  {
+   "date": "2027-04-19",
+   "week": 18,
+   "dow": 1,
+   "kind": "mobility",
+   "session": "Cross-training (60 min)",
+   "miles": null
+  },
+  {
+   "date": "2027-04-20",
+   "week": 18,
+   "dow": 2,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 3.0
+  },
+  {
+   "date": "2027-04-21",
+   "week": 18,
+   "dow": 3,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 4.0
+  },
+  {
+   "date": "2027-04-22",
+   "week": 18,
+   "dow": 4,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-04-23",
+   "week": 18,
+   "dow": 5,
+   "kind": "rest",
+   "session": "Rest",
+   "miles": null
+  },
+  {
+   "date": "2027-04-24",
+   "week": 18,
+   "dow": 6,
+   "kind": "run",
+   "session": "Easy Run",
+   "miles": 2.0
+  },
+  {
+   "date": "2027-04-25",
+   "week": 18,
+   "dow": 7,
+   "kind": "race",
+   "session": "Eugene Marathon",
+   "miles": 26.2
+  }
+ ],
+ "paces_for_goal": [
+  [
+   "Easy aerobic B",
+   "10:15"
+  ],
+  [
+   "Moderate aerobic long run",
+   "9:53"
+  ],
+  [
+   "Marathon pace / tempo",
+   "9:09"
+  ],
+  [
+   "Strength",
+   "8:59"
+  ],
+  [
+   "10K speed",
+   "8:24"
+  ],
+  [
+   "5K speed",
+   "8:03"
+  ]
+ ]
+}
