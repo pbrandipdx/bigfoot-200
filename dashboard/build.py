@@ -6,13 +6,14 @@
   blocks.html  block targets and monitors        <- ../plan/block-targets.md
   plan.html    the sub-100 race plan             <- ../plan/sub100-plan.md
   weeks.html   every week, plan vs actual        <- Supabase plan feed + weekly-actuals.json
+  eugene.html  Intermediate 1 marathon schedule  <- plan/eugene-int1.json
 
 DELIBERATELY NOT PUBLISHED: anything under plan/private/ — Destination Trail's
 copyrighted runner manual lives there. It is gitignored and never rendered.
 """
 import datetime
 import json, os, re, sys
-import md, nav, doc_shell
+import md, nav, doc_shell, eugene_page
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -347,6 +348,15 @@ def main():
     # Racing Aaron: static comparison page. Source lives here so every rebuild keeps it
     # and nav.inject() gives it the shared nav bar.
     write("racing-aaron.html", read("dashboard", "racing_aaron.html"))
+    # Eugene: the Intermediate 1 marathon chart dated to finish at Eugene. Snapshot of the
+    # Supabase plan 'Marathon Intermediate 1 (Eugene)'; see dashboard/eugene_page.py.
+    ep = os.path.join(REPO, "plan", "eugene-int1.json")
+    if os.path.exists(ep):
+        edoc = json.loads(open(ep, encoding="utf-8").read())
+        write("eugene.html", doc_shell.render("Eugene Marathon", eugene_page.render(edoc),
+                                              "plan/eugene-int1.json"))
+    else:
+        print("  eugene-int1.json missing - skipping eugene.html")
 
     # A page that prints the race date must print the current one. A stale
     # hardcode shows up as the label being absent, which is what happened on
